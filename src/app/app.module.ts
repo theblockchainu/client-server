@@ -93,17 +93,17 @@ export class RavenErrorHandler implements ErrorHandler {
     TransferHttpCacheModule
   ],
   bootstrap: [AppComponent],
-  providers: [
-    {
-      provide: ErrorHandler,
-      useClass: RavenErrorHandler
-    },
-    {
-      provide: ErrorHandler,
-      useClass: GlobalErrorHandler
-    },
-    Title
-  ],
+  // providers: [
+  //   {
+  //     provide: ErrorHandler,
+  //     useClass: RavenErrorHandler
+  //   },
+  //   {
+  //     provide: ErrorHandler,
+  //     useClass: GlobalErrorHandler
+  //   },
+  //   Title
+  // ],
   entryComponents: [AppNotificationDialogComponent]
 })
 export class AppModule { }

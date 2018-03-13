@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { CurrencypickerService } from './currencypicker.service';
+import { CurrencyPickerService } from './currencypicker.service';
 
-describe('CurrencypickerService', () => {
+describe('CurrencyPickerService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [CurrencypickerService]
+      providers: [CurrencyPickerService]
     });
   });
 
-  it('should be created', inject([CurrencypickerService], (service: CurrencypickerService) => {
+  it('should be created', inject([CurrencyPickerService], (service: CurrencyPickerService) => {
     expect(service).toBeTruthy();
   }));
 });

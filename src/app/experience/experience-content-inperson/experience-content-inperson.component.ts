@@ -5,7 +5,7 @@ import { AppConfig } from '../../app.config';
 import { MediaUploaderService } from '../../_services/mediaUploader/media-uploader.service';
 import { ContentService } from '../../_services/content/content.service';
 import {MD_DIALOG_DATA, MdDialog, MdDialogRef} from '@angular/material';
-import _ from 'lodash';
+import * as _ from 'lodash';
 import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
 import {AddLocationDialogComponent} from '../add-location-dialog/add-location-dialog.component';
 

@@ -14,7 +14,7 @@ import {
 
 import { RequestHeaderService } from '../../requestHeader/request-header.service';
 
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-multiselect-topic-dialog',

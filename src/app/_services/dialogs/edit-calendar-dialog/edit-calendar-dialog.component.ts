@@ -8,7 +8,7 @@ import { ContentService } from '../../../_services/content/content.service';
 import { CollectionService } from '../../../_services/collection/collection.service';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 import * as moment from 'moment';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 import { ViewConflictDialogComponent } from '../view-conflict-dialog/view-conflict-dialog.component';
 import { SelectDateDialogComponent } from '../select-date-dialog/select-date-dialog.component';

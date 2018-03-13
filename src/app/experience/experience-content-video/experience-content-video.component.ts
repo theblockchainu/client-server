@@ -4,7 +4,7 @@ import { AppConfig } from '../../app.config';
 import { Http } from '@angular/http';
 import { MediaUploaderService } from '../../_services/mediaUploader/media-uploader.service';
 import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
-import _ from 'lodash';
+import * as _ from 'lodash';
 import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
 import { ContentService } from '../../_services/content/content.service';
 

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/observable';
 import { AuthenticationService } from '../_services/authentication/authentication.service';
 import { CookieService } from 'ngx-cookie-service';
-import { CurrencypickerService } from '../_services/currencypicker/currencypicker.service';
+import { CurrencyPickerService } from '../_services/currencypicker/currencypicker.service';
 import { CookieUtilsService } from '../_services/cookieUtils/cookie-utils.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class AppFooterComponent implements OnInit {
     public authService: AuthenticationService,
     public activatedRoute: ActivatedRoute,
     private _cookieUtilsService: CookieUtilsService,
-    private _currencypickerService: CurrencypickerService
+    private _currencypickerService: CurrencyPickerService
   ) {
     this.isLoggedIn = authService.isLoggedIn();
     authService.isLoggedIn().subscribe((res) => {
@@ -40,7 +40,7 @@ export class AppFooterComponent implements OnInit {
   }
 
   public updateCurrencyCookie() {
-      this._cookieUtilsService.setValue('currency', this.selectedCurrency);
+    this._cookieUtilsService.setValue('currency', this.selectedCurrency);
   }
 
 }

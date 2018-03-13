@@ -4,11 +4,11 @@ import { ProfileService } from '../../_services/profile/profile.service';
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
 import { AppConfig } from '../../app.config';
 import { TopicService } from '../../_services/topic/topic.service';
-import _ from 'lodash';
+import * as _ from 'lodash';
 import * as moment from 'moment';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { DialogsService } from '../../_services/dialogs/dialog.service';
-import {CommunityService} from '../../_services/community/community.service';
+import { CommunityService } from '../../_services/community/community.service';
 
 @Component({
     selector: 'app-feed',
@@ -71,19 +71,23 @@ export class HomefeedComponent implements OnInit {
 
     private fetchContinueLearning() {
         this.loadingContinueLearning = true;
-        this._collectionService.getParticipatingCollections(this.userId, '{ "relInclude": "calendarId", "where": {"type":"workshop"}, "include": ["calendars", {"owners":["profiles", "reviewsAboutYou", "ownedCollections"]}, {"participants": "profiles"}, "topics", {"contents":["schedules","views","submissions"]}, {"reviews":"peer"}] }', (err, result) => {
-            if (err) {
-                console.log(err);
-            } else {
-                this.ongoingArray = [];
-                this.upcomingArray = [];
-                this.liveWorkshopsObject = {};
-                this.upcomingWorkshopsObject = {};
-                this.createOutput(result);
-                this.now = new Date();
-                this.loadingContinueLearning = false;
-            }
-        });
+        this._collectionService.getParticipatingCollections(this.userId,
+            '{ "relInclude": "calendarId", "where": {"type":"workshop"}, "include": ' +
+            '["calendars", {"owners":["profiles", "reviewsAboutYou", "ownedCollections"]},' +
+            ' {"participants": "profiles"}, "topics", {"contents":["schedules","views","submissions"]}, ' +
+            '{"reviews":"peer"}] }', (err, result) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    this.ongoingArray = [];
+                    this.upcomingArray = [];
+                    this.liveWorkshopsObject = {};
+                    this.upcomingWorkshopsObject = {};
+                    this.createOutput(result);
+                    this.now = new Date();
+                    this.loadingContinueLearning = false;
+                }
+            });
     }
 
     private createOutput(data: any) {
@@ -136,12 +140,13 @@ export class HomefeedComponent implements OnInit {
             return moment() < moment(element.startDay);
         });
         let fillerWord = '';
-        if (contents[0].type === 'online')
+        if (contents[0].type === 'online') {
             fillerWord = 'session';
-        else if (contents[0].type === 'video')
+        } else if (contents[0].type === 'video') {
             fillerWord = 'recording';
-        else if (contents[0].type === 'project')
+        } else if (contents[0].type === 'project') {
             fillerWord = 'submission';
+        }
         if (currentCalendar) {
             const contentStartDate = moment(currentCalendar.startDate).add(contents[0].schedules[0].startDay, 'days');
             const timeToStart = contentStartDate.diff(moment(), 'days');
@@ -170,7 +175,13 @@ export class HomefeedComponent implements OnInit {
     fetchWorkshops() {
         const query = {
             'include': [
-                { 'relation': 'collections', 'scope': { 'include': [{ 'owners': ['reviewsAboutYou', 'profiles'] }, 'calendars', { 'bookmarks': 'peer' }], 'where': { 'type': 'workshop' } } }
+                {
+                    'relation': 'collections', 'scope': {
+                        'include':
+                            [{ 'owners': ['reviewsAboutYou', 'profiles'] }, 'calendars',
+                            { 'bookmarks': 'peer' }], 'where': { 'type': 'workshop' }
+                    }
+                }
             ],
             'order': 'createdAt desc'
         };
@@ -183,8 +194,10 @@ export class HomefeedComponent implements OnInit {
                     responseObj.collections.forEach(collection => {
                         if (collection.status === 'active') {
                             if (collection.owners && collection.owners[0].reviewsAboutYou) {
-                                collection.rating = this._collectionService.calculateCollectionRating(collection.id, collection.owners[0].reviewsAboutYou);
-                                collection.ratingCount = this._collectionService.calculateCollectionRatingCount(collection.id, collection.owners[0].reviewsAboutYou);
+                                collection.rating = this._collectionService
+                                    .calculateCollectionRating(collection.id, collection.owners[0].reviewsAboutYou);
+                                collection.ratingCount = this._collectionService
+                                    .calculateCollectionRatingCount(collection.id, collection.owners[0].reviewsAboutYou);
                             }
                             let hasActiveCalendar = false;
                             if (collection.calendars) {
@@ -214,7 +227,16 @@ export class HomefeedComponent implements OnInit {
     fetchExperiences() {
         const query = {
             'include': [
-                { 'relation': 'collections', 'scope': { 'include': [{ 'owners': ['reviewsAboutYou', 'profiles'] }, 'calendars', { 'bookmarks': 'peer' }, { 'contents': ['schedules', 'locations'] }], 'where': { 'type': 'experience' } } }
+                {
+                    'relation': 'collections', 'scope': {
+                        'include':
+                            [{ 'owners': ['reviewsAboutYou', 'profiles'] },
+                                'calendars', { 'bookmarks': 'peer' }, {
+                                'contents':
+                                    ['schedules', 'locations']
+                            }], 'where': { 'type': 'experience' }
+                    }
+                }
             ],
             'order': 'createdAt desc'
         };
@@ -231,7 +253,9 @@ export class HomefeedComponent implements OnInit {
                         if (collection.status === 'active') {
                             if (collection.contents) {
                                 collection.contents.forEach(content => {
-                                    if (content.locations && content.locations.length > 0 && content.locations[0].city !== undefined && content.locations[0].city.length > 0) {
+                                    if (content.locations && content.locations.length > 0
+                                        && content.locations[0].city !== undefined
+                                        && content.locations[0].city.length > 0) {
                                         experienceLocation = content.locations[0].city;
                                         lat = parseFloat(content.locations[0].map_lat);
                                         lng = parseFloat(content.locations[0].map_lng);
@@ -242,8 +266,10 @@ export class HomefeedComponent implements OnInit {
                                 collection.lng = lng;
                             }
                             if (collection.owners && collection.owners[0].reviewsAboutYou) {
-                                collection.rating = this._collectionService.calculateCollectionRating(collection.id, collection.owners[0].reviewsAboutYou);
-                                collection.ratingCount = this._collectionService.calculateCollectionRatingCount(collection.id, collection.owners[0].reviewsAboutYou);
+                                collection.rating = this._collectionService
+                                    .calculateCollectionRating(collection.id, collection.owners[0].reviewsAboutYou);
+                                collection.ratingCount = this._collectionService
+                                    .calculateCollectionRatingCount(collection.id, collection.owners[0].reviewsAboutYou);
                             }
                             let hasActiveCalendar = false;
                             if (collection.calendars) {
@@ -274,16 +300,20 @@ export class HomefeedComponent implements OnInit {
     fetchCommunities() {
         const query = {
             'include': [
-                { 'relation': 'communities', 'scope': { 'include': [
-                    'topics',
-                    'views',
-                    'invites',
-                    'rooms',
-                    {'collections': ['owners']},
-                    'links',
-                    {'participants': [{'profiles': ['work']}]},
-                    {'owners': [{'profiles': ['work']}]}
-                ] } }
+                {
+                    'relation': 'communities', 'scope': {
+                        'include': [
+                            'topics',
+                            'views',
+                            'invites',
+                            'rooms',
+                            { 'collections': ['owners'] },
+                            'links',
+                            { 'participants': [{ 'profiles': ['work'] }] },
+                            { 'owners': [{ 'profiles': ['work'] }] }
+                        ]
+                    }
+                }
             ],
             'order': 'createdAt desc'
         };
@@ -344,7 +374,9 @@ export class HomefeedComponent implements OnInit {
     }
 
     public toggleWorkshopBookmark(index: number) {
-        if (!(this.workshops[index].bookmarks && this.workshops[index].bookmarks[0] && this.workshops[index].bookmarks[0].peer && this.workshops[index].bookmarks[0].peer[0] && this.workshops[index].bookmarks[0].peer[0].id === this.userId)) {
+        if (!(this.workshops[index].bookmarks
+            && this.workshops[index].bookmarks[0] && this.workshops[index].bookmarks[0].peer
+            && this.workshops[index].bookmarks[0].peer[0] && this.workshops[index].bookmarks[0].peer[0].id === this.userId)) {
             this._collectionService.saveBookmark(this.workshops[index].id, (err, response) => {
                 this.fetchWorkshops();
             });
@@ -357,7 +389,9 @@ export class HomefeedComponent implements OnInit {
 
 
     public toggleExperienceBookmark(index: number) {
-        if (!(this.experiences[index].bookmarks && this.experiences[index].bookmarks[0] && this.experiences[index].bookmarks[0].peer && this.experiences[index].bookmarks[0].peer[0] && this.experiences[index].bookmarks[0].peer[0].id === this.userId)) {
+        if (!(this.experiences[index].bookmarks && this.experiences[index].bookmarks[0]
+            && this.experiences[index].bookmarks[0].peer && this.experiences[index].bookmarks[0].peer[0]
+            && this.experiences[index].bookmarks[0].peer[0].id === this.userId)) {
             this._collectionService.saveBookmark(this.experiences[index].id, (err, response) => {
                 this.fetchExperiences();
             });
@@ -369,7 +403,9 @@ export class HomefeedComponent implements OnInit {
     }
 
     public toggleCommunityBookmark(index: number) {
-        if (!(this.communities[index].bookmarks && this.communities[index].bookmarks[0] && this.communities[index].bookmarks[0].peer && this.communities[index].bookmarks[0].peer[0] && this.communities[index].bookmarks[0].peer[0].id === this.userId)) {
+        if (!(this.communities[index].bookmarks
+            && this.communities[index].bookmarks[0] && this.communities[index].bookmarks[0].peer
+            && this.communities[index].bookmarks[0].peer[0] && this.communities[index].bookmarks[0].peer[0].id === this.userId)) {
             this._communityService.saveBookmark(this.communities[index].id, (err, response) => {
                 this.fetchCommunities();
             });

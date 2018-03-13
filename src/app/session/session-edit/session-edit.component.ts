@@ -17,7 +17,7 @@ import { MediaUploaderService } from '../../_services/mediaUploader/media-upload
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
 import { AppConfig } from '../../app.config';
 import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
-import _ from 'lodash';
+import * as _ from 'lodash';
 import { MdDialog, MdSnackBar } from '@angular/material';
 import { LeftSidebarService } from '../../_services/left-sidebar/left-sidebar.service';
 

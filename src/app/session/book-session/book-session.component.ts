@@ -7,7 +7,7 @@ import * as moment from 'moment';
 import { PaymentService } from '../../_services/payment/payment.service';
 import { Response } from '@angular/http';
 import { CollectionService } from '../../_services/collection/collection.service';
-import _ from 'lodash';
+import * as _ from 'lodash';
 import { MdSnackBar } from '@angular/material';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 

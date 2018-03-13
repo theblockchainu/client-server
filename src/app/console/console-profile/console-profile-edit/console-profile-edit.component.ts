@@ -4,7 +4,7 @@ import { ConsoleProfileComponent } from '../console-profile.component';
 import { CookieService } from 'ngx-cookie-service';
 import { ProfileService } from '../../../_services/profile/profile.service';
 import { LanguagePickerService } from '../../../_services/languagepicker/languagepicker.service';
-import { CurrencypickerService } from '../../../_services/currencypicker/currencypicker.service';
+import { CurrencyPickerService } from '../../../_services/currencypicker/currencypicker.service';
 import { TimezonePickerService } from '../../../_services/timezone-picker/timezone-picker.service';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 import { MdSnackBar } from '@angular/material';
@@ -19,7 +19,7 @@ import 'rxjs/add/operator/map'; import {
 import { AppConfig } from '../../../app.config';
 
 import { UcFirstPipe } from 'ngx-pipes';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 declare var moment: any;
 
@@ -70,7 +70,7 @@ export class ConsoleProfileEditComponent implements OnInit {
     public _cookieService: CookieService,
     public _profileService: ProfileService,
     public _languageService: LanguagePickerService,
-    public _currencyService: CurrencypickerService,
+    public _currencyService: CurrencyPickerService,
     public snackBar: MdSnackBar,
     public _fb: FormBuilder,
     public _timezoneService: TimezonePickerService,

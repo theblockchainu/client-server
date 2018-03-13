@@ -14,7 +14,7 @@ import { Observable } from 'rxjs/Observable';
 import { AppConfig } from '../../app.config';
 import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
 
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'multiselect-autocomplete',

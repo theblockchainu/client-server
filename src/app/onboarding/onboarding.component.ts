@@ -12,7 +12,7 @@ import { ProfileService } from '../_services/profile/profile.service';
 import { TopicService } from '../_services/topic/topic.service';
 import { CookieUtilsService } from '../_services/cookieUtils/cookie-utils.service';
 
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-onboarding',

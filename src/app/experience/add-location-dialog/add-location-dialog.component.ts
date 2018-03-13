@@ -4,7 +4,7 @@ import { AppConfig } from '../../app.config';
 import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
 import { CountryPickerService } from '../../_services/countrypicker/countrypicker.service';
 import { Observable } from 'rxjs/Observable';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'app-add-location-dialog',

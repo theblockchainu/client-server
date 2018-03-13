@@ -4,7 +4,7 @@ import { TopicService } from '../../_services/topic/topic.service';
 import { ProfileService } from '../../_services/profile/profile.service';
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
 import { AppConfig } from '../../app.config';
-import _ from 'lodash';
+import * as _ from 'lodash';
 import { Observable } from 'rxjs/Observable';
 import { MdDialog } from '@angular/material';
 import { SelectTopicsComponent } from '../dialogs/select-topics/select-topics.component';

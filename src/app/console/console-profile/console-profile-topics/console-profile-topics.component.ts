@@ -9,7 +9,7 @@ import { NG_VALIDATORS, FormControl, Validator, ValidationErrors } from '@angula
 import { DialogsService } from '../../../_services/dialogs/dialog.service';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 
-import _ from 'lodash';
+import * as _ from 'lodash';
 import { AppConfig } from '../../../app.config';
 @Component({
   selector: 'app-console-profile-topics',

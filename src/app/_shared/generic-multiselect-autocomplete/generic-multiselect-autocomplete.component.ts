@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 
 import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
 
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 @Component({
 selector: 'generic-multiselect-autocomplete',

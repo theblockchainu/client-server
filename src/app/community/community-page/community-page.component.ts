@@ -34,7 +34,7 @@ import { DialogsService } from '../../_services/dialogs/dialog.service';
 import { TopicService } from '../../_services/topic/topic.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import * as moment from 'moment';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 declare var FB: any;
 

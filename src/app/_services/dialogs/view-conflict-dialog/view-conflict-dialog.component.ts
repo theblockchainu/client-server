@@ -3,7 +3,7 @@ import { MdDialogRef, MD_DIALOG_DATA, MdButtonModule } from '@angular/material';
 import {
     FormGroup, FormArray, FormBuilder, FormControl, AbstractControl, Validators
 } from '@angular/forms';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'app-view-conflict-dialog',

@@ -4,7 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {CollectionService} from '../../../_services/collection/collection.service';
 import {CookieUtilsService} from '../../../_services/cookieUtils/cookie-utils.service';
 import {CommunityService} from '../../../_services/community/community.service';
-import _ from 'lodash';
+import * as _ from 'lodash';
 import * as moment from 'moment';
 import {DialogsService} from '../../../_services/dialogs/dialog.service';
 import {AppConfig} from '../../../app.config';

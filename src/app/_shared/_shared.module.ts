@@ -53,7 +53,7 @@ import { MediaUploaderService } from '../_services/mediaUploader/media-uploader.
 import { CookieUtilsService } from '../_services/cookieUtils/cookie-utils.service';
 import { ContentService } from '../_services/content/content.service';
 import { LeftSidebarService } from '../_services/left-sidebar/left-sidebar.service';
-import { CurrencypickerService } from '../_services/currencypicker/currencypicker.service';
+import { CurrencyPickerService } from '../_services/currencypicker/currencypicker.service';
 import { TopicService } from '../_services/topic/topic.service';
 import { CommentService } from '../_services/comment/comment.service';
 import { NotificationService } from '../_services/notification/notification.service';
@@ -120,7 +120,7 @@ import { TopicRowComponent } from './topic-row/topic-row.component';
         CookieUtilsService,
         ContentService,
         LeftSidebarService,
-        CurrencypickerService,
+        CurrencyPickerService,
         CommentService,
         TopicService,
         NotificationService,

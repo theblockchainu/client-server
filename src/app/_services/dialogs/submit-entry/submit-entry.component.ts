@@ -9,7 +9,7 @@ import { ProjectSubmissionService } from '../../../_services/project-submission/
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 import 'rxjs/add/operator/map';
 import { ContentService } from '../../../_services/content/content.service';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'app-submit-entry',

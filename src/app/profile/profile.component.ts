@@ -11,7 +11,7 @@ import { MdDialog, MdSnackBar } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 import * as moment from 'moment';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-profile',

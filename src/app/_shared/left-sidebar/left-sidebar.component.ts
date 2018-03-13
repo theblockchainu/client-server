@@ -9,7 +9,7 @@ import { Router, ActivatedRoute, Params, NavigationStart } from '@angular/router
 import { LeftSidebarService, SideBarMenuItem } from '../../_services/left-sidebar/left-sidebar.service';
 import { CollectionService } from '../../_services/collection/collection.service';
 
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-left-sidebar',

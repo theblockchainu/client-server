@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CommunityPageComponent} from '../community-page.component';
 import {ActivatedRoute} from '@angular/router';
-import _ from 'lodash';
+import * as _ from 'lodash';
 import * as moment from 'moment';
 import {CollectionService} from '../../../_services/collection/collection.service';
 import {CommunityService} from '../../../_services/community/community.service';

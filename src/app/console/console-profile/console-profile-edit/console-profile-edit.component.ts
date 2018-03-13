@@ -54,7 +54,7 @@ export class ConsoleProfileEditComponent implements OnInit {
   public disableEndDate = false;
   public disableEndYearBool = false;
 
-  //Geo Location
+  // Geo Location
   public userSettings: any = {
     geoLocation: [37.76999, -122.44696],
     geoRadius: 5,
@@ -95,9 +95,6 @@ export class ConsoleProfileEditComponent implements OnInit {
 
   ngOnInit() {
     this.loadingProfile = true;
-    this.getLanguages();
-    this.getCurrencies();
-    this.getTimezones();
     this.profileForm = this._fb.group(
       {
         first_name: ['', Validators.requiredTrue],
@@ -128,6 +125,9 @@ export class ConsoleProfileEditComponent implements OnInit {
         email: ''
       }
     );
+    this.getLanguages();
+    this.getCurrencies();
+    this.getTimezones();
     const query = {
       'include': [
         'education',
@@ -207,8 +207,7 @@ export class ConsoleProfileEditComponent implements OnInit {
             this.filteredCurrencies = _.filter(this.currencies, (item) => {
               return item.name.toLowerCase().indexOf(val.toLowerCase()) > -1;
             });
-          }
-          else {
+          } else {
             this.currencies.slice();
           }
         }

@@ -20,7 +20,7 @@ export class ContactComponent implements OnInit {
   contactUsForm: FormGroup;
 
   lat = 37.508772;
-  lng: number = -121.960507;
+  lng = -121.960507;
 
   constructor(public _fb: FormBuilder,
     private authenticationService: AuthenticationService,

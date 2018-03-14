@@ -55,8 +55,8 @@ export class WorkshopEditComponent implements OnInit {
   public phoneDetails: FormGroup;
 
   public supplementUrls = new FormArray([]);
-  public uploadingImage = false;
-  public uploadingVideo = false;
+  private uploadingImage = false;
+  private uploadingVideo = false;
 
   private workshopId: string;
   public workshopData: any;
@@ -231,7 +231,8 @@ export class WorkshopEditComponent implements OnInit {
 
     this.phoneDetails = this._fb.group({
       phoneNo: '',
-      inputOTP: ''
+      inputOTP: '',
+        countryCode: ''
     });
 
     this.initializeFormFields();
@@ -1160,7 +1161,7 @@ export class WorkshopEditComponent implements OnInit {
     // Post Workshop for review
 
     element.textContent = text;
-    this._collectionService.sendVerifySMS(this.phoneDetails.controls.phoneNo.value)
+    this._collectionService.sendVerifySMS(this.phoneDetails.controls.phoneNo.value, this.phoneDetails.controls.countryCode.value)
       .subscribe((res) => {
         this.otpSent = true;
         this.phoneDetails.controls.phoneNo.disable();

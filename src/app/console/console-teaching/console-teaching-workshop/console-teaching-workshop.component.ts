@@ -122,9 +122,9 @@ export class ConsoleTeachingWorkshopComponent implements OnInit {
                 this.pastWorkshopsObject[workshop.id]['workshop']['calendars'] = [calendar];
                 let participantReviewCount = 0;
                 this.pastWorkshopsObject[workshop.id]['workshop'].participants.forEach(participant => {
-                  if (participant.reviewsAboutYou && participant.reviewsAboutYou[0].collectionId === workshop.id) {
-                    participantReviewCount += 1;
-                  }
+                    if (participant.reviewsAboutYou && participant.reviewsAboutYou.some(reviews => reviews.collectionId === workshop.id)) {
+                        participantReviewCount += 1;
+                    }
                 });
                 this.pastWorkshopsObject[workshop.id]['workshop'].participantReviewCount = participantReviewCount;
               }

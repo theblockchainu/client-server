@@ -10,6 +10,7 @@ import { CollectionService } from '../../../../_services/collection/collection.s
 export class CohortDetailDialogComponent implements OnInit {
 
   public cohortsDataArray: Array<any>;
+  public loadingCohortDetail = true;
 
   constructor(
     public dialogRef: MdDialogRef<CohortDetailDialogComponent>,
@@ -56,6 +57,7 @@ export class CohortDetailDialogComponent implements OnInit {
             return 0;
           });
         console.log(this.cohortsDataArray);
+        this.loadingCohortDetail = false;
 
       }, err => {
         console.log(err);

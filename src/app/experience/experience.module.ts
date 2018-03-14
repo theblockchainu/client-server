@@ -8,14 +8,15 @@ import { ExperienceContentVideoComponent } from './experience-content-video/expe
 import { ContentViewComponent } from './content-view/content-view.component';
 import { AppointmentCalendarComponent } from './appointment-calendar/appointment-calendar.component';
 import { ExperienceContentInpersonComponent } from './experience-content-inperson/experience-content-inperson.component';
-import { AgmCoreModule } from '@agm/core';
-import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 import { AddLocationDialogComponent } from './add-location-dialog/add-location-dialog.component';
+import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 
 @NgModule({
     imports: [
         SharedModule,
-        ExperienceRoutingModule
+        ExperienceRoutingModule,
+        OwlDateTimeModule,
+        OwlNativeDateTimeModule
     ],
     declarations: [
         ExperienceEditComponent,

@@ -247,15 +247,17 @@ export class ExperienceContentComponent implements OnInit {
       schedule.startTime = new Date(0, 0, 0, 1, 0, 0, 0);
       schedule.endTime = new Date(0, 0, 0, 1, 0, 0, 0);
     } else if (contentObj.type === 'online' || contentObj.type === 'in-person') {
-      const startTimeArr = schedule.startTime.toString().split(':');
+      /*const startTimeArr = schedule.startTime.toString().split(':');
       const startHour = startTimeArr[0];
       const startMin = startTimeArr[1];
-      schedule.startTime = new Date(0, 0, 0, startHour, startMin, 0, 0);
+      schedule.startTime = new Date(0, 0, 0, startHour, startMin, 0, 0);*/
+      schedule.startTime = moment(schedule.startTime).format();
 
-      const endTimeArr = schedule.endTime.toString().split(':');
+      /*const endTimeArr = schedule.endTime.toString().split(':');
       const endHour = endTimeArr[0];
       const endMin = endTimeArr[1];
-      schedule.endTime = new Date(0, 0, 0, endHour, endMin, 0, 0);
+      schedule.endTime = new Date(0, 0, 0, endHour, endMin, 0, 0);*/
+        schedule.endTime = moment(schedule.endTime).format();
       schedule.endDay = 0;
     }
     schedule.startDay = this.numberOfdays(scheduleDate, this.calendar.startDate);
@@ -345,18 +347,20 @@ export class ExperienceContentComponent implements OnInit {
     if (schedule.startTime === '') {
       schedule.startTime = new Date(0, 0, 0, 1, 0, 0, 0);
     } else {
-      const startTimeArr = schedule.startTime.toString().split(':');
+      /*const startTimeArr = schedule.startTime.toString().split(':');
       const startHour = startTimeArr[0];
       const startMin = startTimeArr[1];
-      schedule.startTime = new Date(0, 0, 0, startHour, startMin, 0, 0);
+      schedule.startTime = new Date(0, 0, 0, startHour, startMin, 0, 0);*/
+        schedule.startTime = moment(schedule.startTime).format();
     }
     if (schedule.endTime === '') {
       schedule.endTime = new Date(0, 0, 0, 23, 0, 0, 0);
     } else {
-      const endTimeArr = schedule.endTime.toString().split(':');
+      /*const endTimeArr = schedule.endTime.toString().split(':');
       const endHour = endTimeArr[0];
       const endMin = endTimeArr[1];
-      schedule.endTime = new Date(0, 0, 0, endHour, endMin, 0, 0);
+      schedule.endTime = new Date(0, 0, 0, endHour, endMin, 0, 0);*/
+        schedule.endTime = moment(schedule.endTime).format();
     }
     this.http.put(this.config.apiUrl + '/api/collections/' + this.collection.id + '/contents/' + contentId, contentObj, this.options)
       .map((response: any) => {
@@ -454,6 +458,17 @@ export class ExperienceContentComponent implements OnInit {
 
   getCalendarEndDate() {
     return new Date(this.calendar.endDate);
+  }
+
+  getSelectedItineraryDates() {
+      const selectedDates = [];
+      const itineraries = <FormArray>this.myForm.controls.itenary;
+      itineraries.controls.forEach(itinerary => {
+          if (itinerary.value.date !== null) {
+              selectedDates.push(itinerary.value.date);
+          }
+      });
+      return selectedDates;
   }
 
 }

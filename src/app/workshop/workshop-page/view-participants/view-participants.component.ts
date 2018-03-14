@@ -14,7 +14,7 @@ export class ViewParticipantsComponent implements OnInit {
     @Inject(MD_DIALOG_DATA) public data: any,
     public config: AppConfig,
     private dialog: MdDialog,
-    private _collectionService: CollectionService
+    public _collectionService: CollectionService
   ) { }
 
   ngOnInit() {

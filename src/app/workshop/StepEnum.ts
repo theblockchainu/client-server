@@ -13,4 +13,4 @@ export const StepEnum = {
   STEP10: <StepEnum>10,
   STEP11: <StepEnum>11,
   STEP12: <StepEnum>12
- }
+ };

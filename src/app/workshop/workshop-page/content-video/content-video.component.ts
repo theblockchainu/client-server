@@ -181,8 +181,7 @@ export class ContentVideoComponent implements OnInit, OnDestroy {
                     if (upvote.peer[0].id === this.userId) {
                         result = true;
                     }
-                }
-                else {
+                } else {
                     result = true;
                 }
             });

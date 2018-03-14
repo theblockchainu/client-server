@@ -14,9 +14,9 @@ export class AppointmentCalendarComponent implements OnInit {
 
   event: MyEvent;
 
-  dialogVisible: boolean = false;
+  dialogVisible = false;
 
-  idGen: number = 100;
+  idGen = 100;
 
   constructor(private eventService: AppointmentService) { }
 
@@ -40,8 +40,8 @@ export class AppointmentCalendarComponent implements OnInit {
     this.event = new MyEvent();
     this.event.title = e.calEvent.title;
 
-    let start = e.calEvent.start;
-    let end = e.calEvent.end;
+    const start = e.calEvent.start;
+    const end = e.calEvent.end;
     if (e.view.name === 'month') {
       start.stripTime();
     }
@@ -60,13 +60,11 @@ export class AppointmentCalendarComponent implements OnInit {
   saveEvent() {
     //update
     if (this.event.id) {
-      let index: number = this.findEventIndexById(this.event.id);
+      const index: number = this.findEventIndexById(this.event.id);
       if (index >= 0) {
         this.events[index] = this.event;
       }
-    }
-    //new
-    else {
+    } else {
       this.event.id = this.idGen++;
       this.events.push(this.event);
       this.event = null;
@@ -76,7 +74,7 @@ export class AppointmentCalendarComponent implements OnInit {
   }
 
   deleteEvent() {
-    let index: number = this.findEventIndexById(this.event.id);
+    const index: number = this.findEventIndexById(this.event.id);
     if (index >= 0) {
       this.events.splice(index, 1);
     }
@@ -101,5 +99,5 @@ export class MyEvent {
   title: string;
   start: string;
   end: string;
-  allDay: boolean = true;
+  allDay = true;
 }

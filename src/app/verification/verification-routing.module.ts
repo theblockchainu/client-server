@@ -5,7 +5,7 @@ import { AuthGuardService } from '../_services/auth-guard/auth-guard.service';
 
 const routes: Routes = [
 {
-  path: '', 
+  path: '',
   children: [
     {
       path: ':step',

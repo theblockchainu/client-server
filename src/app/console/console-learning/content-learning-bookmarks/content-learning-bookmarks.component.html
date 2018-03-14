@@ -11,8 +11,8 @@
       <div class="lightText">
         You do not have any bookmarks
         <br>
-        <br> Start by bookmarking a
-        <a color="default" [routerLink]="'/home/workshops'">Workshop </a> or <a color="default" [routerLink]="'/home/experiences'">Experience </a>
+        <br> Start by bookmarking an
+        <!--<a color="default" [routerLink]="'/home/workshops'">Workshop </a> or --><a color="default" [routerLink]="'/home/experiences'">Experience </a>
       </div>
     </div>
     <div *ngIf="bookmarks.length > 0">
@@ -41,11 +41,11 @@
                       </div>
                     </div>
                     <div class="teacherName" (click)="openProfile(bookmark.collection[0].owners[0])">
-                      <span class="mat-body-1 clickable">{{bookmark.collection[0].owners[0].profiles[0].first_name + ' ' + bookmark.collection[0].owners[0].profiles[0].last_name}}
+                      <span class="mat-body-1 clickable">{{bookmark.collection[0].type | ucfirst}} by {{bookmark.collection[0].owners[0].profiles[0].first_name + ' ' + bookmark.collection[0].owners[0].profiles[0].last_name | ucwords}}
                       </span>
                     </div>
                     <div class="teacherHeadline">
-                      <span>{{bookmark.collection[0].owners[0].profiles[0].headline}} </span>
+                      <span>{{bookmark.collection[0].owners[0].profiles[0].headline | ucwords}} </span>
                     </div>
                     <div class="collectionTitle mat-body-2 clickable" (click)="openCollection(bookmark.collection[0])">{{ bookmark.collection[0].title || 'No Title' | ucwords }} </div>
                     <div class="collectionSubtitle">
@@ -76,6 +76,12 @@
                         + ' in ' + consoleLearningComponent.getLearnerUpcomingEvent(bookmark.collection[0]).timeToStart + ' Days' }}
                       </div>
                     </div>
+                      <div *ngIf="consoleLearningComponent.getLearnerUpcomingEvent(bookmark.collection[0]).timeToStart<0">
+
+                          <div class="upcomingEventTitle">
+                              There are no ongoing or upcoming cohorts for this {{bookmark.collection[0].type}}
+                          </div>
+                      </div>
                   </md-card-content>
                   <md-card-actions *ngIf="consoleLearningComponent.getLearnerUpcomingEvent(bookmark.collection[0]).hasStarted">
                     <button md-raised-button (click)="onSelect(bookmark.collection[0])">{{consoleLearningComponent.getLearnerUpcomingEvent(bookmark.collection[0]).upcomingEventButtonText}}</button>

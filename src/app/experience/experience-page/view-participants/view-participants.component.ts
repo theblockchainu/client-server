@@ -5,6 +5,7 @@ import { MessageParticipantComponent } from '../message-participant/message-part
 import { CollectionService } from '../../../_services/collection/collection.service';
 import { DialogsService } from '../../../_services/dialogs/dialog.service';
 import { ProfileService } from '../../../_services/profile/profile.service';
+import {CookieUtilsService} from '../../../_services/cookieUtils/cookie-utils.service';
 @Component({
   selector: 'app-view-participants',
   templateUrl: './view-participants.component.html',
@@ -12,17 +13,21 @@ import { ProfileService } from '../../../_services/profile/profile.service';
 })
 export class ViewParticipantsComponent implements OnInit {
 
+    public userId;
+
   constructor(public dialogRef: MdDialogRef<ViewParticipantsComponent>,
     @Inject(MD_DIALOG_DATA) public data: any,
     public config: AppConfig,
     private dialog: MdDialog,
-    private _collectionService: CollectionService,
+  public _collectionService: CollectionService,
     public _dialogsService: DialogsService,
     public snackBar: MdSnackBar,
-    public _profileService: ProfileService
+    public _profileService: ProfileService,
+              public _cookieUtilsService: CookieUtilsService
   ) { }
 
   ngOnInit() {
+      this.userId = this._cookieUtilsService.getValue('userId');
   }
 
 

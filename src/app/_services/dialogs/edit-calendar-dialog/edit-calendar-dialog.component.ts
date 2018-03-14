@@ -140,8 +140,7 @@ export class EditCalendarDialogComponent implements OnInit {
         if (events.length === 0) {
             this.dateClicked = false;
             return;
-        }
-        else {
+        } else {
             this.dateClicked = true; // !this.dateClicked;
         }
         this.clickedDate = date;
@@ -164,8 +163,7 @@ export class EditCalendarDialogComponent implements OnInit {
                         start: event.start,
                         end: event.end
                     }];
-                }
-                else {
+                } else {
                     this.eventsForTheDay[calId].push({
                         id: eventId,
                         title: title,
@@ -314,12 +312,10 @@ export class EditCalendarDialogComponent implements OnInit {
                     // this.startDay = moment(this.endDate).add(7 - isoWeekDayForLastDate + 1, 'days');//.isoWeekday(isoWeekDay)
                     if (isoWeekDayForLastDate + isoWeekDay >= 7) {
                         this.startDay = moment(this.endDate).add(1, 'weeks').subtract(isoWeekDayForLastDate - isoWeekDay, 'days');
-                    }
-                    else {
+                    } else {
                         this.startDay = moment(this.endDate).add(7 - isoWeekDayForLastDate + 1, 'days'); //.isoWeekday(isoWeekDay)
                     }
-                }
-                else if (isoWeekDayForLastDate === isoWeekDay) {
+                } else if (isoWeekDayForLastDate === isoWeekDay) {
                     this.startDay = moment(this.endDate).add(1, 'weeks').isoWeekday(isoWeekDay);
                 }
                 this.weekDaysStartGap = 7 - isoWeekDayForLastDate;
@@ -394,15 +390,13 @@ export class EditCalendarDialogComponent implements OnInit {
                                 calendarItenary.push(itenary);
                                 itenary = {};
                             }
-                        }
-                        else {
+                        } else {
                             tempStartDay = content.schedules[0].startDay;
                         }
                         const eventDate = this.calculateDate(calendar.startDate, content.schedules[0].startDay);
                         if (itenary && itenary['startDay'] === content.schedules[0].startDay) {
                             itenary['contents'].push(content);
-                        }
-                        else {
+                        } else {
                             itenary = {
                                 startDay: content.schedules[0].startDay,
                                 startDate: eventDate,
@@ -465,8 +459,7 @@ export class EditCalendarDialogComponent implements OnInit {
                             conflictWith: conflict.current,
                             markedForDelete: false
                         });
-                    }
-                    else {
+                    } else {
                         this.computedConflict.push({
                             event: conflict.current,
                             conflictWith: conflict.previous,
@@ -516,16 +509,14 @@ export class EditCalendarDialogComponent implements OnInit {
             tempEnd = moment(start).add(this.duration - 1, 'days');
             this.recurringCalendar.push({ startDate: start.toDate(), endDate: tempEnd.toDate(), markedForDelete: false });
             end = tempEnd; //.format('YYYY-MM-DD');
-        }
-        else if (this.recurring.value.repeatWorkshopGroupOption === 'days') {
+        } else if (this.recurring.value.repeatWorkshopGroupOption === 'days') {
             // start = moment(start).add(days, 'days').utcOffset(0).set({hour:18,minute:30,second:0});
             // tempEnd = moment(start).add(this.duration, 'days').utcOffset(0).set({hour:18,minute:29,second:59});
             start = moment(start).add(days + 1, 'days');
             tempEnd = moment(start).add(this.duration - 1, 'days');
             this.recurringCalendar.push({ startDate: start.toDate(), endDate: tempEnd.toDate(), markedForDelete: false });
             end = tempEnd; //.format('YYYY-MM-DD');
-        }
-        else if (this.recurring.value.repeatWorkshopGroupOption === 'weekdays') {
+        } else if (this.recurring.value.repeatWorkshopGroupOption === 'weekdays') {
             const isoWeekDayForLastDate = moment(end).isoWeekday();
             if (isoWeekDayForLastDate < weekday) {
                 // then just give me this week's instance of that day
@@ -535,12 +526,10 @@ export class EditCalendarDialogComponent implements OnInit {
                 // otherwise, give me next week's instance of that day
                 if (isoWeekDayForLastDate + weekday >= 7) {
                     start = moment(end).add(1, 'weeks').subtract(isoWeekDayForLastDate - weekday, 'days');
-                }
-                else {
+                } else {
                     start = moment(end).add(7 - isoWeekDayForLastDate + 1, 'days'); //.isoWeekday(isoWeekDay)
                 }
-            }
-            else if (isoWeekDayForLastDate === weekday) {
+            } else if (isoWeekDayForLastDate === weekday) {
                 start = moment(end).add(1, 'weeks').isoWeekday(weekday);
             }
             // start = moment(start).subtract(1, 'days').utcOffset(0).set({hour:18,minute:30,second:0});

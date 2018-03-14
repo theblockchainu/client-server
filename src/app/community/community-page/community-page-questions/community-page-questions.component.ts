@@ -78,11 +78,9 @@ export class CommunityPageQuestionsComponent implements OnInit {
                 if (value.substring(value.length - 1) !== '?' && value.substring(value.length - 2, value.length - 1) !== '?' && !this.questionHasQuestionMark) {
                     this.questionHasQuestionMark = true;
                     this.questionForm.controls.text.setValue(value + '?');
-                }
-                else if (value.substring(value.length - 1) !== '?' && value.substring(value.length - 2, value.length - 1) !== '?' && this.questionHasQuestionMark) {
+                } else if (value.substring(value.length - 1) !== '?' && value.substring(value.length - 2, value.length - 1) !== '?' && this.questionHasQuestionMark) {
                     this.questionForm.controls.text.setValue(value.substring(0, value.length - 1) + '?');
-                }
-                else if (value.substring(value.length - 1) !== '?' && value.substring(value.length - 2, value.length - 1) === '?') {
+                } else if (value.substring(value.length - 1) !== '?' && value.substring(value.length - 2, value.length - 1) === '?') {
                     this.questionForm.controls.text.setValue(value.substring(0, value.length - 2) + value.substring(value.length - 1) + '?');
                 }
             }
@@ -176,8 +174,7 @@ export class CommunityPageQuestionsComponent implements OnInit {
             response => {
                 if (question.upvotes !== undefined) {
                     question.upvotes.push(response );
-                }
-                else {
+                } else {
                     question.upvotes = [];
                     question.upvotes.push(response );
                 }
@@ -283,8 +280,7 @@ export class CommunityPageQuestionsComponent implements OnInit {
             response => {
                 if (answer.upvotes !== undefined) {
                     answer.upvotes.push(response );
-                }
-                else {
+                } else {
                     answer.upvotes = [];
                     answer.upvotes.push(response );
                 }
@@ -302,8 +298,7 @@ export class CommunityPageQuestionsComponent implements OnInit {
                     if (upvote.peer[0].id === this.userId) {
                         result = true;
                     }
-                }
-                else {
+                } else {
                     result = true;
                 }
             });
@@ -336,8 +331,7 @@ export class CommunityPageQuestionsComponent implements OnInit {
             response => {
                 if (comment.upvotes !== undefined) {
                     comment.upvotes.push(response );
-                }
-                else {
+                } else {
                     comment.upvotes = [];
                     comment.upvotes.push(response );
                 }
@@ -352,8 +346,7 @@ export class CommunityPageQuestionsComponent implements OnInit {
             response => {
                 if (reply.upvotes !== undefined) {
                     reply.upvotes.push(response );
-                }
-                else {
+                } else {
                     reply.upvotes = [];
                     reply.upvotes.push(response );
                 }
@@ -422,8 +415,7 @@ export class CommunityPageQuestionsComponent implements OnInit {
             this._questionsService.addFollower(question.id, this.userId).subscribe(res => {
                 if (question.followers !== undefined) {
                     question.followers.push(this.loggedInUser);
-                }
-                else {
+                } else {
                     question.followers = [];
                     question.followers.push(this.loggedInUser);
                 }

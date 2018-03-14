@@ -21,7 +21,7 @@ export class ConvertCurrencyPipe implements PipeTransform {
     } else {
       return this._paymentService.convertCurrency(amount, fromCurrency).map(
         res => {
-          return this._currencyPipe.transform(res.amount, res.currency, true, '1.0-0');
+          return this._currencyPipe.transform(res.amount, res.currency.toUpperCase(), 'symbol', '1.0-0');
         }
       );
     }

@@ -468,10 +468,10 @@ export class CollectionService {
     this.router.navigate(['/console/account/transactions']);
   }
 
-  public sendVerifySMS(phoneNo) {
+  public sendVerifySMS(phoneNo, countryCode) {
     const body = {};
     return this.httpClient
-      .post(this.config.apiUrl + '/api/peers/sendVerifySms?phone=' + phoneNo, body, this.options)
+      .post(this.config.apiUrl + '/api/peers/sendVerifySms?phone=' + phoneNo + '&countryCode=' + countryCode, body, this.options)
       .map((response: any) => response, (err) => {
         console.log('Error: ' + err);
       });
@@ -734,7 +734,8 @@ collectionID:string,userId:string,calendarId:string   */
   public calculateCollectionRating(collectionId, reviewArray?: any) {
     let reviewScore = 0;
     for (const reviewObject of reviewArray) {
-      if (reviewObject.collectionId !== undefined && reviewObject.collectionId === collectionId) { reviewScore += reviewObject.score; }
+      if (reviewObject.collectionId !== undefined && reviewObject.collectionId === collectionId)
+       { reviewScore += reviewObject.score;}
     }
     return (reviewScore / (reviewArray.length * 5)) * 5;
   }
@@ -742,7 +743,8 @@ collectionID:string,userId:string,calendarId:string   */
   public calculateCollectionRatingCount(collectionId, reviewArray?: any) {
     let reviewCount = 0;
     for (const reviewObject of reviewArray) {
-      if (reviewObject.collectionId !== undefined && reviewObject.collectionId === collectionId) { reviewCount++; }
+      if (reviewObject.collectionId !== undefined && reviewObject.collectionId === collectionId)
+       { reviewCount++;}
     }
     return reviewCount;
   }

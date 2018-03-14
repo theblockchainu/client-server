@@ -1,5 +1,9 @@
 /* Core Classes */
 
+div {
+    word-wrap: break-word;
+}
+
 html {
     font-size: 93.8%;
     max-width: 100%;

@@ -19,8 +19,9 @@ export class ExitCollectionDialogComponent implements OnInit {
 
   dropOut() {
     this._collectionService.removeParticipant(this.data.collectionId, this.data.userId).subscribe((response) => {
-      if (response)
+      if (response) {
         this.dialogRef.close(true);
+      }
     }, err => {
       this.snackBar.open('Couldn&#39;t Drop out', 'Retry', {
         duration: 800

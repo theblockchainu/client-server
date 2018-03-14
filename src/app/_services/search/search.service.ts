@@ -6,6 +6,8 @@ import { AppConfig } from '../../app.config';
 @Injectable()
 export class SearchService {
 
+    public httpSubscription: any;
+
     constructor(private router: Router,
         private http: HttpClient,
         private config: AppConfig) {
@@ -14,7 +16,10 @@ export class SearchService {
 
     public getAllSearchResults(userId, query: any, cb) {
         if (userId) {
-            this.http
+            if (this.httpSubscription) {
+                this.httpSubscription.unsubscribe();
+            }
+            this.httpSubscription = this.http
                 .get(this.config.searchUrl + '/searchAll?' + 'query=' + query)
                 .map((response) => {
                     console.log(response);

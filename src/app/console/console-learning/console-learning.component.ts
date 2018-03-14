@@ -97,6 +97,18 @@ export class ConsoleLearningComponent implements OnInit {
     }
   }
 
+  public getLatestCalendar(calendars) {
+      return calendars.sort((a, b) => {
+          if (a.startDate < b.startDate) {
+              return -1;
+          }
+          if (a.startDate > b.startDate) {
+              return 1;
+          }
+          return 0;
+      })[0];
+  }
+
   /**
    * Get difference in days
    */
@@ -128,7 +140,10 @@ export class ConsoleLearningComponent implements OnInit {
   public getLearnerUpcomingEvent(collection) {
     const contents = collection.contents;
     const calendars = collection.calendars;
-    const currentCalendar = this.getLearnerCalendar(collection);
+    let currentCalendar = this.getLearnerCalendar(collection);
+    if (!currentCalendar) {
+        currentCalendar = this.getLatestCalendar(calendars);
+    }
     contents.sort((a, b) => {
       if (a.schedules[0].startDay < b.schedules[0].startDay) {
         return -1;
@@ -141,14 +156,15 @@ export class ConsoleLearningComponent implements OnInit {
       return moment() < moment(element.startDay);
     });
     let fillerWord = '';
-    if (contents[0].type === 'online')
+    if (contents[0].type === 'online') {
       fillerWord = 'session';
-    else if (contents[0].type === 'video')
+    } else if (contents[0].type === 'video') {
       fillerWord = 'recording';
-    else if (contents[0].type === 'project')
+         } else if (contents[0].type === 'project') {
       fillerWord = 'submission';
-    else if (contents[0].type === 'in-person')
+         } else if (contents[0].type === 'in-person') {
         fillerWord = 'session';
+         }
     if (currentCalendar) {
       const contentStartDate = moment(currentCalendar.startDate).add(contents[0].schedules[0].startDay, 'days');
       const timeToStart = contentStartDate.diff(moment(), 'days');

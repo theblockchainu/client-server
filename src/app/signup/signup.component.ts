@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AlertService } from '../_services/alert/alert.service';
 import { AuthenticationService } from '../_services/authentication/authentication.service';
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 
@@ -30,7 +30,7 @@ export class SignupComponent implements OnInit {
   }
 
   public submit() {
-    alert("I m submitting");
+    alert('I m submitting');
     // form.submit();
   }
 

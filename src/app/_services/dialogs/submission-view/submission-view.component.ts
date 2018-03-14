@@ -191,8 +191,7 @@ export class SubmissionViewComponent implements OnInit {
                     if (upvote.peer[0].id === this.userId) {
                         result = true;
                     }
-                }
-                else {
+                } else {
                     result = true;
                 }
             });
@@ -203,8 +202,7 @@ export class SubmissionViewComponent implements OnInit {
     public isMyComment(comment) {
         if (comment.peer[0] !== undefined) {
             return comment.peer[0].id === this.userId;
-        }
-        else {
+        } else {
             return false;
         }
     }

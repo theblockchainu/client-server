@@ -107,9 +107,18 @@ export class ConsoleTeachingComponent implements OnInit {
      */
     public showRateStudentsPopup(collection) {
         // Show popup here
-        const data = collection;
-        this.dialogsService.rateParticipant(data)
-            .subscribe();
+        const query = {'relInclude': 'calendarId', 'include': ['profiles', 'reviewsAboutYou']};
+        this._collectionService.getParticipants(collection.id, query).subscribe(
+            result => {
+                const participants = result;
+                const data = collection;
+                data.participants = participants;
+                this.dialogsService.rateParticipant(data)
+                    .subscribe();
+        },
+            err => {
+                console.log('Could not fetch participants of this collection');
+            });
     }
 
     imgErrorHandler(event) {

@@ -12,6 +12,8 @@ import { ProfileService } from '../../../_services/profile/profile.service';
 })
 export class RateParticipantComponent implements OnInit {
 
+    public notReviewedParticipantCount = 0;
+
   constructor(public dialogRef: MdDialogRef<RateParticipantComponent>,
     @Inject(MD_DIALOG_DATA) public data: any,
     public config: AppConfig,
@@ -25,38 +27,47 @@ export class RateParticipantComponent implements OnInit {
 
   ngOnInit() {
     if (this.data) {
+        this.notReviewedParticipantCount = this.data.participants.length;
       this.data.participants.forEach(participant => {
         participant['description'] = '';
         participant['score'] = 0;
         participant['hasReviewForPresentCollection'] = false;
-        participant['reviewsAboutYou'].forEach(reviews => {
-          if (reviews.collectionId === this.data.id) {
+        const validReview = participant['reviewsAboutYou'].find(review => review.collectionId === this.data.id);
+        if (participant['reviewsAboutYou'] && participant['reviewsAboutYou'].length > 0 && validReview) {
             participant['hasReviewForPresentCollection'] = true;
-          }
-        });
+            participant['description'] = validReview.description;
+            participant['score'] = validReview.score;
+            this.notReviewedParticipantCount--;
+        } else {
+            participant['reviewsAboutYou'] = [];
+        }
       });
+      console.log(this.data.participants);
     }
   }
 
   saveReviews() {
     console.log(this.data.participants);
-    const reviewBody = [];
     const collectionId = this.data.id;
     const collectionCalendarId = this.data.calendars[0].id;
 
     this.data.participants.forEach(participant => {
-      reviewBody.push({
-        'description': participant.description,
-        'score': participant.score,
-        'collectionId': collectionId,
-        'collectionCalendarId': collectionCalendarId //TBD pick the right calendar id
-      });
-      this._collectionService.postReview(participant.id, reviewBody).subscribe(
-        result => {
-        }, err => {
-          console.log(err);
-        }
-      );
+        const participantCalendarId = participant.calendarId && participant.calendarId.length > 0 ? participant.calendarId : collectionCalendarId;
+      if (participant.score > 0 && participant.description.length > 0) {
+          const reviewBody = {
+              'description': participant.description,
+              'like': true,
+              'score': participant.score,
+              'collectionId': collectionId,
+              'collectionCalendarId': participantCalendarId
+          };
+          this._collectionService.postReview(participant.id, reviewBody).subscribe(
+              result => {
+              }, err => {
+                  console.log(err);
+              }
+          );
+      }
     });
     this.dialogRef.close();
   }

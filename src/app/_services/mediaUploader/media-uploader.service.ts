@@ -1,7 +1,6 @@
 import { AppConfig } from '../../app.config';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable()
@@ -21,18 +20,16 @@ export class MediaUploaderService {
     const formData = new FormData();
     if (file.type.includes('image/')) {
       type = 'image';
-    }
-    else if (file.type.includes('video/')) {
+    } else if (file.type.includes('video/')) {
       type = 'video';
-    }
-    else {
+    } else {
       type = 'file';
     }
     formData.append(type, file, file.name);
     return this.http.post(this.config.apiUrl + '/api/media/upload?container=peerbuds-dev1290',
       formData,
       { withCredentials: true })
-      .map((response: Response) => response);
+      .map((response: any) => response);
   }
 
 }

@@ -149,7 +149,7 @@ export class ProfileComponent implements OnInit {
     };
     this._profileService.getAllPeers(query).subscribe((result) => {
       this.recommendedpeers = [];
-      for (const responseObj of result.json()) {
+      for (const responseObj of result ) {
         console.log(responseObj);
         responseObj.rating = this._collectionService.calculateRating(responseObj.reviewsAboutYou);
         this.recommendedpeers.push(responseObj);

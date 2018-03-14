@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import {
-  Http, Headers, Response, BaseRequestOptions, RequestOptions
-  , RequestOptionsArgs
-} from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/map';
@@ -12,16 +9,14 @@ import { CookieService } from 'ngx-cookie-service';
 
 import { AppConfig } from '../../app.config';
 import { RequestHeaderService } from '../requestHeader/request-header.service';
-import {AuthenticationService} from '../authentication/authentication.service';
-
-// import { Response } from '@angular/http';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Injectable()
 export class ProjectSubmissionService {
   public key = 'userId';
   private options;
 
-  constructor(private http: Http,
+  constructor(private http: HttpClient,
     private config: AppConfig,
     private _cookieService: CookieService,
     private route: ActivatedRoute,
@@ -62,14 +57,14 @@ export class ProjectSubmissionService {
     }
   }
 
-    /**
-     * Add submission upvote
-     * @param replyId
-     * @param upvoteBody
-     * @returns {Observable<Response>}
-     */
-    public addSubmissionUpvote(submissionId, upvoteBody) {
-        return this.http
-            .post(this.config.apiUrl + '/api/submissions/' + submissionId + '/upvotes', upvoteBody, this.options);
-    }
+  /**
+   * Add submission upvote
+   * @param replyId
+   * @param upvoteBody
+   * @returns {Observable<Response>}
+   */
+  public addSubmissionUpvote(submissionId, upvoteBody) {
+    return this.http
+      .post(this.config.apiUrl + '/api/submissions/' + submissionId + '/upvotes', upvoteBody, this.options);
+  }
 }

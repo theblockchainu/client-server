@@ -5,7 +5,7 @@ import { CookieUtilsService } from '../_services/cookieUtils/cookie-utils.servic
 import { ProfileService } from '../_services/profile/profile.service';
 import * as moment from 'moment';
 import { PaymentService } from '../_services/payment/payment.service';
-import { Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { CollectionService } from '../_services/collection/collection.service';
 
 declare var Stripe: any;
@@ -122,10 +122,10 @@ export class ReviewPayComponent implements OnInit {
                 console.log(this.custId);
 
                 // get all cards
-                this.paymentService.listAllCards(this.userId, this.custId).subscribe(cards => {
+                this.paymentService.listAllCards(this.userId, this.custId).subscribe((cards: any) => {
                     this.loadingCards = false;
                     if (cards) {
-                        this.listAllCards = cards.json().data;
+                        this.listAllCards = cards.data;
                         console.log('listAllCards: ' + JSON.stringify(this.listAllCards));
 
                         if (this.listAllCards && this.listAllCards.length > 0) {
@@ -144,15 +144,14 @@ export class ReviewPayComponent implements OnInit {
         e.preventDefault();
         if (this.isCardExist === true && !this.useAnotherCard) {
             // console.log('card exist');
-            this.paymentService.createCharge(this.userId, this.collectionId, this.createChargeData).subscribe((resp: Response) => {
+            this.paymentService.createCharge(this.userId, this.collectionId, this.createChargeData).subscribe((resp: any) => {
                 if (resp) {
                     this.message = 'Payment successful. Redirecting...';
                     this.savingData = false;
                     this.joinCollection();
                 }
             });
-        }
-        else {
+        } else {
             const form = document.querySelector('form');
             const extraDetails = {
                 name: form.querySelector('input[name=cardholder-name]')['value'],
@@ -161,16 +160,15 @@ export class ReviewPayComponent implements OnInit {
             this.stripe.createToken(this.card, extraDetails).then((result: any) => {
                 if (result.token) {
                     this.createSourceData.token = result.token.id;
-                    this.paymentService.createSource(this.userId, this.custId, this.createSourceData).subscribe((res: Response) => {
+                    this.paymentService.createSource(this.userId, this.custId, this.createSourceData).subscribe((res: any) => {
                         if (res) {
-                            //console.log(JSON.stringify(res.json()));
-                            this.createChargeData.source = res.json().id;
+                            // console.log(JSON.stringify(res ));
+                            this.createChargeData.source = res.id;
                             this.paymentService.createCharge(this.userId, this.collectionId, this.createChargeData).subscribe();
                             this.message = 'Payment successful. Redirecting...';
                             this.savingData = false;
                             this.joinCollection();
-                        }
-                        else {
+                        } else {
                             this.message = 'Error occurred. Please try again.';
                             this.savingData = false;
                         }
@@ -179,8 +177,7 @@ export class ReviewPayComponent implements OnInit {
                         this.message = 'Error: ' + error.statusText;
                         this.savingData = false;
                     }));
-                }
-                else {
+                } else {
                     console.log(result.error);
                     this.message = result.error;
                     this.savingData = false;

@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MdDialogRef, MD_DIALOG_DATA, MdDialog } from '@angular/material';
 import { AppConfig } from '../../../app.config';
-import { Http, Response, } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { ProjectSubmissionService } from '../../../_services/project-submission/project-submission.service';
 import * as moment from 'moment';
 import { ContentService } from '../../../_services/content/content.service';
@@ -112,10 +112,11 @@ export class ContentProjectComponent implements OnInit {
     }
 
     public viewSubmission(submissionId) {
-        const query = '{"include":[{"upvotes":"peer"}, {"peer": "profiles"}, {"comments": [{"peer": {"profiles": "work"}}, {"replies": [{"peer": {"profiles": "work"}}]}]}]}';
-        this.projectSubmissionService.viewSubmission(submissionId, query).subscribe((response: Response) => {
+        const query = '{"include":[{"upvotes":"peer"}, {"peer": "profiles"}, ' +
+            '{"comments": [{"peer": {"profiles": "work"}}, {"replies": [{"peer": {"profiles": "work"}}]}]}]}';
+        this.projectSubmissionService.viewSubmission(submissionId, query).subscribe((response: any) => {
             if (response) {
-                this._dialogsService.submissionView(this.data.userType, response.json(), this.data.peerHasSubmission, this.data.collectionId);
+                this._dialogsService.submissionView(this.data.userType, response, this.data.peerHasSubmission, this.data.collectionId);
             }
         });
     }

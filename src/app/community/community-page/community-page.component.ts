@@ -12,7 +12,8 @@ import { AppConfig } from '../../app.config';
 import { ViewParticipantsComponent } from './view-participants/view-participants.component';
 import { CommunityService } from '../../_services/community/community.service';
 import { QuestionService } from '../../_services/question/question.service';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
+
 import { SearchService } from '../../_services/search/search.service';
 import {
     startOfDay,
@@ -130,7 +131,7 @@ export class CommunityPageComponent implements OnInit, AfterViewChecked {
         public config: AppConfig,
         private _fb: FormBuilder,
         private dialog: MdDialog,
-        private http: Http,
+        private http: HttpClient,
         private _cdRef: ChangeDetectorRef,
         private dialogsService: DialogsService,
         private snackBar: MdSnackBar) {
@@ -353,8 +354,8 @@ export class CommunityPageComponent implements OnInit, AfterViewChecked {
         };
         this._communityService.getParticipants(this.communityId, query).subscribe(
             (response: any) => {
-                this.participants = response.json();
-                for (const responseObj of response.json()) {
+                this.participants = response;
+                for (const responseObj of response) {
                     if (responseObj.id === this.userId) {
                         this.loggedInUser = responseObj;
                     }

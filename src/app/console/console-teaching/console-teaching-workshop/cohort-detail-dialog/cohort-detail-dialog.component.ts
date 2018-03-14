@@ -32,7 +32,7 @@ export class CohortDetailDialogComponent implements OnInit {
     const query = { 'relInclude': 'calendarId' };
     this._collectionService.getParticipants(this.data.id, query).subscribe(
       result => {
-        const participants = result.json();
+        const participants = result ;
         participants.forEach(particpant => {
           if (particpant.calendarId in cohortsDataObj) {
             cohortsDataObj[particpant.calendarId]['participants'].push(particpant);

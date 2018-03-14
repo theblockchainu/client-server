@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { RequestHeaderService } from '../requestHeader/request-header.service';
 
 import { AppConfig } from '../../app.config';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class CommentService {
   public options;
 
-  constructor(private http: Http,
+  constructor(private http: HttpClient,
     private config: AppConfig,
     private requestHeaderService: RequestHeaderService) {
     this.options = requestHeaderService.getOptions();
@@ -21,26 +21,26 @@ export class CommentService {
       .post(this.config.apiUrl + '/api/comments/' + commentId + '/replies', replyBody, this.options);
   }
 
-    /**
-     * Add comment upvote
-     * @param commentId
-     * @param upvoteBody
-     * @returns {Observable<Response>}
-     */
+  /**
+   * Add comment upvote
+   * @param commentId
+   * @param upvoteBody
+   * @returns {Observable<any>}
+   */
   public addCommentUpvote(commentId, upvoteBody) {
-      return this.http
-          .post(this.config.apiUrl + '/api/comments/' + commentId + '/upvotes', upvoteBody, this.options);
+    return this.http
+      .post(this.config.apiUrl + '/api/comments/' + commentId + '/upvotes', upvoteBody, this.options);
   }
 
-    /**
-     * Add reply upvote
-     * @param replyId
-     * @param upvoteBody
-     * @returns {Observable<Response>}
-     */
+  /**
+   * Add reply upvote
+   * @param replyId
+   * @param upvoteBody
+   * @returns {Observable<any>}
+   */
   public addReplyUpvote(replyId, upvoteBody) {
-      return this.http
-          .post(this.config.apiUrl + '/api/replies/' + replyId + '/upvotes', upvoteBody, this.options);
+    return this.http
+      .post(this.config.apiUrl + '/api/replies/' + replyId + '/upvotes', upvoteBody, this.options);
   }
 
   /**

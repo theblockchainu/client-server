@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { Http, Response, } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../../app.config';
 import { CountryPickerService } from '../../_services/countrypicker/countrypicker.service';
 
@@ -46,7 +46,7 @@ export class ContentViewComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
-    private http: Http,
+    private http: HttpClient,
     public config: AppConfig,
     private countryPickerService: CountryPickerService,
     private mediaUploader: MediaUploaderService,

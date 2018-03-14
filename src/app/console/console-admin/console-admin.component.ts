@@ -47,7 +47,7 @@ export class ConsoleAdminComponent implements OnInit {
       ]
     };
     this._profileService.getAllPeers(query).subscribe(result => {
-      this.unapprovedPeers = result.json();
+      this.unapprovedPeers = result ;
       this.unapprovedPeers.sort((a, b) => {
         return moment(a.updatedAt).diff(moment(b.updatedAt), 'days');
       });

@@ -12,10 +12,8 @@ import { FormGroup, FormArray, FormBuilder, FormControl, AbstractControl, Valida
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/map'; import {
-  Http, Headers, Response, BaseRequestOptions
-  , RequestOptions, RequestOptionsArgs
-} from '@angular/http';
+import 'rxjs/add/operator/map';
+import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../../../app.config';
 
 import { UcFirstPipe } from 'ngx-pipes';
@@ -74,7 +72,7 @@ export class ConsoleProfileEditComponent implements OnInit {
     public snackBar: MdSnackBar,
     public _fb: FormBuilder,
     public _timezoneService: TimezonePickerService,
-    private http: Http,
+    private http: HttpClient,
     private config: AppConfig,
     private _cookieUtilsService: CookieUtilsService,
     private ucFirstPipe: UcFirstPipe) {
@@ -175,7 +173,7 @@ export class ConsoleProfileEditComponent implements OnInit {
 
   getLanguages() {
     // this.http.get(this.config.apiUrl + '/api/languages')
-    // .map(response => response.json()).subscribe(data => {
+    // .map(response => response ).subscribe(data => {
     this._languageService.getLanguages().subscribe(data => {
       this.languages = data;
       this.languagesAsync.next(this.languages);
@@ -186,8 +184,7 @@ export class ConsoleProfileEditComponent implements OnInit {
             this.filteredOptions = _.filter(this.languages, (item) => {
               return item.name.toLowerCase().indexOf(val.toLowerCase()) > -1;
             });
-          }
-          else {
+          } else {
             this.languages.slice();
           }
           // console.log(this.filteredOptions);
@@ -228,8 +225,7 @@ export class ConsoleProfileEditComponent implements OnInit {
             this.filteredTimezones = _.filter(this.timezones, (item) => {
               return item.text.toLowerCase().indexOf(val.toLowerCase()) > -1;
             });
-          }
-          else {
+          } else {
             this.timezones.slice();
           }
         }
@@ -399,7 +395,7 @@ export class ConsoleProfileEditComponent implements OnInit {
     delete profileData.emergency_contact;
     // profileData = this.sanitize(profileData);
     console.log(email);
-    //console.log(phone_numbers);
+    // console.log(phone_numbers);
     this.busyUpdate = true;
     this._profileService.updateProfile(this.userId, profileData)
       .flatMap((response) => {
@@ -562,15 +558,15 @@ index:number   */
     event.forEach(element => {
       if (element && element.name) {
         temp_array.push(element.name);
-      }
-      else if (element) {
+      } else if (element) {
         temp_array.push(element);
       }
     });
     const other_languages = <FormArray>this.profileForm.controls['other_languages'];
     temp_array.forEach(language => {
-      if (other_languages.value.indexOf(language) === -1)
+      if (other_languages.value.indexOf(language) === -1) {
         other_languages.push(new FormControl(language));
+      }
     });
   }
 

@@ -1,18 +1,18 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Http, Response, } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../../app.config';
 import { MediaUploaderService } from '../../_services/mediaUploader/media-uploader.service';
 import { ContentService } from '../../_services/content/content.service';
-import {MD_DIALOG_DATA, MdDialog, MdDialogRef} from '@angular/material';
+import { MD_DIALOG_DATA, MdDialog, MdDialogRef } from '@angular/material';
 import * as _ from 'lodash';
 import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
-import {AddLocationDialogComponent} from '../add-location-dialog/add-location-dialog.component';
+import { AddLocationDialogComponent } from '../add-location-dialog/add-location-dialog.component';
 
 @Component({
-  selector: 'app-experience-content-inperson',
-  templateUrl: './experience-content-inperson.component.html',
-  styleUrls: ['./experience-content-inperson.component.scss']
+    selector: 'app-experience-content-inperson',
+    templateUrl: './experience-content-inperson.component.html',
+    styleUrls: ['./experience-content-inperson.component.scss']
 })
 export class ExperienceContentInpersonComponent implements OnInit {
 
@@ -37,7 +37,7 @@ export class ExperienceContentInpersonComponent implements OnInit {
 
     constructor(
         private _fb: FormBuilder,
-        private http: Http,
+        private http: HttpClient,
         public config: AppConfig,
         private mediaUploader: MediaUploaderService,
         private contentService: ContentService,
@@ -70,7 +70,7 @@ export class ExperienceContentInpersonComponent implements OnInit {
 
     imageUploadNew(event) {
         for (const file of event.files) {
-            this.mediaUploader.upload(file).map((responseObj: Response) => {
+            this.mediaUploader.upload(file).map((responseObj: any) => {
                 const contentsFArray = <FormArray>this.itenaryForm.controls['contents'];
                 const contentForm = <FormGroup>contentsFArray.controls[this.lastIndex];
                 contentForm.controls['imageUrl'].patchValue(responseObj.url);
@@ -83,7 +83,7 @@ export class ExperienceContentInpersonComponent implements OnInit {
         this.filesToUpload = event.files.length;
         this.filesUploaded = 0;
         for (const file of event.files) {
-            this.mediaUploader.upload(file).map((responseObj: Response) => {
+            this.mediaUploader.upload(file).map((responseObj: any) => {
                 const contentsFArray = <FormArray>this.itenaryForm.controls['contents'];
                 const contentForm = <FormGroup>contentsFArray.controls[this.lastIndex];
                 const supplementUrls = <FormArray>contentForm.controls.supplementUrls;
@@ -162,8 +162,7 @@ export class ExperienceContentInpersonComponent implements OnInit {
     getAddOrEditText() {
         if (!this.isEdit) {
             return 'Add';
-        }
-        else {
+        } else {
             return 'Edit';
         }
     }
@@ -194,7 +193,7 @@ export class ExperienceContentInpersonComponent implements OnInit {
     }
 
     public addAttachmentUrl(response: any) {
-        //console.log('Adding image url: ' + value);
+        // console.log('Adding image url: ' + value);
         this.attachments.push(new FormControl(response.url));
         this.attachmentUrls.push(response);
     }
@@ -226,7 +225,7 @@ export class ExperienceContentInpersonComponent implements OnInit {
                         });
                     });
                     if (contentForm.controls['id'].value) {
-                        this.deleteFromContent(contentForm, {'supplementUrls': []});
+                        this.deleteFromContent(contentForm, { 'supplementUrls': [] });
                     }
                 } else if (fileType === 'image') {
                     this.addImageUrl('');
@@ -234,18 +233,18 @@ export class ExperienceContentInpersonComponent implements OnInit {
                     const contentForm = <FormGroup>contentsFArray.controls[this.lastIndex];
                     contentForm.controls['imageUrl'].patchValue('');
                     if (contentForm.controls['id'].value) {
-                        this.deleteFromContent(contentForm, {'imageUrl': ''});
+                        this.deleteFromContent(contentForm, { 'imageUrl': '' });
                     }
                 }
             }).subscribe((response) => {
 
-        });
+            });
 
     }
 
     deleteFromContent(contentForm, body) {
         this.http.patch(this.config.apiUrl + '/api/contents/' + contentForm.controls['id'].value, body, this.options)
-            .map((response: Response) => {})
+            .map((response: any) => { })
             .subscribe();
     }
 
@@ -271,11 +270,9 @@ export class ExperienceContentInpersonComponent implements OnInit {
                 const resultJson = JSON.parse(result);
                 if (resultJson.status === 'save') {
                     this.contentForm.controls.location.patchValue(resultJson.locationForm);
-                }
-                else if (resultJson.status === 'edit') {
+                } else if (resultJson.status === 'edit') {
                     this.contentForm.controls.location.patchValue(resultJson.locationForm);
-                }
-                else {
+                } else {
                     // do nothing
                 }
             }

@@ -7,11 +7,8 @@ import {
   FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR
   , NG_VALIDATORS, Validator
 } from '@angular/forms';
-import {
-  Http, Headers, Response, BaseRequestOptions, RequestOptions
-  , RequestOptionsArgs
-} from '@angular/http';
 
+import { HttpClient } from '@angular/common/http';
 import { RequestHeaderService } from '../../requestHeader/request-header.service';
 
 import * as _ from 'lodash';
@@ -32,7 +29,8 @@ import * as _ from 'lodash';
   styleUrls: ['./multiselect-topic-dialog.component.scss'],
   templateUrl: './multiselect-topic-dialog.component.html'
 })
-export class MultiselectTopicDialogComponent implements OnInit { //implements ControlValueAccessor
+export class MultiselectTopicDialogComponent implements OnInit {
+  // implements ControlValueAccessor
   public query = '';
   public selected = [];
   public removed = [];
@@ -45,34 +43,34 @@ export class MultiselectTopicDialogComponent implements OnInit { //implements Co
   public maxTopicMsg;
   public loadingSuggestions = false;
   // Input parameter - jsonObject of collection
-  @Input('list')
-  private inputCollection: any = {};
+  @Input()
+  private list: any = {};
 
   // Optional Input Parameter
-  @Input('searchUrl')
-  public searchURL = '';
+  @Input()
+  public searchUrl = '';
 
   // Optional Input Parameter
-  @Input('multiSelect')
-  private isMultiSelect = true;
+  @Input()
+  private multiSelect = true;
 
-  @Input('create')
-  private canCreate = false;
+  @Input()
+  private create = false;
 
-  @Input('createURL')
-  private postURL = '';
+  @Input()
+  private createURL = '';
 
-  @Input('title')
+  @Input()
   public title = '';
 
-  @Input('preSelectedTopics')
-  private preselectedTopics: any = [];
+  @Input()
+  private preSelectedTopics: any = [];
 
-  @Input('minSelection')
-  private minSelection: number = -1;
+  @Input()
+  private minSelection = -1;
 
-  @Input('maxSelection')
-  private maxSelection: number = -1;
+  @Input()
+  private maxSelection = -1;
 
   @Output()
   selectedOutput = new EventEmitter<any>();
@@ -90,7 +88,7 @@ export class MultiselectTopicDialogComponent implements OnInit { //implements Co
   active = new EventEmitter<any>();
 
   constructor(myElement: ElementRef,
-    private http: Http,
+    private http: HttpClient,
     public requestHeaderService: RequestHeaderService,
     public dialogRef: MdDialogRef<MultiselectTopicDialogComponent>,
     @Inject(MD_DIALOG_DATA) public data: any
@@ -102,7 +100,7 @@ export class MultiselectTopicDialogComponent implements OnInit { //implements Co
 
   ngOnInit() {
     if (this.data) {
-      this.searchURL = this.data.searchUrl;
+      this.searchUrl = this.data.searchUrl;
       this.dialogRef.backdropClick().subscribe(() => {
         this.sendDataToCaller();
       });
@@ -130,25 +128,25 @@ export class MultiselectTopicDialogComponent implements OnInit { //implements Co
     }
   }
 
-  ngOnChanges() {
-    if (!!this.preselectedTopics) {
-      console.log(this.preselectedTopics);
+  onChanges() {
+    if (!!this.preSelectedTopics) {
+      console.log(this.preSelectedTopics);
     }
-    this.selected = _.union(this.preselectedTopics, this.selected);
+    this.selected = _.union(this.preSelectedTopics, this.selected);
   }
 
   ngViewInitChanges() {
-    this.selected = _.union(this.preselectedTopics, this.selected);
+    this.selected = _.union(this.preSelectedTopics, this.selected);
     console.log(this.selected);
   }
 
   public filter() {
     this.loadingSuggestions = true;
     let showItemNotFound = true;
-    if (!this.isMultiSelect) {
+    if (!this.multiSelect) {
       if (this.filteredList.length !== 0) {
-        //Force only 1 selection
-        //TBD
+        // Force only 1 selection
+        // TBD
       }
     }
     if (this.query !== '') {
@@ -160,24 +158,23 @@ export class MultiselectTopicDialogComponent implements OnInit { //implements Co
       if (!query) {
         this.selectedQueries.push(this.query);
       }
-      if (Object.keys(this.inputCollection).length !== 0 && this.inputCollection.constructor === Object) {
-        this.filteredList = _.filter(this.inputCollection, (item) => {
+      if (Object.keys(this.list).length !== 0 && this.list.constructor === Object) {
+        this.filteredList = _.filter(this.list, (item) => {
           return item.name.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
         });
         this.emitRequestTopic();
       }
-      if (this.searchURL) {
-        const finalSearchURL = this.searchURL + this.query;
+      if (this.searchUrl) {
+        const finalSearchURL = this.searchUrl + this.query;
         this.http.get(finalSearchURL)
-          .map(res => {
+          .map((res: any) => {
             this.loadingSuggestions = false;
             this.filteredList = [];
-            res.json().map(item => {
+            res.map(item => {
               this.entryInSelected = _.find(this.selected, function (entry) { return entry.id === item.id; });
               if (!this.entryInSelected) {
                 showItemNotFound = true;
-              }
-              else {
+              } else {
                 showItemNotFound = false;
               }
 
@@ -193,16 +190,16 @@ export class MultiselectTopicDialogComponent implements OnInit { //implements Co
             if (showItemNotFound) {
               this.emitRequestTopic();
             }
-            // if(this.filteredList.length === 0 && this.canCreate)
+            // if(this.filteredList.length === 0 && this.create)
             // {
             //   //Post the new item into the respective collection
             //   const body = {
             //     'name' : this.query,
             //     'type': 'user'
             //   };
-            //   this.http.post(this.postURL, body, this.options)
-            //             .map((res: Response) => {
-            //               this.select(res.json());
+            //   this.http.post(this.createURL, body, this.options)
+            //             .map((res: any) => {
+            //               this.select(res);
             //             })
             //             .subscribe();
             // }
@@ -220,8 +217,7 @@ export class MultiselectTopicDialogComponent implements OnInit { //implements Co
   private emitRequestTopic() {
     if (this.filteredList.length === 0) {
       this.anyItemNotFound.emit(this.query);
-    }
-    else {
+    } else {
       this.anyItemNotFound.emit('');
     }
   }
@@ -231,16 +227,15 @@ export class MultiselectTopicDialogComponent implements OnInit { //implements Co
     if (itemPresent) {
       this.selected = _.remove(this.selected, function (entry) { return item.id !== entry.id; });
       this.removedOutput.emit(this.removed);
-    }
-    else {
+    } else {
       if (this.selected.length >= this.maxSelection && this.maxSelection !== -1) {
         this.query = '';
         this.filteredList = [];
         this.maxTopicMsg = 'You cannot select more than 3 topics. Please delete any existing one and then try to add.';
         return;
       }
-      if (this.preselectedTopics.length !== 0) {
-        this.selected = _.union(this.preselectedTopics, this.selected);
+      if (this.preSelectedTopics.length !== 0) {
+        this.selected = _.union(this.preSelectedTopics, this.selected);
       }
       this.selected.push(item);
     }

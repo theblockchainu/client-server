@@ -356,7 +356,7 @@ export class HomefeedComponent implements OnInit {
         this._profileService.getAllPeers(query).subscribe((result) => {
             this.loadingPeers = false;
             this.peers = [];
-            for (const responseObj of result.json()) {
+            for (const responseObj of result ) {
                 responseObj.rating = this._collectionService.calculateRating(responseObj.reviewsAboutYou);
                 this.peers.push(responseObj);
             }

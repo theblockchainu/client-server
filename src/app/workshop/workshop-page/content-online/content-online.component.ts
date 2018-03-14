@@ -140,11 +140,11 @@ export class ContentOnlineComponent implements OnInit {
         this._commentService.addCommentUpvote(comment.id, {}).subscribe(
             response => {
                 if (comment.upvotes !== undefined) {
-                    comment.upvotes.push(response.json());
+                    comment.upvotes.push(response );
                 }
                 else {
                     comment.upvotes = [];
-                    comment.upvotes.push(response.json());
+                    comment.upvotes.push(response );
                 }
             }, err => {
                 console.log(err);
@@ -156,11 +156,11 @@ export class ContentOnlineComponent implements OnInit {
         this._commentService.addReplyUpvote(reply.id, {}).subscribe(
             response => {
                 if (reply.upvotes !== undefined) {
-                    reply.upvotes.push(response.json());
+                    reply.upvotes.push(response );
                 }
                 else {
                     reply.upvotes = [];
-                    reply.upvotes.push(response.json());
+                    reply.upvotes.push(response );
                 }
             }, err => {
                 console.log(err);

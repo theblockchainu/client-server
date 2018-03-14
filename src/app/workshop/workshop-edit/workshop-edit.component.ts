@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
 
 import { FormGroup, FormArray, FormBuilder, FormControl, AbstractControl, Validators } from '@angular/forms';
-import * as Rx from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/publishReplay';
@@ -156,7 +155,10 @@ export class WorkshopEditComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.workshopId = params['collectionId'];
       this.step = params['step'];
-      this.connectPaymentUrl = 'https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_AlhauL6d5gJ66yM3RaXBHIwt0R8qeb9q&scope=read_write&redirect_uri=' + this.config.clientUrl + '/console/account/payoutmethods&state=' + this.config.clientUrl + '/workshop/' + this.workshopId + '/edit/' + this.step;
+      this.connectPaymentUrl = 'https://connect.stripe.com/express/oauth/authorize?response_type=code' +
+        '&client_id=ca_AlhauL6d5gJ66yM3RaXBHIwt0R8qeb9q&scope=read_write&redirect_uri='
+        + this.config.clientUrl + '/console/account/payoutmethods&state=' + this.config.clientUrl
+        + '/workshop/' + this.workshopId + '/edit/' + this.step;
       this.searchTopicURL = config.searchUrl + '/api/search/' + this.config.uniqueDeveloperCode + '_topics/suggest?field=name&query=';
       this.createTopicURL = config.apiUrl + '/api/' + this.config.uniqueDeveloperCode + '_topics';
     });
@@ -265,7 +267,7 @@ export class WorkshopEditComponent implements OnInit {
         });
       });
     } else {
-      this._paymentService.postPayoutRule(this.workshopId, newPayoutId).subscribe(res => {
+      this._paymentService.postPayoutRule(this.workshopId, newPayoutId).subscribe((res: any) => {
         if (res) {
           this.payoutLoading = false;
           this.snackBar.open('Payout account added', 'close', {
@@ -327,14 +329,13 @@ export class WorkshopEditComponent implements OnInit {
       type: 'workshop'
     }).subscribe((result) => {
       if (result === 'accept') {
-        this._collectionService.patchCollection(this.workshopId, {}).subscribe(response => {
-          const newCollection = response.json();
+        this._collectionService.patchCollection(this.workshopId, {}).subscribe((response: any) => {
+          const newCollection = response;
           if (newCollection.isNewInstance) {
             this.router.navigate(['workshop', newCollection.id, 'edit', this.step]);
           }
         });
-      }
-      else if (result === 'reject') {
+      } else if (result === 'reject') {
         this.router.navigate(['/console/teaching/workshops']);
       }
     });
@@ -538,7 +539,7 @@ export class WorkshopEditComponent implements OnInit {
     if (event) {
       this.selectedLanguages = event;
       this.busyLanguage = false;
-      //this.workshop.controls.selectedLanguage.setValue(event.value);
+      // this.workshop.controls.selectedLanguage.setValue(event.value);
     }
   }
 
@@ -770,13 +771,11 @@ export class WorkshopEditComponent implements OnInit {
         }).subscribe((result) => {
           if (result === 'accept') {
             this.executeSubmitWorkshop(data, timeline, step);
-          }
-          else if (result === 'reject') {
+          } else if (result === 'reject') {
             this.router.navigate(['/console/teaching/workshops']);
           }
         });
-      }
-      else {
+      } else {
         console.log(step);
         this.executeSubmitWorkshop(data, timeline, step);
       }
@@ -830,14 +829,13 @@ export class WorkshopEditComponent implements OnInit {
     delete body.selectedLanguage;
 
     this._collectionService.patchCollection(this.workshopId, body).subscribe(
-      (response) => {
-        const result = response.json();
+      (response: any) => {
+        const result = response;
         let collectionId;
         if (result.isNewInstance) {
           this.workshop.controls.status.setValue(result.status);
           collectionId = result.id;
-        }
-        else {
+        } else {
           collectionId = this.workshopId;
         }
         result.topics = this.workshopData.topics;
@@ -904,7 +902,7 @@ export class WorkshopEditComponent implements OnInit {
     };
 
     if (topicArray.length !== 0) {
-      let observable: Rx.Observable<any>;
+      let observable: Observable<any>;
       observable = this.http.patch(this.config.apiUrl + '/api/collections/' + this.workshopId + '/topics/rel', body)
         .map(response => response).publishReplay().refCount();
       observable.subscribe((res) => {

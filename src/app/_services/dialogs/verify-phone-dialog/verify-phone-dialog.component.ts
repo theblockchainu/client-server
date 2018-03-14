@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { MediaUploaderService } from '../../mediaUploader/media-uploader.service';
 import { AppConfig } from '../../../app.config';
 import { MdSnackBar } from '@angular/material';
@@ -30,7 +30,7 @@ export class VerifyPhoneDialogComponent implements OnInit {
     private mediaUploader: MediaUploaderService,
     private _fb: FormBuilder,
     public _profileService: ProfileService,
-    private http: Http,
+    private http: HttpClient,
     private config: AppConfig,
     public snackBar: MdSnackBar,
     public dialogRef: MdDialogRef<VerifyPhoneDialogComponent>,

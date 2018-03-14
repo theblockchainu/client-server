@@ -58,7 +58,7 @@ export class PeersComponent implements OnInit {
     this._profileService.getAllPeers(query).subscribe((result) => {
       this.loading = false;
       this.peers = [];
-      for (const responseObj of result.json()) {
+      for (const responseObj of result ) {
         if (responseObj.id !== this.userId) {
           responseObj.rating = this._collectionService.calculateRating(responseObj.reviewsAboutYou);
           this.peers.push(responseObj);

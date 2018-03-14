@@ -3,7 +3,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { FormGroup, FormArray, FormBuilder, FormControl, AbstractControl, Validators } from '@angular/forms';
-import * as Rx from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/publishReplay';
@@ -156,8 +155,13 @@ export class CommunityEditComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.communityId = params['collectionId'];
       this.step = params['step'];
-      // this.connectPaymentUrl = 'https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_AlhauL6d5gJ66yM3RaXBHIwt0R8qeb9q&scope=read_write&redirect_uri=' + this.config.apiUrl + '/community/' + this.communityId + '/edit/' + this.step + '&state=1';
-      this.connectPaymentUrl = 'https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_AlhauL6d5gJ66yM3RaXBHIwt0R8qeb9q&scope=read_write&redirect_uri=' + this.config.clientUrl + '/console/account/payoutmethods&state=' + this.config.clientUrl + '/community/' + this.communityId + '/edit/' + this.step;
+      // this.connectPaymentUrl = 'https://connect.stripe.com/express/oauth/authorize?response_type=code&' +
+      //   'client_id=ca_AlhauL6d5gJ66yM3RaXBHIwt0R8qeb9q&scope=read_write&redirect_uri=' + this.config.apiUrl
+      //   + '/community/' + this.communityId + '/edit/' + this.step + '&state=1';
+      this.connectPaymentUrl = 'https://connect.stripe.com/express/oauth/authorize?response_type=code&'
+        + 'client_id=ca_AlhauL6d5gJ66yM3RaXBHIwt0R8qeb9q&scope=read_write&redirect_uri=' + this.config.clientUrl
+        + '/console/account/payoutmethods&state=' + this.config.clientUrl + '/community/' + this.communityId
+        + '/edit/' + this.step;
       this.searchTopicURL = config.searchUrl + '/api/search/' + this.config.uniqueDeveloperCode + '_topics/suggest?field=name&query=';
       this.createTopicURL = config.apiUrl + '/api/' + this.config.uniqueDeveloperCode + '_topics';
     });
@@ -475,7 +479,7 @@ export class CommunityEditComponent implements OnInit {
       console.log(event);
       this.selectedLanguages = event;
       this.busyLanguage = false;
-      //this.community.controls.selectedLanguage.setValue(event.value);
+      // this.community.controls.selectedLanguage.setValue(event.value);
     }
   }
 
@@ -671,13 +675,11 @@ export class CommunityEditComponent implements OnInit {
         .subscribe((result) => {
           if (result === 'accept') {
             this.executeSubmitCommunity(data, timeline, step);
-          }
-          else if (result === 'reject') {
+          } else if (result === 'reject') {
             this.router.navigate(['/console/teaching/communities']);
           }
         });
-    }
-    else {
+    } else {
       this.executeSubmitCommunity(data, timeline, step);
     }
   }
@@ -690,14 +692,13 @@ export class CommunityEditComponent implements OnInit {
     delete body.selectedLanguage;
 
     this._collectionService.patchCollection(this.communityId, body).map(
-      (response) => {
-        const result = response.json();
+      (response: any) => {
+        const result = response;
         let collectionId;
         if (result.isNewInstance) {
           this.community.controls.status.setValue(result.status);
           collectionId = result.id;
-        }
-        else {
+        } else {
           collectionId = this.communityId;
         }
         result.topics = this.communityData.topics;
@@ -740,11 +741,11 @@ export class CommunityEditComponent implements OnInit {
     if (body.startDate && body.endDate) {
       this.http.patch(this.config.apiUrl + '/api/collections/' + collectionId + '/calendar', body)
         .map((response) => {
-          //console.log(this.step);
-          //this.step++;
-          //console.log(this.step);
-          //this.communityStepUpdate();
-          //this.router.navigate(['community', collectionId, 'edit', this.step]);
+          // console.log(this.step);
+          // this.step++;
+          //  console.log(this.step);
+          // this.communityStepUpdate();
+          // this.router.navigate(['community', collectionId, 'edit', this.step]);
         })
         .subscribe();
     } else {
@@ -770,7 +771,7 @@ export class CommunityEditComponent implements OnInit {
     };
 
     if (topicArray.length !== 0) {
-      let observable: Rx.Observable<any>;
+      let observable: Observable<any>;
       observable = this.http.patch(this.config.apiUrl + '/api/collections/' + this.communityId + '/topics/rel', body)
         .map(response => response).publishReplay().refCount();
       observable.subscribe((res) => {
@@ -1113,7 +1114,7 @@ export class CommunityEditComponent implements OnInit {
         });
       });
     } else {
-      this._paymentService.postPayoutRule(this.communityId, newPayoutId).subscribe(res => {
+      this._paymentService.postPayoutRule(this.communityId, newPayoutId).subscribe((res: any) => {
         if (res) {
           this.payoutLoading = false;
           this.payoutRuleAccountId = newPayoutId;

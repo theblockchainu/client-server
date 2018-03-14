@@ -6,10 +6,7 @@ import {
   FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR
   , NG_VALIDATORS, Validator
 } from '@angular/forms';
-import {
-  Http, Headers, Response, BaseRequestOptions, RequestOptions
-  , RequestOptionsArgs
-} from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { AppConfig } from '../../app.config';
 import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
@@ -17,22 +14,23 @@ import { RequestHeaderService } from '../../_services/requestHeader/request-head
 import * as _ from 'lodash';
 
 @Component({
-  selector: 'multiselect-autocomplete',
+  selector: 'app-multiselect-autocomplete',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => MultiselectAutocomplete),
+      useExisting: forwardRef(() => MultiselectAutocompleteComponent),
       multi: true,
     },
     {
       provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => MultiselectAutocomplete),
+      useExisting: forwardRef(() => MultiselectAutocompleteComponent),
       multi: true,
     }],
   styleUrls: ['./multiselect-autocomplete.component.scss'],
   templateUrl: './multiselect-autocomplete.component.html'
 })
-export class MultiselectAutocomplete { //implements ControlValueAccessor
+export class MultiselectAutocompleteComponent {
+  // implements ControlValueAccessor
   public query = '';
   public selected = [];
   public removed = [];
@@ -47,34 +45,34 @@ export class MultiselectAutocomplete { //implements ControlValueAccessor
 
 
   // Input parameter - jsonObject of collection
-  @Input('list')
-  private inputCollection: any = {};
+  @Input()
+  private list: any = {};
 
   // Optional Input Parameter
-  @Input('searchUrl')
-  private searchURL: string = '';
+  @Input()
+  private searchUrl = '';
 
   // Optional Input Parameter
-  @Input('multiSelect')
-  private isMultiSelect: boolean = true;
+  @Input()
+  private multiSelect = true;
 
-  @Input('create')
-  private canCreate: boolean = false;
+  @Input()
+  private create = false;
 
-  @Input('createURL')
-  private postURL: string = '';
+  @Input()
+  private createURL = '';
 
   @Input('title')
-  public title: string = '';
+  public title = '';
 
-  @Input('preSelectedTopics')
-  private preselectedTopics: any = [];
+  @Input()
+  private preSelectedTopics: any = [];
 
   @Input('minSelection')
-  private minSelection: number = -1;
+  private minSelection = -1;
 
   @Input('maxSelection')
-  private maxSelection: number = -1;
+  private maxSelection = -1;
 
   @Output()
   selectedOutput = new EventEmitter<any>();
@@ -92,7 +90,7 @@ export class MultiselectAutocomplete { //implements ControlValueAccessor
   active = new EventEmitter<any>();
 
   constructor(myElement: ElementRef,
-    private http: Http,
+    private http: HttpClient,
     public requestHeaderService: RequestHeaderService,
     public _config: AppConfig) {
     this.elementRef = myElement;
@@ -116,58 +114,57 @@ export class MultiselectAutocomplete { //implements ControlValueAccessor
     }
   }
 
-  ngOnChanges() {
-    if (!!this.preselectedTopics) {
-      console.log(this.preselectedTopics);
+  onChanges() {
+    if (!!this.preSelectedTopics) {
+      console.log(this.preSelectedTopics);
     }
-    this.selected = _.union(this.preselectedTopics, this.selected);
+    this.selected = _.union(this.preSelectedTopics, this.selected);
   }
 
   ngViewInitChanges() {
-    this.selected = _.union(this.preselectedTopics, this.selected);
+    this.selected = _.union(this.preSelectedTopics, this.selected);
     console.log(this.selected);
   }
 
   public filter() {
     this.loadingSuggestions = true;
     let showItemNotFound = true;
-    if (!this.isMultiSelect) {
+    if (!this.multiSelect) {
       if (this.filteredList.length !== 0) {
-        //Force only 1 selection
-        //TBD
+        // Force only 1 selection
+        // TBD
       }
     }
     if (this.query !== '') {
       this.active.emit(true);
-      let query = _.find(this.selectedQueries,
+      const query = _.find(this.selectedQueries,
         (entry) => {
-          return entry == this.query;
+          return entry === this.query;
         });
       if (!query) {
         this.selectedQueries.push(this.query);
       }
-      if (Object.keys(this.inputCollection).length !== 0 && this.inputCollection.constructor === Object) {
-        this.filteredList = _.filter(this.inputCollection, (item) => {
+      if (Object.keys(this.list).length !== 0 && this.list.constructor === Object) {
+        this.filteredList = _.filter(this.list, (item) => {
           return item.name.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
         });
         this.emitRequestTopic();
       }
-      if (this.searchURL) {
-        let finalSearchURL = this.searchURL + this.query;
+      if (this.searchUrl) {
+        const finalSearchURL = this.searchUrl + this.query;
         this.http.get(finalSearchURL)
-          .map(res => {
+          .map((res: any) => {
             this.loadingSuggestions = false;
             this.filteredList = [];
-            res.json().map(item => {
-              this.entryInSelected = _.find(this.selected, function (entry) { return entry.id == item.id; });
+            res.map(item => {
+              this.entryInSelected = _.find(this.selected, function (entry) { return entry.id === item.id; });
               if (!this.entryInSelected) {
                 showItemNotFound = true;
-              }
-              else {
+              } else {
                 showItemNotFound = false;
               }
 
-              let obj = {};
+              const obj = {};
               obj['id'] = item.id;
               obj['name'] = item.name;
               obj['type'] = item.type;
@@ -179,16 +176,16 @@ export class MultiselectAutocomplete { //implements ControlValueAccessor
             if (showItemNotFound) {
               this.emitRequestTopic();
             }
-            // if(this.filteredList.length === 0 && this.canCreate)
+            // if(this.filteredList.length === 0 && this.create)
             // {
             //   //Post the new item into the respective collection
             //   const body = {
             //     'name' : this.query,
             //     'type': 'user'
             //   };
-            //   this.http.post(this.postURL, body, this.options)
-            //             .map((res: Response) => {
-            //               this.select(res.json());
+            //   this.http.post(this.createURL, body, this.options)
+            //             .map((res:  any) => {
+            //               this.select(res );
             //             })
             //             .subscribe();
             // }
@@ -204,29 +201,27 @@ export class MultiselectAutocomplete { //implements ControlValueAccessor
   }
 
   private emitRequestTopic() {
-    if (this.filteredList.length == 0) {
+    if (this.filteredList.length === 0) {
       this.anyItemNotFound.emit(this.query);
-    }
-    else {
+    } else {
       this.anyItemNotFound.emit('');
     }
   }
 
   private select(item) {
-    let itemPresent = _.find(this.selected, function (entry) { return item.id == entry.id; });
+    const itemPresent = _.find(this.selected, function (entry) { return item.id === entry.id; });
     if (itemPresent) {
-      this.selected = _.remove(this.selected, function (entry) { return item.id != entry.id; });
+      this.selected = _.remove(this.selected, function (entry) { return item.id !== entry.id; });
       this.removedOutput.emit(this.removed);
-    }
-    else {
-      if (this.selected.length >= this.maxSelection && this.maxSelection != -1) {
+    } else {
+      if (this.selected.length >= this.maxSelection && this.maxSelection !== -1) {
         this.query = '';
         this.filteredList = [];
         this.maxTopicMsg = 'You cannot select more than 3 topics. Please delete any existing one and then try to add.';
         return;
       }
-      if (this.preselectedTopics.length != 0) {
-        this.selected = _.union(this.preselectedTopics, this.selected);
+      if (this.preSelectedTopics.length !== 0) {
+        this.selected = _.union(this.preSelectedTopics, this.selected);
       }
       this.selected.push(item);
     }

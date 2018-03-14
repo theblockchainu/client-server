@@ -41,7 +41,7 @@ import { NgPipesModule } from 'ngx-pipes';
 import { CalendarModule } from 'angular-calendar';
 import { NgxCarouselModule } from 'ngx-carousel';
 import { MultiselectAutocompleteModule } from './multiselect-autocomplete/multiselect-autocomplete.module';
-import { GenericMultiselectAutocompleteModule } from './generic-multiselect-autocomplete/generic-multiselect-autocomplete.module';
+import { GenericMultiselectAutocompleteComponentModule } from './generic-multiselect-autocomplete/generic-multiselect-autocomplete.module';
 import { SocialSyncModule } from './socialsync/socialsync.module';
 import { LeftSidebarModule } from './left-sidebar/left-sidebar.module';
 import { CollectionService } from '../_services/collection/collection.service';
@@ -150,7 +150,7 @@ import { TopicRowComponent } from './topic-row/topic-row.component';
         CalendarModule,
         CheckboxModule,
         MultiselectAutocompleteModule,
-        GenericMultiselectAutocompleteModule,
+        GenericMultiselectAutocompleteComponentModule,
         SocialSyncModule,
         PopoverModule,
         LightboxModule,

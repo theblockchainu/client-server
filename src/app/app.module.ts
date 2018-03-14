@@ -1,6 +1,5 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
-import 'hammerjs';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './_core/_core.module';
 import { AppComponent } from './app.component';

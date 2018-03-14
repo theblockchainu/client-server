@@ -266,8 +266,7 @@ export class CollectionService {
         fillerWord = 'Recording';
       } else if (contents[0].type === 'in-person') {
         fillerWord = 'Session';
-      }
-      else if (contents[0].type === 'project') {
+      } else if (contents[0].type === 'project') {
         fillerWord = 'Submission';
       }
       const contentStartDate = moment(currentCalendar.startDate).add(contents[0].schedules[0].startDay, 'days');
@@ -294,8 +293,7 @@ export class CollectionService {
       fillerWord = 'recording';
     } else if (contentType === 'in-person') {
       fillerWord = 'session';
-    }
-    else if (contentType === 'project') {
+    } else if (contentType === 'project') {
       fillerWord = 'submission';
     }
     return contentType + ' ' + fillerWord;
@@ -365,8 +363,7 @@ export class CollectionService {
         const calendarLength = workshop.calendars.length;
         if (calendarLength > 1) {
           startDate = this.getCurrentCalendar(workshop.calendars) !== undefined ? this.getCurrentCalendar(workshop.calendars).startDate : this.now;
-        }
-        else if (calendarLength === 1) {
+        } else if (calendarLength === 1) {
           startDate = workshop.calendars[0];
         }
         if (startDate > this.now) {
@@ -468,10 +465,10 @@ export class CollectionService {
     this.router.navigate(['/console/account/transactions']);
   }
 
-  public sendVerifySMS(phoneNo) {
+  public sendVerifySMS(phoneNo, countryCode) {
     const body = {};
     return this.http
-      .post(this.config.apiUrl + '/api/peers/sendVerifySms?phone=' + phoneNo, body, this.options)
+      .post(this.config.apiUrl + '/api/peers/sendVerifySms?phone=' + phoneNo + '&countryCode=' + countryCode, body, this.options)
       .map((response: Response) => response.json(), (err) => {
         console.log('Error: ' + err);
       });
@@ -734,8 +731,9 @@ collectionID:string,userId:string,calendarId:string   */
   public calculateCollectionRating(collectionId, reviewArray?: any) {
     let reviewScore = 0;
     for (const reviewObject of reviewArray) {
-      if (reviewObject.collectionId !== undefined && reviewObject.collectionId === collectionId)
+      if (reviewObject.collectionId !== undefined && reviewObject.collectionId === collectionId) {
         reviewScore += reviewObject.score;
+      }
     }
     return (reviewScore / (reviewArray.length * 5)) * 5;
   }
@@ -743,8 +741,9 @@ collectionID:string,userId:string,calendarId:string   */
   public calculateCollectionRatingCount(collectionId, reviewArray?: any) {
     let reviewCount = 0;
     for (const reviewObject of reviewArray) {
-      if (reviewObject.collectionId !== undefined && reviewObject.collectionId === collectionId)
+      if (reviewObject.collectionId !== undefined && reviewObject.collectionId === collectionId) {
         reviewCount++;
+      }
     }
     return reviewCount;
   }

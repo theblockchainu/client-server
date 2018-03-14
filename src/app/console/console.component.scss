@@ -76,6 +76,10 @@
   font-weight: 700;
   font-size: 12px;
   margin: 10px 0px;
+  color: #33bd9e;
+  &.disabled {
+    color: #aaaaaa;
+  }
 }
 
 a{

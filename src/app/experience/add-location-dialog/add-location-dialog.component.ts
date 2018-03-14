@@ -108,8 +108,7 @@ export class AddLocationDialogComponent implements OnInit {
     getAddOrEditText() {
         if (!this.isEdit) {
             return 'Add';
-        }
-        else {
+        } else {
             return 'Edit';
         }
     }

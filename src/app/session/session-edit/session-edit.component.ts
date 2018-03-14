@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 
 import { FormGroup, FormArray, FormBuilder, FormControl, AbstractControl, Validators } from '@angular/forms';
+import * as Rx from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/publishReplay';
@@ -61,8 +62,8 @@ export class SessionEditComponent implements OnInit {
   public profileForm: FormGroup;
 
   public supplementUrls = new FormArray([]);
-  public uploadingImage = false;
-  public uploadingVideo = false;
+  private uploadingImage = false;
+  private uploadingVideo = false;
 
   private sessionId: string;
   public sessionData: any;
@@ -188,10 +189,7 @@ export class SessionEditComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.sessionId = params['collectionId'];
       this.step = params['step'];
-      this.connectPaymentUrl = 'https://connect.stripe.com/express/oauth/authorize?' +
-        'response_type=code&client_id=ca_AlhauL6d5gJ66yM3RaXBHIwt0R8qeb9q&scope=read_write&redirect_uri='
-        + this.config.clientUrl + '/console/account/payoutmethods&state=' + this.config.clientUrl
-        + '/session/' + this.sessionId + '/edit/' + this.step;
+      this.connectPaymentUrl = 'https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_AlhauL6d5gJ66yM3RaXBHIwt0R8qeb9q&scope=read_write&redirect_uri=' + this.config.clientUrl + '/console/account/payoutmethods&state=' + this.config.clientUrl + '/session/' + this.sessionId + '/edit/' + this.step;
       this.searchTopicURL = config.searchUrl + '/api/search/' + this.config.uniqueDeveloperCode + '_topics/suggest?field=name&query=';
       this.createTopicURL = config.apiUrl + '/api/' + this.config.uniqueDeveloperCode + '_topics';
     });
@@ -260,7 +258,8 @@ export class SessionEditComponent implements OnInit {
 
     this.phoneDetails = this._fb.group({
       phoneNo: '',
-      inputOTP: ''
+      inputOTP: '',
+        countryCode: ''
     });
 
 
@@ -1128,7 +1127,7 @@ export class SessionEditComponent implements OnInit {
     // Post Session for review
 
     element.textContent = text;
-    this._collectionService.sendVerifySMS(this.phoneDetails.controls.phoneNo.value)
+    this._collectionService.sendVerifySMS(this.phoneDetails.controls.phoneNo.value, this.phoneDetails.controls.countryCode.value)
       .subscribe((res) => {
         this.otpSent = true;
         this.phoneDetails.controls.phoneNo.disable();

@@ -65,8 +65,7 @@ export class SelectDateDialogComponent implements OnInit {
   closeSelectCohort() {
     if (this.mode === 'editDelete') {
       this.dialogRef.close(this.deletedCalendar);
-    }
-    else {
+    } else {
       this.dialogRef.close();
     }
   }

@@ -470,10 +470,11 @@ export class ExperiencePageComponent implements OnInit {
               });
             }
 
-            if (contentObj.locations && contentObj.locations.length > 0) {
-              this.lat = parseFloat(contentObj.locations[0].map_lat);
-              this.lng = parseFloat(contentObj.locations[0].map_lng);
-            }
+              if (contentObj.locations && contentObj.locations.length > 0 && contentObj.locations[0].map_lat !== undefined && contentObj.locations[0].map_lng !== undefined) {
+                  this.lat = parseFloat(contentObj.locations[0].map_lat);
+                  this.lng = parseFloat(contentObj.locations[0].map_lng);
+                  console.log('Lat is: ' + this.lat + ' & Lng is: ' + this.lng);
+              }
           });
           console.log(this.itenariesObj);
           for (const key in this.itenariesObj) {
@@ -915,7 +916,8 @@ export class ExperiencePageComponent implements OnInit {
     const dialogRef = this.dialog.open(ViewParticipantsComponent, {
       data: {
         participants: this.participants,
-        experienceId: this.experienceId
+        experienceId: this.experienceId,
+          userType: this.userType
       },
       width: '45vw',
       height: '100vh'

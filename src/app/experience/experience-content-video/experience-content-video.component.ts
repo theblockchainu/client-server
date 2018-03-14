@@ -85,7 +85,7 @@ export class ExperienceContentVideoComponent implements OnInit {
                 if (fileType === 'file') {
                     const contentsFArray = <FormArray>this.itenaryForm.controls['contents'];
                     const contentForm = <FormGroup>contentsFArray.controls[this.lastIndex];
-                    let supplementUrls = <FormArray>contentForm.controls.supplementUrls;
+                    const supplementUrls = <FormArray>contentForm.controls.supplementUrls;
                     let suppUrl = supplementUrls.value;
                     suppUrl = _.remove(suppUrl, function (n) {
                         return n !== fileurl;
@@ -96,10 +96,9 @@ export class ExperienceContentVideoComponent implements OnInit {
                         supplementUrls.push(new FormControl(file));
                         this.contentService.getMediaObject(file).subscribe((res) => {
                             this.attachmentUrls.push(res[0]);
-                        })
+                        });
                     });
-                }
-                else if (fileType === 'video') {
+                } else if (fileType === 'video') {
                     this.urlForVideo = '';
                     const contentsFArray = <FormArray>this.itenaryForm.controls['contents'];
                     const contentForm = <FormGroup>contentsFArray.controls[this.lastIndex];
@@ -237,8 +236,7 @@ export class ExperienceContentVideoComponent implements OnInit {
     getAddOrEditText() {
         if (!this.isEdit) {
             return 'Add';
-        }
-        else {
+        } else {
             return 'Edit';
         }
     }

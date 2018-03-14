@@ -11,7 +11,7 @@ export class AppointmentService {
     return this.http.get('assets/showcase/data/scheduleevents.json')
       .toPromise()
       .then(res => <any[]>res.json().data)
-      .then(data => { return data; });
+      .then(data => data);
       // .subscribe((res) => {
       //   return res.json().data;
       // })

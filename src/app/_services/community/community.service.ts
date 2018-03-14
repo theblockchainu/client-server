@@ -5,8 +5,8 @@ import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '../authentication/authentication.service';
 import {RequestHeaderService} from '../requestHeader/request-header.service';
-import {Observable} from "rxjs/Observable";
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Observable} from 'rxjs/Observable';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class CommunityService {

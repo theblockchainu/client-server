@@ -177,8 +177,7 @@ topic:any   */
               topicArray.push(topic.id);
               this.topicsLearning.push(topic);
             });
-          }
-          else {
+          } else {
             this.selectedTopicsTeaching = res.selected;
             this.selectedTopicsTeaching.forEach((topic) => {
               topicArray.push(topic.id);

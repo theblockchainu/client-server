@@ -143,8 +143,7 @@ export class ConsoleProfileVerificationComponent implements OnInit {
         this.socialIdentitiesConnected.identities.forEach(element => {
           if (element.provider === 'google') {
             this.connectedIdentities.google = true;
-          }
-          else if (element.provider === 'facebook') {
+          } else if (element.provider === 'facebook') {
             this.connectedIdentities.fb = true;
           }
         });
@@ -153,8 +152,7 @@ export class ConsoleProfileVerificationComponent implements OnInit {
         this.socialIdentitiesConnected.credentials.forEach(element => {
           if (element.provider === 'google') {
             this.connectedIdentities.google = true;
-          }
-          else if (element.provider === 'facebook') {
+          } else if (element.provider === 'facebook') {
             this.connectedIdentities.fb = true;
           }
         });

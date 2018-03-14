@@ -75,7 +75,7 @@ export class ConsoleInboxComponent implements OnInit {
 
   private formatDateTime(room) {
     let participantTextHeader = '';
-    let participantTextHeaderSub = '';
+    const participantTextHeaderSub = '';
     if (room.participants) {
       if (room.participants.length > 2) {
         for (let i = 0; i < room.participants.length; i++) {
@@ -86,8 +86,7 @@ export class ConsoleInboxComponent implements OnInit {
         participantTextHeader = participantTextHeader.trim().slice(0, -1);
         participantTextHeaderSub.concat(' + ');
         participantTextHeaderSub.concat(room.participants.length - 2 + ' more');
-      }
-      else {
+      } else {
         for (let i = 0; i < room.participants.length; i++) {
           participantTextHeader += room.participants[i].profiles[0].first_name + ' ' + room.participants[i].profiles[0].last_name + ', ';
         }
@@ -101,8 +100,7 @@ export class ConsoleInboxComponent implements OnInit {
         if (moment(msg.createdAt).format('MMM D YYYY') === moment().format('MMM D YYYY')) {
           msg.createdAtLocal = 'Today';
           msg.leftColLatestMsgTime = moment(msg.createdAt).format('LT');
-        }
-        else {
+        } else {
           msg.createdAtLocal = moment(msg.createdAt).format('ddd, MMM D YYYY');
           msg.leftColLatestMsgTime = moment(msg.createdAt).format('ddd');
         }
@@ -139,11 +137,9 @@ export class ConsoleInboxComponent implements OnInit {
   public getSelectedCollection() {
     if (this.selected === 'workshop') {
       this.tempJoinedRooms = this.workshopCollection;
-    }
-    else if (this.selected === 'experience') {
+    } else if (this.selected === 'experience') {
       this.tempJoinedRooms = this.experienceCollection;
-    }
-    else {
+    } else {
       this.tempJoinedRooms = this.joinedRooms;
     }
   }

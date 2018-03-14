@@ -234,8 +234,7 @@ export class BookSessionComponent implements OnInit {
                 console.log(err.json());
               });
 
-            }
-            else {
+            } else {
               this.message = 'Error occurred. Please try again.';
               this.savingData = false;
             }
@@ -244,8 +243,7 @@ export class BookSessionComponent implements OnInit {
             this.message = 'Error: ' + error.statusText;
             this.savingData = false;
           }));
-        }
-        else {
+        } else {
           console.log(result.error);
           this.message = result.error;
           this.savingData = false;

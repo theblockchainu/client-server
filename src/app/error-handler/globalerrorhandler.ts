@@ -18,6 +18,6 @@ export class GlobalErrorHandler implements ErrorHandler {
         // location.reload();
         // TODO: log on the server
         router.navigate(['error']);
-        //throw error;
+        throw error;
     }
 }

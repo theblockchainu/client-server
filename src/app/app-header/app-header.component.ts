@@ -58,8 +58,7 @@ export class AppHeaderComponent implements OnInit {
         this.userId = userId;
         this.getProfile();
         this.getNotifications();
-      }
-      else {
+      } else {
         this.loggedIn = false;
       }
     });
@@ -103,8 +102,7 @@ export class AppHeaderComponent implements OnInit {
         this.profileCompletionObject = this._profileService.getProfileProgressObject(this.profile);
         console.log(this.profileCompletionObject);
       });
-    }
-    else {
+    } else {
       return null;
     }
   }
@@ -121,8 +119,7 @@ export class AppHeaderComponent implements OnInit {
   public goToHome() {
     if (this.loggedIn) {
       this.router.navigate(['home', 'homefeed']);
-    }
-    else {
+    } else {
       this.router.navigate(['/']);
     }
   }

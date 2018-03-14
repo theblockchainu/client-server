@@ -30,7 +30,7 @@ export class ConsoleAccountComponent implements OnInit {
       consoleComponent.setActiveTab(urlSegment[0].path);
     });
     this.activeTab = 'notifications';
-    
+
     this.userId = _cookieUtilsService.getValue('userId');
   }
 

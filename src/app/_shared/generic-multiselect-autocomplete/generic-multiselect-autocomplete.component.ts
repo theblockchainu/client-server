@@ -42,26 +42,26 @@ private inputCollection: any = {};
 
 // Optional Input Parameter
 @Input('searchUrl')
-private searchURL: string = '';
+private searchURL = '';
 
 // Optional Input Parameter
 @Input('multiSelect')
-private isMultiSelect: boolean = true;
+private isMultiSelect = true;
 
 @Input('create')
-private canCreate: boolean = false;
+private canCreate = false;
 
 @Input('createURL')
-private postURL:string = '';
+private postURL = '';
 
 @Input('title')
-private title:string =  '';
+private title =  '';
 
 @Input('preSelectedItems')
-private preselectedItems:any = [];
+private preselectedItems: any = [];
 
 @Input('maxSelection')
-private maxSelection: number = -1;
+private maxSelection = -1;
 
 @Output()
 selectedOutput = new EventEmitter<any>();
@@ -73,7 +73,7 @@ constructor(myElement: ElementRef,
           private http: Http,
           public requestHeaderService: RequestHeaderService) {
   this.elementRef = myElement;
-  this.options = requestHeaderService.getOptions(); 
+  this.options = requestHeaderService.getOptions();
   this.placeholderString = this.title;
 }
 
@@ -93,11 +93,11 @@ if (!inside) {
 }
 
 ngOnChanges() {
-console.log("ngChanges");
-if(!!this.preselectedItems){         
-    console.log(this.preselectedItems);         
+console.log('ngChanges');
+if (!!this.preselectedItems) {
+    console.log(this.preselectedItems);
 }
-this.preselectedItems = _.filter(this.preselectedItems, (item)=> { return item != ''});
+this.preselectedItems = _.filter(this.preselectedItems, (item) => item != '');
 this.preselectedItems.forEach(element => {
   this.selected.push({
     name: element
@@ -114,8 +114,8 @@ ngViewInitChanges() {
 }
 
 private filter() {
-if(!this.isMultiSelect) {
-  if(this.filteredList.length != 0) {
+if (!this.isMultiSelect) {
+  if (this.filteredList.length != 0) {
     //Force only 1 selection
     //TBD
   }
@@ -127,12 +127,12 @@ if (this.query !== '') {
       });
   }
   if (this.searchURL) {
-      let finalSearchURL = this.searchURL + this.query;
-      this.http.get(finalSearchURL) 
-               .map(res => { 
+      const finalSearchURL = this.searchURL + this.query;
+      this.http.get(finalSearchURL)
+               .map(res => {
                 this.filteredList = [];
-                res.json().map(item => { 
-                  let obj = {};
+                res.json().map(item => {
+                  const obj = {};
                   obj['id'] = item.id;
                   obj['name'] = item.name;
                   obj['type'] = item.type;
@@ -162,8 +162,7 @@ if (this.query !== '') {
 }
 
 private select(item) {
-if(this.selected.length >= this.maxSelection && this.maxSelection != -1)
-{
+if (this.selected.length >= this.maxSelection && this.maxSelection != -1) {
   this.query = '';
   this.filteredList = [];
   return;

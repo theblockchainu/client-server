@@ -103,8 +103,7 @@ export class WorkshopContentComponent implements OnInit {
   checkWorkshopActive() {
     if (this.collection.status === 'active') {
       this.showDialogForActiveWorkshop(false);
-    }
-    else {
+    } else {
       const itenaries = <FormArray>this.myForm.controls['itenary'];
       itenaries.push(this.initItenary());
       this.days.emit(itenaries);
@@ -128,8 +127,7 @@ export class WorkshopContentComponent implements OnInit {
         if (result.isNewInstance) {
           collectionId = result.id;
           this.reload(collectionId, 13);
-        }
-        else {
+        } else {
           window.location.reload();
         }
       }).subscribe();
@@ -143,8 +141,7 @@ export class WorkshopContentComponent implements OnInit {
         if (!isContent) {
           this.executeSubmitWorkshop(this.collection);
         }
-      }
-      else if (result === 'reject') {
+      } else if (result === 'reject') {
         // Do nothing
         this.router.navigate(['console', 'teaching', 'workshops']);
       }
@@ -160,14 +157,12 @@ export class WorkshopContentComponent implements OnInit {
         }).subscribe((result) => {
           if (result === 'accept') {
             this.postContent(event, i);
-          }
-          else if (result === 'reject') {
+          } else if (result === 'reject') {
             // Do nothing
             this.router.navigate(['console', 'teaching', 'workshops']);
           }
         });
-      }
-      else {
+      } else {
         this.postContent(event, i);
       }
 
@@ -178,34 +173,28 @@ export class WorkshopContentComponent implements OnInit {
         }).subscribe((result) => {
           if (result === 'accept') {
             this.patchContent(event, i);
-          }
-          else if (result === 'reject') {
+          } else if (result === 'reject') {
             // Do nothing
             this.router.navigate(['console', 'teaching', 'workshops']);
           }
         });
-      }
-      else {
+      } else {
         this.patchContent(event, i);
       }
-    }
-    else if (event.action === 'delete') {
+    } else if (event.action === 'delete') {
       if (this.collection.status === 'active') {
         this._dialogsService.openCollectionCloneDialog({ type: 'workshop' }).subscribe((result) => {
           if (result === 'accept') {
             this.deleteContent(event.value, i);
-          }
-          else if (result === 'reject') {
+          } else if (result === 'reject') {
             // Do nothing
             this.router.navigate(['console', 'teaching', 'workshops']);
           }
         });
-      }
-      else {
+      } else {
         this.deleteContent(event.value, i);
       }
-    }
-    else if (event.action === 'deleteDay') {
+    } else if (event.action === 'deleteDay') {
       if (this.collection.status === 'active') {
         this._dialogsService.openCollectionCloneDialog({ type: 'workshop' })
           .subscribe((result) => {
@@ -213,20 +202,17 @@ export class WorkshopContentComponent implements OnInit {
               this.deleteContent(null, i);
               const itenary = <FormArray>this.myForm.controls.itenary;
               itenary.removeAt(i);
-            }
-            else if (result === 'reject') {
+            } else if (result === 'reject') {
               // Do nothing
               this.router.navigate(['console', 'teaching', 'workshops']);
             }
           });
-      }
-      else {
+      } else {
         this.deleteContent(null, i);
         const itenary = <FormArray>this.myForm.controls.itenary;
         itenary.removeAt(i);
       }
-    }
-    else {
+    } else {
       console.log('unhandledEvent Triggered');
     }
     // }
@@ -252,8 +238,7 @@ export class WorkshopContentComponent implements OnInit {
     if (contentObj.type === 'project' || contentObj.type === 'video') {
       if (contentObj.type === 'video') {
         schedule.endDay = 0;
-      }
-      else {
+      } else {
         const endDate = new Date(schedule.endDay);
         schedule.endDay = this.numberOfdays(endDate, this.calendar.startDate);
       }
@@ -284,8 +269,7 @@ export class WorkshopContentComponent implements OnInit {
               contentId = content.id;
             }
           });
-        }
-        else {
+        } else {
           contentId = result.id;
         }
         contentGroup.controls.id.setValue(contentId);
@@ -349,8 +333,7 @@ export class WorkshopContentComponent implements OnInit {
     }
     if (schedule.endTime === '') {
       schedule.endTime = new Date(0, 0, 0, 23, 0, 0, 0);
-    }
-    else {
+    } else {
       const endTimeArr = schedule.endTime.toString().split(':');
       const endHour = endTimeArr[0];
       const endMin = endTimeArr[1];
@@ -401,15 +384,13 @@ export class WorkshopContentComponent implements OnInit {
             if (result.isNewInstance) {
               collectionId = result.id;
               this.reload(collectionId, 13);
-            }
-            else {
+            } else {
               const itenary = <FormArray>this.myForm.controls.itenary;
               const form = <FormGroup>itenary.controls[index];
               const contentsArray = <FormArray>form.controls.contents;
               contentsArray.removeAt(eventIndex);
             }
-          }
-          else {
+          } else {
             const itenary = <FormArray>this.myForm.controls.itenary;
             const form = <FormGroup>itenary.controls[index];
             const contentsArray = <FormArray>form.controls.contents;
@@ -417,8 +398,7 @@ export class WorkshopContentComponent implements OnInit {
           }
         })
         .subscribe();
-    }
-    else {
+    } else {
       const contentArray = itenaryObj.contents;
       contentArray.forEach(content => {
         this.http.delete(this.config.apiUrl + '/api/collections/' + this.collection.id + '/contents/' + content.id, this.options)
@@ -429,12 +409,10 @@ export class WorkshopContentComponent implements OnInit {
               if (result && result.isNewInstance) {
                 collectionId = result.id;
                 this.reload(collectionId, 13);
-              }
-              else {
+              } else {
                 const itenary = <FormArray>this.myForm.controls.itenary;
               }
-            }
-            else {
+            } else {
               const itenary = <FormArray>this.myForm.controls.itenary;
             }
           })

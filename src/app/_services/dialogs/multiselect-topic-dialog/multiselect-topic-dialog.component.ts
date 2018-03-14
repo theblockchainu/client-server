@@ -69,10 +69,10 @@ export class MultiselectTopicDialogComponent implements OnInit { //implements Co
   private preselectedTopics: any = [];
 
   @Input('minSelection')
-  private minSelection: number = -1;
+  private minSelection = -1;
 
   @Input('maxSelection')
-  private maxSelection: number = -1;
+  private maxSelection = -1;
 
   @Output()
   selectedOutput = new EventEmitter<any>();
@@ -176,8 +176,7 @@ export class MultiselectTopicDialogComponent implements OnInit { //implements Co
               this.entryInSelected = _.find(this.selected, function (entry) { return entry.id === item.id; });
               if (!this.entryInSelected) {
                 showItemNotFound = true;
-              }
-              else {
+              } else {
                 showItemNotFound = false;
               }
 
@@ -220,8 +219,7 @@ export class MultiselectTopicDialogComponent implements OnInit { //implements Co
   private emitRequestTopic() {
     if (this.filteredList.length === 0) {
       this.anyItemNotFound.emit(this.query);
-    }
-    else {
+    } else {
       this.anyItemNotFound.emit('');
     }
   }
@@ -231,8 +229,7 @@ export class MultiselectTopicDialogComponent implements OnInit { //implements Co
     if (itemPresent) {
       this.selected = _.remove(this.selected, function (entry) { return item.id !== entry.id; });
       this.removedOutput.emit(this.removed);
-    }
-    else {
+    } else {
       if (this.selected.length >= this.maxSelection && this.maxSelection !== -1) {
         this.query = '';
         this.filteredList = [];

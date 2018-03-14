@@ -37,8 +37,7 @@ export class LeftSidebarService {
             sidebarMenuItems[4].submenu[0].visible = false;
             sidebarMenuItems[4].submenu[1].visible = false;
             sidebarMenuItems[3].visible = true;
-        }
-        else if (collection.status === 'submitted') {
+        } else if (collection.status === 'submitted') {
             sidebarMenuItems[4].visible = false;
             sidebarMenuItems[4].submenu[0].visible = false;
             sidebarMenuItems[4].submenu[1].visible = false;
@@ -50,8 +49,7 @@ export class LeftSidebarService {
             //         }, this);
             //     }
             // });
-        }
-        else {
+        } else {
             sidebarMenuItems[4].visible = true;
             sidebarMenuItems[4].submenu[0].visible = true;
             sidebarMenuItems[4].submenu[1].visible = true;
@@ -92,15 +90,14 @@ export class LeftSidebarService {
             sidebarMenuItems[1].submenu[3].complete = true;
             completedSections++;
         }
-        // if (collection.imageUrls !== null && collection.videoUrls !== null 
-        //     && collection.imageUrls !== undefined && collection.videoUrls !== undefined 
+        // if (collection.imageUrls !== null && collection.videoUrls !== null
+        //     && collection.imageUrls !== undefined && collection.videoUrls !== undefined
         //     && collection.imageUrls.length > 0 && collection.videoUrls.length > 0) {
         if ((collection.imageUrls && collection.imageUrls.length > 0)
             || (collection.videoUrls && collection.videoUrls.length > 0)) {
             sidebarMenuItems[1].submenu[4].complete = true;
             completedSections++;
-        }
-        else {
+        } else {
             sidebarMenuItems[1].submenu[4].complete = false;
         }
         if (collection.price !== undefined && collection.currency !== undefined && collection.cancellationPolicy !== undefined && collection.price > 0 && collection.currency.length > 0 && collection.cancellationPolicy.length > 0) {
@@ -115,8 +112,7 @@ export class LeftSidebarService {
         }
         if (completedSections !== 10) {
             sidebarMenuItems[3].locked = true;
-        }
-        else {
+        } else {
             sidebarMenuItems[3].locked = false;
         }
         if (collection.owners !== undefined && collection.owners[0].phoneVerified) {

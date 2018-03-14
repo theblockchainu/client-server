@@ -55,8 +55,8 @@ export class ExperienceEditComponent implements OnInit {
   public paymentInfo: FormGroup;
 
   public supplementUrls = new FormArray([]);
-  public uploadingImage = false;
-  public uploadingVideo = false;
+  private uploadingImage = false;
+  private uploadingVideo = false;
 
   private experienceId: string;
   public experienceData: any;
@@ -223,7 +223,8 @@ export class ExperienceEditComponent implements OnInit {
 
     this.phoneDetails = this._fb.group({
       phoneNo: '',
-      inputOTP: ''
+      inputOTP: '',
+        countryCode: ''
     });
 
     this.paymentInfo = this._fb.group({
@@ -613,6 +614,7 @@ export class ExperienceEditComponent implements OnInit {
 
     if (res.owners[0].profiles[0].phone_numbers && res.owners[0].profiles[0].phone_numbers.length) {
       this.phoneDetails.controls.phoneNo.patchValue(res.owners[0].profiles[0].phone_numbers[0].subscriber_number);
+        this.phoneDetails.controls.countryCode.patchValue(res.owners[0].profiles[0].phone_numbers[0].country_code);
     }
     if (!this.timeline.controls.calendar.value.startDate || !this.timeline.controls.calendar.value.endDate) {
       this.makeDatesEditable();
@@ -699,13 +701,11 @@ export class ExperienceEditComponent implements OnInit {
           .subscribe((result) => {
             if (result === 'accept') {
               this.executeSubmitExperience(data, timeline, step);
-            }
-            else if (result === 'reject') {
+            } else if (result === 'reject') {
               this.router.navigate(['/console/teaching/experiences']);
             }
           });
-      }
-      else {
+      } else {
         this.executeSubmitExperience(data, timeline, step);
       }
     }
@@ -783,7 +783,8 @@ export class ExperienceEditComponent implements OnInit {
 
   public submitTimeline(collectionId, data: FormGroup) {
     const body = data.value.calendar;
-    if (body.startDate && body.endDate) {
+    const itinerary = data.controls.contentGroup.value.itenary;
+    if (body.startDate && body.endDate && itinerary && itinerary.length > 0) {
       this.http.patch(this.config.apiUrl + '/api/collections/' + collectionId + '/calendar', body)
         .subscribe((response) => {
           this.step++;
@@ -791,7 +792,16 @@ export class ExperienceEditComponent implements OnInit {
           this.router.navigate(['experience', collectionId, 'edit', this.step]);
         });
     } else {
-      console.log('Enter Date!');
+      console.log('No date selected or no content added to itinerary! - ' + JSON.stringify(itinerary));
+      if (!itinerary || itinerary.length === 0) {
+          this.snackBar.open('You need to add at least 1 activity to your experience to proceed.', 'Close', {
+              duration: 900
+          });
+      } else {
+          this.snackBar.open('No dates have been selected for your experience.', 'Close', {
+              duration: 900
+          });
+      }
     }
   }
 
@@ -1069,11 +1079,12 @@ export class ExperienceEditComponent implements OnInit {
     // Post Experience for review
 
     element.textContent = text;
-    this._collectionService.sendVerifySMS(this.phoneDetails.controls.phoneNo.value)
+    this._collectionService.sendVerifySMS(this.phoneDetails.controls.phoneNo.value, this.phoneDetails.controls.countryCode.value)
       .subscribe((res) => {
         this.otpSent = true;
         this.phoneDetails.controls.phoneNo.disable();
-        element.textContent = 'OTP Sent';
+          this.phoneDetails.controls.countryCode.disable();
+        element.textContent = 'Verification code sent';
       });
   }
 
@@ -1082,13 +1093,13 @@ export class ExperienceEditComponent implements OnInit {
       .subscribe((res) => {
         console.log(res);
         this.snackBar.open('Token Verified', 'close', {
-          duration: 500
+          duration: 900
         });
         this.step++;
       },
         (error) => {
           this.snackBar.open(error.message, 'close', {
-            duration: 500
+            duration: 900
           });
         });
   }
@@ -1144,13 +1155,13 @@ export class ExperienceEditComponent implements OnInit {
           this.payoutLoading = false;
           this.payoutRuleAccountId = newPayoutId;
           this.snackBar.open('Payout Account Updated', 'close', {
-            duration: 500
+            duration: 900
           });
         }
       }, err => {
         this.payoutLoading = false;
         this.snackBar.open('Unable to update account', 'close', {
-          duration: 500
+          duration: 900
         });
       });
     } else {
@@ -1159,14 +1170,14 @@ export class ExperienceEditComponent implements OnInit {
           this.payoutLoading = false;
           this.payoutRuleAccountId = newPayoutId;
           this.snackBar.open('Payout Account Added', 'close', {
-            duration: 500
+            duration: 900
           });
           this.payoutRuleNodeId = res.id;
         }
       }, err => {
         this.payoutLoading = false;
         this.snackBar.open('Unable to Add account', 'close', {
-          duration: 500
+          duration: 900
         });
       });
 

@@ -87,8 +87,7 @@ export class OnboardingComponent implements OnInit {
         this.socialIdentitiesConnected.identities.forEach(element => {
           if (element.provider === 'google') {
               this.connectedIdentities.google = true;
-          }
-          else if (element.provider === 'facebook') {
+          } else if (element.provider === 'facebook') {
             this.connectedIdentities.fb = true;
           }
         });
@@ -98,8 +97,7 @@ export class OnboardingComponent implements OnInit {
         this.socialIdentitiesConnected.credentials.forEach(element => {
           if (element.provider === 'google') {
               this.connectedIdentities.google = true;
-          }
-          else if (element.provider === 'facebook') {
+          } else if (element.provider === 'facebook') {
             this.connectedIdentities.fb = true;
           }
         });
@@ -123,8 +121,7 @@ export class OnboardingComponent implements OnInit {
     if (event !== '') {
       this.showRequestNewTopic = true;
       this.topicForRequest = event;
-    }
-    else {
+    } else {
       this.showRequestNewTopic = false;
       this.topicForRequest = event;
     }
@@ -243,8 +240,7 @@ export class OnboardingComponent implements OnInit {
     const itemPresent = _.find(this.interests, function(entry) { return item.id == entry.id; });
     if (itemPresent) {
       this.interests = _.remove(this.interests, function(entry) {return item.id != entry.id; });
-    }
-    else {
+    } else {
       this.interests.push(item);
       this.suggestedTopics = _.remove(this.suggestedTopics, function(entry) {return item.id != entry.id; });
     }

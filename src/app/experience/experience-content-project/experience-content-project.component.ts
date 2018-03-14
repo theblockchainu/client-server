@@ -98,7 +98,7 @@ export class ExperienceContentProjectComponent implements OnInit {
             if (fileType === 'file') {
                 const contentsFArray = <FormArray>this.itenaryForm.controls['contents'];
                 const contentForm = <FormGroup>contentsFArray.controls[this.lastIndex];
-                let supplementUrls = <FormArray>contentForm.controls.supplementUrls;
+                const supplementUrls = <FormArray>contentForm.controls.supplementUrls;
                 let suppUrl = supplementUrls.value;
                 suppUrl = _.remove(suppUrl, function (n) {
                     return n !== fileurl;
@@ -109,21 +109,20 @@ export class ExperienceContentProjectComponent implements OnInit {
                     supplementUrls.push(new FormControl(file));
                     this.contentService.getMediaObject(file).subscribe((res) => {
                         this.attachmentUrls.push(res[0]);
-                    })
+                    });
                 });
-            } 
-            else {
+            } else {
               this.urlForVideo = '';
               this.mediaObject = {};
               const contentsFArray = <FormArray>this.itenaryForm.controls['contents'];
               const contentForm = <FormGroup>contentsFArray.controls[this.lastIndex];
               contentForm.controls['imageUrl'].patchValue(this.urlForVideo);
-              if(contentForm.controls['id'].value) {
+              if (contentForm.controls['id'].value) {
                   this.deleteFromContent(contentForm, {'imageUrl': ''});
               }
-            } 
+            }
           }).subscribe();
-    
+
     }
 
     deleteFromContent(contentForm, body) {
@@ -131,12 +130,12 @@ export class ExperienceContentProjectComponent implements OnInit {
         .map((response) => {})
         .subscribe();
     }
-    
+
     imageUploadNew(event) {
         this.uploadingVideo = true;
         for (const file of event.files) {
           this.mediaUploader.upload(file).subscribe((response) => {
-            this.urlForVideo = response.url; 
+            this.urlForVideo = response.url;
             const contentsFArray = <FormArray>this.itenaryForm.controls['contents'];
             const contentForm = <FormGroup>contentsFArray.controls[this.lastIndex];
             contentForm.controls['imageUrl'].patchValue(response.url);
@@ -222,8 +221,7 @@ export class ExperienceContentProjectComponent implements OnInit {
     getAddOrEditText() {
         if (!this.isEdit) {
             return 'Add';
-        }
-        else {
+        } else {
             return 'Edit';
         }
     }

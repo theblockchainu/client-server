@@ -162,8 +162,7 @@ export class ExperienceContentInpersonComponent implements OnInit {
     getAddOrEditText() {
         if (!this.isEdit) {
             return 'Add';
-        }
-        else {
+        } else {
             return 'Edit';
         }
     }
@@ -271,11 +270,9 @@ export class ExperienceContentInpersonComponent implements OnInit {
                 const resultJson = JSON.parse(result);
                 if (resultJson.status === 'save') {
                     this.contentForm.controls.location.patchValue(resultJson.locationForm);
-                }
-                else if (resultJson.status === 'edit') {
+                } else if (resultJson.status === 'edit') {
                     this.contentForm.controls.location.patchValue(resultJson.locationForm);
-                }
-                else {
+                } else {
                     // do nothing
                 }
             }

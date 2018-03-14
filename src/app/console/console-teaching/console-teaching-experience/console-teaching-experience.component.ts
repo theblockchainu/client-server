@@ -122,9 +122,9 @@ export class ConsoleTeachingExperienceComponent implements OnInit {
                 this.pastExperiencesObject[experience.id]['experience']['calendars'] = [calendar];
                 let participantReviewCount = 0;
                 this.pastExperiencesObject[experience.id]['experience'].participants.forEach(participant => {
-                  if (participant.reviewsAboutYou && participant.reviewsAboutYou[0].collectionId === experience.id) {
-                    participantReviewCount += 1;
-                  }
+                    if (participant.reviewsAboutYou && participant.reviewsAboutYou.some(reviews => reviews.collectionId === experience.id)) {
+                        participantReviewCount += 1;
+                    }
                 });
                 this.pastExperiencesObject[experience.id]['experience'].participantReviewCount = participantReviewCount;
               }

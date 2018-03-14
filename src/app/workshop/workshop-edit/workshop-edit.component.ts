@@ -56,8 +56,8 @@ export class WorkshopEditComponent implements OnInit {
   public phoneDetails: FormGroup;
 
   public supplementUrls = new FormArray([]);
-  public uploadingImage = false;
-  public uploadingVideo = false;
+  private uploadingImage = false;
+  private uploadingVideo = false;
 
   private workshopId: string;
   public workshopData: any;
@@ -229,7 +229,8 @@ export class WorkshopEditComponent implements OnInit {
 
     this.phoneDetails = this._fb.group({
       phoneNo: '',
-      inputOTP: ''
+      inputOTP: '',
+        countryCode: ''
     });
 
     this.initializeFormFields();
@@ -333,8 +334,7 @@ export class WorkshopEditComponent implements OnInit {
             this.router.navigate(['workshop', newCollection.id, 'edit', this.step]);
           }
         });
-      }
-      else if (result === 'reject') {
+      } else if (result === 'reject') {
         this.router.navigate(['/console/teaching/workshops']);
       }
     });
@@ -770,13 +770,11 @@ export class WorkshopEditComponent implements OnInit {
         }).subscribe((result) => {
           if (result === 'accept') {
             this.executeSubmitWorkshop(data, timeline, step);
-          }
-          else if (result === 'reject') {
+          } else if (result === 'reject') {
             this.router.navigate(['/console/teaching/workshops']);
           }
         });
-      }
-      else {
+      } else {
         console.log(step);
         this.executeSubmitWorkshop(data, timeline, step);
       }
@@ -836,8 +834,7 @@ export class WorkshopEditComponent implements OnInit {
         if (result.isNewInstance) {
           this.workshop.controls.status.setValue(result.status);
           collectionId = result.id;
-        }
-        else {
+        } else {
           collectionId = this.workshopId;
         }
         result.topics = this.workshopData.topics;
@@ -1162,7 +1159,7 @@ export class WorkshopEditComponent implements OnInit {
     // Post Workshop for review
 
     element.textContent = text;
-    this._collectionService.sendVerifySMS(this.phoneDetails.controls.phoneNo.value)
+    this._collectionService.sendVerifySMS(this.phoneDetails.controls.phoneNo.value, this.phoneDetails.controls.countryCode.value)
       .subscribe((res) => {
         this.otpSent = true;
         this.phoneDetails.controls.phoneNo.disable();

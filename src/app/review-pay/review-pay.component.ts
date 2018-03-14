@@ -151,8 +151,7 @@ export class ReviewPayComponent implements OnInit {
                     this.joinCollection();
                 }
             });
-        }
-        else {
+        } else {
             const form = document.querySelector('form');
             const extraDetails = {
                 name: form.querySelector('input[name=cardholder-name]')['value'],
@@ -169,8 +168,7 @@ export class ReviewPayComponent implements OnInit {
                             this.message = 'Payment successful. Redirecting...';
                             this.savingData = false;
                             this.joinCollection();
-                        }
-                        else {
+                        } else {
                             this.message = 'Error occurred. Please try again.';
                             this.savingData = false;
                         }
@@ -179,8 +177,7 @@ export class ReviewPayComponent implements OnInit {
                         this.message = 'Error: ' + error.statusText;
                         this.savingData = false;
                     }));
-                }
-                else {
+                } else {
                     console.log(result.error);
                     this.message = result.error;
                     this.savingData = false;

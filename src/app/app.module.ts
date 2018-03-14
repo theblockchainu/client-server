@@ -34,7 +34,7 @@ import * as Raven from 'raven-js';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 
 
-Raven
+/*Raven
   .config('https://6c6efc37493d4ff2974b8b4a506c670a@sentry.io/289434', { release: 'dev_aakash' })
   .install();
 
@@ -42,7 +42,7 @@ export class RavenErrorHandler implements ErrorHandler {
   handleError(err: any): void {
     Raven.captureException(err);
   }
-}
+}*/
 
 
 @NgModule({
@@ -64,7 +64,7 @@ export class RavenErrorHandler implements ErrorHandler {
     PrivacyPolicyComponent,
     TermsOfServiceComponent],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'my-app' }),
+    BrowserModule.withServerTransition({ appId: 'peerbuds-client' }),
     CoreModule,
     AppFooterModule,
     BrowserAnimationsModule,

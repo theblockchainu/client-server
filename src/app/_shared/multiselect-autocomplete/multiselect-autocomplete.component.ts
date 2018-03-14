@@ -52,29 +52,29 @@ export class MultiselectAutocomplete { //implements ControlValueAccessor
 
   // Optional Input Parameter
   @Input('searchUrl')
-  private searchURL: string = '';
+  private searchURL = '';
 
   // Optional Input Parameter
   @Input('multiSelect')
-  private isMultiSelect: boolean = true;
+  private isMultiSelect = true;
 
   @Input('create')
-  private canCreate: boolean = false;
+  private canCreate = false;
 
   @Input('createURL')
-  private postURL: string = '';
+  private postURL = '';
 
   @Input('title')
-  public title: string = '';
+  public title = '';
 
   @Input('preSelectedTopics')
   private preselectedTopics: any = [];
 
   @Input('minSelection')
-  private minSelection: number = -1;
+  private minSelection = -1;
 
   @Input('maxSelection')
-  private maxSelection: number = -1;
+  private maxSelection = -1;
 
   @Output()
   selectedOutput = new EventEmitter<any>();
@@ -139,7 +139,7 @@ export class MultiselectAutocomplete { //implements ControlValueAccessor
     }
     if (this.query !== '') {
       this.active.emit(true);
-      let query = _.find(this.selectedQueries,
+      const query = _.find(this.selectedQueries,
         (entry) => {
           return entry == this.query;
         });
@@ -153,7 +153,7 @@ export class MultiselectAutocomplete { //implements ControlValueAccessor
         this.emitRequestTopic();
       }
       if (this.searchURL) {
-        let finalSearchURL = this.searchURL + this.query;
+        const finalSearchURL = this.searchURL + this.query;
         this.http.get(finalSearchURL)
           .map(res => {
             this.loadingSuggestions = false;
@@ -162,12 +162,11 @@ export class MultiselectAutocomplete { //implements ControlValueAccessor
               this.entryInSelected = _.find(this.selected, function (entry) { return entry.id == item.id; });
               if (!this.entryInSelected) {
                 showItemNotFound = true;
-              }
-              else {
+              } else {
                 showItemNotFound = false;
               }
 
-              let obj = {};
+              const obj = {};
               obj['id'] = item.id;
               obj['name'] = item.name;
               obj['type'] = item.type;
@@ -206,19 +205,17 @@ export class MultiselectAutocomplete { //implements ControlValueAccessor
   private emitRequestTopic() {
     if (this.filteredList.length == 0) {
       this.anyItemNotFound.emit(this.query);
-    }
-    else {
+    } else {
       this.anyItemNotFound.emit('');
     }
   }
 
   private select(item) {
-    let itemPresent = _.find(this.selected, function (entry) { return item.id == entry.id; });
+    const itemPresent = _.find(this.selected, function (entry) { return item.id == entry.id; });
     if (itemPresent) {
       this.selected = _.remove(this.selected, function (entry) { return item.id != entry.id; });
       this.removedOutput.emit(this.removed);
-    }
-    else {
+    } else {
       if (this.selected.length >= this.maxSelection && this.maxSelection != -1) {
         this.query = '';
         this.filteredList = [];

@@ -186,8 +186,7 @@ export class ConsoleProfileEditComponent implements OnInit {
             this.filteredOptions = _.filter(this.languages, (item) => {
               return item.name.toLowerCase().indexOf(val.toLowerCase()) > -1;
             });
-          }
-          else {
+          } else {
             this.languages.slice();
           }
           // console.log(this.filteredOptions);
@@ -207,8 +206,7 @@ export class ConsoleProfileEditComponent implements OnInit {
             this.filteredCurrencies = _.filter(this.currencies, (item) => {
               return item.name.toLowerCase().indexOf(val.toLowerCase()) > -1;
             });
-          }
-          else {
+          } else {
             this.currencies.slice();
           }
         }
@@ -229,8 +227,7 @@ export class ConsoleProfileEditComponent implements OnInit {
             this.filteredTimezones = _.filter(this.timezones, (item) => {
               return item.text.toLowerCase().indexOf(val.toLowerCase()) > -1;
             });
-          }
-          else {
+          } else {
             this.timezones.slice();
           }
         }
@@ -563,15 +560,15 @@ index:number   */
     event.forEach(element => {
       if (element && element.name) {
         temp_array.push(element.name);
-      }
-      else if (element) {
+      } else if (element) {
         temp_array.push(element);
       }
     });
     const other_languages = <FormArray>this.profileForm.controls['other_languages'];
     temp_array.forEach(language => {
-      if (other_languages.value.indexOf(language) === -1)
+      if (other_languages.value.indexOf(language) === -1) {
         other_languages.push(new FormControl(language));
+      }
     });
   }
 

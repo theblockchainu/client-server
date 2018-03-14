@@ -21,11 +21,9 @@ export class MediaUploaderService {
     const formData = new FormData();
     if (file.type.includes('image/')) {
       type = 'image';
-    }
-    else if (file.type.includes('video/')) {
+    } else if (file.type.includes('video/')) {
       type = 'video';
-    }
-    else {
+    } else {
       type = 'file';
     }
     formData.append(type, file, file.name);

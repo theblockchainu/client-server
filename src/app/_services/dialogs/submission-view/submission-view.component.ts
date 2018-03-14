@@ -136,8 +136,7 @@ export class SubmissionViewComponent implements OnInit {
             response => {
                 if (comment.upvotes !== undefined) {
                     comment.upvotes.push(response.json());
-                }
-                else {
+                } else {
                     comment.upvotes = [];
                     comment.upvotes.push(response.json());
                 }
@@ -152,8 +151,7 @@ export class SubmissionViewComponent implements OnInit {
             response => {
                 if (submission.upvotes !== undefined) {
                     submission.upvotes.push(response.json());
-                }
-                else {
+                } else {
                     submission.upvotes = [];
                     submission.upvotes.push(response.json());
                 }
@@ -168,8 +166,7 @@ export class SubmissionViewComponent implements OnInit {
             response => {
                 if (reply.upvotes !== undefined) {
                     reply.upvotes.push(response.json());
-                }
-                else {
+                } else {
                     reply.upvotes = [];
                     reply.upvotes.push(response.json());
                 }
@@ -191,8 +188,7 @@ export class SubmissionViewComponent implements OnInit {
                     if (upvote.peer[0].id === this.userId) {
                         result = true;
                     }
-                }
-                else {
+                } else {
                     result = true;
                 }
             });
@@ -203,8 +199,7 @@ export class SubmissionViewComponent implements OnInit {
     public isMyComment(comment) {
         if (comment.peer[0] !== undefined) {
             return comment.peer[0].id === this.userId;
-        }
-        else {
+        } else {
             return false;
         }
     }

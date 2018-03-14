@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AlertService } from '../_services/alert/alert.service';
 import { AuthenticationService } from '../_services/authentication/authentication.service';
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import {AppConfig} from '../app.config';

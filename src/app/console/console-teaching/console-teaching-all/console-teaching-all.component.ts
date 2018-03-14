@@ -122,7 +122,7 @@ export class ConsoleTeachingAllComponent implements OnInit {
                                 this.pastCollectionsObject[collection.id]['collection']['calendars'] = [calendar];
                                 let participantReviewCount = 0;
                                 this.pastCollectionsObject[collection.id]['collection'].participants.forEach(participant => {
-                                    if (participant.reviewsAboutYou && participant.reviewsAboutYou[0].collectionId === collection.id) {
+                                    if (participant.reviewsAboutYou && participant.reviewsAboutYou.some(reviews => reviews.collectionId === collection.id)) {
                                         participantReviewCount += 1;
                                     }
                                 });
@@ -134,9 +134,9 @@ export class ConsoleTeachingAllComponent implements OnInit {
             }
         });
 
-        this.drafts.sort((a, b) => {
-            return moment(b.updatedAt).diff(moment(a.updatedAt), 'days');
-        });
+      this.drafts.sort((a, b) => {
+          return moment(b.updatedAt).diff(moment(a.updatedAt), 'days');
+      });
 
         for (const key in this.pastCollectionsObject) {
             if (this.pastCollectionsObject.hasOwnProperty(key)) {

@@ -146,8 +146,7 @@ export class ContentVideoComponent implements OnInit, OnDestroy {
             response => {
                 if (comment.upvotes !== undefined) {
                     comment.upvotes.push(response.json());
-                }
-                else {
+                } else {
                     comment.upvotes = [];
                     comment.upvotes.push(response.json());
                 }
@@ -162,8 +161,7 @@ export class ContentVideoComponent implements OnInit, OnDestroy {
             response => {
                 if (reply.upvotes !== undefined) {
                     reply.upvotes.push(response.json());
-                }
-                else {
+                } else {
                     reply.upvotes = [];
                     reply.upvotes.push(response.json());
                 }
@@ -181,8 +179,7 @@ export class ContentVideoComponent implements OnInit, OnDestroy {
                     if (upvote.peer[0].id === this.userId) {
                         result = true;
                     }
-                }
-                else {
+                } else {
                     result = true;
                 }
             });

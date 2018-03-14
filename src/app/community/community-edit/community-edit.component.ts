@@ -55,8 +55,8 @@ export class CommunityEditComponent implements OnInit {
   public paymentInfo: FormGroup;
 
   public supplementUrls = new FormArray([]);
-  public uploadingImage = false;
-  public uploadingVideo = false;
+  private uploadingImage = false;
+  private uploadingVideo = false;
 
   private communityId: string;
   public communityData: any;
@@ -220,7 +220,8 @@ export class CommunityEditComponent implements OnInit {
 
     this.phoneDetails = this._fb.group({
       phoneNo: '',
-      inputOTP: ''
+      inputOTP: '',
+        countryCode: ''
     });
 
     this.paymentInfo = this._fb.group({
@@ -461,8 +462,8 @@ export class CommunityEditComponent implements OnInit {
           }
 
         },
-          err => console.log('error'),
-          () => console.log('Completed!'));
+        err => console.log('error'),
+        () => console.log('Completed!'));
 
     } else {
       console.log('NO COLLECTION');
@@ -671,13 +672,11 @@ export class CommunityEditComponent implements OnInit {
         .subscribe((result) => {
           if (result === 'accept') {
             this.executeSubmitCommunity(data, timeline, step);
-          }
-          else if (result === 'reject') {
+          } else if (result === 'reject') {
             this.router.navigate(['/console/teaching/communities']);
           }
         });
-    }
-    else {
+    } else {
       this.executeSubmitCommunity(data, timeline, step);
     }
   }
@@ -696,8 +695,7 @@ export class CommunityEditComponent implements OnInit {
         if (result.isNewInstance) {
           this.community.controls.status.setValue(result.status);
           collectionId = result.id;
-        }
-        else {
+        } else {
           collectionId = this.communityId;
         }
         result.topics = this.communityData.topics;
@@ -1028,7 +1026,7 @@ export class CommunityEditComponent implements OnInit {
     // Post Community for review
 
     element.textContent = text;
-    this._collectionService.sendVerifySMS(this.phoneDetails.controls.phoneNo.value)
+    this._collectionService.sendVerifySMS(this.phoneDetails.controls.phoneNo.value, this.phoneDetails.controls.countryCode.value)
       .subscribe((res) => {
         this.otpSent = true;
         this.phoneDetails.controls.phoneNo.disable();
@@ -1045,11 +1043,11 @@ export class CommunityEditComponent implements OnInit {
         });
         this.step++;
       },
-        (error) => {
-          this.snackBar.open(error.message, 'close', {
-            duration: 500
-          });
+      (error) => {
+        this.snackBar.open(error.message, 'close', {
+          duration: 500
         });
+      });
   }
 
   takeToPayment() {

@@ -86,8 +86,7 @@ export class LoginComponentDialog implements OnInit {
         if (error.status === 401 || error._body === '"authentication error"') {
           this.alertService.error(error._body);
           this.showError = true;
-        }
-        else console.log(error);
+        } else { console.log(error); }
       });
   }
   public openForgotPwd() {

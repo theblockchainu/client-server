@@ -55,7 +55,7 @@ export class LiveSessionDialogComponent implements OnInit, OnDestroy {
     });
     this.mainLoading = true;
     this._twilioServicesService.getToken().subscribe(
-      result => {
+      (result: any) => {
         this.token = result.token;
         this.roomName = this.dialogData.roomName;
         this.createRoom();
@@ -271,7 +271,8 @@ export class LiveSessionDialogComponent implements OnInit, OnDestroy {
     } else {
       img.className = 'circle-thumb otherStreamImage';
       console.log('identity' + participant.identity);
-      if ((participant.identity in this.registeredParticipantMapObj) && this.registeredParticipantMapObj[participant.identity].profiles[0].picture_url) {
+      if ((participant.identity in this.registeredParticipantMapObj)
+        && this.registeredParticipantMapObj[participant.identity].profiles[0].picture_url) {
         img.src = this._config.apiUrl + this.registeredParticipantMapObj[participant.identity].profiles[0].picture_url;
       } else {
         img.src = '../../../assets/images/avatar.png';

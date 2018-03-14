@@ -1,7 +1,6 @@
 import { AppConfig } from '../../app.config';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable()
@@ -30,7 +29,7 @@ export class MediaUploaderService {
     return this.http.post(this.config.apiUrl + '/api/media/upload?container=peerbuds-dev1290',
       formData,
       { withCredentials: true })
-      .map((response: Response) => response);
+      .map((response: any) => response);
   }
 
 }

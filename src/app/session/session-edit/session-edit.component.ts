@@ -440,7 +440,7 @@ export class SessionEditComponent implements OnInit {
         });
       });
     } else {
-      this._paymentService.postPayoutRule(this.sessionId, newPayoutId).subscribe(res => {
+      this._paymentService.postPayoutRule(this.sessionId, newPayoutId).subscribe((res: any) => {
         if (res) {
           this.payoutLoading = false;
           this.snackBar.open('Payout account added', 'close', {
@@ -866,8 +866,8 @@ export class SessionEditComponent implements OnInit {
     delete body.selectedLanguage;
 
     this._collectionService.patchCollection(this.sessionId, body).map(
-      (response) => {
-        const result = response.json();
+      (response: any) => {
+        const result = response;
         let collectionId;
         if (result.isNewInstance) {
           this.session.controls.status.setValue(result.status);
@@ -1312,7 +1312,7 @@ export class SessionEditComponent implements OnInit {
 
   getLanguages() {
     // this.http.get(this.config.apiUrl + '/api/languages')
-    // .map(response => response.json()).subscribe(data => {
+    // .map(response => response ).subscribe(data => {
     this.languagePickerService.getLanguages().subscribe(data => {
       this.languages = data;
       this.languagesAsync.next(this.languages);

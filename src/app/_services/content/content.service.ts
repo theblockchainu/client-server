@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import {
-  Http, Headers, Response, BaseRequestOptions, RequestOptions
-  , RequestOptionsArgs
-} from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+
+import { Observable } from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/map';
@@ -19,19 +17,19 @@ export class ContentService {
 
   public options;
 
-  constructor(private http: Http, private config: AppConfig,
+  constructor(private http: HttpClient, private config: AppConfig,
     private _cookieService: CookieService,
     private route: ActivatedRoute,
     public router: Router,
     private requestHeaderService: RequestHeaderService) {
-      this.options = requestHeaderService.getOptions();
-    }
+    this.options = requestHeaderService.getOptions();
+  }
 
   public getEvents(userId: string) {
     return this.http.get(this.config.apiUrl + '/api/peers/' + userId + '/eventCalendar', this.options)
-                    .map((response: Response) => response.json(), (err) => {
-                        console.log('Error: ' + err);
-                    });
+      .map((response: any) => response, (err) => {
+        console.log('Error: ' + err);
+      });
 
   }
 
@@ -41,25 +39,25 @@ export class ContentService {
       'code': name
     };
     return this.http.post(this.config.apiUrl + '/api/languages', body, this.options)
-                    .map((response: Response) => response.json(), (err) => {
-                      console.log('Error: ' + err);
-                     });
+      .map((response: any) => response, (err) => {
+        console.log('Error: ' + err);
+      });
   }
 
   public getMediaObject(urlString: string) {
     const query = {
-                    'where':
-                            {
-                              url : urlString
-                            }
-                  };
+      'where':
+        {
+          url: urlString
+        }
+    };
     return this.http.get(this.config.apiUrl + '/api/media?filter=' + JSON.stringify(query), this.options)
-                    .map((response: Response) =>
-                      response.json(),
-                      (err) => {
-                        console.log('Error:' + err);
-                      }
-                    );
+      .map((response: any) =>
+        response,
+        (err) => {
+          console.log('Error:' + err);
+        }
+      );
   }
 
 
@@ -70,7 +68,7 @@ export class ContentService {
       'calendarId': calendarId
     };
     return this.http
-           .post(this.config.apiUrl + '/api/contents/' + contentId + '/rsvps', body, this.options)
-           .map((response: Response) => response.json());
+      .post(this.config.apiUrl + '/api/contents/' + contentId + '/rsvps', body, this.options)
+      .map((response: any) => response);
   }
 }

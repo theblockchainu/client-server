@@ -27,9 +27,9 @@
             <div class="col-sm-12 margin-bottom-30">
               <div class="row margin-left-0">
                 <div class="col-sm-8">
-                  <multiselect-autocomplete (queries)="queriesSearched($event)" (active)="userActive($event)" (selectedOutput)="selected($event)"
+                  <app-multiselect-autocomplete (queries)="queriesSearched($event)" (active)="userActive($event)" (selectedOutput)="selected($event)"
                     (removedOutput)="removed($event)" (anyItemNotFound)="requestNewTopicEnabled($event)" [searchUrl]=searchTopicURL
-                    [title]=placeholderStringTopic></multiselect-autocomplete>
+                    [title]=placeholderStringTopic></app-multiselect-autocomplete>
                   <!--[maxSelection]=maxTopics-->
                 </div>
 
@@ -105,7 +105,8 @@
     </form>
   </div>
 
-  <div class="onboarding step-2" style="padding-bottom: 18%; background: url('../../assets/images/onboarding_background_2.jpg'); background-size: cover;" [hidden]="step!=2">
+  <div class="onboarding step-2" style="padding-bottom: 18%; background: url('../../assets/images/onboarding_background_2.jpg'); background-size: cover;"
+    [hidden]="step!=2">
     <div class="text-center">
       <div class="row">
         <div class="col-sm-8 col-sm-offset-2">

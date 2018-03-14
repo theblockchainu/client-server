@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AuthenticationService } from '../_services/authentication/authentication.service';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { RequestHeaderService } from '../_services/requestHeader/request-header.service';
 import { ProfileService } from '../_services/profile/profile.service';
 import { FormControl } from '@angular/forms';
 import { AppConfig } from '../app.config';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MdDialog } from '@angular/material';
@@ -39,7 +39,7 @@ export class AppHeaderComponent implements OnInit {
   public profileCompletionObject: any;
   constructor(public authService: AuthenticationService,
     public config: AppConfig,
-    private http: Http,
+    private http: HttpClient,
     private _cookieService: CookieService,
     private _profileService: ProfileService,
     private router: Router,

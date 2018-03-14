@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  Http, Headers, Response, BaseRequestOptions, RequestOptions
-  , RequestOptionsArgs
-} from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { AppConfig } from '../app.config';
 import { Router, ActivatedRoute, Params, NavigationStart } from '@angular/router';
@@ -38,7 +35,7 @@ export class SignupSocialComponent implements OnInit {
     private _fb: FormBuilder,
     public router: Router,
     private _cookieUtilsService: CookieUtilsService) {
-      this.userId = _cookieUtilsService.getValue('userId');
+    this.userId = _cookieUtilsService.getValue('userId');
   }
 
   ngOnInit() {
@@ -105,7 +102,7 @@ export class SignupSocialComponent implements OnInit {
       dobYear: this.signupSocialForm.value.dobYear
     };
     this.profileService.updatePeer(this.userId, email).subscribe();
-    this.profileService.updatePeerProfile(this.userId, profile).subscribe((response: Response) => response.json());
+    this.profileService.updatePeerProfile(this.userId, profile).subscribe((response: any) => response);
 
     this.router.navigate(['app-upload-docs', '1']);
 

@@ -12,10 +12,8 @@ import { FormGroup, FormArray, FormBuilder, FormControl, AbstractControl, Valida
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/map'; import {
-  Http, Headers, Response, BaseRequestOptions
-  , RequestOptions, RequestOptionsArgs
-} from '@angular/http';
+import 'rxjs/add/operator/map';
+import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../../../app.config';
 
 import { UcFirstPipe } from 'ngx-pipes';
@@ -54,7 +52,7 @@ export class ConsoleProfileEditComponent implements OnInit {
   public disableEndDate = false;
   public disableEndYearBool = false;
 
-  //Geo Location
+  // Geo Location
   public userSettings: any = {
     geoLocation: [37.76999, -122.44696],
     geoRadius: 5,
@@ -74,7 +72,7 @@ export class ConsoleProfileEditComponent implements OnInit {
     public snackBar: MdSnackBar,
     public _fb: FormBuilder,
     public _timezoneService: TimezonePickerService,
-    private http: Http,
+    private http: HttpClient,
     private config: AppConfig,
     private _cookieUtilsService: CookieUtilsService,
     private ucFirstPipe: UcFirstPipe) {
@@ -95,9 +93,6 @@ export class ConsoleProfileEditComponent implements OnInit {
 
   ngOnInit() {
     this.loadingProfile = true;
-    this.getLanguages();
-    this.getCurrencies();
-    this.getTimezones();
     this.profileForm = this._fb.group(
       {
         first_name: ['', Validators.requiredTrue],
@@ -128,6 +123,9 @@ export class ConsoleProfileEditComponent implements OnInit {
         email: ''
       }
     );
+    this.getLanguages();
+    this.getCurrencies();
+    this.getTimezones();
     const query = {
       'include': [
         'education',
@@ -175,7 +173,7 @@ export class ConsoleProfileEditComponent implements OnInit {
 
   getLanguages() {
     // this.http.get(this.config.apiUrl + '/api/languages')
-    // .map(response => response.json()).subscribe(data => {
+    // .map(response => response ).subscribe(data => {
     this._languageService.getLanguages().subscribe(data => {
       this.languages = data;
       this.languagesAsync.next(this.languages);
@@ -397,7 +395,7 @@ export class ConsoleProfileEditComponent implements OnInit {
     delete profileData.emergency_contact;
     // profileData = this.sanitize(profileData);
     console.log(email);
-    //console.log(phone_numbers);
+    // console.log(phone_numbers);
     this.busyUpdate = true;
     this._profileService.updateProfile(this.userId, profileData)
       .flatMap((response) => {

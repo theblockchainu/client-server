@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {Http} from '@angular/http';
-import {AppConfig} from '../../app.config';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { AppConfig } from '../../app.config';
 
 @Injectable()
 export class SearchService {
@@ -9,8 +9,8 @@ export class SearchService {
     public httpSubscription: any;
 
     constructor(private router: Router,
-                private http: Http,
-                private config: AppConfig) {
+        private http: HttpClient,
+        private config: AppConfig) {
     }
 
 
@@ -22,8 +22,8 @@ export class SearchService {
             this.httpSubscription = this.http
                 .get(this.config.searchUrl + '/searchAll?' + 'query=' + query)
                 .map((response) => {
-                    console.log(response.json());
-                    cb(null, response.json());
+                    console.log(response);
+                    cb(null, response);
                 }, (err) => {
                     cb(err);
                 }).subscribe();
@@ -35,8 +35,8 @@ export class SearchService {
             this.http
                 .get(this.config.searchUrl + '/searchCommunity?' + 'query=' + query)
                 .map((response) => {
-                    console.log(response.json());
-                    cb(null, response.json());
+                    console.log(response);
+                    cb(null, response);
                 }, (err) => {
                     cb(err);
                 }).subscribe();

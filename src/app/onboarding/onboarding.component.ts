@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import {
-  URLSearchParams, Headers, Response, BaseRequestOptions, RequestOptions, RequestOptionsArgs
-} from '@angular/http';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../app.config';
 import { CountryPickerService } from '../_services/countrypicker/countrypicker.service';
 import { ContentService } from '../_services/content/content.service';
 import { ProfileService } from '../_services/profile/profile.service';
 import { TopicService } from '../_services/topic/topic.service';
 import { CookieUtilsService } from '../_services/cookieUtils/cookie-utils.service';
-
+import { RequestOptions, Headers } from '@angular/http';
 import * as _ from 'lodash';
 
 @Component({
@@ -35,7 +32,7 @@ export class OnboardingComponent implements OnInit {
 
   public socialIdentitiesConnected: any = [];
   public boolShowConnectedSocials = false;
-  private connectedIdentities = {
+  public connectedIdentities = {
     'fb': false,
     'google': false
   };
@@ -47,13 +44,13 @@ export class OnboardingComponent implements OnInit {
   public showRequestNewTopic = false;
   public topicForRequest = '';
   public queriesSearchedArray = [];
-  private queryForSocialIdentities = {'include': ['identities', 'credentials']};
+  private queryForSocialIdentities = { 'include': ['identities', 'credentials'] };
 
   constructor(
     public router: Router,
     private activatedRoute: ActivatedRoute,
-    private http: Http,
-    private config: AppConfig,
+    private http: HttpClient,
+    public config: AppConfig,
     private _fb: FormBuilder,
     private countryPickerService: CountryPickerService,
     private _contentService: ContentService,
@@ -70,8 +67,8 @@ export class OnboardingComponent implements OnInit {
     this.searchTopicURL = config.searchUrl + '/api/search/' + this.config.uniqueDeveloperCode + '_topics/suggest?field=name&query=';
     this.createTopicURL = config.apiUrl + '/api/' + this.config.uniqueDeveloperCode + '_topics';
     this.activatedRoute.params.subscribe(params => {
-        this.step = params['step'];
-      });
+      this.step = params['step'];
+    });
     this.interest1 = new FormGroup({
     });
     this.countryPickerService.getCountries()
@@ -80,32 +77,32 @@ export class OnboardingComponent implements OnInit {
     this.userId = _cookieUtilsService.getValue('userId');
 
     this._profileService.getSocialIdentities(this.queryForSocialIdentities, this.userId)
-    .subscribe((response: Response) => {
-      this.socialIdentitiesConnected = response;
-      if (this.socialIdentitiesConnected.identities.length > 0) {
-        this.boolShowConnectedSocials = true;
-        this.socialIdentitiesConnected.identities.forEach(element => {
-          if (element.provider === 'google') {
+      .subscribe((response: any) => {
+        this.socialIdentitiesConnected = response;
+        if (this.socialIdentitiesConnected.identities.length > 0) {
+          this.boolShowConnectedSocials = true;
+          this.socialIdentitiesConnected.identities.forEach(element => {
+            if (element.provider === 'google') {
               this.connectedIdentities.google = true;
-          } else if (element.provider === 'facebook') {
-            this.connectedIdentities.fb = true;
-          }
-        });
-      }
-      if (this.socialIdentitiesConnected.credentials.length > 0) {
-        this.boolShowConnectedSocials = true;
-        this.socialIdentitiesConnected.credentials.forEach(element => {
-          if (element.provider === 'google') {
+            } else if (element.provider === 'facebook') {
+              this.connectedIdentities.fb = true;
+            }
+          });
+        }
+        if (this.socialIdentitiesConnected.credentials.length > 0) {
+          this.boolShowConnectedSocials = true;
+          this.socialIdentitiesConnected.credentials.forEach(element => {
+            if (element.provider === 'google') {
               this.connectedIdentities.google = true;
-          } else if (element.provider === 'facebook') {
-            this.connectedIdentities.fb = true;
-          }
+            } else if (element.provider === 'facebook') {
+              this.connectedIdentities.fb = true;
+            }
+          });
+        }
+      },
+        (err) => {
+          console.log('Error: ' + err);
         });
-      }
-    },
-    (err) => {
-      console.log('Error: ' + err);
-    });
   }
 
   public selected(event) {
@@ -155,7 +152,7 @@ export class OnboardingComponent implements OnInit {
         // this.http.delete(this.config.apiUrl + '/api/collections/' + this.userId + '/topics/rel', body)
         topicArray.forEach(topicId => {
           this._topicService.deleteRelTopic(this.userId, topicId)
-          .subscribe((response) => { console.log(response); });
+            .subscribe((response) => { console.log(response); });
         });
       }
     }
@@ -163,10 +160,10 @@ export class OnboardingComponent implements OnInit {
 
   public ngOnInit() {
     this._topicService.getDefaultTopicsAtOnboarding(this.suggestTopicURL)
-    .subscribe((response: Response) => {
-      this.active = false;
-      this.suggestedTopics = response;
-    });
+      .subscribe((response: any) => {
+        this.active = false;
+        this.suggestedTopics = response;
+      });
   }
 
   continue(p) {
@@ -185,7 +182,7 @@ export class OnboardingComponent implements OnInit {
     });
     topicArray.forEach(topicId => {
       this._topicService.relTopic(this.userId, topicId)
-      .subscribe((response) => { console.log(response); });
+        .subscribe((response) => { console.log(response); });
     });
   }
   public changeInterests(topic: any) {
@@ -205,29 +202,29 @@ export class OnboardingComponent implements OnInit {
 
   public queriesSearched(event) {
     this.queriesSearchedArray = event;
-    if (this.interests.length != 0 && this.queriesSearchedArray.length != 0) {
+    if (this.interests.length !== 0 && this.queriesSearchedArray.length !== 0) {
       this.queriesSearchedArray.forEach(query => {
         // this.suggestedTopics = [];
         this._topicService.suggestionPerQuery(query)
-            .subscribe((suggestions) => {
-              let temp = [];
-              console.log(this.interests);
-              this.interests.forEach(selectedTopic => {
-                temp = _.remove(suggestions, function(entry) {
-                  return selectedTopic.id === entry.id;
-                });
-              });
-              console.log(temp);
-              if (suggestions.length) {
-                this.suggestedTopics = [];
-              }
-              suggestions.slice(0, 10 - this.interests.length).forEach(element => {
-                const itemPresent = _.find(this.suggestedTopics, function(entry) { return element.id == entry.id; });
-                if (!itemPresent) {
-                  this.suggestedTopics.push(element);
-                }
+          .subscribe((suggestions) => {
+            let temp = [];
+            console.log(this.interests);
+            this.interests.forEach(selectedTopic => {
+              temp = _.remove(suggestions, function (entry) {
+                return selectedTopic.id === entry.id;
               });
             });
+            console.log(temp);
+            if (suggestions.length) {
+              this.suggestedTopics = [];
+            }
+            suggestions.slice(0, 10 - this.interests.length).forEach(element => {
+              const itemPresent = _.find(this.suggestedTopics, function (entry) { return element.id === entry.id; });
+              if (!itemPresent) {
+                this.suggestedTopics.push(element);
+              }
+            });
+          });
       });
     }
   }
@@ -237,12 +234,12 @@ export class OnboardingComponent implements OnInit {
   }
 
   private select(item) {
-    const itemPresent = _.find(this.interests, function(entry) { return item.id == entry.id; });
+    const itemPresent = _.find(this.interests, function (entry) { return item.id === entry.id; });
     if (itemPresent) {
-      this.interests = _.remove(this.interests, function(entry) {return item.id != entry.id; });
+      this.interests = _.remove(this.interests, function (entry) { return item.id !== entry.id; });
     } else {
       this.interests.push(item);
-      this.suggestedTopics = _.remove(this.suggestedTopics, function(entry) {return item.id != entry.id; });
+      this.suggestedTopics = _.remove(this.suggestedTopics, function (entry) { return item.id !== entry.id; });
     }
   }
 }

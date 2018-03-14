@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../../app.config';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -38,7 +38,7 @@ export class UploadDocsComponent implements OnInit {
     private mediaUploader: MediaUploaderService,
     private _fb: FormBuilder,
     public _profileService: ProfileService,
-    private http: Http,
+    private http: HttpClient,
     public config: AppConfig,
     public snackBar: MdSnackBar,
     private dialog: MdDialog,
@@ -117,7 +117,7 @@ export class UploadDocsComponent implements OnInit {
           console.log(err);
           if (err.status === 400) {
             this.otpError = 'The code you entered does not match our records. Did you enter the most recent one?';
-            //this.otp.controls['inputOTP'].setValue('');
+            // this.otp.controls['inputOTP'].setValue('');
           }
 
         }
@@ -129,7 +129,7 @@ export class UploadDocsComponent implements OnInit {
   }
 
   uploadImage(event) {
-    //this.peer.controls['email'].setValue(this.email);
+    // this.peer.controls['email'].setValue(this.email);
     this.uploadingImage = true;
     console.log(event.files);
     for (const file of event.files) {
@@ -147,7 +147,7 @@ export class UploadDocsComponent implements OnInit {
     if (type === 'image' || type === 'file') {
       this._profileService.updatePeer(this.userId, {
         'verificationIdUrl': ''
-      }).subscribe(response => {
+      }).subscribe((response: any) => {
         this.verificationIdUrl = response.picture_url;
       });
     } else {

@@ -3,7 +3,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { FormGroup, FormArray, FormBuilder, FormControl, AbstractControl, Validators } from '@angular/forms';
-import * as Rx from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/publishReplay';
@@ -158,8 +157,13 @@ export class ExperienceEditComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.experienceId = params['collectionId'];
       this.step = params['step'];
-      // this.connectPaymentUrl = 'https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_AlhauL6d5gJ66yM3RaXBHIwt0R8qeb9q&scope=read_write&redirect_uri=' + this.config.apiUrl + '/experience/' + this.experienceId + '/edit/' + this.step + '&state=1';
-      this.connectPaymentUrl = 'https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_AlhauL6d5gJ66yM3RaXBHIwt0R8qeb9q&scope=read_write&redirect_uri=' + this.config.clientUrl + '/console/account/payoutmethods&state=' + this.config.clientUrl + '/experience/' + this.experienceId + '/edit/' + this.step;
+      // this.connectPaymentUrl = 'https://connect.stripe.com/express/oauth/authorize?response_type=code&' +
+      //   'client_id=ca_AlhauL6d5gJ66yM3RaXBHIwt0R8qeb9q&scope=read_write&redirect_uri=' + this.config.apiUrl
+      //   + '/experience/' + this.experienceId + '/edit/' + this.step + '&state=1';
+      this.connectPaymentUrl = 'https://connect.stripe.com/express/oauth/authorize?response_type=code' +
+        '&client_id=ca_AlhauL6d5gJ66yM3RaXBHIwt0R8qeb9q&scope=read_write&redirect_uri=' + this.config.clientUrl
+        + '/console/account/payoutmethods&state=' + this.config.clientUrl + '/experience/' + this.experienceId
+        + '/edit/' + this.step;
       this.searchTopicURL = config.searchUrl + '/api/search/' + this.config.uniqueDeveloperCode + '_topics/suggest?field=name&query=';
       this.createTopicURL = config.apiUrl + '/api/' + this.config.uniqueDeveloperCode + '_topics';
     });
@@ -503,7 +507,7 @@ export class ExperienceEditComponent implements OnInit {
       console.log(event);
       this.selectedLanguages = event;
       this.busyLanguage = false;
-      //this.experience.controls.selectedLanguage.setValue(event.value);
+      // this.experience.controls.selectedLanguage.setValue(event.value);
     }
   }
 
@@ -739,8 +743,8 @@ export class ExperienceEditComponent implements OnInit {
     delete body.selectedLanguage;
 
     this._collectionService.patchCollection(this.experienceId, body).subscribe(
-      (response) => {
-        const result = response.json();
+      (response: any) => {
+        const result = response;
         let collectionId;
         if (result.isNewInstance) {
           this.experience.controls.status.setValue(result.status);
@@ -821,7 +825,7 @@ export class ExperienceEditComponent implements OnInit {
     };
 
     if (topicArray.length !== 0) {
-      let observable: Rx.Observable<any>;
+      let observable: Observable<any>;
       observable = this.http.patch(this.config.apiUrl + '/api/collections/' + this.experienceId + '/topics/rel', body)
         .map(response => response).publishReplay().refCount();
       observable.subscribe((res) => {
@@ -1165,7 +1169,7 @@ export class ExperienceEditComponent implements OnInit {
         });
       });
     } else {
-      this._paymentService.postPayoutRule(this.experienceId, newPayoutId).subscribe(res => {
+      this._paymentService.postPayoutRule(this.experienceId, newPayoutId).subscribe((res: any) => {
         if (res) {
           this.payoutLoading = false;
           this.payoutRuleAccountId = newPayoutId;

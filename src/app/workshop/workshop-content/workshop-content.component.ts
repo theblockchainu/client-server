@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import * as _ from 'lodash';
 import { Router } from '@angular/router';
-import { Http, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../../app.config';
 import { AuthenticationService } from '../../_services/authentication/authentication.service';
 import { CollectionService } from '../../_services/collection/collection.service';
@@ -41,7 +41,7 @@ export class WorkshopContentComponent implements OnInit {
   private options;
   constructor(
     public authenticationService: AuthenticationService,
-    private http: Http, private config: AppConfig,
+    private http: HttpClient, private config: AppConfig,
     private _fb: FormBuilder,
     private requestHeaders: RequestHeaderService,
     private dialog: MdDialog,
@@ -78,7 +78,7 @@ export class WorkshopContentComponent implements OnInit {
 
     while (deleteIndex !== contents.length) {
       this.http.delete(this.config.apiUrl + '/api/contents/' + contents[deleteIndex].id, this.options)
-        .map((response: Response) => {
+        .map((response: any) => {
           console.log(response);
         })
         .subscribe();
@@ -121,8 +121,8 @@ export class WorkshopContentComponent implements OnInit {
     delete collection.contents;
     const body = collection;
     this._collectionService.patchCollection(collection.id, body).map(
-      (response) => {
-        const result = response.json();
+      (response: any) => {
+        const result = response;
         let collectionId;
         if (result.isNewInstance) {
           collectionId = result.id;
@@ -260,8 +260,8 @@ export class WorkshopContentComponent implements OnInit {
 
     console.log(schedule);
     this.http.post(this.config.apiUrl + '/api/collections/' + this.collection.id + '/contents', contentObj, this.options)
-      .map((response: Response) => {
-        const result = response.json();
+      .map((response: any) => {
+        const result = response;
         if (result.isNewInstance) {
           collectionId = result.id;
           result.contents.forEach((content) => {
@@ -275,7 +275,7 @@ export class WorkshopContentComponent implements OnInit {
         contentGroup.controls.id.setValue(contentId);
 
         this.http.patch(this.config.apiUrl + '/api/contents/' + contentId + '/schedule', schedule, this.options)
-          .map((resp: Response) => {
+          .map((resp: any) => {
             if (resp.status === 200) {
               const Itenary = <FormArray>this.myForm.controls.itenary;
               const Form = <FormGroup>Itenary.controls[i];
@@ -285,7 +285,7 @@ export class WorkshopContentComponent implements OnInit {
               ContentSchedule.controls.startTime.patchValue('');
               ContentSchedule.controls.endTime.patchValue('');*/
               ContentGroup.controls.pending.setValue(false);
-              Form.controls['startDay'].patchValue(resp.json().startDay);
+              Form.controls['startDay'].patchValue(resp.startDay);
             }
             console.log(response);
             if (collectionId) {
@@ -339,10 +339,10 @@ export class WorkshopContentComponent implements OnInit {
       const endMin = endTimeArr[1];
       schedule.endTime = new Date(0, 0, 0, endHour, endMin, 0, 0);
     }
-    //this.http.patch(this.config.apiUrl + '/api/contents/' + contentId, contentObj, this.options)
+    // this.http.patch(this.config.apiUrl + '/api/contents/' + contentId, contentObj, this.options)
     this.http.put(this.config.apiUrl + '/api/collections/' + this.collection.id + '/contents/' + contentId, contentObj, this.options)
-      .map((response: Response) => {
-        const result = response.json();
+      .map((response: any) => {
+        const result = response;
         if (result.isNewInstance) {
           collectionId = result.id;
           result.contents.forEach((content) => {
@@ -352,7 +352,7 @@ export class WorkshopContentComponent implements OnInit {
           });
         }
         this.http.patch(this.config.apiUrl + '/api/contents/' + contentId + '/schedule', schedule, this.options)
-          .map((resp: Response) => {
+          .map((resp: any) => {
             if (resp.status === 200) {
               /*ContentSchedule.controls.startTime.patchValue('');
               ContentSchedule.controls.endTime.patchValue('');*/
@@ -375,12 +375,12 @@ export class WorkshopContentComponent implements OnInit {
     if (eventIndex) {
       const contentObj = itenaryObj.contents[eventIndex];
       const contentId = contentObj.id;
-      //this.http.delete(this.config.apiUrl + '/api/contents/' + contentId, this.options)
+      // this.http.delete(this.config.apiUrl + '/api/contents/' + contentId, this.options)
       this.http.delete(this.config.apiUrl + '/api/collections/' + this.collection.id + '/contents/' + contentId, this.options)
-        .map((response: Response) => {
+        .map((response: any) => {
           console.log(response);
           if (response !== null) {
-            const result = response.json();
+            const result = response;
             if (result.isNewInstance) {
               collectionId = result.id;
               this.reload(collectionId, 13);
@@ -402,10 +402,10 @@ export class WorkshopContentComponent implements OnInit {
       const contentArray = itenaryObj.contents;
       contentArray.forEach(content => {
         this.http.delete(this.config.apiUrl + '/api/collections/' + this.collection.id + '/contents/' + content.id, this.options)
-          .map((response: Response) => {
+          .map((response: any) => {
             console.log(response);
             if (response !== null) {
-              const result = response.json();
+              const result = response;
               if (result && result.isNewInstance) {
                 collectionId = result.id;
                 this.reload(collectionId, 13);

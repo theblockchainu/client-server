@@ -46,9 +46,9 @@ export class ConsoleAccountPaymentmethodsComponent implements OnInit {
         if (peer.stripeCustId) {
           this.custId = peer.stripeCustId;
           // get all cards
-          this.paymentService.listAllCards(this.userId, this.custId).subscribe(cards => {
+          this.paymentService.listAllCards(this.userId, this.custId).subscribe((cards: any) => {
             if (cards) {
-              this.listAllCards = cards.json().data;
+              this.listAllCards = cards.data;
               console.log(this.listAllCards);
               this.loadingCards = false;
             }
@@ -68,7 +68,7 @@ export class ConsoleAccountPaymentmethodsComponent implements OnInit {
         this.createSourceData.token = result.token.id;
         this.paymentService.createSource(this.userId, this.custId, this.createSourceData).subscribe((res: any) => {
           if (res) {
-            console.log(res.json());
+            console.log(res);
             this.fetchCards();
           }
         });
@@ -81,7 +81,7 @@ export class ConsoleAccountPaymentmethodsComponent implements OnInit {
   public deleteCard(cardId: string) {
     this.paymentService.deleteCard(this.userId, this.custId, cardId).subscribe((res: any) => {
       if (res) {
-        console.log(res.json());
+        console.log(res);
         this.fetchCards();
       }
     });

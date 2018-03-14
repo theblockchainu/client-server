@@ -39,7 +39,7 @@ export class ViewEntryDialogComponent implements OnInit {
               const dialogRef = this.dialog.open(SubmissionViewComponent, {
                   data: {
                       userType: this.data.userType,
-                      submission: response.json(),
+                      submission: response ,
                       peerHasSubmission: this.data.peerHasSubmission,
                       collectionId: this.data.collectionId
                   },

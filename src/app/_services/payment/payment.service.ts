@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import {
-  Http, Headers, Response, BaseRequestOptions, RequestOptions
-  , RequestOptionsArgs
-} from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/map';
@@ -19,7 +16,7 @@ export class PaymentService {
   public key = 'userId';
   private options;
 
-  constructor(private http: Http,
+  constructor(private http: HttpClient,
     private config: AppConfig,
     private _cookieService: CookieService,
     private route: ActivatedRoute,
@@ -65,7 +62,7 @@ export class PaymentService {
     const filter = `{"include": [{"owners":"profiles"},"calendars",{"contents":"schedules"}]}`;
     return this.http
       .get(this.config.apiUrl + '/api/collections/' + id + '?filter=' + filter)
-      .map((response: Response) => response.json(), (err) => {
+      .map((response: any) => response, (err) => {
         console.log('Error: ' + err);
       });
 
@@ -73,15 +70,17 @@ export class PaymentService {
 
   public createConnectedAccount(authcode: string, error?: any, errDescription?: any): Observable<any> {
     if (error) {
-      return this.http.get(this.config.apiUrl + '/api/payoutaccs/create-connected-account?error=' + error + '&errorDesc=' + errDescription, this.options).map((response: Response) => response.json(), (err) => {
-        console.log('Error: ' + err);
-      });
+      return this.http.get(this.config.apiUrl + '/api/payoutaccs/create-connected-account?error='
+        + error + '&errorDesc=' + errDescription, this.options).map((response: any) => response, (err) => {
+          console.log('Error: ' + err);
+        });
     } else {
       console.log(authcode);
 
-      return this.http.get(this.config.apiUrl + '/api/payoutaccs/create-connected-account?authCode=' + authcode, this.options).map((response: Response) => response.json(), (err) => {
-        console.log('Error: ' + err);
-      });
+      return this.http.get(this.config.apiUrl
+        + '/api/payoutaccs/create-connected-account?authCode=' + authcode, this.options).map((response: any) => response, (err) => {
+          console.log('Error: ' + err);
+        });
     }
   }
   /**
@@ -89,7 +88,7 @@ export class PaymentService {
    */
   public retrieveConnectedAccount(): Observable<any> {
     return this.http.get(this.config.apiUrl + '/api/payoutaccs/retrieve-connected-accounts', this.options)
-      .map((response: Response) => response.json(), (err) => {
+      .map((response: any) => response, (err) => {
         console.log('Error: ' + err);
       });
   }
@@ -98,7 +97,7 @@ export class PaymentService {
    */
   public createLoginLink(accountId: string): Observable<any> {
     return this.http.get(this.config.apiUrl + '/api/payoutaccs/create-login-link?accountId=' + accountId, this.options)
-      .map((response: Response) => response.json(), (err) => {
+      .map((response: any) => response, (err) => {
         console.log('Error: ' + err);
       });
   }
@@ -109,12 +108,12 @@ export class PaymentService {
   public getTransactions(userId, filter?: any): Observable<any> {
     if (filter) {
       return this.http.get(this.config.apiUrl + '/api/peers/' + userId + '/transactions?filter=' + JSON.stringify(filter), this.options)
-        .map((response: Response) => response.json(), (err) => {
+        .map((response: any) => response, (err) => {
           console.log('Error: ' + err);
         });
     } else {
       return this.http.get(this.config.apiUrl + '/api/peers/' + userId + '/transactions', this.options)
-        .map((response: Response) => response.json(), (err) => {
+        .map((response: any) => response, (err) => {
           console.log('Error: ' + err);
         });
     }
@@ -132,8 +131,8 @@ export class PaymentService {
     console.log(body);
     /*if (from.length === 3 && this._cookieUtilsService.getValue('currency').length === 3) {*/
     return this.http.post(this.config.apiUrl + '/convertCurrency', body, this.options)
-      .map((response: Response) => {
-        const res = response.json();
+      .map((response: any) => {
+        const res = response;
         console.log(res);
         if (res.success) {
           return {
@@ -153,7 +152,7 @@ export class PaymentService {
           currency: from
         };
       });
-    //}
+    // }
   }
 
   /**
@@ -162,7 +161,7 @@ export class PaymentService {
   public patchPayoutRule(payoutRuleId: string, newPayoutId: string) {
     return this.http.patch(this.config.apiUrl + '/api/payoutrules/' + payoutRuleId, {
       'payoutId1': newPayoutId
-    }, this.options).map(result => result.json());
+    }, this.options).map(result => result);
   }
 
   /**
@@ -173,14 +172,16 @@ export class PaymentService {
       'percentage1': 100,
       'payoutId1': 'string'
     };
-    return this.http.post(this.config.apiUrl + '/api/collections/' + collectionId + '/payoutrules', body, this.options).map(result => result.json());
+    return this.http.post(this.config.apiUrl + '/api/collections/'
+      + collectionId + '/payoutrules', body, this.options).map(result => result);
   }
 
   /**
    * retrieveLocalPayoutAccounts
    */
   public retrieveLocalPayoutAccounts() {
-    return this.http.get(this.config.apiUrl + '/api/peers/' + this._cookieUtilsService.getValue('userId') + '/payoutaccs', this.options).map(result => result.json());
+    return this.http.get(this.config.apiUrl + '/api/peers/'
+      + this._cookieUtilsService.getValue('userId') + '/payoutaccs', this.options).map(result => result);
   }
 
 }

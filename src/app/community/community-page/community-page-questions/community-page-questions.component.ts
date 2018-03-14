@@ -173,10 +173,10 @@ export class CommunityPageQuestionsComponent implements OnInit {
         this._questionsService.addQuestionUpvote(question.id, {}).subscribe(
             response => {
                 if (question.upvotes !== undefined) {
-                    question.upvotes.push(response.json());
+                    question.upvotes.push(response );
                 } else {
                     question.upvotes = [];
-                    question.upvotes.push(response.json());
+                    question.upvotes.push(response );
                 }
             }, err => {
                 console.log(err);
@@ -279,10 +279,10 @@ export class CommunityPageQuestionsComponent implements OnInit {
         this._questionsService.addAnswerUpvote(answer.id, {}).subscribe(
             response => {
                 if (answer.upvotes !== undefined) {
-                    answer.upvotes.push(response.json());
+                    answer.upvotes.push(response );
                 } else {
                     answer.upvotes = [];
-                    answer.upvotes.push(response.json());
+                    answer.upvotes.push(response );
                 }
             }, err => {
                 console.log(err);
@@ -330,10 +330,10 @@ export class CommunityPageQuestionsComponent implements OnInit {
         this._commentService.addCommentUpvote(comment.id, {}).subscribe(
             response => {
                 if (comment.upvotes !== undefined) {
-                    comment.upvotes.push(response.json());
+                    comment.upvotes.push(response );
                 } else {
                     comment.upvotes = [];
-                    comment.upvotes.push(response.json());
+                    comment.upvotes.push(response );
                 }
             }, err => {
                 console.log(err);
@@ -345,10 +345,10 @@ export class CommunityPageQuestionsComponent implements OnInit {
         this._commentService.addReplyUpvote(reply.id, {}).subscribe(
             response => {
                 if (reply.upvotes !== undefined) {
-                    reply.upvotes.push(response.json());
+                    reply.upvotes.push(response );
                 } else {
                     reply.upvotes = [];
-                    reply.upvotes.push(response.json());
+                    reply.upvotes.push(response );
                 }
             }, err => {
                 console.log(err);

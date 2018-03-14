@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Http, Response, } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../../app.config';
 import { MediaUploaderService } from '../../_services/mediaUploader/media-uploader.service';
 import { ContentService } from '../../_services/content/content.service';
@@ -35,7 +35,7 @@ export class WorkshopContentOnlineComponent implements OnInit {
 
     constructor(
         private _fb: FormBuilder,
-        private http: Http,
+        private http: HttpClient,
         public config: AppConfig,
         private mediaUploader: MediaUploaderService,
         private contentService: ContentService,
@@ -67,7 +67,7 @@ export class WorkshopContentOnlineComponent implements OnInit {
 
     imageUploadNew(event) {
         for (const file of event.files) {
-            this.mediaUploader.upload(file).map((responseObj: Response) => {
+            this.mediaUploader.upload(file).map((responseObj: any) => {
                 const contentsFArray = <FormArray>this.itenaryForm.controls['contents'];
                 const contentForm = <FormGroup>contentsFArray.controls[this.lastIndex];
                 contentForm.controls['imageUrl'].patchValue(responseObj.url);
@@ -80,7 +80,7 @@ export class WorkshopContentOnlineComponent implements OnInit {
         this.filesToUpload = event.files.length;
         this.filesUploaded = 0;
         for (const file of event.files) {
-            this.mediaUploader.upload(file).map((responseObj: Response) => {
+            this.mediaUploader.upload(file).map((responseObj: any) => {
                 const contentsFArray = <FormArray>this.itenaryForm.controls['contents'];
                 const contentForm = <FormGroup>contentsFArray.controls[this.lastIndex];
                 const supplementUrls = <FormArray>contentForm.controls.supplementUrls;
@@ -167,10 +167,10 @@ export class WorkshopContentOnlineComponent implements OnInit {
     uploadImage(event) {
         this.uploadingImage = true;
         for (const file of event.files) {
-          this.mediaUploader.upload(file).subscribe((response) => {
-            this.addImageUrl(response.url);
-            this.uploadingImage = false;
-          });
+            this.mediaUploader.upload(file).subscribe((response) => {
+                this.addImageUrl(response.url);
+                this.uploadingImage = false;
+            });
         }
     }
 
@@ -182,15 +182,15 @@ export class WorkshopContentOnlineComponent implements OnInit {
     uploadAttachments(event) {
         this.uploadingAttachments = true;
         for (const file of event.files) {
-          this.mediaUploader.upload(file).subscribe((response) => {
-            this.addAttachmentUrl(response);
-            this.uploadingAttachments = false;
-          });
+            this.mediaUploader.upload(file).subscribe((response) => {
+                this.addAttachmentUrl(response);
+                this.uploadingAttachments = false;
+            });
         }
     }
 
     public addAttachmentUrl(response: any) {
-        //console.log('Adding image url: ' + value);
+        // console.log('Adding image url: ' + value);
         this.attachments.push(new FormControl(response.url));
         this.attachmentUrls.push(response);
     }
@@ -203,46 +203,46 @@ export class WorkshopContentOnlineComponent implements OnInit {
         const fileurl = fileUrl;
         fileUrl = _.replace(fileUrl, 'download', 'files');
         this.http.delete(this.config.apiUrl + fileUrl)
-          .map((response) => {
-            console.log(response);
-            if (fileType === 'file') {
-                const contentsFArray = <FormArray>this.itenaryForm.controls['contents'];
-                const contentForm = <FormGroup>contentsFArray.controls[this.lastIndex];
-                const supplementUrls = <FormArray>contentForm.controls.supplementUrls;
-                let suppUrl = supplementUrls.value;
-                suppUrl = _.remove(suppUrl, function (n) {
-                    return n !== fileurl;
-                });
-                contentForm.controls['supplementUrls'] = new FormArray([]);
-                this.attachmentUrls = [];
-                suppUrl.forEach(file => {
-                    supplementUrls.push(new FormControl(file));
-                    this.contentService.getMediaObject(file).subscribe((res) => {
-                        this.attachmentUrls.push(res[0]);
+            .map((response) => {
+                console.log(response);
+                if (fileType === 'file') {
+                    const contentsFArray = <FormArray>this.itenaryForm.controls['contents'];
+                    const contentForm = <FormGroup>contentsFArray.controls[this.lastIndex];
+                    const supplementUrls = <FormArray>contentForm.controls.supplementUrls;
+                    let suppUrl = supplementUrls.value;
+                    suppUrl = _.remove(suppUrl, function (n) {
+                        return n !== fileurl;
                     });
-                });
-                if (contentForm.controls['id'].value) {
-                    this.deleteFromContent(contentForm, {'supplementUrls': []});
+                    contentForm.controls['supplementUrls'] = new FormArray([]);
+                    this.attachmentUrls = [];
+                    suppUrl.forEach(file => {
+                        supplementUrls.push(new FormControl(file));
+                        this.contentService.getMediaObject(file).subscribe((res) => {
+                            this.attachmentUrls.push(res[0]);
+                        });
+                    });
+                    if (contentForm.controls['id'].value) {
+                        this.deleteFromContent(contentForm, { 'supplementUrls': [] });
+                    }
+                } else if (fileType === 'image') {
+                    this.addImageUrl('');
+                    const contentsFArray = <FormArray>this.itenaryForm.controls['contents'];
+                    const contentForm = <FormGroup>contentsFArray.controls[this.lastIndex];
+                    contentForm.controls['imageUrl'].patchValue('');
+                    if (contentForm.controls['id'].value) {
+                        this.deleteFromContent(contentForm, { 'imageUrl': '' });
+                    }
                 }
-            } else if (fileType === 'image') {
-                this.addImageUrl('');
-                const contentsFArray = <FormArray>this.itenaryForm.controls['contents'];
-                const contentForm = <FormGroup>contentsFArray.controls[this.lastIndex];
-                contentForm.controls['imageUrl'].patchValue('');
-                if (contentForm.controls['id'].value) {
-                    this.deleteFromContent(contentForm, {'imageUrl': ''});
-                }
-            }
-          }).subscribe((response) => {
+            }).subscribe((response) => {
 
-          });
+            });
 
     }
 
     deleteFromContent(contentForm, body) {
         this.http.patch(this.config.apiUrl + '/api/contents/' + contentForm.controls['id'].value, body, this.options)
-        .map((response: Response) => {})
-        .subscribe();
+            .map((response: any) => { })
+            .subscribe();
     }
 
 }

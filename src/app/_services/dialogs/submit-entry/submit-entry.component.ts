@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Http, Response, } from '@angular/http';
 import { MdDialogRef, MD_DIALOG_DATA, MdDialog } from '@angular/material';
+import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../../../app.config';
 import { MediaUploaderService } from '../../../_services/mediaUploader/media-uploader.service';
 import { SubmissionViewComponent } from '../submission-view/submission-view.component';
@@ -9,7 +9,7 @@ import { ProjectSubmissionService } from '../../../_services/project-submission/
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 import 'rxjs/add/operator/map';
 import { ContentService } from '../../../_services/content/content.service';
-import * as _ from 'lodash';
+import _ from 'lodash';
 
 @Component({
     selector: 'app-submit-entry',
@@ -40,7 +40,8 @@ export class SubmitEntryComponent implements OnInit {
     constructor(public config: AppConfig,
         @Inject(MD_DIALOG_DATA) public data: any,
         public dialog: MdDialog,
-        private _fb: FormBuilder, public http: Http,
+        private _fb: FormBuilder,
+        public http: HttpClient,
         private mediaUploader: MediaUploaderService,
         public projectSubmissionService: ProjectSubmissionService,
         private _cookieUtilsService: CookieUtilsService,
@@ -70,12 +71,12 @@ export class SubmitEntryComponent implements OnInit {
             isPrivate: this.submitEntryForm.controls['isPrivate'].value
         };
         this.savingDraft = true;
-        this.projectSubmissionService.submitProject(this.data.content.id, submissionForm).subscribe((response: Response) => {
+        this.projectSubmissionService.submitProject(this.data.content.id, submissionForm).subscribe((response: any) => {
             if (response) {
                 this.submissionView = response.json();
                 this.savingDraft = false;
 
-                this.projectSubmissionService.addPeerSubmissionRelation(this.userId, this.submissionView.id).subscribe((res: Response) => {
+                this.projectSubmissionService.addPeerSubmissionRelation(this.userId, this.submissionView.id).subscribe((res: any) => {
                     if (res) {
                         this.data.peerHasSubmission = true;
                     }
@@ -87,7 +88,8 @@ export class SubmitEntryComponent implements OnInit {
     }
 
     public viewSubmission(submissionId) {
-        const query = '{"include":[{"upvotes":"peer"}, {"peer": "profiles"}, {"comments": [{"peer": {"profiles": "work"}}, {"replies": [{"peer": {"profiles": "work"}}]}]}]}';
+        const query = '{"include":[{"upvotes":"peer"}, {"peer": "profiles"}, ' +
+            '{"comments": [{"peer": {"profiles": "work"}}, {"replies": [{"peer": {"profiles": "work"}}]}]}]}';
         this.projectSubmissionService.viewSubmission(submissionId, query).subscribe((response: Response) => {
             if (response) {
                 const dialogRef = this.dialog.open(SubmissionViewComponent, {

@@ -1,9 +1,9 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, FormControl} from '@angular/forms';
-import {Http} from '@angular/http';
-import {AppConfig} from '../../app.config';
-import {MediaUploaderService} from '../../_services/mediaUploader/media-uploader.service';
-import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { AppConfig } from '../../app.config';
+import { MediaUploaderService } from '../../_services/mediaUploader/media-uploader.service';
+import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
 import * as _ from 'lodash';
 import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
 import { ContentService } from '../../_services/content/content.service';
@@ -37,7 +37,7 @@ export class WorkshopContentProjectComponent implements OnInit {
 
     constructor(
         private _fb: FormBuilder,
-        private http: Http, private config: AppConfig,
+        private http: HttpClient, private config: AppConfig,
         private mediaUploader: MediaUploaderService,
         @Inject(MD_DIALOG_DATA) public inputData: any,
         public dialogRef: MdDialogRef<WorkshopContentProjectComponent>,
@@ -75,11 +75,11 @@ export class WorkshopContentProjectComponent implements OnInit {
         console.log(event.files);
         this.uploadingAttachments = true;
         for (const file of event.files) {
-          this.mediaUploader.upload(file).subscribe((response) => {
-            this.addAttachmentUrl(response);
-            this.filesUploaded++;
-            this.uploadingAttachments = false;
-          });
+            this.mediaUploader.upload(file).subscribe((response) => {
+                this.addAttachmentUrl(response);
+                this.filesUploaded++;
+                this.uploadingAttachments = false;
+            });
         }
     }
 
@@ -93,54 +93,54 @@ export class WorkshopContentProjectComponent implements OnInit {
         const fileurl = fileUrl;
         fileUrl = _.replace(fileUrl, 'download', 'files');
         this.http.delete(this.config.apiUrl + fileUrl)
-          .map((response) => {
-            console.log(response);
-            if (fileType === 'file') {
-                const contentsFArray = <FormArray>this.itenaryForm.controls['contents'];
-                const contentForm = <FormGroup>contentsFArray.controls[this.lastIndex];
-                const supplementUrls = <FormArray>contentForm.controls.supplementUrls;
-                let suppUrl = supplementUrls.value;
-                suppUrl = _.remove(suppUrl, function (n) {
-                    return n !== fileurl;
-                });
-                contentForm.controls['supplementUrls'] = new FormArray([]);
-                this.attachmentUrls = [];
-                suppUrl.forEach(file => {
-                    supplementUrls.push(new FormControl(file));
-                    this.contentService.getMediaObject(file).subscribe((res) => {
-                        this.attachmentUrls.push(res[0]);
+            .map((response) => {
+                console.log(response);
+                if (fileType === 'file') {
+                    const contentsFArray = <FormArray>this.itenaryForm.controls['contents'];
+                    const contentForm = <FormGroup>contentsFArray.controls[this.lastIndex];
+                    const supplementUrls = <FormArray>contentForm.controls.supplementUrls;
+                    let suppUrl = supplementUrls.value;
+                    suppUrl = _.remove(suppUrl, function (n) {
+                        return n !== fileurl;
                     });
-                });
-            } else {
-              this.urlForVideo = '';
-              this.mediaObject = {};
-              const contentsFArray = <FormArray>this.itenaryForm.controls['contents'];
-              const contentForm = <FormGroup>contentsFArray.controls[this.lastIndex];
-              contentForm.controls['imageUrl'].patchValue(this.urlForVideo);
-              if (contentForm.controls['id'].value) {
-                  this.deleteFromContent(contentForm, {'imageUrl': ''});
-              }
-            }
-          }).subscribe();
+                    contentForm.controls['supplementUrls'] = new FormArray([]);
+                    this.attachmentUrls = [];
+                    suppUrl.forEach(file => {
+                        supplementUrls.push(new FormControl(file));
+                        this.contentService.getMediaObject(file).subscribe((res) => {
+                            this.attachmentUrls.push(res[0]);
+                        });
+                    });
+                } else {
+                    this.urlForVideo = '';
+                    this.mediaObject = {};
+                    const contentsFArray = <FormArray>this.itenaryForm.controls['contents'];
+                    const contentForm = <FormGroup>contentsFArray.controls[this.lastIndex];
+                    contentForm.controls['imageUrl'].patchValue(this.urlForVideo);
+                    if (contentForm.controls['id'].value) {
+                        this.deleteFromContent(contentForm, { 'imageUrl': '' });
+                    }
+                }
+            }).subscribe();
 
     }
 
     deleteFromContent(contentForm, body) {
         this.http.patch(this.config.apiUrl + '/api/contents/' + contentForm.controls['id'].value, body, this.options)
-        .map((response) => {})
-        .subscribe();
+            .map((response) => { })
+            .subscribe();
     }
 
     imageUploadNew(event) {
         this.uploadingVideo = true;
         for (const file of event.files) {
-          this.mediaUploader.upload(file).subscribe((response) => {
-            this.urlForVideo = response.url;
-            const contentsFArray = <FormArray>this.itenaryForm.controls['contents'];
-            const contentForm = <FormGroup>contentsFArray.controls[this.lastIndex];
-            contentForm.controls['imageUrl'].patchValue(response.url);
-            this.mediaObject = response;
-            this.uploadingVideo = false;
+            this.mediaUploader.upload(file).subscribe((response) => {
+                this.urlForVideo = response.url;
+                const contentsFArray = <FormArray>this.itenaryForm.controls['contents'];
+                const contentForm = <FormGroup>contentsFArray.controls[this.lastIndex];
+                contentForm.controls['imageUrl'].patchValue(response.url);
+                this.mediaObject = response;
+                this.uploadingVideo = false;
             });
         }
     }
@@ -162,7 +162,7 @@ export class WorkshopContentProjectComponent implements OnInit {
     itemEditRemoved(event) {
         delete this.filesToUpload;
         this.filesUploaded = 0;
-        //this.deleteFromContainer(event);
+        // this.deleteFromContainer(event);
     }
 
     /**

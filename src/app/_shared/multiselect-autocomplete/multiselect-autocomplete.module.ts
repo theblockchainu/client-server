@@ -2,7 +2,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MdIconModule } from '@angular/material';
-import { MultiselectAutocomplete } from './multiselect-autocomplete.component';
+import { MultiselectAutocompleteComponent } from './multiselect-autocomplete.component';
 import { ANIMATION_TYPES, LoadingModule } from 'ngx-loading';
 
 @NgModule({
@@ -20,10 +20,10 @@ import { ANIMATION_TYPES, LoadingModule } from 'ngx-loading';
         })
     ],
     exports: [
-        MultiselectAutocomplete,
+        MultiselectAutocompleteComponent,
     ],
     declarations: [
-        MultiselectAutocomplete,
+        MultiselectAutocompleteComponent,
     ],
     providers: [],
 })

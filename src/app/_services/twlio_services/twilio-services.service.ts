@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RequestHeaderService } from '../requestHeader/request-header.service';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../../app.config';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -12,7 +12,7 @@ export class TwilioServicesService {
 
   constructor(
     public _requestHeaderService: RequestHeaderService,
-    private http: Http,
+    private http: HttpClient,
     private config: AppConfig,
     private _cookieService: CookieService
   ) {
@@ -36,7 +36,7 @@ export class TwilioServicesService {
   public getToken() {
     return this.http.get(this.config.apiUrl + '/api/vsessions/token', this.options)
       .map(
-      (response) => response.json()
+        (response) => response
       );
   }
 

@@ -5,7 +5,7 @@ import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.ser
 import { ProfileService } from '../../_services/profile/profile.service';
 import * as moment from 'moment';
 import { PaymentService } from '../../_services/payment/payment.service';
-import { Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { CollectionService } from '../../_services/collection/collection.service';
 import * as _ from 'lodash';
 import { MdSnackBar } from '@angular/material';
@@ -159,7 +159,8 @@ export class BookSessionComponent implements OnInit {
               }
             );
           }
-          this.availability = availability.sort((calEventa, calEventb) => (moment(calEventa.start).isAfter(moment(calEventb.start)) ? 1 : -1));
+          this.availability = availability.sort((calEventa, calEventb) =>
+            (moment(calEventa.start).isAfter(moment(calEventb.start)) ? 1 : -1));
         });
         this.backupSlots = _.cloneDeep(this.availability);
       }
@@ -179,10 +180,10 @@ export class BookSessionComponent implements OnInit {
         this.createChargeData.customer = peer.stripeCustId;
         this.custId = peer.stripeCustId;
         // get all cards
-        this.paymentService.listAllCards(this.userId, this.custId).subscribe(cards => {
+        this.paymentService.listAllCards(this.userId, this.custId).subscribe((cards: any) => {
           this.loadingCards = false;
           if (cards) {
-            this.listAllCards = cards.json().data;
+            this.listAllCards = cards.data;
             console.log('listAllCards: ' + JSON.stringify(this.listAllCards));
             if (this.listAllCards && this.listAllCards.length > 0) {
               this.isCardExist = true;
@@ -204,13 +205,13 @@ export class BookSessionComponent implements OnInit {
 
     if (this.isCardExist === true && !this.useAnotherCard) {
       console.log('card exist');
-      this.paymentService.createCharge(this.userId, this.session.id, this.createChargeData).subscribe((resp: Response) => {
+      this.paymentService.createCharge(this.userId, this.session.id, this.createChargeData).subscribe((resp: any) => {
         if (resp) {
           this.message = 'Payment successful. Redirecting...';
           this.joinSession();
         }
       }, err => {
-        console.log(err.json());
+        console.log(err);
       });
       console.log('exists');
     } else {
@@ -222,16 +223,16 @@ export class BookSessionComponent implements OnInit {
       this.stripe.createToken(this.card, extraDetails).then((result: any) => {
         if (result.token) {
           this.createSourceData.token = result.token.id;
-          this.paymentService.createSource(this.userId, this.custId, this.createSourceData).subscribe((res: Response) => {
+          this.paymentService.createSource(this.userId, this.custId, this.createSourceData).subscribe((res: any) => {
             if (res) {
-              this.createChargeData.source = res.json().id;
+              this.createChargeData.source = res.id;
               this.paymentService.createCharge(this.userId, this.session.id, this.createChargeData).subscribe(success => {
                 if (success) {
                   this.message = 'Payment successful. Redirecting...';
                   this.joinSession();
                 }
               }, err => {
-                console.log(err.json());
+                console.log(err);
               });
 
             } else {
@@ -373,7 +374,8 @@ export class BookSessionComponent implements OnInit {
     const sortedSlots = selectedSlots.sort((calEventa, calEventb) => calEventa.start - calEventb.start);
     const groupArray: Array<any> = [];
     sortedSlots.forEach(slot => {
-      if (groupArray[groupArray.length - 1] && groupArray[groupArray.length - 1][groupArray[groupArray.length - 1].length - 1].end.isSame(slot.start)) {
+      if (groupArray[groupArray.length - 1] &&
+        groupArray[groupArray.length - 1][groupArray[groupArray.length - 1].length - 1].end.isSame(slot.start)) {
         groupArray[groupArray.length - 1].push(slot);
       } else {
         groupArray.push([slot]);
@@ -384,7 +386,7 @@ export class BookSessionComponent implements OnInit {
       this.savingData = false;
       this.router.navigate(['console', 'learning', 'sessions']);
     }, (err) => {
-      console.log(err.json());
+      console.log(err);
       this.message = 'An Error has occured,if your money has been deducted please contact support';
     });
   }

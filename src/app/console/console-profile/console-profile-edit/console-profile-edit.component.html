@@ -221,9 +221,8 @@
               <md-hint class="hint" align="start">Your home time zone.</md-hint>
               <div formArrayName="other_languages" class="margin-top-40 other_languages">
                 <p class="mat-body-2">Other languages</p>
-
-                <generic-multiselect-autocomplete [list]="languages" [preSelectedItems]="profileForm.controls['other_languages'].value" (selectedOutput)="selected($event)"
-                  (removedOutput)="removed($event)"></generic-multiselect-autocomplete>
+                <app-generic-multiselect-autocomplete [list]="languages" [preSelectedItems]="profileForm.controls['other_languages'].value"
+                  (selectedOutput)="selected($event)" (removedOutput)="removed($event)"></app-generic-multiselect-autocomplete>
               </div>
               <md-hint class="hint" align="start">Add any languages that others can use to speak with you on peerbuds.</md-hint>
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../../app.config';
 
 import { ProfileService } from '../../_services/profile/profile.service';
@@ -19,13 +19,13 @@ export class SocialSyncComponent implements OnInit {
   };
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private config: AppConfig,
     private _profileService: ProfileService) { }
 
   ngOnInit() {
     // this._profileService.getSocialIdentities(null)
-    //   .subscribe((response: Response) => {
+    //   .subscribe((response:  any) => {
     //     this.socialIdentitiesConnected = response;
 
     //     this.socialIdentitiesConnected.forEach(socialIdentity => {

@@ -4,24 +4,24 @@ import { ProfileService } from '../../_services/profile/profile.service';
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
 import { AppConfig } from '../../app.config';
 import { MdDialog } from '@angular/material';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-peers',
   templateUrl: './peers.component.html',
   styleUrls: ['./peers.component.scss'],
-    animations: [
-        trigger('slideInOut', [
-            state('in', style({
-                transform: 'translate3d(0, 0, 0)'
-            })),
-            state('out', style({
-                transform: 'translate3d(100%, 0, 0)'
-            })),
-            transition('in => out', animate('400ms ease-in-out')),
-            transition('out => in', animate('400ms ease-in-out'))
-        ]),
-    ]
+  animations: [
+    trigger('slideInOut', [
+      state('in', style({
+        transform: 'translate3d(0, 0, 0)'
+      })),
+      state('out', style({
+        transform: 'translate3d(100%, 0, 0)'
+      })),
+      transition('in => out', animate('400ms ease-in-out')),
+      transition('out => in', animate('400ms ease-in-out'))
+    ]),
+  ]
 })
 export class PeersComponent implements OnInit {
   public peers: Array<any>;
@@ -55,10 +55,10 @@ export class PeersComponent implements OnInit {
       'limit': 50
     };
     this.loading = true;
-    this._profileService.getAllPeers(query).subscribe((result) => {
+    this._profileService.getAllPeers(query).subscribe((result: any) => {
       this.loading = false;
       this.peers = [];
-      for (const responseObj of result.json()) {
+      for (const responseObj of result) {
         if (responseObj.id !== this.userId) {
           responseObj.rating = this._collectionService.calculateRating(responseObj.reviewsAboutYou);
           this.peers.push(responseObj);

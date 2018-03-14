@@ -135,10 +135,11 @@ export class SubmissionViewComponent implements OnInit {
         this._commentService.addCommentUpvote(comment.id, {}).subscribe(
             response => {
                 if (comment.upvotes !== undefined) {
-                    comment.upvotes.push(response.json());
-                } else {
+                    comment.upvotes.push(response );
+                }
+                else {
                     comment.upvotes = [];
-                    comment.upvotes.push(response.json());
+                    comment.upvotes.push(response );
                 }
             }, err => {
                 console.log(err);
@@ -150,10 +151,11 @@ export class SubmissionViewComponent implements OnInit {
         this._submissionService.addSubmissionUpvote(submission.id, {}).subscribe(
             response => {
                 if (submission.upvotes !== undefined) {
-                    submission.upvotes.push(response.json());
-                } else {
+                    submission.upvotes.push(response );
+                }
+                else {
                     submission.upvotes = [];
-                    submission.upvotes.push(response.json());
+                    submission.upvotes.push(response );
                 }
             }, err => {
                 console.log(err);
@@ -165,10 +167,11 @@ export class SubmissionViewComponent implements OnInit {
         this._commentService.addReplyUpvote(reply.id, {}).subscribe(
             response => {
                 if (reply.upvotes !== undefined) {
-                    reply.upvotes.push(response.json());
-                } else {
+                    reply.upvotes.push(response );
+                }
+                else {
                     reply.upvotes = [];
-                    reply.upvotes.push(response.json());
+                    reply.upvotes.push(response );
                 }
             }, err => {
                 console.log(err);

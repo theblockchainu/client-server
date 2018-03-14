@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { AppConfig } from '../../app.config';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { MediaUploaderService } from '../../_services/mediaUploader/media-uploader.service';
 import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
 import * as _ from 'lodash';
@@ -34,7 +34,7 @@ export class ExperienceContentVideoComponent implements OnInit {
 
     constructor(
         private _fb: FormBuilder,
-        private http: Http, private config: AppConfig,
+        private http: HttpClient, private config: AppConfig,
         private mediaUploader: MediaUploaderService,
         @Inject(MD_DIALOG_DATA) public inputData: any,
         public dialogRef: MdDialogRef<ExperienceContentVideoComponent>,
@@ -179,7 +179,7 @@ export class ExperienceContentVideoComponent implements OnInit {
     itemEditRemoved(event) {
         delete this.filesToUpload;
         this.filesUploaded = 0;
-        //this.deleteFromContainer(event);
+        // this.deleteFromContainer(event);
     }
 
     /**

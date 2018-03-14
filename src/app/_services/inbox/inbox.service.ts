@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import {
-  Http, Headers, Response, BaseRequestOptions, RequestOptions
-  , RequestOptionsArgs
-} from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/map';
@@ -18,7 +15,7 @@ export class InboxService {
   public key = 'userId';
   private options;
 
-  constructor(private http: Http,
+  constructor(private http: HttpClient,
     private config: AppConfig,
     private _cookieService: CookieService,
     private route: ActivatedRoute,
@@ -31,18 +28,18 @@ export class InboxService {
 
   getRoomData() {
     const userId = this._cookieUtilsService.getValue(this.key);
-    const query = { 'include' : ['collection', {'messages': {'peer' : 'profiles'}} , {'participants': 'profiles'}]};
+    const query = { 'include': ['collection', { 'messages': { 'peer': 'profiles' } }, { 'participants': 'profiles' }] };
     if (userId) {
       return this.http.get(this.config.apiUrl + '/api/peers/' + userId + '/joinedRooms?filter=' + JSON.stringify(query), this.options)
         .map(
-        (response: Response) => response.json()
+          (response: any) => response
         );
     }
   }
 
   postMessage(roomId, body) {
     return this.http.post(this.config.apiUrl + '/api/rooms/' + roomId + '/messages', body, this.options)
-                    .map((response: Response) => response.json());
+      .map((response: any) => response);
   }
 
 }

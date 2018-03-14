@@ -69,9 +69,9 @@
                   <div class="col-sm-12 margin-bottom-30">
                     <div class="row">
                       <div class="col-sm-12">
-                        <multiselect-autocomplete (selectedOutput)="selected($event)" (removedOutput)="removed($event)" [preSelectedTopics]=interests
+                        <app-multiselect-autocomplete (selectedOutput)="selected($event)" (removedOutput)="removed($event)" [preSelectedTopics]=interests
                           [searchUrl]=searchTopicURL [create]=true [createURL]=createTopicURL [title]=placeholderStringTopic
-                          [maxSelection]=maxTopics [minSelection]="1"></multiselect-autocomplete>
+                          [maxSelection]=maxTopics [minSelection]="1"></app-multiselect-autocomplete>
                       </div>
                     </div>
                     <div class="row">

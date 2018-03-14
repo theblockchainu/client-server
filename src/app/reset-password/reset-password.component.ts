@@ -79,7 +79,7 @@ export class ResetPasswordComponent implements OnInit {
         },
         (error) => {
           console.log(error);
-          this.snackBar.open(error.json().error.message, 'Resend Email').onAction().subscribe(res => {
+          this.snackBar.open(error .error.message, 'Resend Email').onAction().subscribe(res => {
             this._dialogsService.openForgotPassword(this.email).afterClosed().subscribe(data => {
               this.router.navigateByUrl('');
             });

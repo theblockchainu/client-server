@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { MediaUploaderService } from '../../mediaUploader/media-uploader.service';
 import { AppConfig } from '../../../app.config';
 import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
@@ -32,7 +32,7 @@ export class VerifyIdDialogComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public router: Router,
     private _fb: FormBuilder,
-    private http: Http,
+    private http: HttpClient,
     private mediaUploader: MediaUploaderService,
     public config: AppConfig,
     public _profileService: ProfileService,
@@ -85,7 +85,7 @@ export class VerifyIdDialogComponent implements OnInit {
     if (type === 'image' || type === 'file') {
       this._profileService.updatePeer(this.userId, {
         'verificationIdUrl': ''
-      }).subscribe(response => {
+      }).subscribe((response: any) => {
         this.verificationIdUrl = response.picture_url;
       });
     } else {

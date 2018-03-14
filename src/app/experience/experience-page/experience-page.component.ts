@@ -844,7 +844,7 @@ export class ExperiencePageComponent implements OnInit {
 
   rsvpContent(contentId) {
     this._contentService.createRSVP(contentId, this.calendarId)
-      .subscribe((response: Response) => {
+      .subscribe((response:  any) => {
         console.log(response);
         this.initializeExperience();
       });
@@ -1224,10 +1224,10 @@ export class ExperiencePageComponent implements OnInit {
     this._commentService.addCommentUpvote(comment.id, {}).subscribe(
       response => {
         if (comment.upvotes !== undefined) {
-          comment.upvotes.push(response.json());
+          comment.upvotes.push(response );
         } else {
           comment.upvotes = [];
-          comment.upvotes.push(response.json());
+          comment.upvotes.push(response );
         }
       }, err => {
         console.log(err);
@@ -1239,10 +1239,10 @@ export class ExperiencePageComponent implements OnInit {
     this._commentService.addReplyUpvote(reply.id, {}).subscribe(
       response => {
         if (reply.upvotes !== undefined) {
-          reply.upvotes.push(response.json());
+          reply.upvotes.push(response );
         } else {
           reply.upvotes = [];
-          reply.upvotes.push(response.json());
+          reply.upvotes.push(response );
         }
       }, err => {
         console.log(err);
@@ -1261,8 +1261,8 @@ export class ExperiencePageComponent implements OnInit {
     let currentUserParticipatingCalendar = '';
     this._collectionService.getParticipants(this.experienceId, query).subscribe(
       (response: any) => {
-        this.allParticipants = response.json();
-        for (const responseObj of response.json()) {
+        this.allParticipants = response ;
+        for (const responseObj of response ) {
           if (this.calendarId && this.calendarId === responseObj.calendarId) {
             this.participants.push(responseObj);
           }

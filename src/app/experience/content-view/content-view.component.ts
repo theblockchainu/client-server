@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { Http, Response, } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../../app.config';
 import { CountryPickerService } from '../../_services/countrypicker/countrypicker.service';
 import { ModalModule, ModalDirective } from 'ngx-bootstrap';
@@ -45,11 +45,10 @@ export class ContentViewComponent implements OnInit {
   public countries: any[];
   public filesToUpload: number;
   public filesUploaded: number;
-  public selectedDates: any;
 
   constructor(
     private _fb: FormBuilder,
-    private http: Http,
+    private http: HttpClient,
     public config: AppConfig,
     private countryPickerService: CountryPickerService,
     private mediaUploader: MediaUploaderService,
@@ -66,12 +65,7 @@ export class ContentViewComponent implements OnInit {
   }
 
     datePickerFilter = (d: Date): boolean => {
-        this.selectedDates.forEach(date => {
-            if (date === d) {
-                return false;
-            }
-        });
-        return true;
+      return !this.selectedItineraryDates.some(selectedDate => d.getDay() === selectedDate.getDay());
     }
 
   addContent(contentType: string) {

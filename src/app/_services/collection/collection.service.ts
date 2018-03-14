@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, BaseRequestOptions, RequestOptions, RequestOptionsArgs } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/map';
@@ -16,7 +16,7 @@ export class CollectionService {
   public options;
   public now: Date;
   constructor(
-    private http: Http,
+    private httpClient: HttpClient,
     private config: AppConfig,
     private _cookieService: CookieService,
     private route: ActivatedRoute,
@@ -31,42 +31,44 @@ export class CollectionService {
   public getCollection(userId, type: string, cb) {
     const collections = [];
     if (userId) {
-      this.http
+      this.httpClient
         .get(this.config.apiUrl + '/api/peers/' + userId + '/ownedCollections')
-        .map((response: Response) => {
-          const responseObj = response.json();
-          console.log(response.json());
-          responseObj.forEach((res) => {
-            if (res.type === type) {
-              collections.push(res);
-            }
-          });
-          cb(null, collections);
-        }, (err) => {
-          cb(err);
-        }).subscribe();
+        .subscribe(
+          (response: any) => {
+            const responseObj = response;
+            console.log(response);
+            responseObj.forEach((res) => {
+              if (res.type === type) {
+                collections.push(res);
+              }
+            });
+            cb(null, collections);
+          }, (err) => {
+            cb(err);
+          }
+        );
     }
   }
 
   public getOwnedCollections(userId, options: string, cb) {
     if (userId) {
-      this.http
+      this.httpClient
         .get(this.config.apiUrl + '/api/peers/' + userId + '/ownedCollections?' + 'filter=' + options)
-        .map((response) => {
-          cb(null, response.json());
-        }, (err) => {
+        .subscribe(res => {
+          cb(null, res);
+        }, err => {
           cb(err);
-        }).subscribe();
+        });
     }
   }
 
   public getParticipatingCollections(userId, options: any, cb) {
     if (userId) {
-      this.http
+      this.httpClient
         .get(this.config.apiUrl + '/api/peers/' + userId + '/collections?' + 'filter=' + options)
         .map((response) => {
-          console.log(response.json());
-          cb(null, response.json());
+          console.log(response);
+          cb(null, response);
         }, (err) => {
           cb(err);
         }).subscribe();
@@ -74,15 +76,15 @@ export class CollectionService {
   }
 
   public getAllCollections(options: any) {
-    return this.http
+    return this.httpClient
       .get(this.config.apiUrl + '/api/collections?' + 'filter=' + JSON.stringify(options))
-      .map(response => response.json());
+      .map(response => response);
   }
 
   public getCollectionDetails(id: string) {
-    return this.http
+    return this.httpClient
       .get(this.config.apiUrl + '/api/collections/' + id)
-      .map((response: Response) => response.json(), (err) => {
+      .map((response: any) => response, (err) => {
         console.log('Error: ' + err);
       });
 
@@ -90,9 +92,9 @@ export class CollectionService {
 
   public getCollectionDetail(id: string, param: any) {
     const filter = JSON.stringify(param);
-    return this.http
+    return this.httpClient
       .get(this.config.apiUrl + '/api/collections/' + id + '?filter=' + filter)
-      .map((response: Response) => response.json(), (err) => {
+      .map((response: any) => response, (err) => {
         console.log('Error: ' + err);
       });
 
@@ -105,11 +107,11 @@ export class CollectionService {
     const body = {
       'type': type
     };
-    return this.http.post(this.config.apiUrl + '/api/peers/'
+    return this.httpClient.post(this.config.apiUrl + '/api/peers/'
       + userId + '/ownedCollections', body, this.options).map(
-      (response) => response.json(), (err) => {
-        console.log('Error: ' + err);
-      }
+        (response) => response, (err) => {
+          console.log('Error: ' + err);
+        }
       );
   }
 
@@ -117,7 +119,7 @@ export class CollectionService {
    * patchCollection
    */
   public patchCollection(collectionId: string, body: any) {
-    return this.http.patch(this.config.apiUrl +
+    return this.httpClient.patch(this.config.apiUrl +
       '/api/collections/' + collectionId, body, this.options);
   }
 
@@ -125,7 +127,7 @@ export class CollectionService {
    * patchCalendar
    */
   public patchCalendar(calendarId: string, body: any) {
-    return this.http.patch(this.config.apiUrl +
+    return this.httpClient.patch(this.config.apiUrl +
       '/api/calendars/' + calendarId, body, this.options);
   }
 
@@ -133,7 +135,7 @@ export class CollectionService {
    * deleteCollection
    */
   public deleteCollection(collectionId: string) {
-    return this.http.delete(this.config.apiUrl +
+    return this.httpClient.delete(this.config.apiUrl +
       '/api/collections/' + collectionId);
   }
 
@@ -141,7 +143,7 @@ export class CollectionService {
    * delete Calendar
    */
   public deleteCalendar(calendarId: string) {
-    return this.http.delete(this.config.apiUrl +
+    return this.httpClient.delete(this.config.apiUrl +
       '/api/calendars/' + calendarId);
   }
 
@@ -162,13 +164,13 @@ export class CollectionService {
    * removeParticipant
    */
   public removeParticipant(collectionId: string, participantId: string) {
-    return this.http.delete(this.config.apiUrl +
+    return this.httpClient.delete(this.config.apiUrl +
       '/api/collections/' + collectionId + '/participants/rel/' + participantId);
   }
   /* Submit workshop for Review */
   public submitForReview(id: string) {
-    return this.http.post(this.config.apiUrl + '/api/collections/' + id + '/submitForReview', {}, this.options).map(
-      (response) => response.json(), (err) => {
+    return this.httpClient.post(this.config.apiUrl + '/api/collections/' + id + '/submitForReview', {}, this.options).map(
+      (response) => response, (err) => {
         console.log('Error: ' + err);
       });
   }
@@ -362,7 +364,8 @@ export class CollectionService {
         let startDate;
         const calendarLength = workshop.calendars.length;
         if (calendarLength > 1) {
-          startDate = this.getCurrentCalendar(workshop.calendars) !== undefined ? this.getCurrentCalendar(workshop.calendars).startDate : this.now;
+          startDate = this.getCurrentCalendar(workshop.calendars) !==
+            undefined ? this.getCurrentCalendar(workshop.calendars).startDate : this.now;
         } else if (calendarLength === 1) {
           startDate = workshop.calendars[0];
         }
@@ -467,9 +470,9 @@ export class CollectionService {
 
   public sendVerifySMS(phoneNo, countryCode) {
     const body = {};
-    return this.http
+    return this.httpClient
       .post(this.config.apiUrl + '/api/peers/sendVerifySms?phone=' + phoneNo + '&countryCode=' + countryCode, body, this.options)
-      .map((response: Response) => response.json(), (err) => {
+      .map((response: any) => response, (err) => {
         console.log('Error: ' + err);
       });
   }
@@ -477,9 +480,9 @@ export class CollectionService {
 
   public confirmSmsOTP(inputToken) {
     const body = {};
-    return this.http
+    return this.httpClient
       .post(this.config.apiUrl + '/api/peers/confirmSmsOTP?token=' + inputToken, body, this.options)
-      .map((response: Response) => response.json(), (err) => {
+      .map((response: any) => response, (err) => {
         console.log('Error: ' + err);
       });
 
@@ -487,10 +490,10 @@ export class CollectionService {
 
   public saveBookmark(collectionId, cb) {
     const body = {};
-    this.http
+    this.httpClient
       .post(this.config.apiUrl + '/api/collections/' + collectionId + '/bookmarks', body, this.options)
       .map((response) => {
-        cb(null, response.json());
+        cb(null, response);
       }, (err) => {
         cb(err);
       }).subscribe();
@@ -498,10 +501,10 @@ export class CollectionService {
 
   public removeBookmark(bookmarkId, cb) {
     const body = {};
-    this.http
+    this.httpClient
       .delete(this.config.apiUrl + '/api/bookmarks/' + bookmarkId, this.options)
       .map((response) => {
-        cb(null, response.json());
+        cb(null, response);
       }, (err) => {
         cb(err);
       }).subscribe();
@@ -512,10 +515,10 @@ export class CollectionService {
    */
   public getBookmarks(collectionId: string, query: any, cb) {
     const filter = JSON.stringify(query);
-    this.http
+    this.httpClient
       .get(this.config.apiUrl + '/api/collections/' + collectionId + '/bookmarks' + '?filter=' + filter, this.options)
       .map((response) => {
-        cb(null, response.json());
+        cb(null, response);
       }, (err) => {
         cb(err);
       }).subscribe();
@@ -526,7 +529,7 @@ export class CollectionService {
    */
   public getRecommendations(query) {
     const filter = JSON.stringify(query);
-    return this.http
+    return this.httpClient
       .get(this.config.apiUrl + '/api/collections?' + 'filter=' + filter, this.options);
   }
 
@@ -535,7 +538,7 @@ export class CollectionService {
    */
   public getParticipants(collectionId, query) {
     const filter = JSON.stringify(query);
-    return this.http
+    return this.httpClient
       .get(this.config.apiUrl + '/api/collections/' + collectionId + '/participants?filter=' + filter, this.options);
   }
 
@@ -546,24 +549,24 @@ collectionID:string,userId:string,calendarId:string   */
     const body = {
       'calendarId': calendarId
     };
-    this.http
+    this.httpClient
       .put(this.config.apiUrl + '/api/collections/' + collectionId + '/participants/rel/' + userId, body, this.options)
       .map((response) => {
-        cb(null, response.json());
+        cb(null, response);
       }, (err) => {
         cb(err);
       }).subscribe();
   }
 
-    public linkCommunityToCollection(communityId, collectionId, cb) {
-        this.http
-            .put(this.config.apiUrl + '/api/communities/' + communityId + '/collections/rel/' + collectionId, {}, this.options)
-            .map((response) => {
-                cb(null, response.json());
-            }, (err) => {
-                cb(err);
-            }).subscribe();
-    }
+  public linkCommunityToCollection(communityId, collectionId, cb) {
+    this.httpClient
+      .put(this.config.apiUrl + '/api/communities/' + communityId + '/collections/rel/' + collectionId, {}, this.options)
+      .map((response) => {
+        cb(null, response);
+      }, (err) => {
+        cb(err);
+      }).subscribe();
+  }
 
 
   /**
@@ -572,8 +575,8 @@ collectionID:string,userId:string,calendarId:string   */
    * @returns {Observable<any>}
    */
   public approveCollection(collection) {
-    return this.http.post(this.config.apiUrl + '/api/collections/' + collection.id + '/approve', {}, this.options).map(
-      (response) => response.json(), (err) => {
+    return this.httpClient.post(this.config.apiUrl + '/api/collections/' + collection.id + '/approve', {}, this.options).map(
+      (response) => response, (err) => {
         console.log('Error: ' + err);
       });
   }
@@ -601,9 +604,9 @@ collectionID:string,userId:string,calendarId:string   */
   }
 
   public postCalendars(id, calendars) {
-    return this.http
+    return this.httpClient
       .post(this.config.apiUrl + '/api/collections/' + id + '/calendars', calendars, this.options)
-      .map((response: Response) => response.json(), (err) => {
+      .map((response: any) => response, (err) => {
         console.log('Error: ' + err);
       });
   }
@@ -613,10 +616,10 @@ collectionID:string,userId:string,calendarId:string   */
    */
   public getComments(workshopId: string, query: any, cb) {
     const filter = JSON.stringify(query);
-    this.http
+    this.httpClient
       .get(this.config.apiUrl + '/api/collections/' + workshopId + '/comments' + '?filter=' + filter, this.options)
       .map((response) => {
-        cb(null, response.json());
+        cb(null, response);
       }, (err) => {
         cb(err);
       }).subscribe();
@@ -630,10 +633,10 @@ collectionID:string,userId:string,calendarId:string   */
    */
   public getContentComments(contentId: string, query: any, cb) {
     const filter = JSON.stringify(query);
-    this.http
+    this.httpClient
       .get(this.config.apiUrl + '/api/contents/' + contentId + '/comments' + '?filter=' + filter, this.options)
       .map((response) => {
-        cb(null, response.json());
+        cb(null, response);
       }, (err) => {
         cb(err);
       }).subscribe();
@@ -647,10 +650,10 @@ collectionID:string,userId:string,calendarId:string   */
    */
   public getSubmissionComments(submissionId: string, query: any, cb) {
     const filter = JSON.stringify(query);
-    this.http
+    this.httpClient
       .get(this.config.apiUrl + '/api/submissions/' + submissionId + '/comments' + '?filter=' + filter, this.options)
       .map((response) => {
-        cb(null, response.json());
+        cb(null, response);
       }, (err) => {
         cb(err);
       }).subscribe();
@@ -658,10 +661,10 @@ collectionID:string,userId:string,calendarId:string   */
 
   public getReviews(peerId: string, query: any, cb) {
     const filter = JSON.stringify(query);
-    this.http
+    this.httpClient
       .get(this.config.apiUrl + '/api/peers/' + peerId + '/reviewsAboutYou' + '?filter=' + filter, this.options)
       .map((response) => {
-        cb(null, response.json());
+        cb(null, response);
       }, (err) => {
         cb(err);
       }).subscribe();
@@ -671,10 +674,10 @@ collectionID:string,userId:string,calendarId:string   */
    * postComments
   worrkshopID   */
   public postComments(workshopId: string, commentBody: any, cb) {
-    this.http
+    this.httpClient
       .post(this.config.apiUrl + '/api/collections/' + workshopId + '/comments', commentBody, this.options)
       .map((response) => {
-        cb(null, response.json());
+        cb(null, response);
       }, (err) => {
         cb(err);
       }).subscribe();
@@ -687,10 +690,10 @@ collectionID:string,userId:string,calendarId:string   */
    * @param cb
    */
   public postSubmissionComments(submissionId: string, commentBody: any, cb) {
-    this.http
+    this.httpClient
       .post(this.config.apiUrl + '/api/submissions/' + submissionId + '/comments', commentBody, this.options)
       .map((response) => {
-        cb(null, response.json());
+        cb(null, response);
       }, (err) => {
         cb(err);
       }).subscribe();
@@ -703,10 +706,10 @@ collectionID:string,userId:string,calendarId:string   */
    * @param cb
    */
   public postContentComments(contentId: string, commentBody: any, cb) {
-    this.http
+    this.httpClient
       .post(this.config.apiUrl + '/api/contents/' + contentId + '/comments', commentBody, this.options)
       .map((response) => {
-        cb(null, response.json());
+        cb(null, response);
       }, (err) => {
         cb(err);
       }).subscribe();
@@ -716,7 +719,7 @@ collectionID:string,userId:string,calendarId:string   */
    * postReview
    */
   public postReview(peerId: string, reviewBody: any) {
-    return this.http
+    return this.httpClient
       .post(this.config.apiUrl + '/api/peers/' + peerId + '/reviewsAboutYou', reviewBody, this.options);
   }
 
@@ -731,9 +734,8 @@ collectionID:string,userId:string,calendarId:string   */
   public calculateCollectionRating(collectionId, reviewArray?: any) {
     let reviewScore = 0;
     for (const reviewObject of reviewArray) {
-      if (reviewObject.collectionId !== undefined && reviewObject.collectionId === collectionId) {
-        reviewScore += reviewObject.score;
-      }
+      if (reviewObject.collectionId !== undefined && reviewObject.collectionId === collectionId)
+       { reviewScore += reviewObject.score;}
     }
     return (reviewScore / (reviewArray.length * 5)) * 5;
   }
@@ -741,9 +743,8 @@ collectionID:string,userId:string,calendarId:string   */
   public calculateCollectionRatingCount(collectionId, reviewArray?: any) {
     let reviewCount = 0;
     for (const reviewObject of reviewArray) {
-      if (reviewObject.collectionId !== undefined && reviewObject.collectionId === collectionId) {
-        reviewCount++;
-      }
+      if (reviewObject.collectionId !== undefined && reviewObject.collectionId === collectionId)
+       { reviewCount++;}
     }
     return reviewCount;
   }
@@ -760,7 +761,7 @@ collectionID:string,userId:string,calendarId:string   */
    * deleteComment
    */
   public deleteReview(reviewId: string) {
-    return this.http
+    return this.httpClient
       .delete(this.config.apiUrl + '/api/reviews/' + reviewId, this.options);
   }
 
@@ -791,8 +792,10 @@ collectionID:string,userId:string,calendarId:string   */
         });
         itenariesObj[key].forEach(content => {
           if (content.schedules[0].startTime !== undefined) {
-            content.schedules[0].startTime = startDate.format().toString().split('T')[0] + 'T' + content.schedules[0].startTime.split('T')[1];
-            content.schedules[0].endTime = startDate.format().toString().split('T')[0] + 'T' + content.schedules[0].endTime.split('T')[1];
+            content.schedules[0].startTime = startDate.format().toString().split('T')[0]
+              + 'T' + content.schedules[0].startTime.split('T')[1];
+            content.schedules[0].endTime = startDate.format().toString().split('T')[0]
+              + 'T' + content.schedules[0].endTime.split('T')[1];
           }
         });
         const itenary = {
@@ -826,45 +829,45 @@ collectionID:string,userId:string,calendarId:string   */
     const body = {
       'isPresent': isPresent
     };
-    return this.http
+    return this.httpClient
       .put(this.config.apiUrl + '/api/peers/' + peerId + '/rsvps/' + rsvpId, body, this.options)
-      .map((response: Response) => response.json());
+      .map((response: any) => response);
   }
 
   public updateProvisions(collectionId: string, body: any) {
-    return this.http.delete(this.config.apiUrl + '/api/collections/' + collectionId + '/provisions', this.options).flatMap(res => {
-      return this.http
+    return this.httpClient.delete(this.config.apiUrl + '/api/collections/' + collectionId + '/provisions', this.options).flatMap(res => {
+      return this.httpClient
         .post(this.config.apiUrl + '/api/collections/' + collectionId + '/provisions', body, this.options)
-        .map((response: Response) => response.json());
+        .map((response: any) => response);
     });
 
   }
 
   public postPackages(collectionId: string, body: any) {
-    return this.http.delete(this.config.apiUrl + '/api/collections/' + collectionId + '/packages', this.options).flatMap(res => {
+    return this.httpClient.delete(this.config.apiUrl + '/api/collections/' + collectionId + '/packages', this.options).flatMap(res => {
       console.log('deleted');
       console.log('posting', body);
-      return this.http
+      return this.httpClient
         .post(this.config.apiUrl + '/api/collections/' + collectionId + '/packages', body, this.options)
-        .map((response: Response) => response.json());
+        .map((response: any) => response);
     });
   }
 
   public postPreferences(collectionId: string, body: any) {
-    return this.http.delete(this.config.apiUrl + '/api/collections/' + collectionId + '/preferences', this.options).flatMap(res => {
+    return this.httpClient.delete(this.config.apiUrl + '/api/collections/' + collectionId + '/preferences', this.options).flatMap(res => {
       console.log('deleted');
       console.log('posting', body);
-      return this.http
+      return this.httpClient
         .post(this.config.apiUrl + '/api/collections/' + collectionId + '/preferences', body, this.options)
-        .map((response: Response) => response.json());
+        .map((response: any) => response);
     });
   }
 
   public updateAvailability(collectionId: string, body: any) {
-    return this.http.delete(this.config.apiUrl + '/api/collections/' + collectionId + '/availability').flatMap(
+    return this.httpClient.delete(this.config.apiUrl + '/api/collections/' + collectionId + '/availability').flatMap(
       res => {
-        return this.http.post(this.config.apiUrl + '/api/collections/' + collectionId + '/availability', body, this.options)
-          .map((response: Response) => response.json());
+        return this.httpClient.post(this.config.apiUrl + '/api/collections/' + collectionId + '/availability', body, this.options)
+          .map((response: any) => response);
       }
     );
   }
@@ -879,18 +882,19 @@ collectionID:string,userId:string,calendarId:string   */
     });
     const availabilityLinkRequestArray = [];
     const peerLinkRequestArray = [];
-    return this.http.post(this.config.apiUrl + '/api/collections/' + collectionId + '/contents', contentObjs, this.options)
-      .flatMap(res => {
-        const result = res.json();
+    return this.httpClient.post(this.config.apiUrl + '/api/collections/' + collectionId + '/contents', contentObjs, this.options)
+      .flatMap((res: any) => {
+        const result = res;
         result.forEach((savedContent, index) => {
           const targetIds = [];
           availabilities[index].forEach(element => {
             availabilityLinkRequestArray.push(
-              this.http.put(this.config.apiUrl + '/api/contents/' + savedContent.id + '/availabilities/rel/' + element.id, this.options)
+              this.httpClient.put(this.config.apiUrl + '/api/contents/'
+                + savedContent.id + '/availabilities/rel/' + element.id, this.options)
             );
           });
           peerLinkRequestArray.push(
-            this.http.put(this.config.apiUrl + '/api/peers/' + userId + '/contents/rel/' + savedContent.id, this.options)
+            this.httpClient.put(this.config.apiUrl + '/api/peers/' + userId + '/contents/rel/' + savedContent.id, this.options)
           );
         });
         return forkJoin(availabilityLinkRequestArray);
@@ -901,7 +905,7 @@ collectionID:string,userId:string,calendarId:string   */
 
   public approveSessionJoinRequest(sessionId) {
     const body = { 'sessionIsApproved': true };
-    return this.http.patch(this.config.apiUrl + '/api/contents/' + sessionId, body, this.options).map(res => res.json());
+    return this.httpClient.patch(this.config.apiUrl + '/api/contents/' + sessionId, body, this.options).map(res => res);
   }
 
 }

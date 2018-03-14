@@ -1,16 +1,16 @@
-import {Injectable} from '@angular/core';
-import {RequestHeaderService} from '../requestHeader/request-header.service';
-import {AppConfig} from '../../app.config';
-import {Http} from '@angular/http';
+import { Injectable } from '@angular/core';
+import { RequestHeaderService } from '../requestHeader/request-header.service';
+import { AppConfig } from '../../app.config';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class QuestionService {
 
     public options;
 
-    constructor(private http: Http,
-                private config: AppConfig,
-                private requestHeaderService: RequestHeaderService) {
+    constructor(private http: HttpClient,
+        private config: AppConfig,
+        private requestHeaderService: RequestHeaderService) {
         this.options = requestHeaderService.getOptions();
     }
 

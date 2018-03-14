@@ -27,7 +27,7 @@ export class CancelCollectionDialogComponent implements OnInit {
     };
     this._collectionService.patchCollection(this.data.id, body).subscribe(res => {
       if (res) {
-        this.dialogRef.close(res.json());
+        this.dialogRef.close(res );
       }
     }, err => {
       this.snackBar.open('Workshop Couldn&#39;t be Cancelled', 'Retry', {

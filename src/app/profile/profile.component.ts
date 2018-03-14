@@ -95,8 +95,7 @@ export class ProfileComponent implements OnInit {
   public showAll(strLength) {
     if (strLength > this.maxLength) {
       this.maxLength = strLength;
-    }
-    else {
+    } else {
       this.maxLength = 140;
     }
   }
@@ -115,8 +114,7 @@ export class ProfileComponent implements OnInit {
           this.socialIdentities.identities.forEach(element => {
             if (element.provider === 'google') {
               this.connectedIdentities.google = true;
-            }
-            else if (element.provider === 'facebook') {
+            } else if (element.provider === 'facebook') {
               this.connectedIdentities.facebook = true;
             }
           });
@@ -125,8 +123,7 @@ export class ProfileComponent implements OnInit {
           this.socialIdentities.credentials.forEach(element => {
             if (element.provider === 'google') {
               this.connectedIdentities.google = true;
-            }
-            else if (element.provider === 'facebook') {
+            } else if (element.provider === 'facebook') {
               this.connectedIdentities.facebook = true;
             }
           });
@@ -147,9 +144,9 @@ export class ProfileComponent implements OnInit {
       },
       'limit': 6
     };
-    this._profileService.getAllPeers(query).subscribe((result) => {
+    this._profileService.getAllPeers(query).subscribe((result: any) => {
       this.recommendedpeers = [];
-      for (const responseObj of result ) {
+      for (const responseObj of result) {
         console.log(responseObj);
         responseObj.rating = this._collectionService.calculateRating(responseObj.reviewsAboutYou);
         this.recommendedpeers.push(responseObj);
@@ -164,15 +161,14 @@ export class ProfileComponent implements OnInit {
     const queryTeaching = {
       'relInclude': 'experience'
     };
-    this._profileService.getTeachingExternalTopics(this.urluserId, queryTeaching).subscribe((response) => {
+    this._profileService.getTeachingExternalTopics(this.urluserId, queryTeaching).subscribe((response: any) => {
       console.log(response);
       this.topicsTeaching = response;
       this.loadingProfile = false;
       this.loadingLearningJourney = true;
       if (this.profileObj.peer[0].collections) {
         this.getRecommendedWorkshops(this.profileObj.peer[0].collections);
-      }
-      else {
+      } else {
         this.loadingLearningJourney = false;
         this.loadingPeers = true;
         this.getRecommendedPeers();
@@ -222,8 +218,9 @@ export class ProfileComponent implements OnInit {
       if (this.profileObj.other_languages) {
         this.profileObj.other_languages = this.profileObj.other_languages.filter(Boolean);
         this.other_languages = this.profileObj.other_languages.join(', ');
+      } else {
+        this.other_languages = 'No language provided';
       }
-      else this.other_languages = 'No language provided';
 
       this.setInterests();
       if (this.profileObj.peer[0].ownedCollections && this.profileObj.peer[0].ownedCollections.length > 0) {
@@ -231,8 +228,7 @@ export class ProfileComponent implements OnInit {
         this.computeReviews();
         this.isTeacher = true;
         this.offsetString = 'col-md-offset-1';
-      }
-      else {
+      } else {
         this.offsetString = 'custom-margin-left-20pc';
       }
       if (this.profileObj.peer[0].reviewsAboutYou) {
@@ -243,15 +239,14 @@ export class ProfileComponent implements OnInit {
   }
 
   private computeReviews() {
-    //Compute reviews for Peer from Learner and Teachers
+    // Compute reviews for Peer from Learner and Teachers
     const ownedCollectionsArray = this.profileObj.peer[0].ownedCollections;
     const reviewsAboutYou = this.profileObj.peer[0].reviewsAboutYou;
     if (reviewsAboutYou) {
       reviewsAboutYou.forEach(collection => {
         if (_.find(ownedCollectionsArray, function (o) { return o.id === collection.collectionId; })) {
           this.reviewsFromLearners.push(collection);
-        }
-        else {
+        } else {
           this.reviewsFromTeachers.push(collection);
         }
       });
@@ -461,14 +456,14 @@ export class ProfileComponent implements OnInit {
       }) !== undefined ? calendars.find((calendar) => {
         return calendar.id === calendarId;
       }) : {};
-    }
-    else {
+    } else {
       return {};
     }
   }
 
   public redirectToCollection(peer, reviewCollectionId, collectionCalendarId) {
-    return '/' + this.getReviewedCollection(peer, reviewCollectionId).type + '/' + reviewCollectionId + '/calendar/' + collectionCalendarId + '';
+    return '/' + this.getReviewedCollection(peer, reviewCollectionId).type + '/'
+      + reviewCollectionId + '/calendar/' + collectionCalendarId + '';
   }
 
   /**

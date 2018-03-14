@@ -61,22 +61,24 @@ export class ConsoleTeachingAllComponent implements OnInit {
     }
 
     private fetchData() {
-        this._collectionService.getOwnedCollections(this.userId, '{"include": ["calendars", "owners", {"participants": ["reviewsAboutYou", "ownedCollections", "profiles"]}, "topics", {"contents":"schedules"}] }', (err, result) => {
-            if (err) {
-                console.log(err);
-            } else {
-                this.drafts = [];
-                this.ongoingArray = [];
-                this.upcomingArray = [];
-                this.pastArray = [];
-                this.pastCollectionsObject = {};
-                this.liveCollectionsObject = {};
-                this.upcomingCollectionsObject = {};
-                this.createOutput(result);
-                this.now = new Date();
-                this.loaded = true;
-            }
-        });
+        this._collectionService.getOwnedCollections(this.userId,
+            '{"include": ["calendars", "owners", {"participants": ["reviewsAboutYou", "ownedCollections", "profiles"]},'
+            + ' "topics", {"contents":"schedules"}] }', (err, result) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    this.drafts = [];
+                    this.ongoingArray = [];
+                    this.upcomingArray = [];
+                    this.pastArray = [];
+                    this.pastCollectionsObject = {};
+                    this.liveCollectionsObject = {};
+                    this.upcomingCollectionsObject = {};
+                    this.createOutput(result);
+                    this.now = new Date();
+                    this.loaded = true;
+                }
+            });
     }
 
     private createOutput(data: any) {
@@ -192,13 +194,13 @@ export class ConsoleTeachingAllComponent implements OnInit {
     }
 
     public createWorkshop() {
-        this._collectionService.postCollection(this.userId, 'workshop').subscribe((workshopObject) => {
+        this._collectionService.postCollection(this.userId, 'workshop').subscribe((workshopObject: any) => {
             this.router.navigate(['workshop', workshopObject.id, 'edit', 1]);
         });
     }
 
     public createExperience() {
-        this._collectionService.postCollection(this.userId, 'experience').subscribe((experienceObject) => {
+        this._collectionService.postCollection(this.userId, 'experience').subscribe((experienceObject: any) => {
             this.router.navigate(['experience', experienceObject.id, 'edit', 1]);
         });
     }

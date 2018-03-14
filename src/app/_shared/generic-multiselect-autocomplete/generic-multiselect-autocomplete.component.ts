@@ -26,8 +26,8 @@ import * as _ from 'lodash';
       useExisting: forwardRef(() => GenericMultiselectAutocompleteComponent),
       multi: true,
     }],
-  styleUrls: ['./app-generic-multiselect-autocomplete.component.scss'],
-  templateUrl: './app-generic-multiselect-autocomplete.component.html'
+  styleUrls: ['./generic-multiselect-autocomplete.component.scss'],
+  templateUrl: './generic-multiselect-autocomplete.component.html'
 })
 export class GenericMultiselectAutocompleteComponent {
   // implements ControlValueAccessor

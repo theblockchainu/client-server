@@ -57,7 +57,7 @@ export class ConsoleProfileTopicsComponent implements OnInit {
 
   private getLearningTopics() {
     const querylearning = {};
-    this._profileService.getLearningTopics(this.userId, querylearning).subscribe((response) => {
+    this._profileService.getLearningTopics(this.userId, querylearning).subscribe((response: any) => {
       this.topicsLearning = response;
     }, (err) => {
       console.log(err);
@@ -68,7 +68,7 @@ export class ConsoleProfileTopicsComponent implements OnInit {
     const queryTeaching = {
       'relInclude': 'experience'
     };
-    this._profileService.getTeachingTopics(this.userId, queryTeaching).subscribe((response) => {
+    this._profileService.getTeachingTopics(this.userId, queryTeaching).subscribe((response: any) => {
       console.log(response);
       this.topicsTeaching = response;
     });
@@ -177,8 +177,7 @@ topic:any   */
               topicArray.push(topic.id);
               this.topicsLearning.push(topic);
             });
-          }
-          else {
+          } else {
             this.selectedTopicsTeaching = res.selected;
             this.selectedTopicsTeaching.forEach((topic) => {
               topicArray.push(topic.id);

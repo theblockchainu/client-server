@@ -22,17 +22,17 @@ export class CohortDetailDialogComponent implements OnInit {
     const calendarIds = [];
     const cohortsDataObj = {};
     this.data.calendars.forEach(calendar => {
-        if (calendar.status === this.data.status) {
-            calendarIds.push(calendar.id);
-            calendar['participants'] = [];
-            cohortsDataObj[calendar.id] = calendar;
-        }
+      if (calendar.status === this.data.status) {
+        calendarIds.push(calendar.id);
+        calendar['participants'] = [];
+        cohortsDataObj[calendar.id] = calendar;
+      }
     });
     console.log(calendarIds);
     const query = { 'relInclude': 'calendarId' };
     this._collectionService.getParticipants(this.data.id, query).subscribe(
-      result => {
-        const participants = result ;
+      (result: any) => {
+        const participants = result;
         participants.forEach(particpant => {
           if (particpant.calendarId in cohortsDataObj) {
             cohortsDataObj[particpant.calendarId]['participants'].push(particpant);

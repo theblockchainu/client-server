@@ -46,8 +46,8 @@ export class ConsoleAdminComponent implements OnInit {
         'profiles'
       ]
     };
-    this._profileService.getAllPeers(query).subscribe(result => {
-      this.unapprovedPeers = result ;
+    this._profileService.getAllPeers(query).subscribe((result: any) => {
+      this.unapprovedPeers = result;
       this.unapprovedPeers.sort((a, b) => {
         return moment(a.updatedAt).diff(moment(b.updatedAt), 'days');
       });
@@ -66,7 +66,7 @@ export class ConsoleAdminComponent implements OnInit {
       ]
     };
     this._collectionService.getAllCollections(query).subscribe(
-      result => {
+      (result: any) => {
         this.unapprovedCollections = result;
         this.unapprovedCollections.sort((a, b) => {
           return moment(a.updatedAt).diff(moment(b.updatedAt), 'days');
@@ -81,7 +81,7 @@ export class ConsoleAdminComponent implements OnInit {
   public approveWorkshop(collection: any) {
 
     this._collectionService.approveCollection(collection).subscribe(
-      result => {
+      (result: any) => {
         if (result) {
           this.fetchCollections();
           this.snackBar.open(result.result, 'Close', {
@@ -98,7 +98,7 @@ export class ConsoleAdminComponent implements OnInit {
    * approvePeer
    */
   public approvePeer(peer) {
-    this._profileService.approvePeer(peer).subscribe(result => {
+    this._profileService.approvePeer(peer).subscribe((result: any) => {
       if (result) {
         this.fetchPeers();
         this.snackBar.open(result.result, 'Close', {

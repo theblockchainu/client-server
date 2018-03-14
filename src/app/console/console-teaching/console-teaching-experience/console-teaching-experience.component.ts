@@ -180,7 +180,7 @@ export class ConsoleTeachingExperienceComponent implements OnInit {
   }
 
   public createExperience() {
-    this._collectionService.postCollection(this.userId, 'experience').subscribe((experienceObject) => {
+    this._collectionService.postCollection(this.userId, 'experience').subscribe((experienceObject: any) => {
       this.router.navigate(['experience', experienceObject.id, 'edit', 1]);
     });
   }

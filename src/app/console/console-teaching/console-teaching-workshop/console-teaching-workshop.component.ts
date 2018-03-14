@@ -177,7 +177,7 @@ export class ConsoleTeachingWorkshopComponent implements OnInit {
   }
 
   public createWorkshop() {
-    this._collectionService.postCollection(this.userId, 'workshop').subscribe((workshopObject) => {
+    this._collectionService.postCollection(this.userId, 'workshop').subscribe((workshopObject: any) => {
       this.router.navigate(['workshop', workshopObject.id, 'edit', 1]);
     });
   }

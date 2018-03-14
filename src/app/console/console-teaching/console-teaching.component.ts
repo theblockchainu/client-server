@@ -50,7 +50,7 @@ export class ConsoleTeachingComponent implements OnInit {
                 'type': 'session'
             }
         };
-        this._collectionService.getAllCollections(option).subscribe(res => {
+        this._collectionService.getAllCollections(option).subscribe((res: any) => {
             if (res && res.length > 0) {
                 console.log(res);
                 this.session = res;
@@ -62,7 +62,7 @@ export class ConsoleTeachingComponent implements OnInit {
      * createWorkshop
      */
     public createWorkshop() {
-        this._collectionService.postCollection(this.userId, 'workshop').subscribe((workshopObject) => {
+        this._collectionService.postCollection(this.userId, 'workshop').subscribe((workshopObject: any) => {
             this.router.navigate(['workshop', workshopObject.id, 'edit', 1]);
         });
     }
@@ -71,7 +71,7 @@ export class ConsoleTeachingComponent implements OnInit {
      * createExperience
      */
     public createExperience() {
-        this._collectionService.postCollection(this.userId, 'experience').subscribe((experienceObject) => {
+        this._collectionService.postCollection(this.userId, 'experience').subscribe((experienceObject: any) => {
             this.router.navigate(['experience', experienceObject.id, 'edit', 1]);
         });
     }
@@ -80,7 +80,7 @@ export class ConsoleTeachingComponent implements OnInit {
      * createSessions
      */
     public enableSessions() {
-        this._collectionService.postCollection(this.userId, 'session').subscribe((sessionObject) => {
+        this._collectionService.postCollection(this.userId, 'session').subscribe((sessionObject: any) => {
             this.router.navigate(['session', sessionObject.id, 'edit', 1]);
         });
     }

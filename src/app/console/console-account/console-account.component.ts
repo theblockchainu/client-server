@@ -30,7 +30,6 @@ export class ConsoleAccountComponent implements OnInit {
       consoleComponent.setActiveTab(urlSegment[0].path);
     });
     this.activeTab = 'notifications';
-    
     this.userId = _cookieUtilsService.getValue('userId');
   }
 
@@ -42,7 +41,7 @@ export class ConsoleAccountComponent implements OnInit {
    * createWorkshop
    */
   public createWorkshop() {
-    this._collectionService.postCollection(this.userId, 'workshop').subscribe((workshopObject) => {
+    this._collectionService.postCollection(this.userId, 'workshop').subscribe((workshopObject: any) => {
       this.router.navigate(['workshop', workshopObject.id, 'edit', 1]);
     });
   }

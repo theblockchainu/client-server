@@ -353,10 +353,10 @@ export class HomefeedComponent implements OnInit {
             'order': 'createdAt desc'
         };
         this.loadingPeers = true;
-        this._profileService.getAllPeers(query).subscribe((result) => {
+        this._profileService.getAllPeers(query).subscribe((result: any) => {
             this.loadingPeers = false;
             this.peers = [];
-            for (const responseObj of result ) {
+            for (const responseObj of result) {
                 responseObj.rating = this._collectionService.calculateRating(responseObj.reviewsAboutYou);
                 this.peers.push(responseObj);
             }

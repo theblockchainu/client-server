@@ -44,12 +44,12 @@ y  <div class="layout-row footer" layout="row" color="white">
       <div class="row">
         <div class="col-md-12">
           <ul>
-            <li>About us</li>
-            <li>Careers</li>
-            <li>Press</li>
-            <li>Policies</li>
-            <li>Help</li>
-            <li>Token Sale</li>
+              <li><a class="sub-footer-link" [routerLink]="['/about-us']">About us</a></li>
+              <li><a class="sub-footer-link" [routerLink]="['/career']">Careers</a></li>
+              <li><a class="sub-footer-link" [routerLink]="['/press']">Press</a></li>
+              <li><a class="sub-footer-link" [routerLink]="['/policy']">Policies</a></li>
+              <li><a class="sub-footer-link">Help</a></li>
+              <li><a class="sub-footer-link" [routerLink]="['/contact-us']">Contact Us</a></li>
           </ul>
         </div>
       </div>
@@ -63,11 +63,11 @@ y  <div class="layout-row footer" layout="row" color="white">
       <div class="row">
         <div class="col-md-12">
           <ul>
-            <li>Trust and Safety</li>
-            <li>Experiences</li>
-            <li>Classes</li>
-            <li>Peers</li>
-            <li>Peer Profiles</li>
+              <li><a class="sub-footer-link" [routerLink]="['/trust']">Trust and Safety</a></li>
+              <li><a class="sub-footer-link" [routerLink]="['/home/experiences']">Experiences</a></li>
+              <li><a class="sub-footer-link" [routerLink]="['/home/workshops']">Workshops</a></li>
+              <li><a class="sub-footer-link" [routerLink]="['/home/peers']">Peers</a></li>
+              <li><a class="sub-footer-link" [routerLink]="['/home/communities']">Communities</a></li>
           </ul>
         </div>
       </div>
@@ -81,10 +81,10 @@ y  <div class="layout-row footer" layout="row" color="white">
       <div class="row">
         <div class="col-md-12">
           <ul>
-            <li>Why Teach</li>
-            <li>Teaching</li>
-            <li>Responsible Teaching</li>
-            <li>Community Center</li>
+              <li><a class="sub-footer-link" [routerLink]="['/digest/whyTeach']">Why Teach</a></li>
+              <li><a class="sub-footer-link" [routerLink]="['/digest/teachingBenefits']">Teaching</a></li>
+              <li><a class="sub-footer-link" [routerLink]="['/digest/responsibleTeaching']">Responsible Teaching</a></li>
+              <li><a class="sub-footer-link">Community Center</a></li>
           </ul>
         </div>
       </div>
@@ -96,14 +96,22 @@ y  <div class="layout-row footer" layout="row" color="white">
     <div class="col-md-4">
       <img style="width: 14%;" src="/assets/images/pb_logo.png" alt="logo">
     </div>
-    <div class="col-md-4 col-md-offset-4">
-      <a href="/terms-of-service">Terms</a>
-      <a href="/privacy-policy">Privacy</a>
-      <a href="#">Site Map</a>
-      <i class="fa fa-facebook-square"></i>
-      <i class="fa fa-twitter-square"></i>
-      <i class="fa fa-instagram"></i>
+    <div class="col-md-4" style="text-align: center">
+        <a class="footer-social-link" href="https://www.facebook.com/peerbuds"><i class="fa fa-facebook-square"></i></a>
+        <a class="footer-social-link" href="https://www.twitter.com/peerbuds"><i class="fa fa-twitter-square"></i></a>
+        <a class="footer-social-link" href="https://www.instagram.com/peerbuds"><i class="fa fa-instagram"></i></a>
+        <a class="footer-social-link" href="https://www.github.com/peerbuds"><i class="fa fa-github"></i></a>
+        <a class="footer-social-link" href="https://www.reddit.com/r/peerbuds"><i class="fa fa-reddit"></i></a>
+        <a class="footer-social-link" href="https://medium.com/@Peerbuds"><i class="fa fa-medium"></i></a>
+        <a class="footer-social-link" href="https://bitcointalk.org/index.php"><i class="fa fa-btc"></i></a>
+        <a class="footer-social-link" href="https://www.youtube.com/channel/UCu2wZg5_SDJJjlTXDI7OTcw"><i class="fa fa-youtube"></i></a>
+        <a class="footer-social-link" href="https://t.me/peerbuds"><i class="fa fa-telegram"></i></a>
+        <a class="footer-social-link" href="https://peerbudsofficial.slack.com"><i class="fa fa-slack"></i></a>
     </div>
+      <div class="col-md-4" style="text-align: end">
+          <a class="footer-link" href="/terms-of-service">Terms</a>
+          <a class="footer-link" href="/privacy-policy">Privacy</a>
+          <a class="footer-link" href="#">Site Map</a>
+      </div>
   </div>
-
 </footer>

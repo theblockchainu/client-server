@@ -36,7 +36,7 @@ export class AppFooterComponent implements OnInit {
       console.log(res);
       this.availableCurrencies = res;
     });
-    this.selectedCurrency = this._cookieUtilsService.getValue('currency');
+    this.selectedCurrency = this._cookieUtilsService.getValue('currency') && this._cookieUtilsService.getValue('currency').length > 0 ? this._cookieUtilsService.getValue('currency') : 'usd';
   }
 
   public updateCurrencyCookie() {

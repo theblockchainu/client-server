@@ -32,6 +32,11 @@ import { SessionModule } from './session/session.module';
 import { AppFooterModule } from './app-footer/app-footer.module';
 import * as Raven from 'raven-js';
 import { TransferHttpCacheModule } from '@nguniversal/common';
+import { CareerComponent } from './career/career.component';
+import { PressComponent } from './press/press.component';
+import { PolicyComponent } from './policy/policy.component';
+import { TrustComponent } from './trust/trust.component';
+import { DigestModule } from './digest/digest.module';
 
 
 /*Raven
@@ -62,7 +67,11 @@ export class RavenErrorHandler implements ErrorHandler {
     AboutUsComponent,
     WhitePaperComponent,
     PrivacyPolicyComponent,
-    TermsOfServiceComponent],
+    TermsOfServiceComponent,
+    CareerComponent,
+    PressComponent,
+    PolicyComponent,
+    TrustComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'peerbuds-client' }),
     CoreModule,

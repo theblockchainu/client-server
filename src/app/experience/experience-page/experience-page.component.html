@@ -15,7 +15,9 @@
     </div>
     <div class="row pending-actions center" *ngIf="(experience.status === 'draft' || experience.status === '' ) && userType==='teacher' ">
       <div class="col-md-10 col-md-offset-1">
-          <span>This is a preview. Submit your experience to get it approved. <a href="javascript:void(0);" (click)="_collectionService.openEditCollection(experience)">Continue editing?</a></span>
+        <span>This is a preview. Submit your experience to get it approved.
+          <a href="javascript:void(0);" (click)="_collectionService.openEditCollection(experience)">Continue editing?</a>
+        </span>
       </div>
     </div>
     <div class="row pending-actions center" *ngIf="(calendarId !== undefined && experience.status === 'active' && !hasCohortEnded() )">
@@ -45,7 +47,7 @@
         </span>
       </div>
     </div>
-      <div class="row pending-actions center" *ngIf="(userType === 'public' && userId !== undefined && userId.length > 5 && accountApproved !== 'true')">
+    <div class="row pending-actions center" *ngIf="(userType === 'public' && userId !== undefined && userId.length > 5 && accountApproved !== 'true')">
       <div class="col-md-10 col-md-offset-1">
         <span>Your account is still under review. You can sign-up for this experience after you are approved.
           <a href="javascript:void(0);" (click)="openVerificationPage()">Check verification status</a>
@@ -68,7 +70,7 @@
                 <a class="clickable margin-bottom-10" *ngIf="calendarId && userType !== 'participant'" (click)="backToCollection(experience)">
                   < Back to experience page</a>
                     <p class="mat-display-1" style="margin-bottom: 20px !important;">{{experience.title | titlecase}}
-                        <span *ngIf="calendarId && userType !== 'participant'">(Cohort View)</span>
+                      <span *ngIf="calendarId && userType !== 'participant'">(Cohort View)</span>
                     </p>
                     <div *ngIf="userType==='teacher' || userType==='participant'" style="margin-top: -12px;">
                       <span *ngIf="currentCalendar">
@@ -169,7 +171,7 @@
                     <div class="row">
                       <div class="col-md-12">
                         <div class="clickable" style="display: inline-block; position: relative; top: 2px; vertical-align: top;">
-                            <app-profile-popup [peer]="experience.owners[0]"></app-profile-popup>
+                          <app-profile-popup [peer]="experience.owners[0]"></app-profile-popup>
                         </div>
                         <div style="display: inline-block; margin-left: 10px;">
                           <div class="row">
@@ -210,11 +212,11 @@
                     </h3>
                   </div>
                   <div class="col-md-8 margin-top-8">
-                      <agm-map *ngIf="lat !== undefined && lng !== undefined" [latitude]="lat" [longitude]="lng" [mapDraggable]="false" [scrollwheel]="false" [usePanning]="true" [zoomControl]="false"
-                      [zoom]="14" [streetViewControl]="false">
+                    <agm-map *ngIf="lat !== undefined && lng !== undefined" [latitude]="lat" [longitude]="lng" [mapDraggable]="false" [scrollwheel]="false"
+                      [usePanning]="true" [zoomControl]="false" [zoom]="14" [streetViewControl]="false">
                       <agm-circle [latitude]="lat" [longitude]="lng" [radius]="500" [fillColor]="'#33bd9e'" [strokeColor]="'#33bd9e'" [strokeOpacity]="0.9"></agm-circle>
                     </agm-map>
-                      <p *ngIf="lat === undefined || lng === undefined">No valid location co-ordinates recorded for this experience. Please contact the teacher or Peerbuds support.</p>
+                    <p *ngIf="lat === undefined || lng === undefined">No valid location co-ordinates recorded for this experience. Please contact the teacher or Peerbuds support.</p>
                   </div>
                 </div>
               </div>
@@ -362,7 +364,7 @@
                         <md-icon style="color: #cccccc">more_vert</md-icon>
                       </button>
                       <md-menu #menuComment="mdMenu">
-                          <button *ngIf="userType==='participant' && !isMyComment(comment)" md-menu-item>
+                        <button *ngIf="userType==='participant' && !isMyComment(comment)" md-menu-item>
                           <md-icon>flag</md-icon>
                           <span>Flag</span>
                         </button>
@@ -443,7 +445,7 @@
                             <md-icon style="color: #cccccc;">more_vert</md-icon>
                           </button>
                           <md-menu #menuReply="mdMenu">
-                              <button *ngIf="userType==='participant' && !isMyComment(reply)" md-menu-item>
+                            <button *ngIf="userType==='participant' && !isMyComment(reply)" md-menu-item>
                               <md-icon>flag</md-icon>
                               <span>Flag</span>
                             </button>
@@ -516,12 +518,12 @@
                       <md-input-container class="full-width">
                         <input mdInput formControlName="description" placeholder="Describe your experience with this experience">
                       </md-input-container>
-                        <span mdTooltip="Have you given a star rating for this review?" [mdTooltipDisabled]="isRatingReceived" class="pull-right">
-                            <button [disabled]="!isRatingReceived || !reviewForm.valid" md-raised-button color="primary">
-                                <span *ngIf="!busyReview">Submit</span>
-                                <ngx-loading [show]="busyReview"></ngx-loading>
-                            </button>
-                        </span>
+                      <span mdTooltip="Have you given a star rating for this review?" [mdTooltipDisabled]="isRatingReceived" class="pull-right">
+                        <button [disabled]="!isRatingReceived || !reviewForm.valid" md-raised-button color="primary">
+                          <span *ngIf="!busyReview">Submit</span>
+                          <ngx-loading [show]="busyReview"></ngx-loading>
+                        </button>
+                      </span>
                     </form>
                   </div>
                 </div>
@@ -544,7 +546,7 @@
                                     <md-icon style="color: #cccccc;">more_vert</md-icon>
                                   </button>
                                   <md-menu #menuReply="mdMenu">
-                                      <button *ngIf="userType==='participant' && !isMyReview(review)" md-menu-item>
+                                    <button *ngIf="userType==='participant' && !isMyReview(review)" md-menu-item>
                                       <md-icon>flag</md-icon>
                                       <span>Flag</span>
                                     </button>
@@ -632,7 +634,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="clickable" style="display: inline-block; position: relative; top: 2px; vertical-align: top;">
-                      <app-profile-popup [peer]="experience.owners[0]"></app-profile-popup>
+                    <app-profile-popup [peer]="experience.owners[0]"></app-profile-popup>
                   </div>
                   <div style="display: inline-block; margin-left: 10px;">
                     <div class="row">
@@ -645,7 +647,7 @@
                         </span>
                       </div>
                       <div class="col-md-12 mat-h5" *ngIf="experience.owners[0].headline">
-                          {{experience.owners[0].profiles[0].headline | ucwords}}
+                        {{experience.owners[0].profiles[0].headline | ucwords}}
                       </div>
                       <div class="col-md-12 mat-h5" *ngIf="!experience.owners[0].headline">
                         New user
@@ -657,11 +659,11 @@
               <div class="row">
                 <div class="col-md-12">
                   <p>
-                      <span class="pre-wrapped">{{experience.aboutHost | shorten: maxLength : '... '}}</span>
-                      <span *ngIf="experience.aboutHost && experience.aboutHost.length > maxLength" (click)="showAll(experience.aboutHost.length)"
-                            style="color:#33bd9e" class="clickable">read more</span>
-                      <span *ngIf=" experience.aboutHost && experience.aboutHost.length>140  && experience.aboutHost.length <= maxLength" (click)="showAll(experience.aboutHost.length)"
-                            style="color:#33bd9e" class="clickable">show less</span>
+                    <span class="pre-wrapped">{{experience.aboutHost | shorten: maxLength : '... '}}</span>
+                    <span *ngIf="experience.aboutHost && experience.aboutHost.length > maxLength" (click)="showAll(experience.aboutHost.length)"
+                      style="color:#33bd9e" class="clickable">read more</span>
+                    <span *ngIf=" experience.aboutHost && experience.aboutHost.length>140  && experience.aboutHost.length <= maxLength" (click)="showAll(experience.aboutHost.length)"
+                      style="color:#33bd9e" class="clickable">show less</span>
                   </p>
                 </div>
               </div>
@@ -845,10 +847,11 @@
                     </div>
                   </div>
                   <div class="col-md-4" style="padding-top: 9px;">
-                    <span *ngIf="userId !== undefined && userId.length > 5" mdTooltip="Please wait for your account to be approved before signing up for experiences" [mdTooltipDisabled]="accountApproved === 'true'">
+                    <span *ngIf="userId !== undefined && userId.length > 5" mdTooltip="Please wait for your account to be approved before signing up for experiences"
+                      [mdTooltipDisabled]="accountApproved === 'true'">
                       <button md-raised-button (click)="selectJoiningDates()" color="primary" [disabled]="accountApproved !== 'true'">See Dates</button>
                     </span>
-                      <span *ngIf="userId === undefined || userId.length <= 5" mdTooltip="Create an account now to join this experience">
+                    <span *ngIf="userId === undefined || userId.length <= 5" mdTooltip="Create an account now to join this experience">
                       <button md-raised-button color="primary" [disabled]="true">See Dates</button>
                     </span>
                   </div>
@@ -877,7 +880,7 @@
         <!--SIMILAR EXPERIENCES-->
         <div class="row experience-suggestions" *ngIf="userType!=='teacher'">
           <div class="col-md-12">
-              <div class="row margin-bottom-20">
+            <div class="row margin-bottom-20">
               <div class="col-md-5">
                 <h3>Similar Experiences</h3>
               </div>

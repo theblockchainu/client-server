@@ -1,67 +1,67 @@
-import {Component, OnInit, Inject, OnDestroy} from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { AppConfig } from '../../../app.config';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {CommentService} from '../../../_services/comment/comment.service';
-import {CollectionService} from '../../../_services/collection/collection.service';
-import {CookieUtilsService} from '../../../_services/cookieUtils/cookie-utils.service';
-import {SocketService} from '../../../_services/socket/socket.service';
-import {Router} from '@angular/router';
-import {Ng2DeviceService} from 'ng2-device-detector';
-import {VgAPI} from 'videogular2/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommentService } from '../../../_services/comment/comment.service';
+import { CollectionService } from '../../../_services/collection/collection.service';
+import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
+import { SocketService } from '../../../_services/socket/socket.service';
+import { Router } from '@angular/router';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { VgAPI } from 'videogular2/core';
 import * as moment from 'moment';
 import { ContentService } from '../../../_services/content/content.service';
 
 @Component({
-  selector: 'app-content-video',
-  templateUrl: './content-video.component.html',
-  styleUrls: ['./content-video.component.scss']
+    selector: 'app-content-video',
+    templateUrl: './content-video.component.html',
+    styleUrls: ['./content-video.component.scss']
 })
 export class ContentVideoComponent implements OnInit, OnDestroy {
 
-  public userType = 'public';
-  public workshopId = '';
-  public chatForm: FormGroup;
-  public replyForm: FormGroup;
-  public replyingToCommentId: string;
-  public comments: Array<any>;
-  public userId;
-  public startedView;
-  api: VgAPI;
-  public attachmentUrls = [];
-  public duration = 0;
+    public userType = 'public';
+    public workshopId = '';
+    public chatForm: FormGroup;
+    public replyForm: FormGroup;
+    public replyingToCommentId: string;
+    public comments: Array<any>;
+    public userId;
+    public startedView;
+    api: VgAPI;
+    public attachmentUrls = [];
+    public duration = 0;
 
-  constructor(
-    public config: AppConfig,
-    @Inject(MD_DIALOG_DATA) public data: any,
-    public _collectionService: CollectionService,
-    public dialogRef: MdDialogRef<ContentVideoComponent>,
-    private _fb: FormBuilder,
-    private _commentService: CommentService,
-    private cookieUtilsService: CookieUtilsService,
-    private _socketService: SocketService,
-    private router: Router,
-    private deviceService: Ng2DeviceService,
-    private contentService: ContentService
-  ) {
-      this.userType = data.userType;
-      this.workshopId = data.collectionId;
-      this.userId = cookieUtilsService.getValue('userId');
-      this.data.content.supplementUrls.forEach(file => {
-        this.contentService.getMediaObject(file).subscribe((res) => {
-            this.attachmentUrls.push(res[0]);
+    constructor(
+        public config: AppConfig,
+        @Inject(MD_DIALOG_DATA) public data: any,
+        public _collectionService: CollectionService,
+        public dialogRef: MdDialogRef<ContentVideoComponent>,
+        private _fb: FormBuilder,
+        private _commentService: CommentService,
+        private cookieUtilsService: CookieUtilsService,
+        private _socketService: SocketService,
+        private router: Router,
+        private deviceService: DeviceDetectorService,
+        private contentService: ContentService
+    ) {
+        this.userType = data.userType;
+        this.workshopId = data.collectionId;
+        this.userId = cookieUtilsService.getValue('userId');
+        this.data.content.supplementUrls.forEach(file => {
+            this.contentService.getMediaObject(file).subscribe((res) => {
+                this.attachmentUrls.push(res[0]);
+            });
         });
-      });
-  }
+    }
 
-  ngOnInit() {
-      this.initializeForms();
-      this.getDiscussions();
-  }
+    ngOnInit() {
+        this.initializeForms();
+        this.getDiscussions();
+    }
 
-  ngOnDestroy() {
+    ngOnDestroy() {
 
-  }
+    }
 
     private initializeForms() {
         this.chatForm = this._fb.group({
@@ -145,10 +145,10 @@ export class ContentVideoComponent implements OnInit, OnDestroy {
         this._commentService.addCommentUpvote(comment.id, {}).subscribe(
             response => {
                 if (comment.upvotes !== undefined) {
-                    comment.upvotes.push(response );
+                    comment.upvotes.push(response);
                 } else {
                     comment.upvotes = [];
-                    comment.upvotes.push(response );
+                    comment.upvotes.push(response);
                 }
             }, err => {
                 console.log(err);
@@ -160,10 +160,10 @@ export class ContentVideoComponent implements OnInit, OnDestroy {
         this._commentService.addReplyUpvote(reply.id, {}).subscribe(
             response => {
                 if (reply.upvotes !== undefined) {
-                    reply.upvotes.push(response );
+                    reply.upvotes.push(response);
                 } else {
                     reply.upvotes = [];
-                    reply.upvotes.push(response );
+                    reply.upvotes.push(response);
                 }
             }, err => {
                 console.log(err);

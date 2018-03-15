@@ -6,7 +6,7 @@ import { ProjectSubmissionService } from '../../../_services/project-submission/
 import * as moment from 'moment';
 import { ContentService } from '../../../_services/content/content.service';
 import { VgAPI } from 'videogular2/core';
-import { Ng2DeviceService } from 'ng2-device-detector';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { Router } from '@angular/router';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 import { SocketService } from '../../../_services/socket/socket.service';
@@ -36,7 +36,7 @@ export class ContentProjectComponent implements OnInit {
     public dialogRef: MdDialogRef<ContentProjectComponent>,
     public projectSubmissionService: ProjectSubmissionService,
     private contentService: ContentService,
-    private deviceService: Ng2DeviceService,
+    private deviceService: DeviceDetectorService,
     private router: Router,
     private cookieUtilsService: CookieUtilsService,
     private _socketService: SocketService,

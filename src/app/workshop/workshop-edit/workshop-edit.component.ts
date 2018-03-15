@@ -55,10 +55,10 @@ export class WorkshopEditComponent implements OnInit {
   public phoneDetails: FormGroup;
 
   public supplementUrls = new FormArray([]);
-  private uploadingImage = false;
-  private uploadingVideo = false;
+  public uploadingImage = false;
+  public uploadingVideo = false;
 
-  private workshopId: string;
+  public workshopId: string;
   public workshopData: any;
   public isWorkShopActive = false;
   public activeWorkshop = '';
@@ -232,7 +232,7 @@ export class WorkshopEditComponent implements OnInit {
     this.phoneDetails = this._fb.group({
       phoneNo: '',
       inputOTP: '',
-        countryCode: ''
+      countryCode: ''
     });
 
     this.initializeFormFields();

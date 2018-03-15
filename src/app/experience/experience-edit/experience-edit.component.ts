@@ -54,10 +54,10 @@ export class ExperienceEditComponent implements OnInit {
   public paymentInfo: FormGroup;
 
   public supplementUrls = new FormArray([]);
-  private uploadingImage = false;
-  private uploadingVideo = false;
+  public uploadingImage = false;
+  public uploadingVideo = false;
 
-  private experienceId: string;
+  public experienceId: string;
   public experienceData: any;
   public isExperienceActive = false;
   public activeExperience = '';
@@ -228,7 +228,7 @@ export class ExperienceEditComponent implements OnInit {
     this.phoneDetails = this._fb.group({
       phoneNo: '',
       inputOTP: '',
-        countryCode: ''
+      countryCode: ''
     });
 
     this.paymentInfo = this._fb.group({
@@ -618,7 +618,7 @@ export class ExperienceEditComponent implements OnInit {
 
     if (res.owners[0].profiles[0].phone_numbers && res.owners[0].profiles[0].phone_numbers.length) {
       this.phoneDetails.controls.phoneNo.patchValue(res.owners[0].profiles[0].phone_numbers[0].subscriber_number);
-        this.phoneDetails.controls.countryCode.patchValue(res.owners[0].profiles[0].phone_numbers[0].country_code);
+      this.phoneDetails.controls.countryCode.patchValue(res.owners[0].profiles[0].phone_numbers[0].country_code);
     }
     if (!this.timeline.controls.calendar.value.startDate || !this.timeline.controls.calendar.value.endDate) {
       this.makeDatesEditable();
@@ -798,13 +798,13 @@ export class ExperienceEditComponent implements OnInit {
     } else {
       console.log('No date selected or no content added to itinerary! - ' + JSON.stringify(itinerary));
       if (!itinerary || itinerary.length === 0) {
-          this.snackBar.open('You need to add at least 1 activity to your experience to proceed.', 'Close', {
-              duration: 900
-          });
+        this.snackBar.open('You need to add at least 1 activity to your experience to proceed.', 'Close', {
+          duration: 900
+        });
       } else {
-          this.snackBar.open('No dates have been selected for your experience.', 'Close', {
-              duration: 900
-          });
+        this.snackBar.open('No dates have been selected for your experience.', 'Close', {
+          duration: 900
+        });
       }
     }
   }
@@ -1087,7 +1087,7 @@ export class ExperienceEditComponent implements OnInit {
       .subscribe((res) => {
         this.otpSent = true;
         this.phoneDetails.controls.phoneNo.disable();
-          this.phoneDetails.controls.countryCode.disable();
+        this.phoneDetails.controls.countryCode.disable();
         element.textContent = 'Verification code sent';
       });
   }

@@ -61,8 +61,8 @@ export class SessionEditComponent implements OnInit {
   public profileForm: FormGroup;
 
   public supplementUrls = new FormArray([]);
-  private uploadingImage = false;
-  private uploadingVideo = false;
+  public uploadingImage = false;
+  public uploadingVideo = false;
 
   private sessionId: string;
   public sessionData: any;

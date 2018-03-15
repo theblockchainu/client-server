@@ -54,10 +54,10 @@ export class CommunityEditComponent implements OnInit {
   public paymentInfo: FormGroup;
 
   public supplementUrls = new FormArray([]);
-  private uploadingImage = false;
-  private uploadingVideo = false;
+  public uploadingImage = false;
+  public uploadingVideo = false;
 
-  private communityId: string;
+  public communityId: string;
   public communityData: any;
   public isWorkShopActive = false;
   public activeCommunity = '';
@@ -225,7 +225,7 @@ export class CommunityEditComponent implements OnInit {
     this.phoneDetails = this._fb.group({
       phoneNo: '',
       inputOTP: '',
-        countryCode: ''
+      countryCode: ''
     });
 
     this.paymentInfo = this._fb.group({
@@ -466,8 +466,8 @@ export class CommunityEditComponent implements OnInit {
           }
 
         },
-        err => console.log('error'),
-        () => console.log('Completed!'));
+          err => console.log('error'),
+          () => console.log('Completed!'));
 
     } else {
       console.log('NO COLLECTION');
@@ -1047,11 +1047,11 @@ export class CommunityEditComponent implements OnInit {
         });
         this.step++;
       },
-      (error) => {
-        this.snackBar.open(error.message, 'close', {
-          duration: 500
+        (error) => {
+          this.snackBar.open(error.message, 'close', {
+            duration: 500
+          });
         });
-      });
   }
 
   takeToPayment() {

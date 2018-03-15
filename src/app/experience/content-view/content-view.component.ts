@@ -24,7 +24,7 @@ export class ContentViewComponent implements OnInit {
   @Input()
   public itenaryForm: FormGroup;
   @Input()
-  public itenaryId: Number;
+  public itenaryId: number;
   @Input()
   public selectedItineraryDates: any;
   @Input()

@@ -86,16 +86,22 @@ export class AuthenticationService {
   */
   logout(): void {
     if (this.getCookie(this.key)) {
+      console.log(this.options);
       this.http.get(this.config.apiUrl + '/auth/logout', this.options)
-        .map((res: any) => {
-          console.log('Logged out from server');
-          this.removeCookie(this.key);
-          this.removeCookie('userId');
-          this.removeCookie('accountApproved');
-          this.isLoginSubject.next(false);
-          this.getLoggedInUser.emit(0);
-          this.router.navigate(['/']);
-        }).subscribe();
+        .subscribe(
+          (res: any) => {
+            console.log(res);
+            console.log('Logged out from server');
+            this.removeCookie(this.key);
+            this.removeCookie('userId');
+            this.removeCookie('accountApproved');
+            this.isLoginSubject.next(false);
+            this.getLoggedInUser.emit(0);
+            this.router.navigate(['/']);
+          }, err => {
+            console.log(err);
+          }
+        );
     }
   }
 

@@ -5,7 +5,8 @@
         <hr>
         <div style="margin-top: -36px; width: fit-content; background-color: #fff; margin-left: auto; margin-right: auto; padding: 0px 20px;">
           <md-icon>wb_sunny</md-icon>
-          <input mdInput [mdDatepicker]="startDatePicker" formControlName="date" [hidden]="true" [min]="collectionStartDate" [max]="collectionEndDate" [mdDatepickerFilter]="datePickerFilter">
+          <input mdInput [mdDatepicker]="startDatePicker" formControlName="date" [hidden]="true" [min]="collectionStartDate" [max]="collectionEndDate"
+            [mdDatepickerFilter]="datePickerFilter">
           <a *ngIf="!itenaryForm.value.date" style="cursor: pointer; float: right; margin: -2px 0 0 10px;font-size:16px;border-bottom:1px dotted gray;"
             (click)="startDatePicker.open()">({{showItineraryDate(itenaryForm.value.date)}})</a>
           <a *ngIf="itenaryForm.value.date" style="float: right; margin: -2px 0 0 10px;font-size:16px;border-bottom:1px dotted gray;">({{itenaryForm.value.date| date}})</a>
@@ -33,11 +34,11 @@
   <div *ngIf="itenaryForm.value.date">
     <div class="col-md-10" style="padding-left: 0px;">
       <div formArrayName="contents">
-        <div class="selected-content-label title" *ngIf="itenaryForm.controls.contents.controls.length > 0">
+        <div class="selected-content-label title" *ngIf="itenaryForm.controls['contents'].controls.length > 0">
           Activities scheduled
         </div>
         <md-list style="margin-left: 0px">
-          <md-list-item *ngFor="let Content of itenaryForm.controls.contents.controls; let i=index" style="margin: 20px 0px; padding: 0px 0px; height: fit-content;">
+          <md-list-item *ngFor="let Content of itenaryForm.controls['contents'].controls; let i=index" style="margin: 20px 0px; padding: 0px 0px; height: fit-content;">
             <div class="col-md-3" style="padding-left: 0px; margin-right: 10px;" (click)="findAndOpenDialog(i)">
               <img *ngIf="!Content.value.imageUrl" src="/assets/images/placeholder-image.jpg" style="width: 140px;">
               <img *ngIf="Content.value.imageUrl  && Content.value.type !== 'video'" src="{{config.apiUrl + Content.value.imageUrl}}" (error)="imgErrorHandler($event)"
@@ -53,9 +54,9 @@
               <div *ngIf="Content.value.type === 'online' || Content.value.type === 'in-person'" class="content-subtitle">{{getContentTimeRange(Content)}}</div>
               <div *ngIf="Content.value.type === 'project'" class="content-subtitle">Deadline: {{getDeadline(Content)}}</div>
               <div *ngIf="Content.value.type === 'in-person'" class="content-subtitle">
-                  <span *ngIf="Content.controls.location.controls.apt_suite.value">#{{Content.controls.location.controls.apt_suite.value}} </span>
-                  <span *ngIf="Content.controls.location.controls.street_address.value">{{Content.controls.location.controls.street_address.value}}, </span>
-                  <span *ngIf="Content.controls.location.controls.city.value">{{Content.controls.location.controls.city.value}}</span>
+                <span *ngIf="Content.controls.location.controls.apt_suite.value">#{{Content.controls.location.controls.apt_suite.value}} </span>
+                <span *ngIf="Content.controls.location.controls.street_address.value">{{Content.controls.location.controls.street_address.value}}, </span>
+                <span *ngIf="Content.controls.location.controls.city.value">{{Content.controls.location.controls.city.value}}</span>
               </div>
               <span></span>
               <div class="content-type subtitle">{{_collectionService.getContentTypeFullName(Content.value.type) | titlecase }}</div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, Renderer2 } from '@angular/core';
 import { AppConfig } from '../../app.config';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { DialogsService } from '../../_services/dialogs/dialog.service';
 import { Router } from '@angular/router';
 @Component({
@@ -13,10 +13,10 @@ export class ProfilePopupComponent implements OnInit {
   @Input() peer: any;
   @ViewChild('profilePic') profilePic;
 
-  private dialogref: MdDialogRef<any>;
+  private dialogref: MatDialogRef<any>;
 
   constructor(public config: AppConfig,
-    public dialog: MdDialog,
+    public dialog: MatDialog,
     private _dialogsService: DialogsService,
     private _router: Router
   ) { }

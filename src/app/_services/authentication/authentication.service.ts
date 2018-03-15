@@ -20,10 +20,10 @@ export class AuthenticationService {
 
   public key = 'access_token';
   private options;
-  private userId;
+  public userId;
   isLoginSubject = new BehaviorSubject<boolean>(this.hasToken());
 
-  constructor(private http: HttpClient, private config: AppConfig,
+  constructor(private http: HttpClient, public config: AppConfig,
     private _cookieService: CookieService,
     private _cookieUtilsService: CookieUtilsService,
     private route: ActivatedRoute,
@@ -62,7 +62,7 @@ export class AuthenticationService {
     // this.isLoginSubject.next(true);
     const body = `{"email":"${email}","password":"${password}","rememberMe":${rememberMe}}`;
     return this.http
-      .post(this.config.apiUrl + '/auth/local', body, this.options)
+      .post(this.config.apiUrl + '/auth/local', body)
       .map((response: any) => {
         // if res code is xxx and response "error"
         // login successful if there's a jwt token in the response
@@ -86,16 +86,22 @@ export class AuthenticationService {
   */
   logout(): void {
     if (this.getCookie(this.key)) {
+      console.log(this.options);
       this.http.get(this.config.apiUrl + '/auth/logout', this.options)
-        .map((res: any) => {
-          console.log('Logged out from server');
-          this.removeCookie(this.key);
-          this.removeCookie('userId');
-          this.removeCookie('accountApproved');
-          this.isLoginSubject.next(false);
-          this.getLoggedInUser.emit(0);
-          this.router.navigate(['/']);
-        }).subscribe();
+        .subscribe(
+          (res: any) => {
+            console.log(res);
+            console.log('Logged out from server');
+            this.removeCookie(this.key);
+            this.removeCookie('userId');
+            this.removeCookie('accountApproved');
+            this.isLoginSubject.next(false);
+            this.getLoggedInUser.emit(0);
+            this.router.navigate(['/']);
+          }, err => {
+            console.log(err);
+          }
+        );
     }
   }
 

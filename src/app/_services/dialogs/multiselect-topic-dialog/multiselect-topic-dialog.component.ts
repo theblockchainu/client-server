@@ -2,7 +2,7 @@ import {
   Component, OnInit, Input, forwardRef, ElementRef, Inject, EventEmitter
   , HostBinding, HostListener, Output
 } from '@angular/core';
-import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import {
   FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR
   , NG_VALIDATORS, Validator
@@ -90,8 +90,8 @@ export class MultiselectTopicDialogComponent implements OnInit {
   constructor(myElement: ElementRef,
     private http: HttpClient,
     public requestHeaderService: RequestHeaderService,
-    public dialogRef: MdDialogRef<MultiselectTopicDialogComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any
+    public dialogRef: MatDialogRef<MultiselectTopicDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.elementRef = myElement;
     this.options = requestHeaderService.getOptions();

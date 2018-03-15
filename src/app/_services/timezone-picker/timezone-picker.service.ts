@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class TimezonePickerService {
 
-  constructor(private http: HttpClient, private config: AppConfig) {
+  constructor(private http: HttpClient, public config: AppConfig) {
   }
 
   public getTimezones(filter: string) {

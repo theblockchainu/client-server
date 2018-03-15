@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 @Component({
   selector: 'app-id-policy-dialog',
   templateUrl: './id-policy-dialog.component.html',
@@ -9,8 +9,8 @@ export class IdPolicyDialogComponent implements OnInit {
 
   public action;
 
-  constructor(public dialogRef: MdDialogRef<IdPolicyDialogComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any) { }
+  constructor(public dialogRef: MatDialogRef<IdPolicyDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
   }

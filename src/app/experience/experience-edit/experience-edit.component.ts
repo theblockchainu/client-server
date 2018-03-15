@@ -16,7 +16,7 @@ import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.ser
 import { AppConfig } from '../../app.config';
 import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
 import * as _ from 'lodash';
-import { MdDialog, MdSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { LeftSidebarService } from '../../_services/left-sidebar/left-sidebar.service';
 
 import { DialogsService } from '../../_services/dialogs/dialog.service';
@@ -54,10 +54,10 @@ export class ExperienceEditComponent implements OnInit {
   public paymentInfo: FormGroup;
 
   public supplementUrls = new FormArray([]);
-  private uploadingImage = false;
-  private uploadingVideo = false;
+  public uploadingImage = false;
+  public uploadingVideo = false;
 
-  private experienceId: string;
+  public experienceId: string;
   public experienceData: any;
   public isExperienceActive = false;
   public activeExperience = '';
@@ -145,10 +145,10 @@ export class ExperienceEditComponent implements OnInit {
     public _collectionService: CollectionService,
     private mediaUploader: MediaUploaderService,
     public requestHeaderService: RequestHeaderService,
-    private dialog: MdDialog,
+    private dialog: MatDialog,
     private _leftSideBarService: LeftSidebarService,
     private dialogsService: DialogsService,
-    private snackBar: MdSnackBar,
+    private snackBar: MatSnackBar,
     private _cookieUtilsService: CookieUtilsService,
     private _topicService: TopicService,
     private _paymentService: PaymentService,
@@ -228,7 +228,7 @@ export class ExperienceEditComponent implements OnInit {
     this.phoneDetails = this._fb.group({
       phoneNo: '',
       inputOTP: '',
-        countryCode: ''
+      countryCode: ''
     });
 
     this.paymentInfo = this._fb.group({
@@ -261,7 +261,7 @@ export class ExperienceEditComponent implements OnInit {
 
       if (this.experienceData.status === 'active') {
         this.isExperienceActive = true;
-        this.activeExperience = 'disabledMD';
+        this.activeExperience = 'disabledMAT';
       }
       this.timeline.controls.calendar.patchValue(calendar);
       this.initializeContentForm(res);
@@ -618,7 +618,7 @@ export class ExperienceEditComponent implements OnInit {
 
     if (res.owners[0].profiles[0].phone_numbers && res.owners[0].profiles[0].phone_numbers.length) {
       this.phoneDetails.controls.phoneNo.patchValue(res.owners[0].profiles[0].phone_numbers[0].subscriber_number);
-        this.phoneDetails.controls.countryCode.patchValue(res.owners[0].profiles[0].phone_numbers[0].country_code);
+      this.phoneDetails.controls.countryCode.patchValue(res.owners[0].profiles[0].phone_numbers[0].country_code);
     }
     if (!this.timeline.controls.calendar.value.startDate || !this.timeline.controls.calendar.value.endDate) {
       this.makeDatesEditable();
@@ -798,13 +798,13 @@ export class ExperienceEditComponent implements OnInit {
     } else {
       console.log('No date selected or no content added to itinerary! - ' + JSON.stringify(itinerary));
       if (!itinerary || itinerary.length === 0) {
-          this.snackBar.open('You need to add at least 1 activity to your experience to proceed.', 'Close', {
-              duration: 900
-          });
+        this.snackBar.open('You need to add at least 1 activity to your experience to proceed.', 'Close', {
+          duration: 900
+        });
       } else {
-          this.snackBar.open('No dates have been selected for your experience.', 'Close', {
-              duration: 900
-          });
+        this.snackBar.open('No dates have been selected for your experience.', 'Close', {
+          duration: 900
+        });
       }
     }
   }
@@ -1087,7 +1087,7 @@ export class ExperienceEditComponent implements OnInit {
       .subscribe((res) => {
         this.otpSent = true;
         this.phoneDetails.controls.phoneNo.disable();
-          this.phoneDetails.controls.countryCode.disable();
+        this.phoneDetails.controls.countryCode.disable();
         element.textContent = 'Verification code sent';
       });
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CollectionService } from '../../collection/collection.service';
 import { AppConfig } from '../../../app.config';
 @Component({
@@ -11,8 +11,8 @@ export class ProfilePopupCardComponent implements OnInit {
 
   public userRating: any;
   public ownedCollections = [];
-  constructor(public dialogRef: MdDialogRef<ProfilePopupCardComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any,
+  constructor(public dialogRef: MatDialogRef<ProfilePopupCardComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     public _collectionService: CollectionService,
     public _config: AppConfig) { }
 

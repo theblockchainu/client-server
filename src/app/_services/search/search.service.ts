@@ -10,7 +10,7 @@ export class SearchService {
 
     constructor(private router: Router,
         private http: HttpClient,
-        private config: AppConfig) {
+        public config: AppConfig) {
     }
 
 

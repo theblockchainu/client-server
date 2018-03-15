@@ -1,12 +1,12 @@
-<div class="dialog-container" md-dialog-content>
+<div class="dialog-container" mat-dialog-content>
     <div class="mat-dialog-focus-trap"></div>
     <form [formGroup]="recurring">
         <div class="row margin-bottom-10" style="margin-left:0px">
-            <button md-button class="col-md-1 mat-icon-button dialog-close-button" type="button" (click)="addDeleteEvents()">
-                <md-icon class="mat-icon material-icons mat-icon-small">close</md-icon>
+            <button mat-button class="col-md-1 mat-icon-button dialog-close-button" type="button" (click)="addDeleteEvents()">
+                <mat-icon class="mat-icon material-icons mat-icon-small">close</mat-icon>
             </button>
             <div class="col-md-4">
-                <h3 md-dialog-title>Add more cohorts your {{ duration }} day workshop</h3>
+                <h3 mat-dialog-title>Add more cohorts your {{ duration }} day workshop</h3>
                 <div>
                 <span>You have
                     <b>{{calendars.length}}</b> existing cohorts</span> &emsp;
@@ -28,7 +28,7 @@
             <div class="row margin-bottom-20 wrapper">
                 <div class="col-md-5 right-border leftContent">
                     <p class="mat-caption" *ngIf="calendars.length === 1">
-                        <md-icon style="vertical-align:sub;font-size: 16px;">info</md-icon>
+                        <mat-icon style="vertical-align:sub;font-size: 16px;">info</mat-icon>
                         Your first cohort was automatically created when this Workshop was approved. You can add more Cohorts to your workshop at
                         any time.
                     </p>
@@ -36,57 +36,57 @@
                     <label *ngIf="calendars.length > 0">After your last existing cohort ends, the next cohort starts...</label>
                     <br>
                     <br>
-                    <md-radio-group class="repeat-workshop-group" formControlName="repeatWorkshopGroupOption" (change)="repeatFrequency($event.value)">
-                        <md-radio-button class="repeat-workshop-button margin-bottom-10" value="immediate">
+                    <mat-radio-group class="repeat-workshop-group" formControlName="repeatWorkshopGroupOption" (change)="repeatFrequency($event.value)">
+                        <mat-radio-button class="repeat-workshop-button margin-bottom-10" value="immediate">
                             <span>Immediately</span>
-                        </md-radio-button>
-                        <md-radio-button class="repeat-workshop-button margin-bottom-10" value="days">
+                        </mat-radio-button>
+                        <mat-radio-button class="repeat-workshop-button margin-bottom-10" value="days">
                             <span class="valignMiddle">after</span>
                             &nbsp;&nbsp;
-                            <md-select formControlName="days" class="widthDays padding-top-0" (change)="computeDays($event.value)">
-                                <md-option *ngFor="let day of daysOption" [value]="day">{{day}}</md-option>
-                            </md-select>
+                            <mat-select formControlName="days" class="widthDays padding-top-0" (change)="computeDays($event.value)">
+                                <mat-option *ngFor="let day of daysOption" [value]="day">{{day}}</mat-option>
+                            </mat-select>
                             <span class="valignMiddle">&nbsp;&nbsp;days</span>
-                        </md-radio-button>
-                        <md-radio-button class="repeat-workshop-button margin-bottom-10" value="weekdays">
+                        </mat-radio-button>
+                        <mat-radio-button class="repeat-workshop-button margin-bottom-10" value="weekdays">
                             <span class="valignMiddle">from the next</span>
                             &nbsp;&nbsp;
-                            <md-select formControlName="weekdays" class="padding-top-0" (change)="computeWeekday($event.value)">
-                                <md-option *ngFor="let day of weekDayOption" [value]="day.value">{{day.text}}</md-option>
-                            </md-select>
-                        </md-radio-button>
-                    </md-radio-group>
+                            <mat-select formControlName="weekdays" class="padding-top-0" (change)="computeWeekday($event.value)">
+                                <mat-option *ngFor="let day of weekDayOption" [value]="day.value">{{day.text}}</mat-option>
+                            </mat-select>
+                        </mat-radio-button>
+                    </mat-radio-group>
                     <div class="margin-top-40 flex-column">
                         <label>It will continue repeating up to..</label>
                         <br>
-                        <md-radio-group class="repeat-workshop-group" formControlName="repeatTillOption" (change)="repeatTill($event.value)">
-                            <md-radio-button class="repeat-workshop-button margin-bottom-10" value="daysRepeat">
+                        <mat-radio-group class="repeat-workshop-group" formControlName="repeatTillOption" (change)="repeatTill($event.value)">
+                            <mat-radio-button class="repeat-workshop-button margin-bottom-10" value="daysRepeat">
                                 &nbsp;&nbsp;
-                                <md-select formControlName="daysRepeat" class="widthDays padding-top-0" (change)="repeatTillTrigger()">
-                                    <md-option *ngFor="let day of daysOption" [value]="day">{{day}}</md-option>
-                                </md-select>
+                                <mat-select formControlName="daysRepeat" class="widthDays padding-top-0" (change)="repeatTillTrigger()">
+                                    <mat-option *ngFor="let day of daysOption" [value]="day">{{day}}</mat-option>
+                                </mat-select>
                                 <span class="valignMiddle">&nbsp;&nbsp;more sessions</span>
-                            </md-radio-button>
-                            <md-radio-button class="repeat-workshop-button margin-bottom-10" value="monthsRepeat">
+                            </mat-radio-button>
+                            <mat-radio-button class="repeat-workshop-button margin-bottom-10" value="monthsRepeat">
                                 &nbsp;&nbsp;
-                                <md-select formControlName="monthsRepeat" class="widthDays padding-top-0" (change)="repeatTillTrigger()">
-                                    <md-option *ngFor="let month of monthOption" [value]="month">{{month}}</md-option>
-                                </md-select>
+                                <mat-select formControlName="monthsRepeat" class="widthDays padding-top-0" (change)="repeatTillTrigger()">
+                                    <mat-option *ngFor="let month of monthOption" [value]="month">{{month}}</mat-option>
+                                </mat-select>
                                 <span class="valignMiddle">&nbsp;&nbsp;more months</span>
-                            </md-radio-button>
-                            <md-radio-button class="repeat-workshop-button margin-bottom-10" value="dateRepeat">
+                            </mat-radio-button>
+                            <mat-radio-button class="repeat-workshop-button margin-bottom-10" value="dateRepeat">
                                 <span class="valignMiddle">the date</span>
                                 &nbsp;&nbsp;
-                                <md-input-container>
-                                    <input mdInput [min]="minDate" [mdDatepicker]="dateRepeat" formControlName="dateRepeat" (change)="repeatTillTrigger()">
-                                    <md-datepicker-toggle mdSuffix [for]="dateRepeat"></md-datepicker-toggle>
-                                </md-input-container>
-                                <md-datepicker #dateRepeat></md-datepicker>
-                            </md-radio-button>
-                        </md-radio-group>
+                                <mat-input-container>
+                                    <input matInput [min]="minDate" [matDatepicker]="dateRepeat" formControlName="dateRepeat" (change)="repeatTillTrigger()">
+                                    <mat-datepicker-toggle matSuffix [for]="dateRepeat"></mat-datepicker-toggle>
+                                </mat-input-container>
+                                <mat-datepicker #dateRepeat></mat-datepicker>
+                            </mat-radio-button>
+                        </mat-radio-group>
                         <div class="margin-top-20">
-                        <span mdTooltip="Solve Conflicts!" [mdTooltipDisabled]="recurringCount !== 0 && (computedConflict.length <= 0 || acceptConflicts)">
-                            <button md-raised-button color="primary" (click)="saveCalendar()" [disabled]="recurringCount == 0 || (computedConflict.length > 0 && !acceptConflicts)">Save Workshop Batches</button>
+                        <span matTooltip="Solve Conflicts!" [matTooltipDisabled]="recurringCount !== 0 && (computedConflict.length <= 0 || acceptConflicts)">
+                            <button mat-raised-button color="primary" (click)="saveCalendar()" [disabled]="recurringCount == 0 || (computedConflict.length > 0 && !acceptConflicts)">Save Workshop Batches</button>
                         </span>
 
                         </div>
@@ -102,7 +102,7 @@
                                     <br/> existing calendar events.</label>
                             </div>
                             <div class="margin-top-20 margin-bottom-20">
-                                <button md-button class="mat-border-button" color="primary" (click)="viewConflict()">View Conflict</button>
+                                <button mat-button class="mat-border-button" color="primary" (click)="viewConflict()">View Conflict</button>
                             </div>
                         </div>
                         <p-accordion (onOpen)="onTabOpen($event)" (onClose)="onTabClose($event)">
@@ -160,12 +160,12 @@
                             <span class="flex"></span>
 
                             <div class="prevNext">
-                            <button md-button class="mat-icon-button" type="button" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
-                                <md-icon class="" aria-hidden="true">chevron_left</md-icon>
+                            <button mat-button class="mat-icon-button" type="button" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+                                <mat-icon class="" aria-hidden="true">chevron_left</mat-icon>
                             </button>
 
-                            <button md-button class="mat-icon-button" type="button" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
-                                <md-icon class="" aria-hidden="true">chevron_right</md-icon>
+                            <button mat-button class="mat-icon-button" type="button" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+                                <mat-icon class="" aria-hidden="true">chevron_right</mat-icon>
                             </button>
                             </div>
                         </div>

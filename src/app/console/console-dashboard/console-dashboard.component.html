@@ -14,11 +14,15 @@
       </div>
       <div class="row margin-top-20">
         <div class="col-md-12" style="text-align: justify">
-          Peerbuds believes in celebrating individuality in learning and teaching without isolating the experience of learning. We believe that community creates comfort and relieves the many anxieties associated with conventional models of learning.
-          <br><br>
-          By cultivating a safe and passionate learning community we can achieve a higher level of understanding one another and the world around us. We are all seekers of intellect and our solution should amplify the human urge to uncover the unknown together.
-          <br><br>
-          We want to help teachers and students attain 'Unconventional Wisdom' and learn from one another without the hierarchy of current systems.
+          Peerbuds believes in celebrating individuality in learning and teaching without isolating the experience of learning. We
+          believe that community creates comfort and relieves the many anxieties associated with conventional models of learning.
+          <br>
+          <br> By cultivating a safe and passionate learning community we can achieve a higher level of understanding one another
+          and the world around us. We are all seekers of intellect and our solution should amplify the human urge to uncover
+          the unknown together.
+          <br>
+          <br> We want to help teachers and students attain 'Unconventional Wisdom' and learn from one another without the hierarchy
+          of current systems.
         </div>
       </div>
       <hr style="margin-top: 30px;">
@@ -33,22 +37,22 @@
           <ng-template #topicName>{{collection.topics[0].name | titlecase}}</ng-template>
           <ng-template #noTopicText>No Topics</ng-template>
           <div class="col-md-5" style="margin-top: 20px;" *ngSwitchCase="'active'">
-            <md-card style="text-align: center; padding: 20px;">
-              <md-card-content>
+            <mat-card style="text-align: center; padding: 20px;">
+              <mat-card-content>
                 <div style="text-align: right">
                   <div class="pull-right">
-                    <a [mdMenuTriggerFor]="ongoingCardMenu" style="text-align: right; padding: 0px">
-                      <md-icon>more_vert</md-icon>
+                    <a [matMenuTriggerFor]="ongoingCardMenu" style="text-align: right; padding: 0px">
+                      <mat-icon>more_vert</mat-icon>
                     </a>
                   </div>
                 </div>
                 <div style="text-align: center">
                   <div class="pull-left">
-                    <md-chip-list class="cardTypeChip">
-                      <md-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'workshop'">Workshop</md-chip>
-                      <md-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'experience'">Experience</md-chip>
-                      <md-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'session'">Session</md-chip>
-                    </md-chip-list>
+                    <mat-chip-list class="cardTypeChip">
+                      <mat-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'workshop'">Workshop</mat-chip>
+                      <mat-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'experience'">Experience</mat-chip>
+                      <mat-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'session'">Session</mat-chip>
+                    </mat-chip-list>
                   </div>
                 </div>
                 <div class="collectionParticipantImageCarousel">
@@ -57,14 +61,14 @@
                   </div>
                 </div>
                 <div class="teacherName">
-                      <span class="mat-body-1 clickable" (click)="openProfile(collection.owners[0].id)">{{collection.owners[0].profiles[0].first_name + ' ' + collection.owners[0].profiles[0].last_name}}
-                      </span>
+                  <span class="mat-body-1 clickable" (click)="openProfile(collection.owners[0].id)">{{collection.owners[0].profiles[0].first_name + ' ' + collection.owners[0].profiles[0].last_name}}
+                  </span>
                 </div>
                 <div class="teacherHeadline">
                   <span>{{collection.owners[0].profiles[0].headline}} </span>
                 </div>
                 <div class="collectionTitle mat-body-2 clickable" (click)="_collectionService.openCollection(collection)">{{ collection.title || 'No Title' | ucwords }} </div>
-                <md-progress-bar mode="determinate" value="{{_collectionService.getProgressValue(collection)}}"></md-progress-bar>
+                <mat-progress-bar mode="determinate" value="{{_collectionService.getProgressValue(collection)}}"></mat-progress-bar>
                 <div class="collectionSubtitle">
                   {{ getThisCollectionDate(collection) }} | {{collection.contents.length}} Activity |
                   <span *ngIf="collection.topics.length > 0; then topicName else noTopicText"></span>
@@ -88,43 +92,43 @@
                     {{ getLearnerUpcomingEvent(collection).title | ucwords }}
                   </div>
                   <div class="upcomingEventTime">
-                    {{ getLearnerUpcomingEvent(collection).type | ucfirst }}{{' ' + getLearnerUpcomingEvent(collection).fillerWord
-                    + ' in ' + getLearnerUpcomingEvent(collection).timeToStart + ' Days' }}
+                    {{ getLearnerUpcomingEvent(collection).type | ucfirst }}{{' ' + getLearnerUpcomingEvent(collection).fillerWord + ' in ' +
+                    getLearnerUpcomingEvent(collection).timeToStart + ' Days' }}
                   </div>
                 </div>
-              </md-card-content>
-              <md-card-actions *ngIf="getLearnerUpcomingEvent(collection).hasStarted">
-                <button md-raised-button (click)="onSelect(collection)">{{getLearnerUpcomingEvent(collection).upcomingEventButtonText}}</button>
-              </md-card-actions>
+              </mat-card-content>
+              <mat-card-actions *ngIf="getLearnerUpcomingEvent(collection).hasStarted">
+                <button mat-raised-button (click)="onSelect(collection)">{{getLearnerUpcomingEvent(collection).upcomingEventButtonText}}</button>
+              </mat-card-actions>
               <br>
-            </md-card>
+            </mat-card>
           </div>
-          <md-menu #ongoingCardMenu>
-            <button md-menu-item (click)="exitCollection(collection)">
+          <mat-menu #ongoingCardMenu>
+            <button mat-menu-item (click)="exitCollection(collection)">
               Cancel
             </button>
-          </md-menu>
+          </mat-menu>
         </div>
         <div *ngFor="let collection of upcomingLearningArray" [ngSwitch]="collection.status">
           <ng-template #topicName>{{collection.topics[0].name | titlecase}}</ng-template>
           <ng-template #noTopicText>No Topics</ng-template>
           <div class="col-md-5" style="margin-top: 20px;" *ngSwitchCase="'active'">
-            <md-card style="text-align: center; padding: 20px;">
-              <md-card-content>
+            <mat-card style="text-align: center; padding: 20px;">
+              <mat-card-content>
                 <div style="text-align: right">
                   <div class="pull-right">
-                    <a [mdMenuTriggerFor]="upcomingCardMenu" style="text-align: right; padding: 0px">
-                      <md-icon>more_vert</md-icon>
+                    <a [matMenuTriggerFor]="upcomingCardMenu" style="text-align: right; padding: 0px">
+                      <mat-icon>more_vert</mat-icon>
                     </a>
                   </div>
                 </div>
                 <div style="text-align: center">
                   <div class="pull-left">
-                    <md-chip-list class="cardTypeChip">
-                      <md-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'workshop'">Workshop</md-chip>
-                      <md-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'experience'">Experience</md-chip>
-                      <md-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'session'">Session</md-chip>
-                    </md-chip-list>
+                    <mat-chip-list class="cardTypeChip">
+                      <mat-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'workshop'">Workshop</mat-chip>
+                      <mat-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'experience'">Experience</mat-chip>
+                      <mat-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'session'">Session</mat-chip>
+                    </mat-chip-list>
                   </div>
                 </div>
                 <div class="collectionParticipantImageCarousel">
@@ -133,8 +137,8 @@
                   </div>
                 </div>
                 <div class="teacherName">
-                      <span class="mat-body-1">{{collection.owners[0].profiles[0].first_name + ' ' + collection.owners[0].profiles[0].last_name}}
-                      </span>
+                  <span class="mat-body-1">{{collection.owners[0].profiles[0].first_name + ' ' + collection.owners[0].profiles[0].last_name}}
+                  </span>
                 </div>
                 <div class="teacherHeadline">
                   <span>{{collection.owners[0].profiles[0].headline}} </span>
@@ -154,24 +158,25 @@
                   {{ getLearnerUpcomingEvent(collection).title | ucwords}}
                 </div>
                 <div class="upcomingEventTime">
-                  {{ getLearnerUpcomingEvent(collection).type | ucfirst}}{{' ' + getLearnerUpcomingEvent(collection).fillerWord + ' in ' + consoleLearningComponent.getLearnerUpcomingEvent(collection).timeToStart + ' Days' }}
+                  {{ getLearnerUpcomingEvent(collection).type | ucfirst}}{{' ' + getLearnerUpcomingEvent(collection).fillerWord + ' in ' +
+                  consoleLearningComponent.getLearnerUpcomingEvent(collection).timeToStart + ' Days' }}
                 </div>
-              </md-card-content>
-              <md-card-actions *ngIf="getLearnerUpcomingEvent(collection).hasStarted">
-                <button md-raised-button (click)="onSelect(collection)">{{getLearnerUpcomingEvent(collection).upcomingEventButtonText}}</button>
-              </md-card-actions>
+              </mat-card-content>
+              <mat-card-actions *ngIf="getLearnerUpcomingEvent(collection).hasStarted">
+                <button mat-raised-button (click)="onSelect(collection)">{{getLearnerUpcomingEvent(collection).upcomingEventButtonText}}</button>
+              </mat-card-actions>
               <br>
-            </md-card>
+            </mat-card>
           </div>
-          <md-menu #upcomingCardMenu>
-            <button md-menu-item (click)="exitCollection(collection)">
+          <mat-menu #upcomingCardMenu>
+            <button mat-menu-item (click)="exitCollection(collection)">
               Cancel Participation
             </button>
-          </md-menu>
+          </mat-menu>
         </div>
       </div>
       <div class="text-center margin-top-20">
-        <button md-button class="mat-border-button center margin-top-20" [routerLink]="['/console/learning/all']">View all</button>
+        <button mat-button class="mat-border-button center margin-top-20" [routerLink]="['/console/learning/all']">View all</button>
       </div>
       <hr style="margin-top: 30px;">
     </div>
@@ -180,13 +185,15 @@
       <div class="mat-body-2">
         Notifications ({{notifications.length}})
       </div>
-      <md-list>
+      <mat-list>
         <div *ngFor="let notification of notifications; let i = index;">
-          <md-list-item *ngIf="!notification.hidden && i <= 3">
-            <div [ngClass]="{'row': true, 'full-width': true, 'notificationsRow': true, 'notificationsRowUnread': !notification.seen}" (click)="onNotificationClick(notification)">
+          <mat-list-item *ngIf="!notification.hidden && i <= 3">
+            <div [ngClass]="{'row': true, 'full-width': true, 'notificationsRow': true, 'notificationsRowUnread': !notification.seen}"
+              (click)="onNotificationClick(notification)">
               <div class="col-md-1">
                 <img *ngIf="!notification.actor[0].profiles[0].picture_url" src="/assets/images/avatar.png" alt="A" class="circle-thumb notificationsImage">
-                <img *ngIf="notification.actor[0].profiles[0].picture_url" src="{{config.apiUrl + notification.actor[0].profiles[0].picture_url}}" alt="A" class="circle-thumb notificationsImage">
+                <img *ngIf="notification.actor[0].profiles[0].picture_url" src="{{config.apiUrl + notification.actor[0].profiles[0].picture_url}}"
+                  alt="A" class="circle-thumb notificationsImage">
               </div>
               <div class="col-md-10">
                 <!--Content here-->
@@ -194,14 +201,14 @@
                 <h6 class="mat-caption" style="margin-top: 0px;">{{getNotificationTime(notification)}}</h6>
               </div>
               <div class="col-md-1" style="top: 10px;">
-                <md-icon class="lightText" style="font-size: 10px; cursor: pointer;" (click)="hideNotification(notification)">close</md-icon>
+                <mat-icon class="lightText" style="font-size: 10px; cursor: pointer;" (click)="hideNotification(notification)">close</mat-icon>
               </div>
             </div>
-          </md-list-item>
+          </mat-list-item>
         </div>
-      </md-list>
+      </mat-list>
       <div class="text-center margin-top-20">
-        <button md-button class="mat-border-button center margin-top-20" [routerLink]="['/console/account/notifications']">View all</button>
+        <button mat-button class="mat-border-button center margin-top-20" [routerLink]="['/console/account/notifications']">View all</button>
       </div>
       <hr style="margin-top: 30px; margin-right: 60px;">
     </div>
@@ -213,8 +220,10 @@
       <div *ngFor="let collection of collections; let i = index;">
         <div class="row margin-top-30" *ngIf="i < 3">
           <div class="col-md-6">
-            <div class="teachingContentThumb clickable" *ngIf="collection.imageUrls && collection.imageUrls.length > 0" [ngStyle]="{'background': 'url(' + config.apiUrl + collection.imageUrls[0] + '), url(../../assets/images/no-image.jpg)', 'background-size': 'cover'}" (click)="_collectionService.openCollection(collection)"></div>
-            <div class="teachingContentThumb clickable" *ngIf="!collection.imageUrls || collection.imageUrls.length === 0" [ngStyle]="{'background': 'url(url(../../assets/images/no-image.jpg)', 'background-size': 'cover'}" (click)="_collectionService.openCollection(collection)"></div>
+            <div class="teachingContentThumb clickable" *ngIf="collection.imageUrls && collection.imageUrls.length > 0" [ngStyle]="{'background': 'url(' + config.apiUrl + collection.imageUrls[0] + '), url(../../assets/images/no-image.jpg)', 'background-size': 'cover'}"
+              (click)="_collectionService.openCollection(collection)"></div>
+            <div class="teachingContentThumb clickable" *ngIf="!collection.imageUrls || collection.imageUrls.length === 0" [ngStyle]="{'background': 'url(url(../../assets/images/no-image.jpg)', 'background-size': 'cover'}"
+              (click)="_collectionService.openCollection(collection)"></div>
           </div>
           <div class="col-md-6">
             <div class="row">
@@ -225,43 +234,40 @@
             <div class="row margin-bottom-20">
               <div class="col-md-12">
                 <div class="mat-caption">
-                <span>
-                  {{_collectionService.calculateTotalHours(collection) | i18nPlural : hourMapping}} {{collection.type}} &nbsp;&nbsp;&nbsp;
-                  <md-icon style="font-size: 5px; top: -2px; height: 20px; width: 12px;">fiber_manual_record</md-icon>{{collection.contents.length | i18nPlural : activityMapping}} &nbsp;&nbsp;&nbsp;
-                  <md-icon style="font-size: 5px; top: -2px; height: 20px; width: 12px;">fiber_manual_record</md-icon><p-rating style="display: inline-flex;" [ngModel]="collection.reviewValue" readonly="true" stars="5" [cancel]="false"></p-rating>
-                </span>
+                  <span>
+                    {{_collectionService.calculateTotalHours(collection) | i18nPlural : hourMapping}} {{collection.type}} &nbsp;&nbsp;&nbsp;
+                    <mat-icon style="font-size: 5px; top: -2px; height: 20px; width: 12px;">fiber_manual_record</mat-icon>{{collection.contents.length | i18nPlural : activityMapping}} &nbsp;&nbsp;&nbsp;
+                    <mat-icon style="font-size: 5px; top: -2px; height: 20px; width: 12px;">fiber_manual_record</mat-icon>
+                    <p-rating style="display: inline-flex;" [ngModel]="collection.reviewValue" readonly="true" stars="5" [cancel]="false"></p-rating>
+                  </span>
                 </div>
               </div>
             </div>
             <div class="row margin-bottom-20">
               <div class="col-md-6">
                 <b>Price</b>
-                <br>
-                {{collection.price | convertCurrency: collection.currency | async}}
+                <br> {{collection.price | convertCurrency: collection.currency | async}}
               </div>
               <div class="col-md-6">
                 <b>Cohorts</b>
-                <br>
-                {{collection.calendars.length}} batches
+                <br> {{collection.calendars.length}} batches
               </div>
             </div>
             <div class="row margin-bottom-20">
               <div class="col-md-6">
                 <b>Views</b>
-                <br>
-                {{collection.views.length}}
+                <br> {{collection.views.length}}
               </div>
               <div class="col-md-6">
                 <b>Earnings</b>
-                <br>
-                {{collection.price * collection.participants.length | convertCurrency: collection.currency | async}}
+                <br> {{collection.price * collection.participants.length | convertCurrency: collection.currency | async}}
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="text-center margin-top-20">
-        <button md-button class="mat-border-button center margin-top-20" [routerLink]="['/console/teaching/all']">View all</button>
+        <button mat-button class="mat-border-button center margin-top-20" [routerLink]="['/console/teaching/all']">View all</button>
       </div>
       <hr style="margin-top: 30px;">
     </div>
@@ -274,30 +280,30 @@
         <div *ngFor="let collection of ongoingArray" class="col-md-5" style="margin-top: 20px;">
           <ng-template #topicName>{{collection.topics[0].name | titlecase}}</ng-template>
           <ng-template #noTopicText>No Topics</ng-template>
-          <md-card class="upcoming-card">
-            <md-card-content>
+          <mat-card class="upcoming-card">
+            <mat-card-content>
               <div style="text-align: right">
                 <div class="pull-right">
-                  <a md-icon-button [mdMenuTriggerFor]="ongoingCardMenu" style="text-align: right; padding: 0px">
-                    <md-icon>more_vert</md-icon>
+                  <a mat-icon-button [matMenuTriggerFor]="ongoingCardMenu" style="text-align: right; padding: 0px">
+                    <mat-icon>more_vert</mat-icon>
                   </a>
                 </div>
               </div>
               <div style="text-align: center">
                 <div class="pull-left">
-                  <md-chip-list class="cardTypeChip">
-                    <md-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'workshop'">Workshop</md-chip>
-                    <md-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'experience'">Experience</md-chip>
-                    <md-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'session'">Session</md-chip>
-                  </md-chip-list>
+                  <mat-chip-list class="cardTypeChip">
+                    <mat-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'workshop'">Workshop</mat-chip>
+                    <mat-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'experience'">Experience</mat-chip>
+                    <mat-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'session'">Session</mat-chip>
+                  </mat-chip-list>
                 </div>
               </div>
               <div class="collectionParticipantImageCarousel">
-            <span *ngFor="let participant of collection.participants; let i=index">
-              <div *ngIf="i<7" class="image-inline">
-                <app-profile-popup style="margin-left: -15px;" [peer]="participant"></app-profile-popup>
-              </div>
-            </span>
+                <span *ngFor="let participant of collection.participants; let i=index">
+                  <div *ngIf="i<7" class="image-inline">
+                    <app-profile-popup style="margin-left: -15px;" [peer]="participant"></app-profile-popup>
+                  </div>
+                </span>
                 <div class="image-inline" *ngIf="collection.participants.length === 0">
                   <img src="/assets/images/user-placeholder.jpg" alt=" " class="circle-thumb" (error)="_collectionService.imgErrorHandler($event)">
                 </div>
@@ -307,94 +313,95 @@
               </div>
               <div class="collectionTitle mat-body-2 clickable" (click)="_collectionService.openCollection(collection)">{{ collection.title || 'No Title' | titlecase | shorten:20 :'...'}} </div>
               <div class="cohortDate">
-            <span>{{collection.calendars[0].startDate |extractTime:'Do MMM'}} - {{ collection.calendars[0].endDate |extractTime:'Do MMM' }}</span>
+                <span>{{collection.calendars[0].startDate |extractTime:'Do MMM'}} - {{ collection.calendars[0].endDate |extractTime:'Do
+                  MMM' }}</span>
               </div>
               <div class="collectionSubtitle clickable" (click)="_collectionService.openCollection(collection)">
                 {{ collection.itenaries.length }} Days | {{collection.contents.length}} Activity |
                 <span *ngIf="collection.topics.length > 0; then topicName else noTopicText"></span>
               </div>
-              <span mdTooltip="{{_collectionService.getProgressValue(collection)}}% completed">
-            <md-progress-bar style="margin-bottom: 15px;" mode="determinate" value="{{_collectionService.getProgressValue(collection)}}"></md-progress-bar>
-          </span>
+              <span matTooltip="{{_collectionService.getProgressValue(collection)}}% completed">
+                <mat-progress-bar style="margin-bottom: 15px;" mode="determinate" value="{{_collectionService.getProgressValue(collection)}}"></mat-progress-bar>
+              </span>
               <span *ngIf="_collectionService.getUpcomingEvent(collection) && _collectionService.getUpcomingEvent(collection).timeToStart === 0">
-            <p class="upcomingEventLabel">
-              Today
-            </p>
-            <div class="upcomingEventTitle">
-              {{ _collectionService.getUpcomingEvent(collection).title | titlecase | shorten:20 :'...'}}
-            </div>
-            <div class="upcomingEventTime">
-              {{ _collectionService.getUpcomingEvent(collection).type | titlecase}} today.
-            </div>
-          </span>
+                <p class="upcomingEventLabel">
+                  Today
+                </p>
+                <div class="upcomingEventTitle">
+                  {{ _collectionService.getUpcomingEvent(collection).title | titlecase | shorten:20 :'...'}}
+                </div>
+                <div class="upcomingEventTime">
+                  {{ _collectionService.getUpcomingEvent(collection).type | titlecase}} today.
+                </div>
+              </span>
               <span *ngIf=" _collectionService.getUpcomingEvent(collection) && _collectionService.getUpcomingEvent(collection).timeToStart > 0">
-            <p class="upcomingEventLabel">
-              Up Next
-            </p>
-            <div class="upcomingEventTitle">
-              {{ _collectionService.getUpcomingEvent(collection).title | titlecase | shorten:20 :'...'}}
-            </div>
-            <div class="upcomingEventTime">
-              {{ _collectionService.getUpcomingEvent(collection).type | titlecase }} {{ _collectionService.getUpcomingEvent(collection).fillerWord
-              + ' in ' + _collectionService.getUpcomingEvent(collection).timeToStart + ' Days' }}
-            </div>
-          </span>
+                <p class="upcomingEventLabel">
+                  Up Next
+                </p>
+                <div class="upcomingEventTitle">
+                  {{ _collectionService.getUpcomingEvent(collection).title | titlecase | shorten:20 :'...'}}
+                </div>
+                <div class="upcomingEventTime">
+                  {{ _collectionService.getUpcomingEvent(collection).type | titlecase }} {{ _collectionService.getUpcomingEvent(collection).fillerWord
+                  + ' in ' + _collectionService.getUpcomingEvent(collection).timeToStart + ' Days' }}
+                </div>
+              </span>
               <span *ngIf="_collectionService.getUpcomingEvent(collection) &&  _collectionService.getUpcomingEvent(collection).timeToStart < 0">
-            <p class="upcomingEventLabel">
-              Last Event
-            </p>
-            <div class="upcomingEventTitle">
-              {{ _collectionService.getUpcomingEvent(collection).title | titlecase | shorten:20 :'...'}}
-            </div>
-            <div class="upcomingEventTime">
-              {{ _collectionService.getUpcomingEvent(collection).type| titlecase }} {{ _collectionService.getUpcomingEvent(collection).fillerWord
-              + ' was ' + -(_collectionService.getUpcomingEvent(collection).timeToStart) + ' Days ago' }}
-            </div>
-          </span>
-            </md-card-content>
-            <md-menu #ongoingCardMenu>
-              <button md-menu-item (click)="cancelCollection(collection)">
+                <p class="upcomingEventLabel">
+                  Last Event
+                </p>
+                <div class="upcomingEventTitle">
+                  {{ _collectionService.getUpcomingEvent(collection).title | titlecase | shorten:20 :'...'}}
+                </div>
+                <div class="upcomingEventTime">
+                  {{ _collectionService.getUpcomingEvent(collection).type| titlecase }} {{ _collectionService.getUpcomingEvent(collection).fillerWord
+                  + ' was ' + -(_collectionService.getUpcomingEvent(collection).timeToStart) + ' Days ago' }}
+                </div>
+              </span>
+            </mat-card-content>
+            <mat-menu #ongoingCardMenu>
+              <button mat-menu-item (click)="cancelCollection(collection)">
                 Cancel {{collection.type | ucwords}}
               </button>
-              <button md-menu-item (click)="_collectionService.openEditCollection(collection)">
+              <button mat-menu-item (click)="_collectionService.openEditCollection(collection)">
                 Edit {{collection.type | ucwords}}
               </button>
-            </md-menu>
-            <md-card-actions *ngIf="_collectionService.getUpcomingEvent(collection) && _collectionService.getUpcomingEvent(collection).hasStarted">
-              <button md-raised-button (click)="_collectionService.viewCollection(collection)">{{_collectionService.getUpcomingEvent(collection).upcomingEventButtonText}}</button>
-            </md-card-actions>
-            <md-card-footer class="cardFooter" style="margin-top: -4px">
-              <button md-button [routerLink]="['/' + collection.type + '/'+collection.id+'/calendar/'+collection.calendars[0].id]">Continue Teaching</button>
-            </md-card-footer>
-          </md-card>
+            </mat-menu>
+            <mat-card-actions *ngIf="_collectionService.getUpcomingEvent(collection) && _collectionService.getUpcomingEvent(collection).hasStarted">
+              <button mat-raised-button (click)="_collectionService.viewCollection(collection)">{{_collectionService.getUpcomingEvent(collection).upcomingEventButtonText}}</button>
+            </mat-card-actions>
+            <mat-card-footer class="cardFooter" style="margin-top: -4px">
+              <button mat-button [routerLink]="['/' + collection.type + '/'+collection.id+'/calendar/'+collection.calendars[0].id]">Continue Teaching</button>
+            </mat-card-footer>
+          </mat-card>
         </div>
         <div *ngFor="let collection of upcomingArray" class="col-md-5" style="margin-top: 20px;">
           <ng-template #topicName>{{collection.topics[0].name | titlecase}}</ng-template>
           <ng-template #noTopicText>No Topics</ng-template>
-          <md-card class="upcoming-card">
-            <md-card-content>
+          <mat-card class="upcoming-card">
+            <mat-card-content>
               <div style="text-align: right">
                 <div class="pull-right">
-                  <a md-icon-button [mdMenuTriggerFor]="upcomingCardMenu" style="text-align: right; padding: 0px">
-                    <md-icon>more_vert</md-icon>
+                  <a mat-icon-button [matMenuTriggerFor]="upcomingCardMenu" style="text-align: right; padding: 0px">
+                    <mat-icon>more_vert</mat-icon>
                   </a>
                 </div>
               </div>
               <div style="text-align: center">
                 <div class="pull-left">
-                  <md-chip-list class="cardTypeChip">
-                    <md-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'workshop'">Workshop</md-chip>
-                    <md-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'experience'">Experience</md-chip>
-                    <md-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'session'">Session</md-chip>
-                  </md-chip-list>
+                  <mat-chip-list class="cardTypeChip">
+                    <mat-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'workshop'">Workshop</mat-chip>
+                    <mat-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'experience'">Experience</mat-chip>
+                    <mat-chip class="smallChip" [color]="'accent'" *ngIf="collection.type == 'session'">Session</mat-chip>
+                  </mat-chip-list>
                 </div>
               </div>
               <div class="collectionParticipantImageCarousel">
-            <span *ngFor="let participant of collection.participants; let i=index">
-              <div *ngIf="i<6" class="image-inline">
-                <app-profile-popup style="margin-left: -15px;" [peer]="participant"></app-profile-popup>
-              </div>
-            </span>
+                <span *ngFor="let participant of collection.participants; let i=index">
+                  <div *ngIf="i<6" class="image-inline">
+                    <app-profile-popup style="margin-left: -15px;" [peer]="participant"></app-profile-popup>
+                  </div>
+                </span>
                 <div class="image-inline" *ngIf="collection.participants.length === 0">
                   <img src="/assets/images/user-placeholder.jpg" alt=" " class="circle-thumb" (error)="_collectionService.imgErrorHandler($event)">
                 </div>
@@ -405,7 +412,8 @@
               </div>
               <div class="collectionTitle mat-body-2 clickable" (click)="_collectionService.openCollection(collection)">{{ collection.title || 'No Title' | titlecase | shorten:20 :'...'}} </div>
               <div class="cohortDate">
-            <span>{{collection.calendars[0].startDate |extractTime:'Do MMM'}} - {{ collection.calendars[0].endDate |extractTime:'Do MMM' }}</span>
+                <span>{{collection.calendars[0].startDate |extractTime:'Do MMM'}} - {{ collection.calendars[0].endDate |extractTime:'Do
+                  MMM' }}</span>
               </div>
               <div class="collectionSubtitle clickable" (click)="_collectionService.openCollection(collection)">
                 {{ collection.itenaries.length }} Days | {{collection.contents.length}} Activity |
@@ -421,26 +429,26 @@
                 {{ _collectionService.getUpcomingEvent(collection).type | titlecase }} {{ _collectionService.getUpcomingEvent(collection).fillerWord
                 + ' in ' + _collectionService.getUpcomingEvent(collection).timeToStart + ' Days' }}
               </div>
-            </md-card-content>
-            <md-menu #upcomingCardMenu>
-              <button md-menu-item (click)="cancelCollection(collection)">
+            </mat-card-content>
+            <mat-menu #upcomingCardMenu>
+              <button mat-menu-item (click)="cancelCollection(collection)">
                 Cancel
               </button>
-              <button md-menu-item (click)="_collectionService.openEditCollection(collection)">
+              <button mat-menu-item (click)="_collectionService.openEditCollection(collection)">
                 Edit {{collection.type | ucwords}}
               </button>
-            </md-menu>
-            <md-card-actions *ngIf="_collectionService.getUpcomingEvent(collection) && _collectionService.getUpcomingEvent(collection).hasStarted">
-              <button md-raised-button (click)="_collectionService.viewCollection(collection)">{{_collectionService.getUpcomingEvent(collection).upcomingEventButtonText}}</button>
-            </md-card-actions>
-            <md-card-footer class="cardFooter" style="line-height: 30px; position: absolute;bottom: 24px;width: 100%;left: 24px;">
+            </mat-menu>
+            <mat-card-actions *ngIf="_collectionService.getUpcomingEvent(collection) && _collectionService.getUpcomingEvent(collection).hasStarted">
+              <button mat-raised-button (click)="_collectionService.viewCollection(collection)">{{_collectionService.getUpcomingEvent(collection).upcomingEventButtonText}}</button>
+            </mat-card-actions>
+            <mat-card-footer class="cardFooter" style="line-height: 30px; position: absolute;bottom: 24px;width: 100%;left: 24px;">
               <a style="font-size: 1.077rem" (click)="_collectionService.viewCollection(collection)">Is this a recurring {{collection.type}}?</a>
-            </md-card-footer>
-          </md-card>
+            </mat-card-footer>
+          </mat-card>
         </div>
       </div>
       <div class="text-center margin-top-20">
-        <button md-button class="mat-border-button center margin-top-20" [routerLink]="['/console/teaching/all']">View all</button>
+        <button mat-button class="mat-border-button center margin-top-20" [routerLink]="['/console/teaching/all']">View all</button>
       </div>
       <hr style="margin-top: 30px;">
     </div>
@@ -450,7 +458,8 @@
     <div class="userInfo margin-bottom-30" *ngIf="profileLoaded && collections.length === 0 && learningCollections.length === 0">
       <div class="row margin-bottom-10">
         <div class="col-md-12 margin-top-10 text-center">
-          <img src="{{config.apiUrl + loggedInUser.picture_url}}" width="150px" height="150px" class="profileImageLarge clickable" (error)="_profileService.imgErrorHandler($event)" [routerLink]="['/console/profile/photos']">
+          <img src="{{config.apiUrl + loggedInUser.picture_url}}" width="150px" height="150px" class="profileImageLarge clickable"
+            (error)="_profileService.imgErrorHandler($event)" [routerLink]="['/console/profile/photos']">
         </div>
         <div class="col-md-12 margin-top-20 text-center">
           <div class="mat-body-2 clickable" [routerLink]="['profile', userId]">
@@ -490,21 +499,21 @@
           Email address
         </div>
         <div class="col-md-6 margin-bottom-10" style="text-align: right">
-          <md-icon *ngIf="loggedInUser.peer[0].emailVerified" style="color: #33bd9e;">done</md-icon>
+          <mat-icon *ngIf="loggedInUser.peer[0].emailVerified" style="color: #33bd9e;">done</mat-icon>
           <span *ngIf="!loggedInUser.peer[0].emailVerified" style="color: #777777;">Pending</span>
         </div>
         <div class="col-md-6 margin-bottom-20">
           Phone number
         </div>
         <div class="col-md-6 margin-bottom-20" style="text-align: right">
-          <md-icon *ngIf="loggedInUser.peer[0].phoneVerified" style="color: #33bd9e;">done</md-icon>
+          <mat-icon *ngIf="loggedInUser.peer[0].phoneVerified" style="color: #33bd9e;">done</mat-icon>
           <span *ngIf="!loggedInUser.peer[0].phoneVerified" style="color: #777777;">Pending</span>
         </div>
         <div class="col-md-6 margin-bottom-20">
           Government ID
         </div>
         <div class="col-md-6 margin-bottom-20" style="text-align: right">
-          <md-icon *ngIf="loggedInUser.peer[0].accountVerified" style="color: #33bd9e;">done</md-icon>
+          <mat-icon *ngIf="loggedInUser.peer[0].accountVerified" style="color: #33bd9e;">done</mat-icon>
           <span *ngIf="!loggedInUser.peer[0].accountVerified && loggedInUser.peer[0].verificationIdUrl" style="color: #777777;">Awaiting approval</span>
           <span *ngIf="!loggedInUser.peer[0].accountVerified && !loggedInUser.peer[0].verificationIdUrl" style="color: #777777;">Pending</span>
         </div>

@@ -7,13 +7,13 @@ import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class TwilioServicesService {
-  private userId;
+  public userId;
   private options;
 
   constructor(
     public _requestHeaderService: RequestHeaderService,
     private http: HttpClient,
-    private config: AppConfig,
+    public config: AppConfig,
     private _cookieService: CookieService
   ) {
     this.userId = this.getCookieValue('userId');

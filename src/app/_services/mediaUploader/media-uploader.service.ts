@@ -8,7 +8,7 @@ export class MediaUploaderService {
   private options;
 
   constructor(private http: HttpClient,
-    private config: AppConfig,
+    public config: AppConfig,
     private sanitizer: DomSanitizer) { }
 
   public upload(file) {

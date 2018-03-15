@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { AppConfig } from '../../app.config';
-import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { CountryPickerService } from '../../_services/countrypicker/countrypicker.service';
 import { Observable } from 'rxjs/Observable';
 import * as _ from 'lodash';
@@ -37,8 +37,8 @@ export class AddLocationDialogComponent implements OnInit {
 
     constructor(
         public config: AppConfig,
-        @Inject(MD_DIALOG_DATA) public inputData: any,
-        public dialogRef: MdDialogRef<AddLocationDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public inputData: any,
+        public dialogRef: MatDialogRef<AddLocationDialogComponent>,
         private countryPickerService: CountryPickerService
     ) {
     }

@@ -7,7 +7,7 @@ import { WorkshopsComponent } from './workshops/workshops.component';
 import { ExperiencesComponent } from './experiences/experiences.component';
 import { PeersComponent } from './peers/peers.component';
 
-import { MdTabsModule } from '@angular/material';
+import { MatTabsModule } from '@angular/material';
 import { HomefeedComponent } from './homefeed/homefeed.component';
 import { SharedModule } from '../_shared/_shared.module';
 import { SelectTopicsComponent } from './dialogs/select-topics/select-topics.component';
@@ -20,7 +20,7 @@ import { CommunitiesComponent } from './communities/communities.component';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    MdTabsModule,
+    MatTabsModule,
     SharedModule,
     StickyModule
   ],

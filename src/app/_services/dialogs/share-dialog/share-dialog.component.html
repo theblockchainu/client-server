@@ -1,32 +1,32 @@
-<div md-dialog-content class="dialog-container">
+<div mat-dialog-content class="dialog-container">
   <div class="row">
     <h2>Share {{data.type | titlecase}}</h2>
   </div>
   <div class="row">
     <div class="col-md-12 share_buttons">
-      <button color="secondary" [ngxClipboard]="urlInput" (cbOnSuccess)="onCopySuccess()" md-fab>
-        <md-icon>content_copy</md-icon>
+      <button color="secondary" [ngxClipboard]="urlInput" (cbOnSuccess)="onCopySuccess()" mat-fab>
+        <mat-icon>content_copy</mat-icon>
       </button>
-      <button color="secondary" (click)="onEmailClicked()" md-fab>
+      <button color="secondary" (click)="onEmailClicked()" mat-fab>
         <i class="fa fa-envelope-o" aria-hidden="true"></i>
       </button>
-      <button color="primary" (click)="onFBClicked()" md-fab>
+      <button color="primary" (click)="onFBClicked()" mat-fab>
         <i class="fa fa-facebook" aria-hidden="true"></i>
       </button>
-      <a color="primary" href="{{tweetUrl}}" md-fab>
+      <a color="primary" href="{{tweetUrl}}" mat-fab>
         <i class="fa fa-twitter" aria-hidden="true">
         </i>
       </a>
-      <button color="primary" (click)="onLinkedInClicked()" md-fab>
+      <button color="primary" (click)="onLinkedInClicked()" mat-fab>
         <i class="fa fa-linkedin" aria-hidden="true"></i>
       </button>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
-      <md-input-container [floatPlaceholder]="'never'" class="pb-block" style="font-size: 20px;">
-        <input #urlInput mdInput [readOnly]="true" value="{{generatedUrl}}" />
-      </md-input-container>
+      <mat-input-container   class="pb-block" style="font-size: 20px;">
+        <input #urlInput matInput [readOnly]="true" value="{{generatedUrl}}" />
+      </mat-input-container>
     </div>
   </div>
 </div>

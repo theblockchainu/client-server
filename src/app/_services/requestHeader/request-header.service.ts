@@ -9,7 +9,7 @@ export class RequestHeaderService {
 
   constructor(
     private http: HttpClient,
-    private config: AppConfig) {
+    public config: AppConfig) {
   }
 
   getOptions() {

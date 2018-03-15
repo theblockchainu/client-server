@@ -1,17 +1,18 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MdDialogRef, MD_DIALOG_DATA, MdDialog } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { AppConfig } from '../../../app.config';
 import { HttpClient } from '@angular/common/http';
 import { ProjectSubmissionService } from '../../../_services/project-submission/project-submission.service';
 import * as moment from 'moment';
 import { ContentService } from '../../../_services/content/content.service';
 import { VgAPI } from 'videogular2/core';
-import { Ng2DeviceService } from 'ng2-device-detector';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { Router } from '@angular/router';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 import { SocketService } from '../../../_services/socket/socket.service';
 import { CollectionService } from '../../../_services/collection/collection.service';
 import { DialogsService } from '../../../_services/dialogs/dialog.service';
+
 @Component({
     selector: 'app-content-project',
     templateUrl: './content-project.component.html',
@@ -31,12 +32,12 @@ export class ContentProjectComponent implements OnInit {
     public userType = 'public';
 
     constructor(public config: AppConfig,
-        @Inject(MD_DIALOG_DATA) public data: any,
-        public dialog: MdDialog,
-        public dialogRef: MdDialogRef<ContentProjectComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        public dialog: MatDialog,
+        public dialogRef: MatDialogRef<ContentProjectComponent>,
         public projectSubmissionService: ProjectSubmissionService,
         private contentService: ContentService,
-        private deviceService: Ng2DeviceService,
+        private deviceService: DeviceDetectorService,
         private router: Router,
         private cookieUtilsService: CookieUtilsService,
         private _socketService: SocketService,

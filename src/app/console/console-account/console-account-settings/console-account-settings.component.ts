@@ -13,7 +13,7 @@ export class ConsoleAccountSettingsComponent implements OnInit {
 
   public busyDeleteAccount = false;
   public loaded = true;
-  private userId;
+  public userId;
 
   constructor(
     public activatedRoute: ActivatedRoute,

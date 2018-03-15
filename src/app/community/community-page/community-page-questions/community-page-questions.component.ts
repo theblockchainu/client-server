@@ -7,7 +7,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CommunityService} from '../../../_services/community/community.service';
 import {ProfileService} from '../../../_services/profile/profile.service';
 import {CommentService} from '../../../_services/comment/comment.service';
-import {MdSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
     selector: 'app-community-page-questions',
@@ -46,7 +46,7 @@ export class CommunityPageQuestionsComponent implements OnInit {
                 public _communityService: CommunityService,
                 public _commentService: CommentService,
                 public _fb: FormBuilder,
-                public snackBar: MdSnackBar,
+                public snackBar: MatSnackBar,
                 public _profileService: ProfileService) {
 
         activatedRoute.pathFromRoot[3].url.subscribe((urlSegment) => {

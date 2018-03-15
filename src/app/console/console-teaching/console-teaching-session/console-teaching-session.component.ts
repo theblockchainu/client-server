@@ -16,7 +16,7 @@ export class ConsoleTeachingSessionComponent implements OnInit {
 
   public loaded: boolean;
   public activeTab: string;
-  private userId;
+  public userId;
   public pastSessions: Array<any>;
   public ongoingSessions: Array<any>;
   public upcomingSessions: Array<any>;

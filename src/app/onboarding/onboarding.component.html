@@ -6,7 +6,7 @@
               <h1 class="headline">Welcome to Peerbuds</h1>
               <p class="description1 margin-top-10 margin-bottom-20">You are entering a blockchain based community <br>where peers can teach and learn from one another, while earning</p>
               <div class="margin-top-40">
-                  <button md-raised-button class="customBtn" type="button" color="accent" (click)="continue(2)">Yes, that's me</button>
+                  <button mat-raised-button class="customBtn" type="button" color="accent" (click)="continue(2)">Yes, that's me</button>
               </div>
             </div>
           </div>
@@ -36,7 +36,7 @@
                 <div class="col-sm-2" style="margin-top:5px">
                   <div *ngIf="!boolShowConnectedSocials" style="line-height:30px">
                     <a class="text-right syncSocial" style="cursor: pointer;" (click)="showConnectedSocials()">
-                      <md-icon class="vAlignTextTop">cached</md-icon>
+                      <mat-icon class="vAlignTextTop">cached</mat-icon>
                       &nbsp;&nbsp;&nbsp;&nbsp;Sync Social</a>
                   </div>
                   <div *ngIf="boolShowConnectedSocials" style="margin-top:5px">
@@ -56,11 +56,11 @@
           <div class="row center" *ngIf="showRequestNewTopic">
             <div class="col-sm-8">
               <div class="margin-bottom-20">
-                <i class="mdi mdi-emoticon-sad mdi-48px primaryColor"></i>
+                <i class="mati mati-emoticon-sad mati-48px primaryColor"></i>
               </div>
               <div class="margin-bottom-20">
                 <div class="suggestions"> Topic you are looking for cannot be found</div>
-                <button md-button class="outline-btn margin-top-20" (click)="requestNewTopic(topicForRequest)"> Request for {{topicForRequest}} topic</button>
+                <button mat-button class="outline-btn margin-top-20" (click)="requestNewTopic(topicForRequest)"> Request for {{topicForRequest}} topic</button>
               </div>
             </div>
           </div>
@@ -71,7 +71,7 @@
                   <img src="/assets/images/onboarding_select_interest.png" class="topic-bg">
                   <span style="margin-left:20px">{{item.name}}</span>
                   <span>
-                    <i class="mdi mdi-check-circle mdi-24px primaryColor pull-right" style="margin:18px 10px"></i>
+                    <i class="mati mati-check-circle mati-24px primaryColor pull-right" style="margin:18px 10px"></i>
                   </span>
                 </a>
               </li>
@@ -84,7 +84,7 @@
                   <img src="/assets/images/onboarding_select_interest.png" class="topic-bg">
                   <span style="margin-left:20px">{{item.name}}</span>
                   <span>
-                    <i class="mdi mdi-check-circle-outline mdi-24px primaryColor pull-right" style="margin:18px 10px"></i>
+                    <i class="mati mati-check-circle-outline mati-24px primaryColor pull-right" style="margin:18px 10px"></i>
                   </span>
                 </a>
               </li>
@@ -95,9 +95,9 @@
       <div class="fixedFooter col-sm-12">
         <div class="col-md-9" style="margin-left:12%">
           <div class="pull-right">
-            <button md-button style="margin-right:15px; color:#767676">Back</button>
-            <span mdTooltip="Choose more topics!" [mdTooltipDisabled]="interests.length >= 3">
-              <button md-raised-button (click)="continue(2)" color="accent" [disabled]="interests.length < 3">Done</button>
+            <button mat-button style="margin-right:15px; color:#767676">Back</button>
+            <span matTooltip="Choose more topics!" [matTooltipDisabled]="interests.length >= 3">
+              <button mat-raised-button (click)="continue(2)" color="accent" [disabled]="interests.length < 3">Done</button>
             </span>
           </div>
         </div>
@@ -114,7 +114,7 @@
             <h1 class="mat-title title-explore text-center">You're now ready to teach
               <br> and learn anything to your heart's desires</h1>
             <div class="checkbox margin-top-50">
-              <a md-raised-button class="customBtn mat-elevation-z6" type="button" color="accent" href="/home/homefeed">Start Exploring</a>
+              <a mat-raised-button class="customBtn mat-elevation-z6" type="button" color="accent" href="/home/homefeed">Start Exploring</a>
             </div>
           </div>
         </div>

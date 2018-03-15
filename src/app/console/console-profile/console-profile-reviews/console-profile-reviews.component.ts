@@ -17,7 +17,7 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class ConsoleProfileReviewsComponent implements OnInit, AfterViewChecked {
 
-  private userId;
+  public userId;
   public loading: boolean;
   public profile: any;
   public now: Date;

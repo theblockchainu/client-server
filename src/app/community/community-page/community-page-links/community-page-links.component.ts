@@ -6,7 +6,7 @@ import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from '
 import {CookieUtilsService} from '../../../_services/cookieUtils/cookie-utils.service';
 import {QuestionService} from '../../../_services/question/question.service';
 import {CommentService} from '../../../_services/comment/comment.service';
-import {MdSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 import {ProfileService} from '../../../_services/profile/profile.service';
 
 @Component({
@@ -35,7 +35,7 @@ export class CommunityPageLinksComponent implements OnInit {
                 public _communityService: CommunityService,
                 public _commentService: CommentService,
                 public _fb: FormBuilder,
-                public snackBar: MdSnackBar,
+                public snackBar: MatSnackBar,
                 public _profileService: ProfileService) {
 
         activatedRoute.pathFromRoot[3].url.subscribe((urlSegment) => {

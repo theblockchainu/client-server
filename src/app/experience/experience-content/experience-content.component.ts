@@ -8,7 +8,7 @@ import { AppConfig } from '../../app.config';
 import { AuthenticationService } from '../../_services/authentication/authentication.service';
 import { CollectionService } from '../../_services/collection/collection.service';
 import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
 import { forEach } from '@angular/router/src/utils/collection';
 import { DialogsService } from '../../_services/dialogs/dialog.service';
@@ -42,10 +42,10 @@ export class ExperienceContentComponent implements OnInit {
   private options;
   constructor(
     public authenticationService: AuthenticationService,
-    private http: HttpClient, private config: AppConfig,
+    private http: HttpClient, public config: AppConfig,
     private _fb: FormBuilder,
     private requestHeaders: RequestHeaderService,
-    private dialog: MdDialog,
+    private dialog: MatDialog,
     public router: Router,
     public _collectionService: CollectionService,
     private location: Location,

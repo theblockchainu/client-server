@@ -7,7 +7,7 @@ import { CollectionService } from '../_services/collection/collection.service';
 import { DialogsService } from '../_services/dialogs/dialog.service';
 import { TopicService } from '../_services/topic/topic.service';
 import { CookieUtilsService } from '../_services/cookieUtils/cookie-utils.service';
-import { MdDialog, MdSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 import * as moment from 'moment';
@@ -75,8 +75,8 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     public _collectionService: CollectionService,
     private _topicService: TopicService,
-    public dialog: MdDialog,
-    public snackBar: MdSnackBar,
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar,
     public _dialogsService: DialogsService
   ) {
     this.activatedRoute.params.subscribe((param) => {

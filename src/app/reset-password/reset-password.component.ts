@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import {
   FormGroup, FormArray, FormBuilder, FormControl, AbstractControl, Validators
 } from '@angular/forms';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { DialogsService } from '../_services/dialogs/dialog.service';
 
 
@@ -36,7 +36,7 @@ export class ResetPasswordComponent implements OnInit {
     public authenticationService: AuthenticationService,
     private alertService: AlertService,
     private _fb: FormBuilder,
-    private snackBar: MdSnackBar,
+    private snackBar: MatSnackBar,
     private _dialogsService: DialogsService
   ) {
     this.isLoggedIn = this.authenticationService.isLoggedIn();
@@ -79,7 +79,7 @@ export class ResetPasswordComponent implements OnInit {
         },
         (error) => {
           console.log(error);
-          this.snackBar.open(error .error.message, 'Resend Email').onAction().subscribe(res => {
+          this.snackBar.open(error.error.message, 'Resend Email').onAction().subscribe(res => {
             this._dialogsService.openForgotPassword(this.email).afterClosed().subscribe(data => {
               this.router.navigateByUrl('');
             });

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ConsoleComponent } from '../console.component';
 import { CollectionService } from '../../_services/collection/collection.service';
 import { ProfileService } from '../../_services/profile/profile.service';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { AppConfig } from '../../app.config';
 
 declare var moment: any;
@@ -24,7 +24,7 @@ export class ConsoleAdminComponent implements OnInit {
     consoleComponent: ConsoleComponent,
     public _collectionService: CollectionService,
     public _profileService: ProfileService,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     public appConfig: AppConfig
   ) {
     activatedRoute.pathFromRoot[3].url.subscribe((urlSegment) => {

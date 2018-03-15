@@ -19,7 +19,7 @@ export class LeftSidebarService {
     sidebarMenuItems: Observable<SideBarMenuItem>;
 
     constructor(
-        private http: HttpClient, private config: AppConfig,
+        private http: HttpClient, public config: AppConfig,
         private route: ActivatedRoute, public router: Router
     ) { }
 

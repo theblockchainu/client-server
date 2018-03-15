@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MdDialogRef, MD_DIALOG_DATA, MdSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { CollectionService } from '../../collection/collection.service';
 @Component({
   selector: 'app-cancel-cohort-dialog',
@@ -8,10 +8,10 @@ import { CollectionService } from '../../collection/collection.service';
 })
 export class CancelCohortDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MdDialogRef<CancelCohortDialogComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any,
+  constructor(public dialogRef: MatDialogRef<CancelCohortDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private _collectionService: CollectionService,
-    private snackBar: MdSnackBar) { }
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }

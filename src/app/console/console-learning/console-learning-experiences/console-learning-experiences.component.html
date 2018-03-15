@@ -8,7 +8,7 @@
 <div class="row">
   <div class="col-md-12 margin-top-10" *ngIf="loaded">
     <div #noContentView *ngIf="ongoingArray.length === 0 && upcomingArray.length===0 && pastArray.length === 0" class="center"
-         style="margin-top: 10%; margin-bottom: 10%">
+      style="margin-top: 10%; margin-bottom: 10%">
       <div class="lightText">
         You are not learning any experience
         <br>
@@ -27,12 +27,12 @@
               <ng-template #topicName>{{collection.topics[0].name | titlecase}}</ng-template>
               <ng-template #noTopicText>No Topics</ng-template>
               <div class="col-md-4" style="margin-top: 20px;" *ngSwitchCase="'active'">
-                <md-card style="text-align: center; padding: 20px;">
-                  <md-card-content>
+                <mat-card style="text-align: center; padding: 20px;">
+                  <mat-card-content>
                     <div style="text-align: right">
                       <div class="pull-right">
-                        <a [mdMenuTriggerFor]="ongoingCardMenu" style="text-align: right; padding: 0px">
-                          <md-icon>more_vert</md-icon>
+                        <a [matMenuTriggerFor]="ongoingCardMenu" style="text-align: right; padding: 0px">
+                          <mat-icon>more_vert</mat-icon>
                         </a>
                       </div>
                     </div>
@@ -49,7 +49,7 @@
                       <span>{{collection.owners[0].profiles[0].headline}} </span>
                     </div>
                     <div class="collectionTitle mat-body-2 clickable" (click)="openCollection(collection)">{{ collection.title || 'No Title' | ucwords }} </div>
-                    <md-progress-bar mode="determinate" value="{{consoleLearningComponent.getProgressValue(collection)}}"></md-progress-bar>
+                    <mat-progress-bar mode="determinate" value="{{consoleLearningComponent.getProgressValue(collection)}}"></mat-progress-bar>
                     <div class="collectionSubtitle">
                       {{ consoleLearningComponent.getThisCollectionDate(collection) }} | {{collection.contents.length}} Activity |
                       <span *ngIf="collection.topics.length > 0; then topicName else noTopicText"></span>
@@ -78,30 +78,30 @@
                         + ' in ' + consoleLearningComponent.getLearnerUpcomingEvent(collection).timeToStart + ' Days' }}
                       </div>
                     </div>
-                  </md-card-content>
-                  <md-card-actions *ngIf="consoleLearningComponent.getLearnerUpcomingEvent(collection).hasStarted">
-                    <button md-raised-button (click)="onSelect(collection)">{{consoleLearningComponent.getLearnerUpcomingEvent(collection).upcomingEventButtonText}}</button>
-                  </md-card-actions>
+                  </mat-card-content>
+                  <mat-card-actions *ngIf="consoleLearningComponent.getLearnerUpcomingEvent(collection).hasStarted">
+                    <button mat-raised-button (click)="onSelect(collection)">{{consoleLearningComponent.getLearnerUpcomingEvent(collection).upcomingEventButtonText}}</button>
+                  </mat-card-actions>
                   <br>
                   <br>
-                </md-card>
+                </mat-card>
               </div>
-              <md-menu #ongoingCardMenu>
-                <button md-menu-item (click)="exitExperience(collection)">
+              <mat-menu #ongoingCardMenu>
+                <button mat-menu-item (click)="exitExperiences(collection)">
                   Cancel
                 </button>
-              </md-menu>
+              </mat-menu>
             </div>
             <div *ngFor="let collection of upcomingArray" [ngSwitch]="collection.status">
               <ng-template #topicName>{{collection.topics[0].name | titlecase}}</ng-template>
               <ng-template #noTopicText>No Topics</ng-template>
               <div class="col-md-4" style="margin-top: 20px;" *ngSwitchCase="'active'">
-                <md-card style="text-align: center; padding: 20px;">
-                  <md-card-content>
+                <mat-card style="text-align: center; padding: 20px;">
+                  <mat-card-content>
                     <div style="text-align: right">
                       <div class="pull-right">
-                        <a [mdMenuTriggerFor]="upcomingCardMenu" style="text-align: right; padding: 0px">
-                          <md-icon>more_vert</md-icon>
+                        <a [matMenuTriggerFor]="upcomingCardMenu" style="text-align: right; padding: 0px">
+                          <mat-icon>more_vert</mat-icon>
                         </a>
                       </div>
                     </div>
@@ -135,19 +135,19 @@
                       {{ consoleLearningComponent.getLearnerUpcomingEvent(collection).type | ucfirst}}{{' ' + consoleLearningComponent.getLearnerUpcomingEvent(collection).fillerWord
                       + ' in ' + consoleLearningComponent.getLearnerUpcomingEvent(collection).timeToStart + ' Days' }}
                     </div>
-                  </md-card-content>
-                  <md-card-actions *ngIf="consoleLearningComponent.getLearnerUpcomingEvent(collection).hasStarted">
-                    <button md-raised-button (click)="onSelect(collection)">{{consoleLearningComponent.getLearnerUpcomingEvent(collection).upcomingEventButtonText}}</button>
-                  </md-card-actions>
+                  </mat-card-content>
+                  <mat-card-actions *ngIf="consoleLearningComponent.getLearnerUpcomingEvent(collection).hasStarted">
+                    <button mat-raised-button (click)="onSelect(collection)">{{consoleLearningComponent.getLearnerUpcomingEvent(collection).upcomingEventButtonText}}</button>
+                  </mat-card-actions>
                   <br>
                   <br>
-                </md-card>
+                </mat-card>
               </div>
-              <md-menu #upcomingCardMenu>
-                <button md-menu-item (click)="exitExperience(collection)">
+              <mat-menu #upcomingCardMenu>
+                <button mat-menu-item (click)="exitExperiences(collection)">
                   Cancel
                 </button>
-              </md-menu>
+              </mat-menu>
             </div>
           </div>
         </div>
@@ -167,12 +167,12 @@
                 <ng-template #topicName>{{collection.topics[0].name | titlecase}}</ng-template>
                 <ng-template #noTopicText>No Topics</ng-template>
                 <div class="col-md-4" style="margin-top: 20px;">
-                  <md-card style="text-align: center; padding: 20px;">
-                    <md-card-content>
+                  <mat-card style="text-align: center; padding: 20px;">
+                    <mat-card-content>
                       <div style="text-align: right">
                         <div class="pull-right">
-                          <a [mdMenuTriggerFor]="pastCardMenu" style="text-align: right; padding: 0px">
-                            <md-icon>more_vert</md-icon>
+                          <a [matMenuTriggerFor]="pastCardMenu" style="text-align: right; padding: 0px">
+                            <mat-icon>more_vert</mat-icon>
                           </a>
                         </div>
                       </div>
@@ -189,27 +189,27 @@
                         <span>{{collection.owners[0].profiles[0].headline}} </span>
                       </div>
                       <div class="mat-body-2 clickable" style="margin-top: 30px; margin-bottom: 30px" (click)="openCollection(collection)">{{ collection.title || 'No Title' | ucwords }} </div>
-                      <md-progress-bar mode="determinate" value="{{consoleLearningComponent.getProgressValue(collection)}}"></md-progress-bar>
+                      <mat-progress-bar mode="determinate" value="{{consoleLearningComponent.getProgressValue(collection)}}"></mat-progress-bar>
                       <div class="collectionSubtitle">
                         {{ consoleLearningComponent.getThisCollectionDate(collection) }} | {{collection.contents.length}} Activity |
                         <span *ngIf="collection.topics.length > 0; then topicName else noTopicText"></span>
                       </div>
-                    </md-card-content>
-                    <md-card-actions>
-                      <button md-raised-button (click)="consoleLearningComponent.viewExperience(collection)">View Details</button>
-                    </md-card-actions>
+                    </mat-card-content>
+                    <mat-card-actions>
+                      <button mat-raised-button (click)="consoleLearningComponent.viewExperience(collection)">View Details</button>
+                    </mat-card-actions>
                     <p class="upcomingEventLabel" *ngIf="consoleLearningComponent.peerHasReview(collection)">
                       {{collection.owners[0].profiles[0].first_name}} gave you a review
                     </p>
                     <br>
                     <br>
-                  </md-card>
+                  </mat-card>
                 </div>
-                <md-menu #pastCardMenu>
-                  <button md-menu-item (click)="viewTransaction(collection)">
+                <mat-menu #pastCardMenu>
+                  <button mat-menu-item (click)="viewTransaction(collection)">
                     View Receipt
                   </button>
-                </md-menu>
+                </mat-menu>
               </div>
             </div>
           </div>

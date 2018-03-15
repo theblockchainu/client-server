@@ -15,7 +15,7 @@ export class ConsoleAccountPayoutmethodsComponent implements OnInit {
   public loading: boolean;
   public loadingRules: boolean;
   public payoutAccounts: Array<any>;
-  private userId: string;
+  public userId: string;
   public ownedCollections: Array<any>;
   constructor(
     public activatedRoute: ActivatedRoute,

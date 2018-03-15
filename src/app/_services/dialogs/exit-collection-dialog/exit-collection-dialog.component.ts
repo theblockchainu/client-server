@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { CollectionService } from '../../collection/collection.service';
-import { MdDialogRef, MD_DIALOG_DATA, MdSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-exit-collection-dialog',
@@ -9,10 +9,10 @@ import { MdDialogRef, MD_DIALOG_DATA, MdSnackBar } from '@angular/material';
 })
 export class ExitCollectionDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MdDialogRef<ExitCollectionDialogComponent>
-    , @Inject(MD_DIALOG_DATA) public data: any,
+  constructor(public dialogRef: MatDialogRef<ExitCollectionDialogComponent>
+    , @Inject(MAT_DIALOG_DATA) public data: any,
     private _collectionService: CollectionService,
-    private snackBar: MdSnackBar) { }
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }

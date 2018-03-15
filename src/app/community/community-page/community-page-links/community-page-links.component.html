@@ -16,21 +16,21 @@
             </div>
         </div>
         <div class="col-md-3" style="text-align: right">
-            <md-select [(value)]="linksFilter" placeholder="Sort">
-                <md-option value="descending">Descending</md-option>
-                <md-option value="ascending">Ascending</md-option>
-                <md-option value="unsolved">Unsolved</md-option>
-                <md-option value="popular">Popular</md-option>
-            </md-select>
+            <mat-select [(value)]="linksFilter" placeholder="Sort">
+                <mat-option value="descending">Descending</mat-option>
+                <mat-option value="ascending">Ascending</mat-option>
+                <mat-option value="unsolved">Unsolved</mat-option>
+                <mat-option value="popular">Popular</mat-option>
+            </mat-select>
         </div>
     </div>
     <div class="row" style="margin-top: -20px;">
         <div class="col-md-12">
             <form [formGroup]="linksForm" (ngSubmit)="postLink()">
-                <md-input-container class="full-width margin-top-10" style="font-size: 15px;" [floatPlaceholder]="'never'">
-                    <input mdInput formControlName="text" placeholder="Type or paste your link here...">
-                </md-input-container>
-                <button md-raised-button color="primary" [disabled]="!linksForm.valid" class="pull-right">
+                <mat-input-container class="full-width margin-top-10" style="font-size: 15px;"  >
+                    <input matInput formControlName="text" placeholder="Type or paste your link here...">
+                </mat-input-container>
+                <button mat-raised-button color="primary" [disabled]="!linksForm.valid" class="pull-right">
                     <span *ngIf="!busyLink">Share</span>
                     <span *ngIf="busyLink"> </span>
                     <ngx-loading [show]="busyLink"></ngx-loading>

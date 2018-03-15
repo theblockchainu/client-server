@@ -6,11 +6,11 @@ import { ConsoleTeachingComponent } from '../console-teaching.component';
 import { AppConfig } from '../../../app.config';
 import * as _ from 'lodash';
 declare var moment: any;
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { CohortDetailDialogComponent } from './cohort-detail-dialog/cohort-detail-dialog.component';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 import { DialogsService } from '../../../_services/dialogs/dialog.service';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { UcFirstPipe } from 'ngx-pipes';
 
 @Component({
@@ -24,7 +24,7 @@ export class ConsoleTeachingWorkshopComponent implements OnInit {
   public collections: any;
   public loaded: boolean;
   public now: Date;
-  private userId;
+  public userId;
   public drafts: Array<any>;
   public ongoingArray: Array<any>;
   public upcomingArray: Array<any>;
@@ -41,8 +41,8 @@ export class ConsoleTeachingWorkshopComponent implements OnInit {
     private _dialogService: DialogsService,
     public router: Router,
     public config: AppConfig,
-    public dialog: MdDialog,
-    public snackBar: MdSnackBar,
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar,
     private ucFirstPipe: UcFirstPipe
   ) {
     activatedRoute.pathFromRoot[4].url.subscribe((urlSegment) => {

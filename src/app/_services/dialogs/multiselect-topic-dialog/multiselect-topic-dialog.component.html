@@ -1,9 +1,9 @@
-<div class="dialog-container" md-dialog-content>
+<div class="dialog-container" mat-dialog-content>
     <div class="col-md-10">
     <span class="ui-autocomplete ui-widget ui-autocomplete-multiple multiselectBox">
     <ul class="ui-autocomplete-multiple-container ui-widget ui-inputtext ui-state-default ui-corner-all" style="padding-left: 0.0em">
       <li class="ui-autocomplete-input-token col-sm-12">
-        <md-icon icon="search" aria-label="search" role="img" class="vAlignMiddle">search</md-icon>
+        <mat-icon icon="search" aria-label="search" role="img" class="vAlignMiddle">search</mat-icon>
         <input #box id="list" type="text" class="form-control input-topic" [(ngModel)]=query (keyup)=filter() placeholder="{{ title }}">
       </li>
 
@@ -28,18 +28,18 @@
                     <a><img src="/assets/images/onboarding_select_interest.png" class="topic-bg">
                         <span style="margin-left:20px">{{item.name}}</span>
                         <span *ngIf="!item.inSelect">
-                <i class="mdi mdi-check-circle-outline mdi-24px primaryColor pull-right" style="margin:18px 10px"></i>
+                <i class="mati mati-check-circle-outline mati-24px primaryColor pull-right" style="margin:18px 10px"></i>
               </span>
                         <span *ngIf="item.inSelect">
-                <i class="mdi mdi-check-circle mdi-24px primaryColor pull-right" style="margin:18px 10px"></i>
+                <i class="mati mati-check-circle mati-24px primaryColor pull-right" style="margin:18px 10px"></i>
               </span>
                     </a>
                 </li>
             </ul>
         </div>
     </div>
-    <md-dialog-actions *ngIf="data && data.searchUrl" class="col-md-2" style="padding:0px">
-        <button md-raised-button class="mat-raised-button" (click)="sendDataToCaller()" color="primary">Done</button>
-    </md-dialog-actions>
+    <mat-dialog-actions *ngIf="data && data.searchUrl" class="col-md-2" style="padding:0px">
+        <button mat-raised-button class="mat-raised-button" (click)="sendDataToCaller()" color="primary">Done</button>
+    </mat-dialog-actions>
 </div>
       

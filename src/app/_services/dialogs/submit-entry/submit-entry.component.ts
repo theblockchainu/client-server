@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MdDialogRef, MD_DIALOG_DATA, MdDialog } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../../../app.config';
 import { MediaUploaderService } from '../../../_services/mediaUploader/media-uploader.service';
@@ -18,7 +18,7 @@ import _ from 'lodash';
 })
 export class SubmitEntryComponent implements OnInit {
 
-    private userId;
+    public userId;
     public submitEntryForm: any = FormGroup;
     public imageUrl: string;
     public submissionTopics = [];
@@ -38,15 +38,15 @@ export class SubmitEntryComponent implements OnInit {
     public maxTopicMsg = 'Choose max 3 related tags';
 
     constructor(public config: AppConfig,
-        @Inject(MD_DIALOG_DATA) public data: any,
-        public dialog: MdDialog,
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        public dialog: MatDialog,
         private _fb: FormBuilder,
         public http: HttpClient,
         private mediaUploader: MediaUploaderService,
         public projectSubmissionService: ProjectSubmissionService,
         private _cookieUtilsService: CookieUtilsService,
         private _contentService: ContentService,
-        public dialogRef: MdDialogRef<SubmitEntryComponent>
+        public dialogRef: MatDialogRef<SubmitEntryComponent>
     ) {
         this.userId = _cookieUtilsService.getValue('userId');
         this.searchTopicURL = config.searchUrl + '/api/search/' + this.config.uniqueDeveloperCode + '_topics/suggest?field=name&query=';

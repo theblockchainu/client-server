@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MD_DIALOG_DATA, MdDialogRef, MdSnackBar } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { CommunityService } from '../../community/community.service';
 
 @Component({
@@ -9,10 +9,10 @@ import { CommunityService } from '../../community/community.service';
 })
 export class ExitCommunityDialogComponent implements OnInit {
 
-    constructor(public dialogRef: MdDialogRef<ExitCommunityDialogComponent>
-        , @Inject(MD_DIALOG_DATA) public data: any,
+    constructor(public dialogRef: MatDialogRef<ExitCommunityDialogComponent>
+        , @Inject(MAT_DIALOG_DATA) public data: any,
         private _communityService: CommunityService,
-        private snackBar: MdSnackBar) { }
+        private snackBar: MatSnackBar) { }
 
     ngOnInit() {
     }

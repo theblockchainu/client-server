@@ -10,7 +10,7 @@ import { IdPolicyDialogComponent } from './id-policy-dialog/id-policy-dialog.com
 import { VideoDialogComponent } from './video-dialog/video-dialog.component';
 import { VerifyPhoneDialogComponent } from './verify-phone-dialog/verify-phone-dialog.component';
 import { CollectionGridDialogComponent } from './collection-grid-dialog/collection-grid-dialog.component';
-import { MdDialogRef, MdDialog, MdDialogConfig } from '@angular/material';
+import { MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material';
 import { Injectable } from '@angular/core';
 import { ProfilePopupCardComponent } from './profile-popup-card/profile-popup-card.component';
 import { RequestPasswordDialogComponent } from './forgot-pwd-dialog/forgot-pwd-dialog.component';
@@ -42,11 +42,11 @@ import { DateConflictDialogComponent } from './date-conflict-dialog/date-conflic
 @Injectable()
 export class DialogsService {
 
-    constructor(public dialog: MdDialog
+    constructor(public dialog: MatDialog
     ) { }
 
     public openSignup() {
-        let dialogRef: MdDialogRef<SignupComponentDialogComponent>;
+        let dialogRef: MatDialogRef<SignupComponentDialogComponent>;
 
         dialogRef = this.dialog.open(SignupComponentDialogComponent);
 
@@ -54,14 +54,14 @@ export class DialogsService {
     }
 
     public openLogin() {
-        let dialogRef1: MdDialogRef<LoginComponentDialog>;
+        let dialogRef1: MatDialogRef<LoginComponentDialog>;
 
         dialogRef1 = this.dialog.open(LoginComponentDialog);
 
         return dialogRef1.afterClosed();
     }
     public addCard() {
-        let dialogRef4: MdDialogRef<AddCardDialogComponent>;
+        let dialogRef4: MatDialogRef<AddCardDialogComponent>;
 
         dialogRef4 = this.dialog.open(AddCardDialogComponent, {
             width: '610px',
@@ -70,7 +70,7 @@ export class DialogsService {
         return dialogRef4.afterClosed();
     }
     public openIdVerify() {
-        let dialogRef5: MdDialogRef<VerifyIdDialogComponent>;
+        let dialogRef5: MatDialogRef<VerifyIdDialogComponent>;
 
         dialogRef5 = this.dialog.open(VerifyIdDialogComponent, {
             width: '60vw',
@@ -79,7 +79,7 @@ export class DialogsService {
         return dialogRef5.afterClosed();
     }
     public openEmailVerify() {
-        let dialogRef6: MdDialogRef<VerifyEmailDialogComponent>;
+        let dialogRef6: MatDialogRef<VerifyEmailDialogComponent>;
 
         dialogRef6 = this.dialog.open(VerifyEmailDialogComponent, {
             width: '50vw',
@@ -88,7 +88,7 @@ export class DialogsService {
         return dialogRef6.afterClosed();
     }
     public openIdPolicy() {
-        let dialogRef7: MdDialogRef<IdPolicyDialogComponent>;
+        let dialogRef7: MatDialogRef<IdPolicyDialogComponent>;
 
         dialogRef7 = this.dialog.open(IdPolicyDialogComponent, {
             width: '45vw',
@@ -98,7 +98,7 @@ export class DialogsService {
     }
 
     public openVideo(url: string) {
-        let dialogRef8: MdDialogRef<VideoDialogComponent>;
+        let dialogRef8: MatDialogRef<VideoDialogComponent>;
 
         dialogRef8 = this.dialog.open(VideoDialogComponent, {
             width: '1000px',
@@ -108,7 +108,7 @@ export class DialogsService {
         return dialogRef8.afterClosed();
     }
     public openPhoneVerify() {
-        let dialogRef9: MdDialogRef<VerifyPhoneDialogComponent>;
+        let dialogRef9: MatDialogRef<VerifyPhoneDialogComponent>;
 
         dialogRef9 = this.dialog.open(VerifyPhoneDialogComponent, {
             width: '50vw',
@@ -118,7 +118,7 @@ export class DialogsService {
     }
 
     public openFollowTopicDialog(type, searchTopicURL) {
-        let dialogRef5: MdDialogRef<MultiselectTopicDialogComponent>;
+        let dialogRef5: MatDialogRef<MultiselectTopicDialogComponent>;
 
         dialogRef5 = this.dialog.open(MultiselectTopicDialogComponent,
             {
@@ -140,7 +140,7 @@ export class DialogsService {
     //  * startLiveSession
     //  */
     // public startLiveSession() {
-    //     let dialogRef5: MdDialogRef<LiveSessionDialogComponent>;
+    //     let dialogRef5: MatDialogRef<LiveSessionDialogComponent>;
 
     //     dialogRef5 = this.dialog.open(LiveSessionDialogComponent, {
     //         width: '100vw',
@@ -153,7 +153,7 @@ export class DialogsService {
      * openCollectionGrid
      */
     public openCollectionGrid(title, collections) {
-        let dialogRef: MdDialogRef<CollectionGridDialogComponent>;
+        let dialogRef: MatDialogRef<CollectionGridDialogComponent>;
 
         dialogRef = this.dialog.open(CollectionGridDialogComponent, {
             width: '80vw',
@@ -235,7 +235,7 @@ export class DialogsService {
 
 
     public editCalendar(collection, contents, calendars, allItinerary, participants, events: CalendarEvent[], userId: string, startDate: Date, endDate: Date): Observable<boolean> {
-        let dialogRef: MdDialogRef<EditCalendarDialogComponent>;
+        let dialogRef: MatDialogRef<EditCalendarDialogComponent>;
 
         dialogRef = this.dialog.open(EditCalendarDialogComponent, {
             width: '80vw',
@@ -257,7 +257,7 @@ export class DialogsService {
 
 
     public addNewTopic() {
-        let dialogRef: MdDialogRef<AddTopicDialogComponent>;
+        let dialogRef: MatDialogRef<AddTopicDialogComponent>;
 
         dialogRef = this.dialog.open(AddTopicDialogComponent);
 
@@ -266,7 +266,7 @@ export class DialogsService {
     }
 
     public addNewLanguage() {
-        let dialogRef: MdDialogRef<AddLanguageDialogComponent>;
+        let dialogRef: MatDialogRef<AddLanguageDialogComponent>;
 
         dialogRef = this.dialog.open(AddLanguageDialogComponent);
 
@@ -278,7 +278,7 @@ export class DialogsService {
      * startLiveSession
      */
     public startLiveSession(data: any) {
-        let dialogRef5: MdDialogRef<LiveSessionDialogComponent>;
+        let dialogRef5: MatDialogRef<LiveSessionDialogComponent>;
 
         dialogRef5 = this.dialog.open(LiveSessionDialogComponent, {
             panelClass: 'my-full-screen-dialog',

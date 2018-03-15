@@ -2,31 +2,31 @@ import { NgModule } from '@angular/core';
 import { CommonModule, NgSwitch, CurrencyPipe, TitleCasePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
-    MdChipsModule,
-    MdDialogModule,
-    MdMenuModule,
-    MdButtonModule,
-    MdCardModule,
-    MdToolbarModule,
-    MdIconModule,
-    MdProgressBarModule,
-    MdListModule,
-    MdTabsModule,
-    MdTableModule,
-    MdInputModule,
-    MdCheckboxModule,
-    MdSidenavModule,
-    MdSelectModule,
-    MdDatepickerModule,
-    MdGridListModule,
-    MdRadioModule,
-    MdNativeDateModule,
-    MdSliderModule,
-    MdProgressSpinnerModule,
-    MdExpansionModule,
-    MdSnackBarModule,
-    MdAutocompleteModule,
-    MdTooltipModule
+    MatChipsModule,
+    MatDialogModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatListModule,
+    MatTabsModule,
+    MatTableModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatSidenavModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatGridListModule,
+    MatRadioModule,
+    MatNativeDateModule,
+    MatSliderModule,
+    MatProgressSpinnerModule,
+    MatExpansionModule,
+    MatSnackBarModule,
+    MatAutocompleteModule,
+    MatTooltipModule
 } from '@angular/material';
 import {
     ModalModule, BsDropdownModule, ProgressbarModule,
@@ -60,7 +60,7 @@ import { NotificationService } from '../_services/notification/notification.serv
 import { ANIMATION_TYPES, LoadingModule } from 'ngx-loading';
 import { ExtractTimePipe } from './extract-time/extract-time.pipe';
 import { SocketService } from '../_services/socket/socket.service';
-import { Ng2DeviceDetectorModule } from 'ng2-device-detector';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 import { StickyModule } from 'ng2-sticky-kit';
 import { ConvertCurrencyPipe } from './convert-currency/convert-currency.pipe';
 import { TrimPipe } from './trim/trim.pipe';
@@ -93,7 +93,7 @@ import { TopicRowComponent } from './topic-row/topic-row.component';
             secondaryColour: '#ff5b5f',
             tertiaryColour: '#ff6d71'
         }),
-        Ng2DeviceDetectorModule.forRoot(),
+        DeviceDetectorModule.forRoot(),
         StickyModule,
         NgxCarouselModule,
         AgmCoreModule.forRoot({
@@ -102,8 +102,8 @@ import { TopicRowComponent } from './topic-row/topic-row.component';
             language: 'en-US'
         }),
         Ng4GeoautocompleteModule.forRoot(),
-        MdIconModule,
-        MdButtonModule
+        MatIconModule,
+        MatButtonModule
     ],
     declarations:
         [ExtractTimePipe,
@@ -159,13 +159,13 @@ import { TopicRowComponent } from './topic-row/topic-row.component';
         TimepickerModule,
         NgPipesModule,
         AccordionModule,
-        MdChipsModule, MdDialogModule, MdMenuModule, MdButtonModule,
-        MdCardModule, MdToolbarModule, MdIconModule, MdProgressBarModule,
-        MdListModule, MdTabsModule, MdTableModule, MdInputModule, MdCheckboxModule,
-        MdSidenavModule, MdSelectModule, MdDatepickerModule, MdGridListModule, MdRadioModule,
-        MdNativeDateModule, MdSliderModule, MdAutocompleteModule,
-        SliderModule, MdProgressSpinnerModule, MdExpansionModule, MdSnackBarModule, ExtractTimePipe,
-        LoadingModule, MdTooltipModule, ConvertCurrencyPipe, ProfilePopupComponent, TrimPipe, TitleCasePipe
+        MatChipsModule, MatDialogModule, MatMenuModule, MatButtonModule,
+        MatCardModule, MatToolbarModule, MatIconModule, MatProgressBarModule,
+        MatListModule, MatTabsModule, MatTableModule, MatInputModule, MatCheckboxModule,
+        MatSidenavModule, MatSelectModule, MatDatepickerModule, MatGridListModule, MatRadioModule,
+        MatNativeDateModule, MatSliderModule, MatAutocompleteModule,
+        SliderModule, MatProgressSpinnerModule, MatExpansionModule, MatSnackBarModule, ExtractTimePipe,
+        LoadingModule, MatTooltipModule, ConvertCurrencyPipe, ProfilePopupComponent, TrimPipe, TitleCasePipe
         , TextIconCarouselComponent, Ng4GeoautocompleteModule, AgmCoreModule, TimeToNowPipe, TopicRowComponent,
         NgxCarouselModule
     ]

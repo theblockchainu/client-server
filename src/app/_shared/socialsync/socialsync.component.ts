@@ -20,8 +20,8 @@ export class SocialSyncComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private config: AppConfig,
-    private _profileService: ProfileService) { }
+    public config: AppConfig,
+    public _profileService: ProfileService) { }
 
   ngOnInit() {
     // this._profileService.getSocialIdentities(null)

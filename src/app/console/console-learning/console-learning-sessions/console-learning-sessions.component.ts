@@ -17,7 +17,7 @@ export class ConsoleLearningSessionsComponent implements OnInit {
 
   public loaded: boolean;
   public activeTab: string;
-  private userId;
+  public userId;
   public pastSessions = [];
   public ongoingSessions = [];
   public upcomingSessions = [];
@@ -29,7 +29,7 @@ export class ConsoleLearningSessionsComponent implements OnInit {
     public _collectionService: CollectionService,
     public router: Router,
     private _cookieUtilsService: CookieUtilsService,
-    private _profileService: ProfileService,
+    public _profileService: ProfileService,
     public config: AppConfig,
     private dialogsService: DialogsService
   ) {

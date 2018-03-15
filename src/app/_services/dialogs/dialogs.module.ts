@@ -5,7 +5,7 @@ import { SharedModule } from '../../_shared/_shared.module';
 import { FormsModule, ReactiveFormsModule, NgModel } from '@angular/forms';
 import { ClipboardModule } from 'ngx-clipboard';
 
-import { SignupComponentDialog } from './signup-dialog/signup-dialog.component';
+import { SignupComponentDialogComponent } from './signup-dialog/signup-dialog.component';
 import { LoginComponentDialog } from './login-dialog/login-dialog.component';
 import { RequestPasswordDialogComponent } from './forgot-pwd-dialog/forgot-pwd-dialog.component';
 import { AddCardDialogComponent } from './add-card-dialog/add-card-dialog.component';
@@ -60,10 +60,10 @@ import { DateConflictDialogComponent } from './date-conflict-dialog/date-conflic
     VgBufferingModule,
     ClipboardModule
   ],
-  exports: [SignupComponentDialog, LoginComponentDialog, RequestPasswordDialogComponent, AddCardDialogComponent
+  exports: [SignupComponentDialogComponent, LoginComponentDialog, RequestPasswordDialogComponent, AddCardDialogComponent
     , VerifyIdDialogComponent, VerifyEmailDialogComponent, IdPolicyDialogComponent, VideoDialogComponent
     , VerifyPhoneDialogComponent, LiveSessionDialogComponent, CollectionGridDialogComponent, ProfilePopupCardComponent],
-  declarations: [SignupComponentDialog, LoginComponentDialog, RequestPasswordDialogComponent
+  declarations: [SignupComponentDialogComponent, LoginComponentDialog, RequestPasswordDialogComponent
     , AddCardDialogComponent, MultiselectTopicDialogComponent, VerifyIdDialogComponent, VerifyEmailDialogComponent
     , IdPolicyDialogComponent, VideoDialogComponent, VerifyPhoneDialogComponent, LiveSessionDialogComponent, CollectionGridDialogComponent, ProfilePopupCardComponent
     , ProfilePopupCardComponent, ExitCollectionDialogComponent, CancelCollectionDialogComponent, DeleteCollectionDialogComponent,
@@ -82,7 +82,7 @@ import { DateConflictDialogComponent } from './date-conflict-dialog/date-conflic
     ProjectSubmissionService
   ],
   entryComponents: [
-    SignupComponentDialog, LoginComponentDialog, RequestPasswordDialogComponent, AddCardDialogComponent, MultiselectTopicDialogComponent
+    SignupComponentDialogComponent, LoginComponentDialog, RequestPasswordDialogComponent, AddCardDialogComponent, MultiselectTopicDialogComponent
     , VerifyIdDialogComponent, VerifyEmailDialogComponent, IdPolicyDialogComponent, VideoDialogComponent, VerifyPhoneDialogComponent
     , LiveSessionDialogComponent, CollectionGridDialogComponent, ProfilePopupCardComponent, CancelCollectionDialogComponent, ExitCollectionDialogComponent, DeleteCollectionDialogComponent,
     EditCalendarDialogComponent,

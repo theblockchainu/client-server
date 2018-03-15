@@ -141,8 +141,7 @@ export class ContentOnlineComponent implements OnInit {
             response => {
                 if (comment.upvotes !== undefined) {
                     comment.upvotes.push(response );
-                }
-                else {
+                } else {
                     comment.upvotes = [];
                     comment.upvotes.push(response );
                 }
@@ -157,8 +156,7 @@ export class ContentOnlineComponent implements OnInit {
             response => {
                 if (reply.upvotes !== undefined) {
                     reply.upvotes.push(response );
-                }
-                else {
+                } else {
                     reply.upvotes = [];
                     reply.upvotes.push(response );
                 }

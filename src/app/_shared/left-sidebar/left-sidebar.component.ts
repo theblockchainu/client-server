@@ -3,7 +3,8 @@ import {
   , HostBinding, HostListener, Output
 } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 import { Router, ActivatedRoute, Params, NavigationStart } from '@angular/router';
 
 import { LeftSidebarService, SideBarMenuItem } from '../../_services/left-sidebar/left-sidebar.service';

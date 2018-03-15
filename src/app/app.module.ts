@@ -1,6 +1,5 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
-import 'hammerjs';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './_core/_core.module';
 import { AppComponent } from './app.component';
@@ -15,7 +14,7 @@ import {
   MdNativeDateModule, MdProgressSpinnerModule, MdProgressBarModule, MdTooltipModule
 } from '@angular/material';
 import { DialogsModule } from './_services/dialogs/dialogs.module';
-import { GlobalErrorHandler } from './error-handler/globalerrorhandler';
+import { GlobalErrorHandlerComponent } from './error-handler/globalerrorhandler';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { SignupComponent } from './signup/signup.component';
 import { AppDesignComponent } from './app-design/app-design.component';
@@ -60,7 +59,7 @@ export class RavenErrorHandler implements ErrorHandler {
     LoginComponent,
     SignupComponent,
     AppDesignComponent,
-    GlobalErrorHandler,
+    GlobalErrorHandlerComponent,
     AppNotificationDialogComponent,
     ResetPasswordComponent,
     ContactComponent,
@@ -109,7 +108,7 @@ export class RavenErrorHandler implements ErrorHandler {
   //   },
   //   {
   //     provide: ErrorHandler,
-  //     useClass: GlobalErrorHandler
+  //     useClass: GlobalErrorHandlerComponent
   //   },
   //   Title
   // ],

@@ -7,7 +7,7 @@ import { LoginComponentDialog } from './_services/dialogs/login-dialog/login-dia
 import { LoginComponent } from './login/login.component';
 import { AppDesignComponent } from './app-design/app-design.component';
 import { IndexPhilComponent } from './default/index-philosophy/index-philosophy.component';
-import { GlobalErrorHandler } from './error-handler/globalerrorhandler';
+import { GlobalErrorHandlerComponent } from './error-handler/globalerrorhandler';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ContactComponent } from './contact-us/contact-us.component';
 import { AboutUsComponent } from './about-us/about-us.component';
@@ -139,7 +139,7 @@ const routes: Routes = [
   },
   {
     path: 'error',
-    component: GlobalErrorHandler
+    component: GlobalErrorHandlerComponent
   },
   {
     path: '**',

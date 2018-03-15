@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../_shared/_shared.module';
 import { CommunityRoutingModule } from './community-routing.module';
 import { AppointmentCalendarComponent } from './appointment-calendar/appointment-calendar.component';
-import 'hammerjs';
 import { CommunityEditComponent } from './community-edit/community-edit.component';
 
 @NgModule({

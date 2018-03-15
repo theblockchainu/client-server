@@ -9,7 +9,7 @@ import { AppConfig } from '../app.config';
 })
 
 @Injectable()
-export class GlobalErrorHandler implements ErrorHandler {
+export class GlobalErrorHandlerComponent implements ErrorHandler {
     constructor(private injector: Injector,
         public _appConfig: AppConfig) { }
     handleError(error) {

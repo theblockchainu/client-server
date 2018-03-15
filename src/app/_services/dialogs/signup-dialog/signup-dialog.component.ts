@@ -5,11 +5,11 @@ import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
   templateUrl: './signup-dialog.component.html',
   styleUrls: ['./signup-dialog.component.scss']
 })
-export class SignupComponentDialog implements OnInit {
+export class SignupComponentDialogComponent implements OnInit {
 
   public action;
 
-  constructor(public dialogRef: MdDialogRef<SignupComponentDialog>,
+  constructor(public dialogRef: MdDialogRef<SignupComponentDialogComponent>,
     @Inject(MD_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {

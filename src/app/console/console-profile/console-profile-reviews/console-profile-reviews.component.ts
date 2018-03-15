@@ -97,11 +97,11 @@ export class ConsoleProfileReviewsComponent implements OnInit, AfterViewChecked 
    * @param calendarId
    */
   public getReviewedCalendar(calendars, calendarId) {
-      return calendars.find((calendar) => {
-        return calendar.id === calendarId;
-      }) !== undefined ? calendars.find((calendar) => {
-        return calendar.id === calendarId;
-      }) : {};
+    return calendars.find((calendar) => {
+      return calendar.id === calendarId;
+    }) !== undefined ? calendars.find((calendar) => {
+      return calendar.id === calendarId;
+    }) : {};
   }
 
   /**
@@ -143,11 +143,11 @@ export class ConsoleProfileReviewsComponent implements OnInit, AfterViewChecked 
                   this.completeCollections[collection.id]['collection']['calendars'] = [calendar];
                   let participantReviewCount = 0;
                   if (this.completeCollections[collection.id]['collection'].participants !== undefined) {
-                      this.completeCollections[collection.id]['collection'].participants.forEach(participant => {
-                          if (participant.reviewsAboutYou && participant.reviewsAboutYou[0].collectionId === collection.id) {
-                              participantReviewCount += 1;
-                          }
-                      });
+                    this.completeCollections[collection.id]['collection'].participants.forEach(participant => {
+                      if (participant.reviewsAboutYou && participant.reviewsAboutYou[0].collectionId === collection.id) {
+                        participantReviewCount += 1;
+                      }
+                    });
                   }
                   this.completeCollections[collection.id]['collection'].participantReviewCount = participantReviewCount;
                 }
@@ -156,7 +156,7 @@ export class ConsoleProfileReviewsComponent implements OnInit, AfterViewChecked 
           });
         }
       });
-      //const completeCollections = this._collectionService.filerCompleteCollections(peer.ownedCollections);
+      // const completeCollections = this._collectionService.filerCompleteCollections(peer.ownedCollections);
       console.log(this.completeCollections);
       for (const key in this.completeCollections) {
         if (this.completeCollections.hasOwnProperty(key)) {
@@ -180,8 +180,8 @@ export class ConsoleProfileReviewsComponent implements OnInit, AfterViewChecked 
             collection.participants.forEach(participant => {
               // If one of the participant of a collection does not have a review
               if (peer.reviewsByYou === undefined || !peer.reviewsByYou.some(review => {
-                  return review.collectionId === collection.id && review.reviewedPeer[0].id === participant.id;
-                })) {
+                return review.collectionId === collection.id && review.reviewedPeer[0].id === participant.id;
+              })) {
                 hasPending = true;
                 pendingReviewParticipantCount++;
               }
@@ -214,7 +214,7 @@ export class ConsoleProfileReviewsComponent implements OnInit, AfterViewChecked 
     // Show popup here
     const data = collection;
     this.dialogsService.rateParticipant(data)
-        .subscribe();
+      .subscribe();
   }
 
 }

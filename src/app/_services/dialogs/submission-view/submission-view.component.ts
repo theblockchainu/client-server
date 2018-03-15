@@ -136,8 +136,7 @@ export class SubmissionViewComponent implements OnInit {
             response => {
                 if (comment.upvotes !== undefined) {
                     comment.upvotes.push(response );
-                }
-                else {
+                } else {
                     comment.upvotes = [];
                     comment.upvotes.push(response );
                 }
@@ -152,8 +151,7 @@ export class SubmissionViewComponent implements OnInit {
             response => {
                 if (submission.upvotes !== undefined) {
                     submission.upvotes.push(response );
-                }
-                else {
+                } else {
                     submission.upvotes = [];
                     submission.upvotes.push(response );
                 }
@@ -168,8 +166,7 @@ export class SubmissionViewComponent implements OnInit {
             response => {
                 if (reply.upvotes !== undefined) {
                     reply.upvotes.push(response );
-                }
-                else {
+                } else {
                     reply.upvotes = [];
                     reply.upvotes.push(response );
                 }

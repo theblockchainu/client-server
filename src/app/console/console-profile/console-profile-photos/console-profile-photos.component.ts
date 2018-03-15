@@ -54,15 +54,15 @@ export class ConsoleProfilePhotosComponent implements OnInit {
         this.profile_video = response.url;
         this._profileService.updateProfile(this.userId, {
           'profile_video': response.url
-        }).subscribe(response => {
-            this.profile_video = response.profile_video;
-            this.uploadingVideo = false;
-          }, err => {
-            console.log(err);
-        });
+        }).subscribe((res: any) => {
+          this.profile_video = res.profile_video;
+          this.uploadingVideo = false;
         }, err => {
           console.log(err);
         });
+      }, err => {
+        console.log(err);
+      });
     }
   }
 
@@ -73,16 +73,16 @@ export class ConsoleProfilePhotosComponent implements OnInit {
         this.picture_url = response.url;
         this._profileService.updateProfile(this.userId, {
           'picture_url': response.url
-        }).subscribe(response => {
-            this.picture_url = response.picture_url;
-            this.uploadingImage = false;
-          }, err => {
-            console.log(err);
-        });
-          // this.profile_picture_array.push(response.url);
+        }).subscribe((res: any) => {
+          this.picture_url = res.picture_url;
+          this.uploadingImage = false;
         }, err => {
           console.log(err);
         });
+        // this.profile_picture_array.push(response.url);
+      }, err => {
+        console.log(err);
+      });
     }
   }
 
@@ -90,9 +90,9 @@ export class ConsoleProfilePhotosComponent implements OnInit {
     this._profileService.updateProfile(this.userId, {
       'picture_url': image
     }).subscribe(response => {
-        this.picture_url = response.url;
-      }, err => {
-        console.log(err);
+      this.picture_url = response.url;
+    }, err => {
+      console.log(err);
     });
   }
 

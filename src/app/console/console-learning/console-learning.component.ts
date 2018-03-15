@@ -19,7 +19,7 @@ export class ConsoleLearningComponent implements OnInit {
   public loaded: boolean;
   public activeTab: string;
   public now: Date;
-  private userId;
+  public userId;
 
   constructor(
     private activatedRoute: ActivatedRoute,

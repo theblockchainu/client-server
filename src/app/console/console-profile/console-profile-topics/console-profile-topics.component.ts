@@ -18,7 +18,7 @@ import { AppConfig } from '../../../app.config';
 })
 export class ConsoleProfileTopicsComponent implements OnInit {
 
-  private userId;
+  public userId;
   public loading: boolean;
   public topicsLearning: Array<any> = [];
   public topicsTeaching: Array<any> = [];
@@ -37,7 +37,7 @@ export class ConsoleProfileTopicsComponent implements OnInit {
     public snackBar: MatSnackBar,
     public _dialogService: DialogsService,
     private _cookieUtilsService: CookieUtilsService,
-    private config: AppConfig
+    public config: AppConfig
   ) {
     activatedRoute.pathFromRoot[4].url.subscribe((urlSegment) => {
       console.log(urlSegment[0].path);

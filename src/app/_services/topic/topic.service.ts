@@ -7,10 +7,10 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class TopicService {
-  private userId;
+  public userId;
   public options;
   constructor(
-    private http: HttpClient, private config: AppConfig,
+    private http: HttpClient, public config: AppConfig,
     public router: Router,
     private requestHeaderService: RequestHeaderService
   ) {

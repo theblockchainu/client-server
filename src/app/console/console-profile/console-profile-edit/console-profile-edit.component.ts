@@ -30,7 +30,7 @@ declare var moment: any;
 export class ConsoleProfileEditComponent implements OnInit {
   public loadingProfile = false;
   public busyUpdate = false;
-  private userId;
+  public userId;
   public profile: any;
   public peer: any;
   public work: any;
@@ -73,7 +73,7 @@ export class ConsoleProfileEditComponent implements OnInit {
     public _fb: FormBuilder,
     public _timezoneService: TimezonePickerService,
     private http: HttpClient,
-    private config: AppConfig,
+    public config: AppConfig,
     private _cookieUtilsService: CookieUtilsService,
     private ucFirstPipe: UcFirstPipe) {
     activatedRoute.pathFromRoot[4].url.subscribe((urlSegment) => {

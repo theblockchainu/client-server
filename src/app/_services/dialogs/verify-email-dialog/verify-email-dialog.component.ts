@@ -33,7 +33,7 @@ export class VerifyEmailDialogComponent implements OnInit {
     private _fb: FormBuilder,
     public _profileService: ProfileService,
     private http: HttpClient,
-    private config: AppConfig,
+    public config: AppConfig,
     public dialogRef: MatDialogRef<VerifyEmailDialogComponent>,
     private _cookieUtilsService: CookieUtilsService,
     @Inject(MAT_DIALOG_DATA) public data: any) {

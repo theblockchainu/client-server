@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule, MatCardModule, MatMenuModule,
   MatToolbarModule, MatIconModule, MatAutocompleteModule, MatInputModule,
-  MatNativeDateModule, MatProgressSpinnerModule, MatProgressBarModule, MatTooltipModule
+  MatNativeDateModule, MatProgressSpinnerModule, MatProgressBarModule, MatTooltipModule, MatListModule
 } from '@angular/material';
 import { DialogsModule } from './_services/dialogs/dialogs.module';
 import { GlobalErrorHandlerComponent } from './error-handler/globalerrorhandler';
@@ -89,7 +89,8 @@ export class RavenErrorHandler implements ErrorHandler {
       secondaryColour: '#ff5b5f',
       tertiaryColour: '#ff6d71'
     }),
-    TransferHttpCacheModule
+    TransferHttpCacheModule,
+    MatListModule
   ],
   bootstrap: [AppComponent],
   // providers: [

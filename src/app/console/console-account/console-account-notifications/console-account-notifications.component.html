@@ -19,10 +19,12 @@
       </div>
       <div *ngFor="let notification of notifications">
         <mat-list-item *ngIf="!notification.hidden">
-          <div [ngClass]="{'row': true, 'full-width': true, 'notificationsRow': true, 'notificationsRowUnread': !notification.seen}" (click)="onNotificationClick(notification)">
+          <div [ngClass]="{'row': true, 'full-width': true, 'notificationsRow': true, 'notificationsRowUnread': !notification.seen}"
+            (click)="onNotificationClick(notification)">
             <div class="col-md-1">
               <img *ngIf="!notification.actor[0].profiles[0].picture_url" src="/assets/images/avatar.png" alt="A" class="circle-thumb notificationsImage">
-              <img *ngIf="notification.actor[0].profiles[0].picture_url" src="{{config.apiUrl + notification.actor[0].profiles[0].picture_url}}" alt="A" class="circle-thumb notificationsImage">
+              <img *ngIf="notification.actor[0].profiles[0].picture_url" src="{{config.apiUrl + notification.actor[0].profiles[0].picture_url}}"
+                alt="A" class="circle-thumb notificationsImage">
             </div>
             <div class="col-md-10" style="padding-left: 25px;">
               <!--Content here-->

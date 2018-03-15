@@ -18,7 +18,7 @@ import _ from 'lodash';
 })
 export class SubmitEntryComponent implements OnInit {
 
-    private userId;
+    public userId;
     public submitEntryForm: any = FormGroup;
     public imageUrl: string;
     public submissionTopics = [];

@@ -25,16 +25,16 @@
                                     <mat-option value="{{card.id}}" *ngFor="let card of listAllCards">{{ card.brand }} {{card.object}} ending with {{card.last4}}</mat-option>
                                 </mat-select>
                             </div>
-                            <div class="col-sm-6" *ngIf="cardDetails.id">
-                                <span class="text-grey" *ngIf="cardDetails.brand === 'Visa'">
+                            <div class="col-sm-6" *ngIf="cardDetails['id']">
+                                <span class="text-grey" *ngIf="cardDetails['brand'] === 'Visa'">
                                     <i class="fa fa-cc-visa fa-2x"></i>
                                 </span> &emsp;
                                 <div class="display-inline-block fs-12 text-grey">
                                     <span class="display-block lh-1">Name:
-                                        <span class="text-black">{{cardDetails.name}}</span>
+                                        <span class="text-black">{{cardDetails['name']}}</span>
                                     </span>
                                     <span>Expires:
-                                        <span class="text-black">{{cardDetails.exp_month}}/{{cardDetails.exp_year}}</span>
+                                        <span class="text-black">{{cardDetails['exp_month']}}/{{cardDetails['exp_year']}}</span>
                                     </span>
                                 </div>
                             </div>

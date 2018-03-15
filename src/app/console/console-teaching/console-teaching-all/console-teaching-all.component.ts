@@ -22,7 +22,7 @@ export class ConsoleTeachingAllComponent implements OnInit {
     public collections: any;
     public loaded: boolean;
     public now: Date;
-    private userId;
+    public userId;
     private outputResult: any;
     public activeTab: string;
     public drafts: Array<any>;

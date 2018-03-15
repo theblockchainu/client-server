@@ -5,6 +5,7 @@ import { MessageParticipantComponent } from '../message-participant/message-part
 import { CollectionService } from '../../../_services/collection/collection.service';
 import { DialogsService } from '../../../_services/dialogs/dialog.service';
 import { ProfileService } from '../../../_services/profile/profile.service';
+
 @Component({
   selector: 'app-view-participants',
   templateUrl: './view-participants.component.html',
@@ -16,7 +17,7 @@ export class ViewParticipantsComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public config: AppConfig,
     private dialog: MatDialog,
-    private _collectionService: CollectionService,
+    public _collectionService: CollectionService,
     public _dialogsService: DialogsService,
     public snackBar: MatSnackBar,
     public _profileService: ProfileService

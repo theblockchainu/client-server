@@ -4,7 +4,8 @@
             <button disableRipple mat-button [mat-dialog-close]="getDiscardDialogData()" *ngIf="!isEdit" style="min-width: 20px;padding: 0px 10px 0px 0px;vertical-align: middle;">
                 <mat-icon class="mat-icon material-icons mat-icon-small">close</mat-icon>
             </button>
-            <button disableRipple mat-button *ngIf="isEdit" style="min-width: 20px;padding: 0px 10px 0px 0px;vertical-align: middle;" (click)="dialogRef.close()">
+            <button disableRipple mat-button *ngIf="isEdit" style="min-width: 20px;padding: 0px 10px 0px 0px;vertical-align: middle;"
+                (click)="dialogRef.close()">
                 <mat-icon class="mat-icon material-icons mat-icon-small">close</mat-icon>
             </button>
             <div>
@@ -18,7 +19,7 @@
         </div>
     </div>
     <div *ngIf="lastIndex>-1">
-        <form [formGroup]="itenaryForm.controls.contents.controls[lastIndex]">
+        <form [formGroup]="itenaryForm.controls['contents'].controls[lastIndex]">
             <div>
                 <div class="row">
                     <div class="col-sm-12 margin-bottom-30">
@@ -44,11 +45,14 @@
                                     <ngx-loading [show]="true"></ngx-loading>
                                 </div>
                                 <p-fileUpload *ngIf="!uploadingImage" #fubauto name="image" customUpload="true" (uploadHandler)="uploadImage($event)" maxFileSize="10000000"
-                                              accept="image/*" chooseLabel="Browse">
+                                    accept="image/*" chooseLabel="Browse">
                                     <ng-template pTemplate="toolbar">
                                         <div style="font-size: 80%; margin-top: 5px;">You can upload a maximum of 1 image</div>
                                     </ng-template>
-                                </p-fileUpload>                  <h5>Max File Size               <b>10MB</b>             </h5>
+                                </p-fileUpload>
+                                <h5>Max File Size
+                                    <b>10MB</b>
+                                </h5>
                                 <!-- <ng-template pTemplate="content"> -->
                                 <!-- <mat-grid-list cols="4" gutterSize="10px" *ngIf="image.value">
                                         <mat-grid-tile>
@@ -66,13 +70,13 @@
                             </div>
                         </div>
                         <mat-input-container class="pb-block" style="margin-top: 20px; margin-bottom: 20px">
-                        <textarea matInput #description maxlength="500" rows="2" formControlName="description" placeholder="What will we do?" [required]="true"
-                                  class="title"></textarea>
+                            <textarea matInput #description maxlength="500" rows="2" formControlName="description" placeholder="What will we do?" [required]="true"
+                                class="title"></textarea>
                             <mat-hint align="end">{{description.value.length}} / 500</mat-hint>
                         </mat-input-container>
                         <mat-input-container class="pb-block" style="margin-top: 20px; margin-bottom: 20px">
-                        <textarea matInput #prerequisites maxlength="500" rows="2" formControlName="prerequisites" placeholder="What do learners need to know?"
-                                  class="title" [required]="true"></textarea>
+                            <textarea matInput #prerequisites maxlength="500" rows="2" formControlName="prerequisites" placeholder="What do learners need to know?"
+                                class="title" [required]="true"></textarea>
                             <mat-hint align="end">{{prerequisites.value.length}} / 500</mat-hint>
                         </mat-input-container>
                         <div class="form-group">
@@ -81,7 +85,7 @@
                                 <ngx-loading [show]="true"></ngx-loading>
                             </div>
                             <p-fileUpload *ngIf="!uploadingAttachments" #fubauto name="file" customUpload="true" (uploadHandler)="uploadAttachments($event)"
-                                          maxFileSize="10000000" chooseLabel="Browse" accept="application/pdf,application/msword,
+                                maxFileSize="10000000" chooseLabel="Browse" accept="application/pdf,application/msword,
                             application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/*,video/*" multiple="multiple">
                                 <ng-template pTemplate="toolbar">
                                     <div style="font-size: 80%; margin-top: 5px;">You can upload a maximum of 2 attachments</div>
@@ -89,7 +93,10 @@
                                 <!-- <ng-template #file pTemplate="file">
                                     </ng-template> -->
 
-                            </p-fileUpload>                  <h5>Max File Size               <b>10MB</b>             </h5>
+                            </p-fileUpload>
+                            <h5>Max File Size
+                                <b>10MB</b>
+                            </h5>
                             <!-- <ng-template pTemplate="content">  -->
                             <!-- <mat-grid-list cols="1" gutterSize="10px" rowHeight="50px" *ngIf="attachmentUrls.length">
                                     <mat-grid-tile *ngFor="let file of attachmentUrls">
@@ -119,9 +126,9 @@
                 </div>
             </div>
             <mat-dialog-actions>
-            <span matTooltip="Recheck the inputs!" [matTooltipDisabled]="title.value.length!==0 || description.value.length !== 0 || prerequisites.value.length !== 0">
-                <button mat-raised-button [mat-dialog-close]="getSaveDialogData()" color="accent" *ngIf="!isEdit" [disabled]="title.value.length==0 && description.value.length == 0 && prerequisites.value.length == 0">Save</button> &emsp;
-            </span>
+                <span matTooltip="Recheck the inputs!" [matTooltipDisabled]="title.value.length!==0 || description.value.length !== 0 || prerequisites.value.length !== 0">
+                    <button mat-raised-button [mat-dialog-close]="getSaveDialogData()" color="accent" *ngIf="!isEdit" [disabled]="title.value.length==0 && description.value.length == 0 && prerequisites.value.length == 0">Save</button> &emsp;
+                </span>
                 <button mat-raised-button [mat-dialog-close]="getEditDialogData()" color="accent" *ngIf="isEdit">Update</button> &emsp;
                 <button mat-button [mat-dialog-close]="getDiscardDialogData()" *ngIf="!isEdit">Discard</button>
                 <button mat-button [mat-dialog-close]="getDeleteDialogData()" *ngIf="isEdit">Delete</button>

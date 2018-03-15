@@ -13,7 +13,7 @@ import { PaymentService } from '../../../_services/payment/payment.service';
 })
 export class ConsoleAccountPaymentmethodsComponent implements OnInit {
 
-  private userId;
+  public userId;
   public createSourceData = { token: '', email: '' };
   public custId: string;
   public listAllCards: Array<any>;

@@ -17,7 +17,7 @@ export class ConsoleAccountComponent implements OnInit {
   public workshops: any;
   public loaded: boolean;
   public activeTab: string;
-  private userId;
+  public userId;
 
   constructor(
     private activatedRoute: ActivatedRoute,

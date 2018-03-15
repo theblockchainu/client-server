@@ -15,7 +15,7 @@ import { ContentService } from '../../../_services/content/content.service';
 })
 export class ConsoleProfileVerificationComponent implements OnInit {
 
-  private userId;
+  public userId;
   public loading = false;
   public profile: any;
   public alreadyVerified: Array<any>;

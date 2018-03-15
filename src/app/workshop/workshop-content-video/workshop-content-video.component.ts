@@ -34,7 +34,7 @@ export class WorkshopContentVideoComponent implements OnInit {
 
     constructor(
         private _fb: FormBuilder,
-        private http: HttpClient, private config: AppConfig,
+        private http: HttpClient, public config: AppConfig,
         private mediaUploader: MediaUploaderService,
         @Inject(MAT_DIALOG_DATA) public inputData: any,
         public dialogRef: MatDialogRef<WorkshopContentVideoComponent>,

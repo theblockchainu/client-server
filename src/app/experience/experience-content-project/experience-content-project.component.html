@@ -5,7 +5,8 @@
             <button disableRipple mat-button [mat-dialog-close]="getDiscardDialogData()" *ngIf="!isEdit" style="min-width: 20px;padding: 0px 10px 0px 0px;vertical-align: middle;">
                 <mat-icon class="mat-icon material-icons mat-icon-small">close</mat-icon>
             </button>
-            <button disableRipple mat-button *ngIf="isEdit" style="min-width: 20px;padding: 0px 10px 0px 0px;vertical-align: middle;" (click)="dialogRef.close()">
+            <button disableRipple mat-button *ngIf="isEdit" style="min-width: 20px;padding: 0px 10px 0px 0px;vertical-align: middle;"
+                (click)="dialogRef.close()">
                 <mat-icon class="mat-icon material-icons mat-icon-small">close</mat-icon>
             </button>
             <div>
@@ -19,7 +20,7 @@
         </div>
     </div>
     <div *ngIf="lastIndex>-1">
-        <form [formGroup]="itenaryForm.controls.contents.controls[lastIndex]">
+        <form [formGroup]="itenaryForm.controls['contents']['controls'][lastIndex]">
             <div>
                 <div class="row">
                     <div class="col-sm-12 margin-bottom-30">
@@ -29,7 +30,8 @@
 
                         <div formGroupName="schedule" class="margin-top-20 margin-bottom-20">
                             <mat-form-field class="dateStyles">
-                                <input matInput [matDatepicker]="endDayDatePicker" [min]="itenaryForm.value.date" [max]="collectionEndDate" placeholder="Deadline" formControlName="endDay" [required]="true">
+                                <input matInput [matDatepicker]="endDayDatePicker" [min]="itenaryForm.value.date" [max]="collectionEndDate" placeholder="Deadline"
+                                    formControlName="endDay" [required]="true">
                                 <mat-datepicker-toggle matSuffix [for]="endDayDatePicker" class="svgStyle"></mat-datepicker-toggle>
                             </mat-form-field>
                             <mat-datepicker touchUi="true" #endDayDatePicker></mat-datepicker>
@@ -42,7 +44,10 @@
                                     <ngx-loading [show]="true"></ngx-loading>
                                 </div>
                                 <p-fileUpload *ngIf="!uploadingVideo" #fubauto name="image" customUpload="true" (uploadHandler)="imageUploadNew($event)"
-                                              maxFileSize="10000000" chooseLabel="Browse" accept="image/*,video/*"></p-fileUpload>                  <h5>Max File Size               <b>10MB</b>             </h5>
+                                    maxFileSize="10000000" chooseLabel="Browse" accept="image/*,video/*"></p-fileUpload>
+                                <h5>Max File Size
+                                    <b>10MB</b>
+                                </h5>
                                 <!-- <mat-grid-list cols="2" rowHeight="100px" gutterSize="10px" *ngIf="mediaObject && mediaObject.hasOwnProperty('type') && mediaObject.hasOwnProperty('url')">
                                     <mat-grid-tile>
                                         <img *ngIf="mediaObject.type.includes('image')" src="{{config.apiUrl + mediaObject.url}}" width="150" (error)="imgErrorHandler($event)">
@@ -53,8 +58,7 @@
                                     </mat-grid-tile>
                                 </mat-grid-list> -->
                                 <div *ngIf="mediaObject && mediaObject.hasOwnProperty('type') && mediaObject.hasOwnProperty('url')" class="col-md-6 padding-left-0 pic delete imageContainerVideo">
-                                    <img *ngIf="mediaObject.type.includes('image')" src="{{config.apiUrl + mediaObject.url}}" width="150" (error)="imgErrorHandler($event)"
-                                         style="border: 0.5px solid #ccc; position: relative; top: -20px;">
+                                    <img *ngIf="mediaObject.type.includes('image')" src="{{config.apiUrl + mediaObject.url}}" width="150" style="border: 0.5px solid #ccc; position: relative; top: -20px;">
                                     <mat-icon *ngIf="mediaObject.type.includes('image')" (click)="deleteFromContainer(mediaObject.url, 'image')" class="delete-image">close</mat-icon>
                                     <video *ngIf="mediaObject.type.includes('video')" controls width="150" style="border: 0.5px solid #ccc" preload="metadata">
                                         <source src="{{config.apiUrl + mediaObject.url}}"> Your browser does not support the video tag.
@@ -70,8 +74,8 @@
                         </mat-input-container>
 
                         <mat-input-container class="pb-block margin-top-20 margin-bottom-20">
-                        <textarea matInput #prerequisites maxlength="500" rows="5" formControlName="prerequisites" placeholder="What do learners need to know?"
-                                  [required]="true"></textarea>
+                            <textarea matInput #prerequisites maxlength="500" rows="5" formControlName="prerequisites" placeholder="What do learners need to know?"
+                                [required]="true"></textarea>
                             <mat-hint align="end">{{prerequisites.value.length}} / 500</mat-hint>
                         </mat-input-container>
 
@@ -87,12 +91,15 @@
                             </div>
                             <p-fileUpload *ngIf="!uploadingAttachments" name="attachments" accept="application/pdf,application/msword,
                         application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/*,video/*" customUpload="true"
-                                          (uploadHandler)="uploadNew($event)" maxFileSize="10000000" (onClear)="resetNewUrls($event)" (onRemove)="itemEditRemoved($event)">
+                                (uploadHandler)="uploadNew($event)" maxFileSize="10000000" (onClear)="resetNewUrls($event)" (onRemove)="itemEditRemoved($event)">
                                 <ng-template pTemplate="toolbar">
                                     <div style="font-size: 80%; margin-top: 5px;">You can upload a maximum of 1 image/video</div>
                                 </ng-template>
 
-                            </p-fileUpload>                  <h5>Max File Size               <b>10MB</b>             </h5>
+                            </p-fileUpload>
+                            <h5>Max File Size
+                                <b>10MB</b>
+                            </h5>
                             <!-- <ng-template pTemplate="content"> -->
                             <!-- <mat-grid-list cols="1" gutterSize="10px" rowHeight="50px" *ngIf="attachmentUrls.length">
                                 <mat-grid-tile *ngFor="let file of attachmentUrls">
@@ -123,9 +130,9 @@
                 </div>
             </div>
             <mat-dialog-actions>
-            <span matTooltip="Recheck the inputs!" [matTooltipDisabled]="title.value.length!==0 || endDay !== null || description.value.length !== 0 || prerequisites.value.length !== 0">
-                <button mat-raised-button [mat-dialog-close]="getSaveDialogData()" color="accent" *ngIf="!isEdit" [disabled]="title.value.length==0 && endDay == null && description.value.length == 0 && prerequisites.value.length == 0">Save</button> &emsp;
-            </span>
+                <span matTooltip="Recheck the inputs!" [matTooltipDisabled]="title.value.length!==0  || description.value.length !== 0 || prerequisites.value.length !== 0">
+                    <button mat-raised-button [mat-dialog-close]="getSaveDialogData()" color="accent" *ngIf="!isEdit" [disabled]="title.value.length==0 && description.value.length == 0 && prerequisites.value.length == 0">Save</button> &emsp;
+                </span>
                 <button mat-raised-button [mat-dialog-close]="getEditDialogData()" color="accent" *ngIf="isEdit">Update</button> &emsp;
                 <button mat-button [mat-dialog-close]="getDiscardDialogData()" *ngIf="!isEdit">Discard</button>
                 <button mat-button [mat-dialog-close]="getDeleteDialogData()" *ngIf="isEdit">Delete</button>

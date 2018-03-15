@@ -20,10 +20,10 @@ export class AuthenticationService {
 
   public key = 'access_token';
   private options;
-  private userId;
+  public userId;
   isLoginSubject = new BehaviorSubject<boolean>(this.hasToken());
 
-  constructor(private http: HttpClient, private config: AppConfig,
+  constructor(private http: HttpClient, public config: AppConfig,
     private _cookieService: CookieService,
     private _cookieUtilsService: CookieUtilsService,
     private route: ActivatedRoute,

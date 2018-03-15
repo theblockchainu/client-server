@@ -14,7 +14,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class ConsoleAccountTransactionhistoryComponent implements OnInit {
 
-  private userId;
+  public userId;
   public userCurrency;
   public transactions: Array<any>;
   public totalSpend: number;

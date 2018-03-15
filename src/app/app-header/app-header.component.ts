@@ -41,7 +41,7 @@ export class AppHeaderComponent implements OnInit {
     public config: AppConfig,
     private http: HttpClient,
     private _cookieService: CookieService,
-    private _profileService: ProfileService,
+    public _profileService: ProfileService,
     private router: Router,
     private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,

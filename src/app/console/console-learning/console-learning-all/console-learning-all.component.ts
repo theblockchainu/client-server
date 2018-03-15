@@ -20,7 +20,7 @@ export class ConsoleLearningAllComponent implements OnInit {
     public now: Date;
     private outputResult: any;
     public activeTab: string;
-    private userId;
+    public userId;
 
     public ongoingArray: Array<any>;
     public upcomingArray: Array<any>;

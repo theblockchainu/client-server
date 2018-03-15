@@ -15,7 +15,7 @@ export class ConsoleAccountSecurityComponent implements OnInit {
   public changePasswordForm: FormGroup;
   public busyChangePassword = false;
   public loaded = true;
-  private userId;
+  public userId;
 
   constructor(
     public activatedRoute: ActivatedRoute,

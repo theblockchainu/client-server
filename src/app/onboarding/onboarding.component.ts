@@ -18,7 +18,7 @@ import * as _ from 'lodash';
 })
 export class OnboardingComponent implements OnInit {
   public step = 1;
-  private userId;
+  public userId;
   public placeholderStringTopic = 'Search for a topic ';
 
   public suggestedTopics;
@@ -54,7 +54,7 @@ export class OnboardingComponent implements OnInit {
     private _fb: FormBuilder,
     private countryPickerService: CountryPickerService,
     private _contentService: ContentService,
-    private _profileService: ProfileService,
+    public _profileService: ProfileService,
     private _topicService: TopicService,
     private _cookieUtilsService: CookieUtilsService
   ) {

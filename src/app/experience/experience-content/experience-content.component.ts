@@ -42,7 +42,7 @@ export class ExperienceContentComponent implements OnInit {
   private options;
   constructor(
     public authenticationService: AuthenticationService,
-    private http: HttpClient, private config: AppConfig,
+    private http: HttpClient, public config: AppConfig,
     private _fb: FormBuilder,
     private requestHeaders: RequestHeaderService,
     private dialog: MatDialog,

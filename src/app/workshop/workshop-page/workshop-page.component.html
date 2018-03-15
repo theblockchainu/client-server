@@ -305,7 +305,7 @@
                 <h3 *ngIf="comments !== undefined">Discussion ({{comments.length}})</h3>
                 <h3 *ngIf="comments === undefined">Discussion (0)</h3>
                 <form [formGroup]="chatForm" (ngSubmit)="postComment()">
-                  <mat-input-container class="full-width margin-top-10"  >
+                  <mat-input-container class="full-width margin-top-10">
                     <input matInput type="text" formControlName="description" placeholder="Post your thoughts on this workshop">
                   </mat-input-container>
                   <mat-checkbox [formControlName]="'isAnnouncement'" *ngIf="userType==='teacher'">Make Announcement</mat-checkbox>
@@ -425,7 +425,7 @@
                               <span>Delete</span>
                             </button>
                           </mat-menu>
-                          <div style="text-align: center; display: inline-block; color: #cccccc; vertical-align: top; margin-right: 25px;margin-top: 10px;  margin-left: -60px; float: left;"
+                          <div style="text-align: center; display: inline-block; color: #cccccc; vertical-align: top; margin-right: 25px;margin-top: 10px;  margin-left: -60px;"
                             [ngClass]="{'hasUpvoted': !!hasUpvoted(reply.upvotes)}">
                             <mat-icon *ngIf="!hasUpvoted(reply.upvotes)" style="cursor: pointer;" (click)="addReplyUpvote(reply)">arrow_drop_up</mat-icon>
                             <mat-icon *ngIf="hasUpvoted(reply.upvotes)">arrow_drop_up</mat-icon>
@@ -779,7 +779,7 @@
                 <!--COVER IMAGE-->
                 <div class="row">
                   <div class="col-md-12">
-                    <div style="width: 340px; height: 500px" *ngIf="carouselImages && carouselConfig">
+                    <div style="width: 340px; height: 500px" *ngIf="carouselImages">
                       <ngx-carousel [inputs]="carouselBanner">
                         <ngx-item NgxCarouselItem class="bannerStyle" *ngFor="let imageUrl of carouselImages">
                           <div class="row">

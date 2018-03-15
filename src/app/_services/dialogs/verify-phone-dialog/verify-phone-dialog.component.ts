@@ -31,7 +31,7 @@ export class VerifyPhoneDialogComponent implements OnInit {
     private _fb: FormBuilder,
     public _profileService: ProfileService,
     private http: HttpClient,
-    private config: AppConfig,
+    public config: AppConfig,
     public snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<VerifyPhoneDialogComponent>,
     public _cookieUtilsService: CookieUtilsService,

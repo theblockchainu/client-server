@@ -8,11 +8,11 @@ import {AppConfig} from '../../app.config';
 export class SocketService {
 
     private socket;
-    private userId;
+    public userId;
 
     constructor(
         private _cookieUtilsService: CookieUtilsService,
-        private config: AppConfig
+        public config: AppConfig
     ) {
         this.userId = _cookieUtilsService.getValue('userId');
         this.socket = io(this.config.apiUrl);

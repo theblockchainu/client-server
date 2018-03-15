@@ -24,7 +24,7 @@ export class ConsoleTeachingWorkshopComponent implements OnInit {
   public collections: any;
   public loaded: boolean;
   public now: Date;
-  private userId;
+  public userId;
   public drafts: Array<any>;
   public ongoingArray: Array<any>;
   public upcomingArray: Array<any>;

@@ -11,7 +11,7 @@
 
     <div class="row carousel-component">
       <div class="col-md-12">
-        <ngx-carousel [inputs]="carouselBanner" [moveToSlide]="gotoSlide" [] (onMove)="onmoveFn($event)">
+        <ngx-carousel [inputs]="carouselBanner" [moveToSlide]="gotoSlide" (onMove)="onmoveFn($event)">
           <ngx-item NgxCarouselItem class="bannerStyle" *ngFor="let testimonial of testimonialArray">
             <div class="row">
               <div class="col-md-12">

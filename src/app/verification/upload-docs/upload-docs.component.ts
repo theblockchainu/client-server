@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { MediaUploaderService } from '../../_services/mediaUploader/media-uploader.service';
 import { ProfileService } from '../../_services/profile/profile.service';
-import { MdDialog, MdDialogConfig, MdDialogRef, MdSnackBar } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatDialogRef, MatSnackBar } from '@angular/material';
 import { DialogsService } from '../../_services/dialogs/dialog.service';
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
 
@@ -40,8 +40,8 @@ export class UploadDocsComponent implements OnInit {
     public _profileService: ProfileService,
     private http: HttpClient,
     public config: AppConfig,
-    public snackBar: MdSnackBar,
-    private dialog: MdDialog,
+    public snackBar: MatSnackBar,
+    private dialog: MatDialog,
     private dialogsService: DialogsService,
     private _cookieUtilsService: CookieUtilsService) {
     this.activatedRoute.params.subscribe(params => {

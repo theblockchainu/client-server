@@ -26,12 +26,12 @@
               <ng-template #topicName>{{bookmark.collection[0].topics[0].name | titlecase}}</ng-template>
               <ng-template #noTopicText>No Topics</ng-template>
               <div class="col-md-4" style="margin-top: 20px;">
-                <md-card style="text-align: center; padding: 20px;">
-                  <md-card-content>
+                <mat-card style="text-align: center; padding: 20px;">
+                  <mat-card-content>
                     <div style="text-align: right">
                       <div class="pull-right">
-                        <a [mdMenuTriggerFor]="bookmarkCardMenu" style="text-align: right; padding: 0px">
-                          <md-icon>more_vert</md-icon>
+                        <a [matMenuTriggerFor]="bookmarkCardMenu" style="text-align: right; padding: 0px">
+                          <mat-icon>more_vert</mat-icon>
                         </a>
                       </div>
                     </div>
@@ -82,19 +82,19 @@
                               There are no ongoing or upcoming cohorts for this {{bookmark.collection[0].type}}
                           </div>
                       </div>
-                  </md-card-content>
-                  <md-card-actions *ngIf="consoleLearningComponent.getLearnerUpcomingEvent(bookmark.collection[0]).hasStarted">
-                    <button md-raised-button (click)="onSelect(bookmark.collection[0])">{{consoleLearningComponent.getLearnerUpcomingEvent(bookmark.collection[0]).upcomingEventButtonText}}</button>
-                  </md-card-actions>
+                  </mat-card-content>
+                  <mat-card-actions *ngIf="consoleLearningComponent.getLearnerUpcomingEvent(bookmark.collection[0]).hasStarted">
+                    <button mat-raised-button (click)="onSelect(bookmark.collection[0])">{{consoleLearningComponent.getLearnerUpcomingEvent(bookmark.collection[0]).upcomingEventButtonText}}</button>
+                  </mat-card-actions>
                   <br>
                   <br>
-                </md-card>
+                </mat-card>
               </div>
-              <md-menu #bookmarkCardMenu>
-                <button md-menu-item (click)="deleteBookmark(bookmark)">
+              <mat-menu #bookmarkCardMenu>
+                <button mat-menu-item (click)="deleteBookmark(bookmark)">
                   Delete bookmark
                 </button>
-              </md-menu>
+              </mat-menu>
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { AppConfig } from '../../app.config';
 import { HttpClient } from '@angular/common/http';
 import { MediaUploaderService } from '../../_services/mediaUploader/media-uploader.service';
-import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import * as _ from 'lodash';
 import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
 import { ContentService } from '../../_services/content/content.service';
@@ -36,8 +36,8 @@ export class ExperienceContentVideoComponent implements OnInit {
         private _fb: FormBuilder,
         private http: HttpClient, private config: AppConfig,
         private mediaUploader: MediaUploaderService,
-        @Inject(MD_DIALOG_DATA) public inputData: any,
-        public dialogRef: MdDialogRef<ExperienceContentVideoComponent>,
+        @Inject(MAT_DIALOG_DATA) public inputData: any,
+        public dialogRef: MatDialogRef<ExperienceContentVideoComponent>,
         private requestHeaders: RequestHeaderService,
         private contentService: ContentService
     ) {

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MD_DIALOG_DATA, MdDialogRef, MdSnackBar } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { AppConfig } from '../../../app.config';
 @Component({
   selector: 'app-invite-friends-dialog',
@@ -11,9 +11,9 @@ export class InviteFriendsDialogComponent implements OnInit {
   public url = '';
   public loggedinUserEmail = '';
   constructor(
-    public dialogRef: MdDialogRef<InviteFriendsDialogComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any,
-    private snackBar: MdSnackBar,
+    public dialogRef: MatDialogRef<InviteFriendsDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private snackBar: MatSnackBar,
     public _appConfig: AppConfig
   ) {
     this.url = this._appConfig.clientUrl + '/' + data.url;

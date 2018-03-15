@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MdDialogRef, MD_DIALOG_DATA, MdDialog } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { AppConfig } from '../../../app.config';
 import { CollectionService } from '../../../_services/collection/collection.service';
 
@@ -14,10 +14,10 @@ export class ShowRSVPPopupComponent implements OnInit {
     public experienceId = '';
     public hasChanged = false;
     public loadingRsvpDetail = false;
-    constructor(public dialogRef: MdDialogRef<ShowRSVPPopupComponent>,
-                @Inject(MD_DIALOG_DATA) public data: any,
+    constructor(public dialogRef: MatDialogRef<ShowRSVPPopupComponent>,
+                @Inject(MAT_DIALOG_DATA) public data: any,
                 public config: AppConfig,
-                private dialog: MdDialog,
+                private dialog: MatDialog,
                 public _collectionService: CollectionService
     ) { }
 

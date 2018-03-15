@@ -20,12 +20,12 @@
                     <h4 class="pre-wrapped">{{profileObj.headline | titlecase}}</h4>
                 </div>
                 <!-- <div class="col-md-12">
-                    <button md-button>Message</button>
+                    <button mat-button>Message</button>
                 </div> -->
             </div>
             <div class="row border-top">
                 <div class="col-md-1">
-                    <md-icon>mic_none</md-icon>
+                    <mat-icon>mic_none</mat-icon>
                 </div>
                 <div class="col-md-10">
                     <p>
@@ -33,9 +33,9 @@
                     </p>
                 </div>
                 <div class="col-md-1">
-                    <md-icon>
+                    <mat-icon>
                         location_on
-                    </md-icon>
+                    </mat-icon>
                 </div>
                 <div class="col-md-10">
                     <p>
@@ -59,11 +59,11 @@
                     <div class="mat-title">Interest</div>
                 </div>
                 <div class="col-md-offset-1 col-md-10 padding-left-0">
-                    <md-chip-list>
+                    <mat-chip-list>
                         <span *ngFor="let interest of interestsArray;let i=index" style="margin: 0px 10px 10px 0px">
-                            <md-chip *ngIf="i<maxVisibleInterest">{{interest | titlecase}}</md-chip>
+                            <mat-chip *ngIf="i<maxVisibleInterest">{{interest | titlecase}}</mat-chip>
                         </span>
-                    </md-chip-list>
+                    </mat-chip-list>
                     <span *ngIf="interestsArray.length>3">
                         <span *ngIf="interestsArray.length>maxVisibleInterest">
                             <a (click)="toggleMaxInterest()">
@@ -143,7 +143,7 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-1">
-                                    <md-icon style="font-size: 35px;">work</md-icon>
+                                    <mat-icon style="font-size: 35px;">work</mat-icon>
                                 </div>
                                 <div class="col-md-11 resumeText">
                                     <span class="mat-body-2">Work Experience</span>
@@ -161,7 +161,7 @@
                                     <div class="row">
                                         <div class="col-md-12 work-title">
                                             <span style="font-size: 16px;font-weight: bolder;">{{workObj.position}} </span> &emsp;
-                                            <md-icon style="font-size: 5px;line-height:24px;vertical-align:middle;width: 15px;margin-left: -5px;">fiber_manual_record</md-icon>
+                                            <mat-icon style="font-size: 5px;line-height:24px;vertical-align:middle;width: 15px;margin-left: -5px;">fiber_manual_record</mat-icon>
                                             <span class="lighttext" style="font-size: 15px;">
                                                 {{workObj.company | ucfirst}}
                                             </span>
@@ -182,7 +182,7 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-1">
-                                    <md-icon class="resumeIcons">school</md-icon>
+                                    <mat-icon class="resumeIcons">school</mat-icon>
                                 </div>
                                 <div class="col-md-11 resumeText">
                                     <span class="mat-body-2">Education</span>
@@ -346,8 +346,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="mat-title" style="padding-left: 5px;">Teaching Journey</div>
-                    <md-tab-group disableRipple class="noJustify">
-                        <!-- <md-tab label="Workshops" style="padding-left: 0px !important; min-width: min-content !important;">
+                    <mat-tab-group disableRipple class="noJustify">
+                        <!-- <mat-tab label="Workshops" style="padding-left: 0px !important; min-width: min-content !important;">
                             <div class="row" style="padding-left: 5px;">
                                 <div *ngIf="upcomingWorkshops.length>0">
                                     <div class="col-md-12 mat-subheading-2 margin-top-20">
@@ -439,8 +439,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </md-tab> -->
-                        <md-tab label="Experiences" style="min-width: min-content !important;">
+                        </mat-tab> -->
+                        <mat-tab label="Experiences" style="min-width: min-content !important;">
                             <div class="row" style="padding-left: 5px;">
                                 <div *ngIf="upcomingExperiences.length>0">
                                     <div class="col-md-12 mat-subheading-2 margin-top-20">
@@ -532,8 +532,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </md-tab>
-                        <!-- <md-tab label="Sessions" style="min-width: min-content !important;">
+                        </mat-tab>
+                        <!-- <mat-tab label="Sessions" style="min-width: min-content !important;">
                             <div class="row" style="padding-left: 5px;">
                                 <div *ngIf="availablePackages.length>0">
                                     <div class="col-md-12 mat-subheading-2 margin-top-20">
@@ -573,8 +573,8 @@
                                     <hr>
                                 </div>
                             </div>
-                        </md-tab> -->
-                    </md-tab-group>
+                        </mat-tab> -->
+                    </mat-tab-group>
                 </div>
             </div>
         </div>
@@ -590,11 +590,11 @@
 
                 </div>
                 <div class="col-md-2">
-                    <md-select [(value)]="learningJourneyFilter" placeholder="Filter">
-                        <md-option>All</md-option>
-                        <md-option value="workshop">Workshop</md-option>
-                        <md-option value="experience">Experience</md-option>
-                    </md-select>
+                    <mat-select [(value)]="learningJourneyFilter" placeholder="Filter">
+                        <mat-option>All</mat-option>
+                        <mat-option value="workshop">Workshop</mat-option>
+                        <mat-option value="experience">Experience</mat-option>
+                    </mat-select>
                 </div>
                 <div class="col-md-2" *ngIf="participatingWorkshops && participatingWorkshops.length > 5">
                     <a class="pull-right" [routerLink]="'/home/workshops'">

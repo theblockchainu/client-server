@@ -7,7 +7,7 @@ import { LanguagePickerService } from '../../../_services/languagepicker/languag
 import { CurrencyPickerService } from '../../../_services/currencypicker/currencypicker.service';
 import { TimezonePickerService } from '../../../_services/timezone-picker/timezone-picker.service';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { FormGroup, FormArray, FormBuilder, FormControl, AbstractControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -69,7 +69,7 @@ export class ConsoleProfileEditComponent implements OnInit {
     public _profileService: ProfileService,
     public _languageService: LanguagePickerService,
     public _currencyService: CurrencyPickerService,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     public _fb: FormBuilder,
     public _timezoneService: TimezonePickerService,
     private http: HttpClient,

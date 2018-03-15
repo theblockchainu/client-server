@@ -18,7 +18,7 @@ import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.ser
 import { AppConfig } from '../../app.config';
 import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
 import * as _ from 'lodash';
-import { MdDialog, MdSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { LeftSidebarService } from '../../_services/left-sidebar/left-sidebar.service';
 
 import { DialogsService } from '../../_services/dialogs/dialog.service';
@@ -175,10 +175,10 @@ export class SessionEditComponent implements OnInit {
     public _collectionService: CollectionService,
     private mediaUploader: MediaUploaderService,
     public requestHeaderService: RequestHeaderService,
-    private dialog: MdDialog,
+    private dialog: MatDialog,
     private _leftSideBarService: LeftSidebarService,
     private dialogsService: DialogsService,
-    private snackBar: MdSnackBar,
+    private snackBar: MatSnackBar,
     private _cookieUtilsService: CookieUtilsService,
     private _topicService: TopicService,
     private _paymentService: PaymentService,

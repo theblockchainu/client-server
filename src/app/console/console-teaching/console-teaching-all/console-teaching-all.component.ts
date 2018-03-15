@@ -4,7 +4,7 @@ import { ConsoleTeachingComponent } from '../console-teaching.component';
 import { CollectionService } from '../../../_services/collection/collection.service';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 import { AppConfig } from '../../../app.config';
-import { MdDialog, MdSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import * as _ from 'lodash';
 import { DialogsService } from '../../../_services/dialogs/dialog.service';
 import { CohortDetailDialogComponent } from '../console-teaching-workshop/cohort-detail-dialog/cohort-detail-dialog.component';
@@ -41,8 +41,8 @@ export class ConsoleTeachingAllComponent implements OnInit {
         private _dialogService: DialogsService,
         private _cookieUtilsService: CookieUtilsService,
         public config: AppConfig,
-        public dialog: MdDialog,
-        public snackBar: MdSnackBar,
+        public dialog: MatDialog,
+        public snackBar: MatSnackBar,
         private ucFirstPipe: UcFirstPipe
     ) {
         activatedRoute.pathFromRoot[4].url.subscribe((urlSegment) => {

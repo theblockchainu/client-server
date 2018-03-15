@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, ViewChild, ElementRef, Renderer2, OnDestroy 
 import * as Video from 'twilio-video';
 import * as _ from 'lodash';
 import { TwilioServicesService } from '../../twlio_services/twilio-services.service';
-import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CookieUtilsService } from '../../cookieUtils/cookie-utils.service';
 import { SocketService } from '../../socket/socket.service';
 import { Router } from '@angular/router';
@@ -35,8 +35,8 @@ export class LiveSessionDialogComponent implements OnInit, OnDestroy {
 
   constructor(
     private _twilioServicesService: TwilioServicesService,
-    public dialogRef: MdDialogRef<LiveSessionDialogComponent>,
-    @Inject(MD_DIALOG_DATA) public dialogData: any,
+    public dialogRef: MatDialogRef<LiveSessionDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public dialogData: any,
     private renderer: Renderer2,
     private cookieUtilsService: CookieUtilsService,
     private _socketService: SocketService,

@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MD_DIALOG_DATA, MdDialog, MdDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {AppConfig} from '../../../app.config';
 import {CollectionService} from '../../collection/collection.service';
 import {ProjectSubmissionService} from '../../project-submission/project-submission.service';
@@ -16,10 +16,10 @@ export class ViewEntryDialogComponent implements OnInit {
   public defaultProfileUrl = '/assets/images/avatar.png';
 
   constructor(
-      public dialogRef: MdDialogRef<ViewEntryDialogComponent>,
-      @Inject(MD_DIALOG_DATA) public data: any,
+      public dialogRef: MatDialogRef<ViewEntryDialogComponent>,
+      @Inject(MAT_DIALOG_DATA) public data: any,
       public config: AppConfig,
-      private dialog: MdDialog,
+      private dialog: MatDialog,
       private _collectionService: CollectionService,
       private _projectSubmissionService: ProjectSubmissionService
   ) { }

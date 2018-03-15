@@ -1,9 +1,9 @@
 
-<div md-dialog-content class="dialog-container">
+<div mat-dialog-content class="dialog-container">
   <div class="row">
     <div class="col-md-12 collectionContent">
-      <button disableRipple md-button style="min-width: 30px;padding: 0px 10px 0px 0px;vertical-align: middle;" (click)="dialogRef.close()">
-        <md-icon class="mat-icon material-icons mat-icon-small">close</md-icon>
+      <button disableRipple mat-button style="min-width: 30px;padding: 0px 10px 0px 0px;vertical-align: middle;" (click)="dialogRef.close()">
+        <mat-icon class="mat-icon material-icons mat-icon-small">close</mat-icon>
       </button>
       <div class="mat-display-1" style="margin-bottom: 20px;" *ngIf="data.content">
         {{data.content.title | titlecase}}
@@ -71,12 +71,12 @@
         <b *ngIf="comments !== undefined">Discussion ({{comments.length}})</b>
         <b *ngIf="comments === undefined">Discussion (0)</b>
         <form [formGroup]="chatForm" (ngSubmit)="postComment()">
-          <md-input-container class="full-width" [floatPlaceholder]="false">
-            <input mdInput type="text" formControlName="description" placeholder="Post your thoughts on this activity" tabindex="-1">
-          </md-input-container>
-          <span mdTooltip="Invalid input!" [mdTooltipDisabled]="chatForm.valid">
+          <mat-input-container class="full-width"  >
+            <input matInput type="text" formControlName="description" placeholder="Post your thoughts on this activity" tabindex="-1">
+          </mat-input-container>
+          <span matTooltip="Invalid input!" [matTooltipDisabled]="chatForm.valid">
 
-          <button md-raised-button color="primary" [disabled]="!chatForm.valid" class="pull-right" tabindex="-1">Post</button>
+          <button mat-raised-button color="primary" [disabled]="!chatForm.valid" class="pull-right" tabindex="-1">Post</button>
         </span>
         </form>
       </div>
@@ -90,27 +90,27 @@
         <div class="row margin-top-10" *ngFor="let comment of comments; let i=index;">
           <div>
             <div class="col-md-1 margin-top-10" style="text-align: center; color: #cccccc;" [ngClass]="{'hasUpvoted': !!hasUpvoted(comment.upvotes)}">
-              <md-icon *ngIf="!hasUpvoted(comment.upvotes)" style="cursor: pointer;" (click)="addCommentUpvote(comment)">arrow_drop_up</md-icon>
-              <md-icon *ngIf="hasUpvoted(comment.upvotes)">arrow_drop_up</md-icon>
+              <mat-icon *ngIf="!hasUpvoted(comment.upvotes)" style="cursor: pointer;" (click)="addCommentUpvote(comment)">arrow_drop_up</mat-icon>
+              <mat-icon *ngIf="hasUpvoted(comment.upvotes)">arrow_drop_up</mat-icon>
               <div>
                 {{comment.upvotes.length}}
               </div>
             </div>
             <div class="col-md-11">
-              <button *ngIf="userType !== 'public'" md-icon-button [mdMenuTriggerFor]="menuComment" style="float: right; margin-right: 15px; margin-top: 15px;"
+              <button *ngIf="userType !== 'public'" mat-icon-button [matMenuTriggerFor]="menuComment" style="float: right; margin-right: 15px; margin-top: 15px;"
                       tabindex="-1">
-                <md-icon style="color: #cccccc">more_vert</md-icon>
+                <mat-icon style="color: #cccccc">more_vert</mat-icon>
               </button>
-              <md-menu #menuComment="mdMenu">
-                <button *ngIf="userType==='participant'" md-menu-item>
-                  <md-icon>flag</md-icon>
+              <mat-menu #menuComment="matMenu">
+                <button *ngIf="userType==='participant'" mat-menu-item>
+                  <mat-icon>flag</mat-icon>
                   <span>Flag</span>
                 </button>
-                <button *ngIf="userType==='teacher' || isMyComment(comment)" md-menu-item>
-                  <md-icon>delete</md-icon>
+                <button *ngIf="userType==='teacher' || isMyComment(comment)" mat-menu-item>
+                  <mat-icon>delete</mat-icon>
                   <span>Delete</span>
                 </button>
-              </md-menu>
+              </mat-menu>
               <div class="mat-body-1">{{comment.description}}</div>
               <div style="margin-top: 10px;" class="" *ngIf="comment.peer.length>0">
                 <div style="float: left; margin-left: 15px;">
@@ -131,40 +131,40 @@
               </div>
               <div style="margin-top: 10px;" *ngIf="!(replyForm && replyingToCommentId===comment.id)">
                 <a href="javascript:void(0);" (click)="createReplyForm(comment)">
-                  <md-icon style="top: 5px; position: relative;">reply</md-icon> Reply</a>
+                  <mat-icon style="top: 5px; position: relative;">reply</mat-icon> Reply</a>
               </div>
               <div class="col-md-11 col-md-offset-1 margin-top-30" *ngIf="replyForm && replyingToCommentId===comment.id" style="margin-left: -25px;">
                 <form [formGroup]="replyForm" (ngSubmit)="postReply(comment)">
                   <img src="/assets/images/avatar.png" alt="A" class="circle-thumb margin-top-5">
-                  <md-input-container style="margin-left: 15px; width: 88%;">
-                    <input mdInput type="text" formControlName="description" placeholder="Reply to above comment..." tabindex="-1">
-                  </md-input-container>
-                  <span mdTooltip="Invalid input!" [mdTooltipDisabled]="replyForm.valid">
+                  <mat-input-container style="margin-left: 15px; width: 88%;">
+                    <input matInput type="text" formControlName="description" placeholder="Reply to above comment..." tabindex="-1">
+                  </mat-input-container>
+                  <span matTooltip="Invalid input!" [matTooltipDisabled]="replyForm.valid">
 
-                  <button [disabled]="!replyForm.valid" md-raised-button class="pull-right" color="primary" tabindex="-1">Post</button>
+                  <button [disabled]="!replyForm.valid" mat-raised-button class="pull-right" color="primary" tabindex="-1">Post</button>
                 </span>
                 </form>
               </div>
               <div class="col-md-11 col-md-offset-1 margin-top-10">
                 <div class="row margin-top-20" *ngFor="let reply of comment.replies">
-                  <button *ngIf="userType !== 'public'" md-icon-button [mdMenuTriggerFor]="menuReply" style="float: right; margin-right: 15px; margin-top: 15px;"
+                  <button *ngIf="userType !== 'public'" mat-icon-button [matMenuTriggerFor]="menuReply" style="float: right; margin-right: 15px; margin-top: 15px;"
                           tabindex="-1">
-                    <md-icon style="color: #cccccc;">more_vert</md-icon>
+                    <mat-icon style="color: #cccccc;">more_vert</mat-icon>
                   </button>
-                  <md-menu #menuReply="mdMenu">
-                    <button *ngIf="userType==='participant'" md-menu-item>
-                      <md-icon>flag</md-icon>
+                  <mat-menu #menuReply="matMenu">
+                    <button *ngIf="userType==='participant'" mat-menu-item>
+                      <mat-icon>flag</mat-icon>
                       <span>Flag</span>
                     </button>
-                    <button *ngIf="userType==='teacher' || isMyComment(reply)" md-menu-item>
-                      <md-icon>delete</md-icon>
+                    <button *ngIf="userType==='teacher' || isMyComment(reply)" mat-menu-item>
+                      <mat-icon>delete</mat-icon>
                       <span>Delete</span>
                     </button>
-                  </md-menu>
+                  </mat-menu>
                   <div style="text-align: center; display: inline-block; color: #cccccc; vertical-align: top; margin-right: 25px;margin-top: 10px;  margin-left: -60px;"
                        [ngClass]="{'hasUpvoted': !!hasUpvoted(reply.upvotes)}">
-                    <md-icon *ngIf="!hasUpvoted(reply.upvotes)" style="cursor: pointer;" (click)="addReplyUpvote(reply)">arrow_drop_up</md-icon>
-                    <md-icon *ngIf="hasUpvoted(reply.upvotes)">arrow_drop_up</md-icon>
+                    <mat-icon *ngIf="!hasUpvoted(reply.upvotes)" style="cursor: pointer;" (click)="addReplyUpvote(reply)">arrow_drop_up</mat-icon>
+                    <mat-icon *ngIf="hasUpvoted(reply.upvotes)">arrow_drop_up</mat-icon>
                     <div>
                       <span *ngIf="reply.upvotes !== undefined">{{reply.upvotes.length}}</span>
                       <span *ngIf="reply.upvotes === undefined">0</span>
@@ -205,8 +205,8 @@
   <div *ngIf="data.userType==='teacher' || data.userType==='participant' ">
     <div class="row">
       <div class="col-md-12">
-        <a md-raised-button color="primary" *ngIf="data.content.isLive" (click)="joinLiveSession(data.content)">Join</a>
-        <button md-button class="mat-border-button" *ngIf="data.content.timetoSession" [disabled]="true" tabindex="-1"> {{data.content.timetoSession}} </button>
+        <a mat-raised-button color="primary" *ngIf="data.content.isLive" (click)="joinLiveSession(data.content)">Join</a>
+        <button mat-button class="mat-border-button" *ngIf="data.content.timetoSession" [disabled]="true" tabindex="-1"> {{data.content.timetoSession}} </button>
       </div>
     </div>
   </div>

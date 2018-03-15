@@ -6,11 +6,11 @@ import { ConsoleTeachingComponent } from '../console-teaching.component';
 import { AppConfig } from '../../../app.config';
 import * as _ from 'lodash';
 declare var moment: any;
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { CohortDetailDialogComponent } from '../console-teaching-workshop/cohort-detail-dialog/cohort-detail-dialog.component';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 import { DialogsService } from '../../../_services/dialogs/dialog.service';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { UcFirstPipe } from 'ngx-pipes';
 
 @Component({
@@ -41,8 +41,8 @@ export class ConsoleTeachingExperienceComponent implements OnInit {
     private _dialogService: DialogsService,
     public router: Router,
     public config: AppConfig,
-    public dialog: MdDialog,
-    public snackBar: MdSnackBar,
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar,
     private ucFirstPipe: UcFirstPipe
   ) {
     activatedRoute.pathFromRoot[4].url.subscribe((urlSegment) => {
@@ -125,9 +125,9 @@ export class ConsoleTeachingExperienceComponent implements OnInit {
                 this.pastExperiencesObject[experience.id]['experience']['calendars'] = [calendar];
                 let participantReviewCount = 0;
                 this.pastExperiencesObject[experience.id]['experience'].participants.forEach(participant => {
-                    if (participant.reviewsAboutYou && participant.reviewsAboutYou.some(reviews => reviews.collectionId === experience.id)) {
-                        participantReviewCount += 1;
-                    }
+                  if (participant.reviewsAboutYou && participant.reviewsAboutYou.some(reviews => reviews.collectionId === experience.id)) {
+                    participantReviewCount += 1;
+                  }
                 });
                 this.pastExperiencesObject[experience.id]['experience'].participantReviewCount = participantReviewCount;
               }

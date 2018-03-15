@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConsoleProfileComponent } from '../console-profile.component';
 import { ProfileService } from '../../../_services/profile/profile.service';
 import { AppConfig } from '../../../app.config';
-import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { DialogsService } from '../../../_services/dialogs/dialog.service';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 import { ContentService } from '../../../_services/content/content.service';
@@ -32,7 +32,7 @@ export class ConsoleProfileVerificationComponent implements OnInit {
     public activatedRoute: ActivatedRoute,
     public consoleProfileComponent: ConsoleProfileComponent,
     public router: Router,
-    private dialog: MdDialog,
+    private dialog: MatDialog,
     private dialogsService: DialogsService,
     public _profileService: ProfileService,
     public config: AppConfig,

@@ -3,10 +3,10 @@
     <div class="maincontent">
       <div class="position-relative step-1">
         <form [formGroup]="peer">
-          <md-dialog-content>
+          <mat-dialog-content>
             <div class="col-md-12 position-relative">
               <div class="verification-box drop-shadow">
-                <button class="md-fab roundFab col-md-offset-5 margin-bottom-40" type="button">
+                <button class="mat-fab roundFab col-md-offset-5 margin-bottom-40" type="button">
                   <i class="fa fa-id-card-o fa-3x" style="color:#FF5B5F" aria-hidden="true"></i>
                 </button>
                 <h2 class="headline">Confirm Your Identity</h2>
@@ -35,8 +35,8 @@
                   <div *ngIf="verificationIdUrl" class="profilePic icon-remove delete">
                     <img *ngIf="fileType.includes('image')" class="uploaded_picture" src="{{config.apiUrl + verificationIdUrl}}" width="150"
                       style="border: 0.5px solid #ccc">
-                    <md-icon *ngIf="fileType.includes('image')" (click)="deleteFromContainer(verificationIdUrl, 'image')" class="delete-image">close</md-icon>
-                    <md-icon *ngIf="fileType.includes('application')" (click)="deleteFromContainer(verificationIdUrl, 'file')" class="delete-file">close</md-icon>
+                    <mat-icon *ngIf="fileType.includes('image')" (click)="deleteFromContainer(verificationIdUrl, 'image')" class="delete-image">close</mat-icon>
+                    <mat-icon *ngIf="fileType.includes('application')" (click)="deleteFromContainer(verificationIdUrl, 'file')" class="delete-file">close</mat-icon>
                     <div *ngIf="fileType.includes('application')" class="uploaded_file">{{ fileName }}</div>
                   </div>
                 </div>
@@ -45,14 +45,14 @@
 
             <div class="col-md-12 position-relative">
               <div class="pull-right">
-                <!--<button md-button style="margin-right:20px; color:#767676" (click)="redirectToOnboarding()">Skip</button>-->
-                <span mdTooltip="Invalid Verification ID!" [mdTooltipDisabled]="this.peer.controls['verificationIdUrl'].value">
+                <!--<button mat-button style="margin-right:20px; color:#767676" (click)="redirectToOnboarding()">Skip</button>-->
+                <span matTooltip="Invalid Verification ID!" [matTooltipDisabled]="this.peer.controls['verificationIdUrl'].value">
 
-                  <button md-raised-button color="accent" (click)="continue()" [disabled]="!this.peer.controls['verificationIdUrl'].value">Continue</button>
+                  <button mat-raised-button color="accent" (click)="continue()" [disabled]="!this.peer.controls['verificationIdUrl'].value">Continue</button>
                 </span>
               </div>
             </div>
-          </md-dialog-content>
+          </mat-dialog-content>
         </form>
       </div>
     </div>

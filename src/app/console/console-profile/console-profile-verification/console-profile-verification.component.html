@@ -17,7 +17,7 @@
             <p class="mat-caption">You will need to provide identification before you book, so get a head start by doing it now</p>
           </div>
           <div class="col-md-4">
-            <button class="provideId" md-button class="mat-border-button" color="accent" style="border-color:#ff5b5f !important" (click)="openIdVerify()"
+            <button class="provideId" mat-button class="mat-border-button" color="accent" style="border-color:#ff5b5f !important" (click)="openIdVerify()"
               *ngIf="!verifiedObj">Provide ID</button>
             <a *ngIf="verifiedObj" (click)="openIdVerify()" style="cursor:pointer;"> Awaiting Verification</a>
           </div>
@@ -35,8 +35,8 @@
                 <br>
                 <div class="row">
                   <div class="col-sm-1" style="width:7.3333% !important;">
-                    <!--<button md-mini-fab> <md-icon> check </md-icon> </button>-->
-                    <i class="mdi mdi-check-circle-outline mdi-24px primaryColor pull-right" style="margin-top: 2px"></i>
+                    <!--<button mat-mini-fab> <mat-icon> check </mat-icon> </button>-->
+                    <i class="mati mati-check-circle-outline mati-24px primaryColor pull-right" style="margin-top: 2px"></i>
                   </div>
                   <p class="mat-caption" *ngIf="verifiedObj.text !== 'Government Id'" style="color:#767676;">{{verifiedObj.value}}</p>
                   <a *ngIf="verifiedObj.text == 'Government Id' && verifiedObj.value" href="{{config.apiUrl + verifiedObj.value.url}}" target="_blank">{{verifiedObj.value.originalFilename}}</a>
@@ -64,12 +64,12 @@
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <button md-button color="primary" *ngIf="unverifiedObj.text == 'Email address'" (click)="openEmailVerify()">Verify</button>
-                  <button md-button color="primary" *ngIf="unverifiedObj.text == 'Government Id' && !unverifiedObj.submitted" (click)="openIdVerify()">Verify</button>
-                  <span mdTooltip="Already submitted!" *ngIf="unverifiedObj.text == 'Government Id' && unverifiedObj.submitted">
-                    <button md-button color="primary" [disabled]="true">Awaiting verification</button>
+                  <button mat-button color="primary" *ngIf="unverifiedObj.text == 'Email address'" (click)="openEmailVerify()">Verify</button>
+                  <button mat-button color="primary" *ngIf="unverifiedObj.text == 'Government Id' && !unverifiedObj.submitted" (click)="openIdVerify()">Verify</button>
+                  <span matTooltip="Already submitted!" *ngIf="unverifiedObj.text == 'Government Id' && unverifiedObj.submitted">
+                    <button mat-button color="primary" [disabled]="true">Awaiting verification</button>
                   </span>
-                  <button md-button color="primary" *ngIf="unverifiedObj.text == 'Phone Number'" (click)="openPhoneVerify()">Verify</button>
+                  <button mat-button color="primary" *ngIf="unverifiedObj.text == 'Phone Number'" (click)="openPhoneVerify()">Verify</button>
                 </div>
               </div>
             </div>
@@ -89,7 +89,7 @@
               </div>
             </div>
             <div class="col-md-4 margin-top-20">
-              <a *ngIf="!connectedIdentities.fb" md-button href="{{config.apiUrl + '/link/Facebook?returnTo=console/profile/verification'}}">Connect</a>
+              <a *ngIf="!connectedIdentities.fb" mat-button href="{{config.apiUrl + '/link/Facebook?returnTo=console/profile/verification'}}">Connect</a>
               <p *ngIf="connectedIdentities.fb" href="#" color="grey">Connected</p>
             </div>
           </div>
@@ -107,7 +107,7 @@
               </div>
             </div>
             <div class="col-md-4 margin-top-40">
-              <a *ngIf="!connectedIdentities.google" md-button href="{{config.apiUrl + '/link/Google?returnTo=console/profile/verification'}}">Connect</a>
+              <a *ngIf="!connectedIdentities.google" mat-button href="{{config.apiUrl + '/link/Google?returnTo=console/profile/verification'}}">Connect</a>
               <p *ngIf="connectedIdentities.google" href="#" color="grey">Connected</p>
             </div>
           </div>
@@ -125,7 +125,7 @@
             </div>
           </div>
           <div class="col-md-4 margin-top-40">
-            <a md-button color="accent">Connect</a>
+            <a mat-button color="accent">Connect</a>
           </div>
         </div> -->
         </div>

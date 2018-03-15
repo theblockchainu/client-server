@@ -11,10 +11,10 @@
         </div>-->
         <div class="col-md-12">
           <div class="margin-right-10" style="float: left;">
-            <button md-button class="mat-border-button" #priceButton (click)="openPriceDialog()" style="color: rgba(0,0,0,0.54) !important;">Price</button>
+            <button mat-button class="mat-border-button" #priceButton (click)="openPriceDialog()" style="color: rgba(0,0,0,0.54) !important;">Price</button>
           </div>
           <!--<div style="float: left;">
-            <button md-button class="mat-border-button" #topicButton (click)="openTopicsDialog()" style="color: rgba(0,0,0,0.54) !important;">Topics</button>
+            <button mat-button class="mat-border-button" #topicButton (click)="openTopicsDialog()" style="color: rgba(0,0,0,0.54) !important;">Topics</button>
           </div>-->
         </div>
       </div>
@@ -36,14 +36,14 @@
         </div>
         <div class="recommendation-card" *ngFor="let workshop of workshops; let i =index">
           <span class="share-panel">
-            <button md-icon-button class="bookmark" (click)="toggleBookmark(i)">
-              <md-icon *ngIf="!(workshop.bookmarks && workshop.bookmarks[0] && workshop.bookmarks[0].peer && workshop.bookmarks[0].peer[0] && workshop.bookmarks[0].peer[0].id===userId)">
-                bookmark</md-icon>
-              <md-icon *ngIf="workshop.bookmarks && workshop.bookmarks[0] && workshop.bookmarks[0].peer && workshop.bookmarks[0].peer[0] && workshop.bookmarks[0].peer[0].id===userId"
-                color="primary">bookmark</md-icon>
+            <button mat-icon-button class="bookmark" (click)="toggleBookmark(i)">
+              <mat-icon *ngIf="!(workshop.bookmarks && workshop.bookmarks[0] && workshop.bookmarks[0].peer && workshop.bookmarks[0].peer[0] && workshop.bookmarks[0].peer[0].id===userId)">
+                bookmark</mat-icon>
+              <mat-icon *ngIf="workshop.bookmarks && workshop.bookmarks[0] && workshop.bookmarks[0].peer && workshop.bookmarks[0].peer[0] && workshop.bookmarks[0].peer[0].id===userId"
+                color="primary">bookmark</mat-icon>
             </button>
-            <button md-icon-button class="share" (click)="_dialogsService.shareCollection('workshop',workshop.id,workshop.title)">
-              <md-icon>share</md-icon>
+            <button mat-icon-button class="share" (click)="_dialogsService.shareCollection('workshop',workshop.id,workshop.title)">
+              <mat-icon>share</mat-icon>
             </button>
           </span>
           <a [routerLink]="'/workshop/'+workshop.id">

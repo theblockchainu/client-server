@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, ViewContainerRef } from '@a
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 // import { Location } from '@angular/common';
 import { Router, ActivatedRoute, Params, NavigationStart } from '@angular/router';
-import { MdDialog, MdDialogConfig, MdDialogRef, MdSnackBar, SELECT_MAX_OPTIONS_DISPLAYED } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatDialogRef, MatSnackBar } from '@angular/material';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 
@@ -194,9 +194,9 @@ export class WorkshopPageComponent implements OnInit {
     private _commentService: CommentService,
     public config: AppConfig,
     private _fb: FormBuilder,
-    private dialog: MdDialog,
+    private dialog: MatDialog,
     private dialogsService: DialogsService,
-    private snackBar: MdSnackBar,
+    private snackBar: MatSnackBar,
     // private location: Location
   ) {
     this.activatedRoute.params.subscribe(params => {

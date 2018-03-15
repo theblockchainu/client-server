@@ -6,7 +6,7 @@ import { CountryPickerService } from '../../_services/countrypicker/countrypicke
 import { ModalModule, ModalDirective } from 'ngx-bootstrap';
 import { MediaUploaderService } from '../../_services/mediaUploader/media-uploader.service';
 import * as _ from 'lodash';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { ExperienceContentProjectComponent } from '../experience-content-project/experience-content-project.component';
 import { ExperienceContentVideoComponent } from '../experience-content-video/experience-content-video.component';
 import { CollectionService } from '../../_services/collection/collection.service';
@@ -52,7 +52,7 @@ export class ContentViewComponent implements OnInit {
     public config: AppConfig,
     private countryPickerService: CountryPickerService,
     private mediaUploader: MediaUploaderService,
-    private dialog: MdDialog,
+    private dialog: MatDialog,
     public _collectionService: CollectionService
   ) {
     this.countryPickerService.getCountries()

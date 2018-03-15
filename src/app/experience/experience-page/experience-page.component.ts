@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, ViewContainerRef } from '@a
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 // import { Location } from '@angular/common';
 import { Router, ActivatedRoute, Params, NavigationStart } from '@angular/router';
-import { MdDialog, MdDialogConfig, MdDialogRef, MdSnackBar, SELECT_MAX_OPTIONS_DISPLAYED } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatDialogRef, MatSnackBar } from '@angular/material';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 
@@ -200,9 +200,9 @@ export class ExperiencePageComponent implements OnInit {
     private _commentService: CommentService,
     public config: AppConfig,
     private _fb: FormBuilder,
-    private dialog: MdDialog,
+    private dialog: MatDialog,
     private dialogsService: DialogsService,
-    private snackBar: MdSnackBar,
+    private snackBar: MatSnackBar,
     // private location: Location
   ) {
     this.activatedRoute.params.subscribe(params => {
@@ -470,11 +470,11 @@ export class ExperiencePageComponent implements OnInit {
               });
             }
 
-              if (contentObj.locations && contentObj.locations.length > 0 && contentObj.locations[0].map_lat !== undefined && contentObj.locations[0].map_lng !== undefined) {
-                  this.lat = parseFloat(contentObj.locations[0].map_lat);
-                  this.lng = parseFloat(contentObj.locations[0].map_lng);
-                  console.log('Lat is: ' + this.lat + ' & Lng is: ' + this.lng);
-              }
+            if (contentObj.locations && contentObj.locations.length > 0 && contentObj.locations[0].map_lat !== undefined && contentObj.locations[0].map_lng !== undefined) {
+              this.lat = parseFloat(contentObj.locations[0].map_lat);
+              this.lng = parseFloat(contentObj.locations[0].map_lng);
+              console.log('Lat is: ' + this.lat + ' & Lng is: ' + this.lng);
+            }
           });
           console.log(this.itenariesObj);
           for (const key in this.itenariesObj) {
@@ -844,7 +844,7 @@ export class ExperiencePageComponent implements OnInit {
 
   rsvpContent(contentId) {
     this._contentService.createRSVP(contentId, this.calendarId)
-      .subscribe((response:  any) => {
+      .subscribe((response: any) => {
         console.log(response);
         this.initializeExperience();
       });
@@ -917,7 +917,7 @@ export class ExperiencePageComponent implements OnInit {
       data: {
         participants: this.participants,
         experienceId: this.experienceId,
-          userType: this.userType
+        userType: this.userType
       },
       width: '45vw',
       height: '100vh'
@@ -1224,10 +1224,10 @@ export class ExperiencePageComponent implements OnInit {
     this._commentService.addCommentUpvote(comment.id, {}).subscribe(
       response => {
         if (comment.upvotes !== undefined) {
-          comment.upvotes.push(response );
+          comment.upvotes.push(response);
         } else {
           comment.upvotes = [];
-          comment.upvotes.push(response );
+          comment.upvotes.push(response);
         }
       }, err => {
         console.log(err);
@@ -1239,10 +1239,10 @@ export class ExperiencePageComponent implements OnInit {
     this._commentService.addReplyUpvote(reply.id, {}).subscribe(
       response => {
         if (reply.upvotes !== undefined) {
-          reply.upvotes.push(response );
+          reply.upvotes.push(response);
         } else {
           reply.upvotes = [];
-          reply.upvotes.push(response );
+          reply.upvotes.push(response);
         }
       }, err => {
         console.log(err);
@@ -1261,8 +1261,8 @@ export class ExperiencePageComponent implements OnInit {
     let currentUserParticipatingCalendar = '';
     this._collectionService.getParticipants(this.experienceId, query).subscribe(
       (response: any) => {
-        this.allParticipants = response ;
-        for (const responseObj of response ) {
+        this.allParticipants = response;
+        for (const responseObj of response) {
           if (this.calendarId && this.calendarId === responseObj.calendarId) {
             this.participants.push(responseObj);
           }

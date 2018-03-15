@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../../app.config';
 import { MediaUploaderService } from '../../_services/mediaUploader/media-uploader.service';
 import { ContentService } from '../../_services/content/content.service';
-import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import * as _ from 'lodash';
 import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
 
@@ -39,8 +39,8 @@ export class WorkshopContentOnlineComponent implements OnInit {
         public config: AppConfig,
         private mediaUploader: MediaUploaderService,
         private contentService: ContentService,
-        @Inject(MD_DIALOG_DATA) public inputData: any,
-        public dialogRef: MdDialogRef<WorkshopContentOnlineComponent>,
+        @Inject(MAT_DIALOG_DATA) public inputData: any,
+        public dialogRef: MatDialogRef<WorkshopContentOnlineComponent>,
         private requestHeaders: RequestHeaderService
     ) {
         this.options = requestHeaders.getOptions();

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { MediaUploaderService } from '../../mediaUploader/media-uploader.service';
 import { AppConfig } from '../../../app.config';
-import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ProfileService } from '../../profile/profile.service';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 
@@ -37,8 +37,8 @@ export class VerifyIdDialogComponent implements OnInit {
     public config: AppConfig,
     public _profileService: ProfileService,
     // private dialogsService: DialogsService,
-    public dialogRef: MdDialogRef<VerifyIdDialogComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<VerifyIdDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     public _cookieUtilsService: CookieUtilsService) {
     this.userId = _cookieUtilsService.getValue('userId');
   }

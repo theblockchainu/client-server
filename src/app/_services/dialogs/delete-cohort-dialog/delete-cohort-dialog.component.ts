@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MdDialogRef, MD_DIALOG_DATA, MdSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { CollectionService } from '../../collection/collection.service';
 
 @Component({
@@ -10,10 +10,10 @@ import { CollectionService } from '../../collection/collection.service';
 export class DeleteCohortDialogComponent implements OnInit {
   public deleteable: boolean;
 
-  constructor(public dialogRef: MdDialogRef<DeleteCohortDialogComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any,
+  constructor(public dialogRef: MatDialogRef<DeleteCohortDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private _collectionService: CollectionService,
-    private snackBar: MdSnackBar) {
+    private snackBar: MatSnackBar) {
 
   }
   ngOnInit() {

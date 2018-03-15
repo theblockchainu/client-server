@@ -30,8 +30,8 @@
             <!-- <div *ngFor="let pp of profile_picture_array"  class="profilePic"> -->
             <div *ngIf="picture_url" class="profilePic delete">
               <img class="uploaded_picture" src="{{config.apiUrl + picture_url}}" width="150" style="border: 0.5px solid #ccc">
-              <md-icon (click)="deleteFromContainer(picture_url, 'image')" class="delete-button">close</md-icon>
-              <!-- <button md-button class="setPP" (click)="setProfilePic(pp, 'image')">Set as profile pic</button> -->
+              <mat-icon (click)="deleteFromContainer(picture_url, 'image')" class="delete-button">close</mat-icon>
+              <!-- <button mat-button class="setPP" (click)="setProfilePic(pp, 'image')">Set as profile pic</button> -->
             </div>
             <!-- </div> -->
             <div class="lighterText mat-caption">
@@ -60,7 +60,7 @@
               <video width="150" class="uploaded_picture" preload="metadata">
                 <source src="{{config.apiUrl + profile_video}}"> Your browser does not support the video tag.
               </video>
-              <md-icon (click)="deleteFromContainer(profile_video, 'video')" class="delete-button">close</md-icon>
+              <mat-icon (click)="deleteFromContainer(profile_video, 'video')" class="delete-button">close</mat-icon>
             </div>
             <div class="darkText mat-body-1">
               Tell the community a bit about yourself

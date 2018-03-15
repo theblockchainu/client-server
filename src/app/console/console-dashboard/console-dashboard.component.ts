@@ -6,7 +6,7 @@ import { NotificationService } from '../../_services/notification/notification.s
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
 import { UcFirstPipe, UcWordsPipe } from 'ngx-pipes';
 import { CollectionService } from '../../_services/collection/collection.service';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { DialogsService } from '../../_services/dialogs/dialog.service';
 import { ProfileService } from '../../_services/profile/profile.service';
 
@@ -82,7 +82,7 @@ export class ConsoleDashboardComponent implements OnInit {
         public router: Router,
         private _cookieUtilsService: CookieUtilsService,
         public _collectionService: CollectionService,
-        private snackBar: MdSnackBar,
+        private snackBar: MatSnackBar,
         private _dialogService: DialogsService,
         private _profileService: ProfileService
     ) {

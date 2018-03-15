@@ -4,7 +4,7 @@
       <form [formGroup]="peer">
         <div class="col-md-8 col-md-offset-2">
           <div class="verification-box drop-shadow">
-            <button class="md-fab roundFab col-md-offset-5 margin-bottom-40" type="button">
+            <button class="mat-fab roundFab col-md-offset-5 margin-bottom-40" type="button">
               <i class="fa fa-id-card-o fa-3x" style="color:#FF5B5F" aria-hidden="true"></i>
             </button>
             <h2 class="headline">Confirm Your Identity</h2>
@@ -33,8 +33,8 @@
               <div *ngIf="verificationIdUrl" class="profilePic icon-remove delete">
                 <img *ngIf="fileType.includes('image')" class="uploaded_picture" src="{{config.apiUrl + verificationIdUrl}}" width="150"
                   style="border: 0.5px solid #ccc">
-                <md-icon *ngIf="fileType.includes('image')" (click)="deleteFromContainer(verificationIdUrl, 'image')" class="delete-image">close</md-icon>
-                <md-icon *ngIf="fileType.includes('application')" (click)="deleteFromContainer(verificationIdUrl, 'file')" class="delete-file">close</md-icon>
+                <mat-icon *ngIf="fileType.includes('image')" (click)="deleteFromContainer(verificationIdUrl, 'image')" class="delete-image">close</mat-icon>
+                <mat-icon *ngIf="fileType.includes('application')" (click)="deleteFromContainer(verificationIdUrl, 'file')" class="delete-file">close</mat-icon>
                 <div *ngIf="fileType.includes('application')" class="uploaded_file">{{ fileName }}</div>
               </div>
             </div>
@@ -46,9 +46,9 @@
         <div class="fixedFooter col-sm-12">
           <div class="col-md-8 col-md-offset-2 bottom-section clearfix">
             <div class="pull-right">
-              <button md-button style="margin-right:20px; color:#767676" (click)="redirectToOnboarding()">Skip</button>
-              <span mdTooltip="Please check Verification Id!" [mdTooltipDisabled]="this.peer.controls['verificationIdUrl'].value">
-                <button md-raised-button color="accent" (click)="continue(2)" [disabled]="!this.peer.controls['verificationIdUrl'].value">Continue</button>
+              <button mat-button style="margin-right:20px; color:#767676" (click)="redirectToOnboarding()">Skip</button>
+              <span matTooltip="Please check Verification Id!" [matTooltipDisabled]="this.peer.controls['verificationIdUrl'].value">
+                <button mat-raised-button color="accent" (click)="continue(2)" [disabled]="!this.peer.controls['verificationIdUrl'].value">Continue</button>
               </span>
             </div>
           </div>
@@ -60,24 +60,24 @@
       <form [formGroup]="peer">
         <div class="col-md-8 col-md-offset-2">
           <div class="verification-box drop-shadow">
-            <button class="md-fab roundFab col-md-offset-5 margin-bottom-40" type="button">
+            <button class="mat-fab roundFab col-md-offset-5 margin-bottom-40" type="button">
               <i class="fa fa-envelope-o fa-3x" style="color:#FF5B5F" aria-hidden="true"></i>
             </button>
             <h2 class="headline">How can we reach you securely?</h2>
             <p class="description1 margin-bottom-40">Please let us know how can we reach you by email. To help keep your Peerbuds account secure, make sure only you
               can log into this email address.</p>
-            <md-input-container style="width:50% !important" class="pb-block margin-bottom-60 margin-top-20">
+            <mat-input-container style="width:50% !important" class="pb-block margin-bottom-60 margin-top-20">
               <!-- <input type="text" formControlName="email" class="form-control display-inline-block email-address-input" placeholder="Email Address" /> -->
-              <input type="email" mdInput #email formControlName="email" placeholder="Email Address" />
-            </md-input-container>
+              <input type="email" matInput #email formControlName="email" placeholder="Email Address" />
+            </mat-input-container>
           </div>
         </div>
         <div class="fixedFooter col-sm-12">
           <div class="col-md-8 col-md-offset-2 bottom-section clearfix">
             <div class="pull-right">
-              <button md-button style="margin-right:20px; color:#767676" (click)="redirectToOnboarding()">Skip</button>
-              <span mdTooltip="Invalid email!" [mdTooltipDisabled]="!peer.controls.email.invalid || !peer.controls.email.dirty && email.value.length !== 0">
-                <button md-raised-button color="accent" (click)="continue(3)" [disabled]="peer.controls['email'].invalid && peer.controls['email'].dirty || email.value.length == 0">Continue</button>
+              <button mat-button style="margin-right:20px; color:#767676" (click)="redirectToOnboarding()">Skip</button>
+              <span matTooltip="Invalid email!" [matTooltipDisabled]="!peer.controls.email.invalid || !peer.controls.email.dirty && email.value.length !== 0">
+                <button mat-raised-button color="accent" (click)="continue(3)" [disabled]="peer.controls['email'].invalid && peer.controls['email'].dirty || email.value.length == 0">Continue</button>
               </span>
             </div>
           </div>
@@ -90,7 +90,7 @@
       <form [formGroup]="otp">
         <div class="col-md-8 col-md-offset-2 position-relative">
           <div class="verification-box drop-shadow">
-            <button class="md-fab roundFab col-md-offset-5 margin-bottom-40" type="button">
+            <button class="mat-fab roundFab col-md-offset-5 margin-bottom-40" type="button">
               <i class="fa fa-key fa-3x" style="color:#FF5B5F" aria-hidden="true"></i>
             </button>
             <h2 class="headline">Enter the code sent to your email</h2>
@@ -101,9 +101,9 @@
                 <label class="display-block margin-bottom-0"><strong>OTP</strong></label>
                 <input type="text" formControlName = "inputOTP" class="form-control display-inline-block otp-input" />
               </div> -->
-            <md-input-container style="width:20% !important" class="margin-bottom-10">
-              <input type="number" mdInput #inputOTP formControlName="inputOTP" />
-            </md-input-container>
+            <mat-input-container style="width:20% !important" class="margin-bottom-10">
+              <input type="number" matInput #inputOTP formControlName="inputOTP" />
+            </mat-input-container>
             <span *ngIf="otpError" style="color:red;margin-left:10px;">{{otpError}}</span>
             <div>
               <p class="description1">
@@ -117,9 +117,9 @@
         <div class="fixedFooter col-sm-12">
           <div class="col-md-8 col-md-offset-2 bottom-section clearfix">
             <div class="pull-right">
-              <a md-button style="margin-right:20px; color:#767676" [routerLink]="['/onboarding/1']">Skip</a>
-              <span mdTooltip="Please recheck the code you entered." [mdTooltipDisabled]="inputOTP.value.length ===6">
-                <button md-raised-button color="accent" (click)="verifyEmail()" [disabled]="inputOTP.value.length !=6">Verify Email</button>
+              <a mat-button style="margin-right:20px; color:#767676" [routerLink]="['/onboarding/1']">Skip</a>
+              <span matTooltip="Please recheck the code you entered." [matTooltipDisabled]="inputOTP.value.length ===6">
+                <button mat-raised-button color="accent" (click)="verifyEmail()" [disabled]="inputOTP.value.length !=6">Verify Email</button>
               </span>
             </div>
           </div>

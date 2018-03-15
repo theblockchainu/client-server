@@ -4,7 +4,7 @@ import { ConsoleLearningComponent } from '../console-learning.component';
 import { CollectionService } from '../../../_services/collection/collection.service';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 import { DialogsService } from '../../../_services/dialogs/dialog.service';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 declare var moment: any;
 import * as _ from 'lodash';
@@ -39,7 +39,7 @@ export class ConsoleLearningWorkshopsComponent implements OnInit {
     public router: Router,
     private _cookieUtilsService: CookieUtilsService,
     private _dialogService: DialogsService,
-    public snackBar: MdSnackBar
+    public snackBar: MatSnackBar
   ) {
     activatedRoute.pathFromRoot[4].url.subscribe((urlSegment) => {
       if (urlSegment[0] === undefined) {
@@ -170,7 +170,7 @@ export class ConsoleLearningWorkshopsComponent implements OnInit {
   }
 
   public openProfile(peer: any) {
-      this.router.navigate(['profile', peer.id]);
+    this.router.navigate(['profile', peer.id]);
   }
 
 }

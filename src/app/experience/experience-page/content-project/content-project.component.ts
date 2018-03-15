@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MdDialogRef, MD_DIALOG_DATA, MdDialog } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { AppConfig } from '../../../app.config';
 import { HttpClient } from '@angular/common/http';
 import { ProjectSubmissionService } from '../../../_services/project-submission/project-submission.service';
@@ -31,9 +31,9 @@ export class ContentProjectComponent implements OnInit {
   public userType = 'public';
 
   constructor(public config: AppConfig,
-    @Inject(MD_DIALOG_DATA) public data: any,
-    public dialog: MdDialog,
-    public dialogRef: MdDialogRef<ContentProjectComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialog: MatDialog,
+    public dialogRef: MatDialogRef<ContentProjectComponent>,
     public projectSubmissionService: ProjectSubmissionService,
     private contentService: ContentService,
     private deviceService: DeviceDetectorService,

@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MdDialogRef, MD_DIALOG_DATA, MdSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { AppConfig } from '../../../app.config';
 
 declare var FB: any;
@@ -15,9 +15,9 @@ export class ShareDialogComponent implements OnInit {
   public generatedUrl: string;
   public tweetUrl: string;
   public LinkedInShareUrl: string;
-  constructor(public dialogRef: MdDialogRef<ShareDialogComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any,
-    private snackBar: MdSnackBar,
+  constructor(public dialogRef: MatDialogRef<ShareDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private snackBar: MatSnackBar,
     public config: AppConfig) {
     if (data.cohortId) {
       this.generatedUrl = config.clientUrl + '/' + data.type + '/' + data.id + '/calendar/' + data.cohortId;

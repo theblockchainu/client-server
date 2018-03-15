@@ -4,7 +4,6 @@ import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 
 import { FormGroup, FormArray, FormBuilder, FormControl, AbstractControl, Validators } from '@angular/forms';
-import * as Rx from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/publishReplay';
@@ -259,7 +258,7 @@ export class SessionEditComponent implements OnInit {
     this.phoneDetails = this._fb.group({
       phoneNo: '',
       inputOTP: '',
-        countryCode: ''
+      countryCode: ''
     });
 
 

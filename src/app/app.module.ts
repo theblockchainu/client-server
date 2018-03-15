@@ -14,7 +14,7 @@ import {
   MdNativeDateModule, MdProgressSpinnerModule, MdProgressBarModule, MdTooltipModule
 } from '@angular/material';
 import { DialogsModule } from './_services/dialogs/dialogs.module';
-import { GlobalErrorHandler } from './error-handler/globalerrorhandler';
+import { GlobalErrorHandlerComponent } from './error-handler/globalerrorhandler';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { SignupComponent } from './signup/signup.component';
 import { AppDesignComponent } from './app-design/app-design.component';
@@ -54,7 +54,7 @@ export class RavenErrorHandler implements ErrorHandler {
     LoginComponent,
     SignupComponent,
     AppDesignComponent,
-    GlobalErrorHandler,
+    GlobalErrorHandlerComponent,
     AppNotificationDialogComponent,
     ResetPasswordComponent,
     ContactComponent,
@@ -99,7 +99,7 @@ export class RavenErrorHandler implements ErrorHandler {
   //   },
   //   {
   //     provide: ErrorHandler,
-  //     useClass: GlobalErrorHandler
+  //     useClass: GlobalErrorHandlerComponent
   //   },
   //   Title
   // ],

@@ -1,8 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { AppointmentService } from '../../_services/appointment/appointment.service';
 
+
+export class MyEvent {
+  id: number;
+  title: string;
+  start: string;
+  end: string;
+  allDay = true;
+}
+
 @Component({
-  selector: 'appointment-calendar',
+  selector: 'app-appointment-calendar',
   templateUrl: './appointment-calendar.component.html',
   styleUrls: ['./appointment-calendar.component.scss']
 })
@@ -58,7 +67,7 @@ export class AppointmentCalendarComponent implements OnInit {
   }
 
   saveEvent() {
-    //update
+    // update
     if (this.event.id) {
       const index: number = this.findEventIndexById(this.event.id);
       if (index >= 0) {
@@ -84,7 +93,7 @@ export class AppointmentCalendarComponent implements OnInit {
   findEventIndexById(id: number) {
     let index = -1;
     for (let i = 0; i < this.events.length; i++) {
-      if (id == this.events[i].id) {
+      if (id === this.events[i].id) {
         index = i;
         break;
       }
@@ -94,10 +103,3 @@ export class AppointmentCalendarComponent implements OnInit {
   }
 }
 
-export class MyEvent {
-  id: number;
-  title: string;
-  start: string;
-  end: string;
-  allDay = true;
-}

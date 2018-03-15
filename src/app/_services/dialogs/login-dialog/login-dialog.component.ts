@@ -46,13 +46,13 @@ export class LoginComponentDialog implements OnInit {
     private _fb: FormBuilder,
     public config: AppConfig,
     @Inject(MD_DIALOG_DATA) public data: any,
-    //private dialogsService: DialogsService
+    // private dialogsService: DialogsService
   ) {
     this.isLoggedIn = this.authenticationService.isLoggedIn();
   }
 
   public ngOnInit() {
-    //reset login status
+    // reset login status
     this.authenticationService.logout();
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home/homefeed';
@@ -77,17 +77,17 @@ export class LoginComponentDialog implements OnInit {
     this.rememberMe = this.loginForm.controls['rememberMe'].value;
     this.authenticationService.login(this.email, this.passWord, this.rememberMe)
       .subscribe(
-      (data) => {
-        console.log(this.returnUrl);
-        this.dialogRef.close();
-        this.router.navigate([this.returnUrl]);
-      },
-      (error) => {
-        if (error.status === 401 || error._body === '"authentication error"') {
-          this.alertService.error(error._body);
-          this.showError = true;
-        } else { console.log(error); }
-      });
+        (data) => {
+          console.log(this.returnUrl);
+          this.dialogRef.close();
+          this.router.navigate([this.returnUrl]);
+        },
+        (error) => {
+          if (error.status === 401 || error._body === '"authentication error"') {
+            this.alertService.error(error._body);
+            this.showError = true;
+          } else { console.log(error); }
+        });
   }
   public openForgotPwd() {
     const dialogRef = this.dialog.open(RequestPasswordDialogComponent);

@@ -6,10 +6,10 @@ import {
     FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR
     , NG_VALIDATORS, Validator
 } from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
-import {RequestHeaderService} from '../../_services/requestHeader/request-header.service';
+import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
 
 import * as _ from 'lodash';
 
@@ -74,8 +74,8 @@ export class GenericMultiselectAutocompleteComponent {
     removedOutput = new EventEmitter<any>();
 
     constructor(myElement: ElementRef,
-                private http: HttpClient,
-                public requestHeaderService: RequestHeaderService) {
+        private http: HttpClient,
+        public requestHeaderService: RequestHeaderService) {
         this.elementRef = myElement;
         this.options = requestHeaderService.getOptions();
         this.placeholderString = this.title;
@@ -119,8 +119,8 @@ export class GenericMultiselectAutocompleteComponent {
     private filter() {
         if (!this.multiSelect) {
             if (this.filteredList.length !== 0) {
-                //Force only 1 selection
-                //TBD
+                // Force only 1 selection
+                // TBD
             }
         }
         if (this.query !== '') {
@@ -171,14 +171,14 @@ export class GenericMultiselectAutocompleteComponent {
             this.filteredList = [];
             return;
         }
-// if(this.preSelectedItems.length != 0){
-//   this.selected = _.union(_.filter(this.preSelectedItems, (item)=> { return item != ''}), this.selected);
-// }
-// this.preSelectedItems.forEach(element => {
-//   this.selected.push({
-//     name: element
-//   });
-// });
+        // if(this.preSelectedItems.length != 0){
+        //   this.selected = _.union(_.filter(this.preSelectedItems, (item)=> { return item != ''}), this.selected);
+        // }
+        // this.preSelectedItems.forEach(element => {
+        //   this.selected.push({
+        //     name: element
+        //   });
+        // });
         this.selected.push(item);
         this.selected = _.uniqBy(this.selected, 'name');
         this.selectedOutput.emit(this.selected);

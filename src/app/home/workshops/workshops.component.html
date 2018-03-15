@@ -18,21 +18,22 @@
           </div>-->
         </div>
       </div>
-        <div class="mat-display-1" style="margin-bottom: 5px !important; margin-top: 34px;">
-            Explore Peerbuds
-        </div>
-      <app-topic-row [availableTopics]="availableTopics" (onTopicClicked)="filterClickedTopic($event)"></app-topic-row>
+      <div class="mat-display-1" style="margin-bottom: 5px !important; margin-top: 34px;">
+        Explore Peerbuds
+      </div>
+      <app-topic-row [availableTopics]="availableTopics" (topciClickedEvent)="filterClickedTopic($event)"></app-topic-row>
 
-        <div class="mat-display-1" style="margin-bottom: 25px !important;">
-            All workshops
-        </div>
+      <div class="mat-display-1" style="margin-bottom: 25px !important;">
+        All workshops
+      </div>
       <div class="loading-container" [hidden]="!loading">
         <ngx-loading [show]="true"></ngx-loading>
       </div>
       <div *ngIf="!loading" class="row feed-horizontal margin-bottom-40" style="padding: 0px 7px;">
-          <div class="noDataContainer" *ngIf="workshops === undefined || workshops.length === 0">
-              There are no new active workshops to view right now. Browse from within your signed-up workshops <a class="clickable">here</a>.
-          </div>
+        <div class="noDataContainer" *ngIf="workshops === undefined || workshops.length === 0">
+          There are no new active workshops to view right now. Browse from within your signed-up workshops
+          <a class="clickable">here</a>.
+        </div>
         <div class="recommendation-card" *ngFor="let workshop of workshops; let i =index">
           <span class="share-panel">
             <button md-icon-button class="bookmark" (click)="toggleBookmark(i)">

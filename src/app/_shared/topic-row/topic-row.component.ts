@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {CollectionService} from '../../_services/collection/collection.service';
-import {AppConfig} from '../../app.config';
+import { CollectionService } from '../../_services/collection/collection.service';
+import { AppConfig } from '../../app.config';
 
 @Component({
   selector: 'app-topic-row',
@@ -11,11 +11,11 @@ export class TopicRowComponent implements OnInit {
   public translateX: number;
   public transformStyle: any;
   @Input() availableTopics: Array<any>;
-  @Output() onTopicClicked = new EventEmitter<number>();
+  @Output() topciClickedEvent = new EventEmitter<number>();
 
   constructor(
-      public _collectionService: CollectionService,
-      public config: AppConfig,
+    public _collectionService: CollectionService,
+    public config: AppConfig,
   ) { }
 
   ngOnInit() {
@@ -40,7 +40,7 @@ export class TopicRowComponent implements OnInit {
   }
 
   public topicClicked(topicIndex: number) {
-    this.onTopicClicked.emit(topicIndex);
+    this.topciClickedEvent.emit(topicIndex);
   }
 
 }

@@ -16,21 +16,21 @@
             </div>
         </div>
         <div class="col-md-3" style="text-align: right">
-            <md-select [(value)]="questionsFilter" placeholder="Sort">
-                <md-option value="descending">Descending</md-option>
-                <md-option value="ascending">Ascending</md-option>
-                <md-option value="unsolved">Unsolved</md-option>
-                <md-option value="popular">Popular</md-option>
-            </md-select>
+            <mat-select [(value)]="questionsFilter" placeholder="Sort">
+                <mat-option value="descending">Descending</mat-option>
+                <mat-option value="ascending">Ascending</mat-option>
+                <mat-option value="unsolved">Unsolved</mat-option>
+                <mat-option value="popular">Popular</mat-option>
+            </mat-select>
         </div>
     </div>
     <div class="row" style="margin-top: -20px;">
         <div class="col-md-12">
             <form [formGroup]="questionForm" (ngSubmit)="postQuestion()">
-                <md-input-container class="full-width margin-top-10" style="font-size: 15px;" [floatPlaceholder]="'never'">
-                    <input mdInput formControlName="text" placeholder="Start your question with 'What', 'How', or 'Why', etc">
-                </md-input-container>
-                <button md-raised-button color="primary" [disabled]="!questionForm.valid" class="pull-right">
+                <mat-input-container class="full-width margin-top-10" style="font-size: 15px;"  >
+                    <input matInput formControlName="text" placeholder="Start your question with 'What', 'How', or 'Why', etc">
+                </mat-input-container>
+                <button mat-raised-button color="primary" [disabled]="!questionForm.valid" class="pull-right">
                     <span *ngIf="!busyQuestion">Post question</span>
                     <span *ngIf="busyQuestion"> </span>
                     <ngx-loading [show]="busyQuestion"></ngx-loading>
@@ -50,15 +50,15 @@
             </div>
             <div class="row margin-top-10" *ngFor="let question of questions">
                 <div class="col-md-12">
-                    <button *ngIf="userType !== 'public'" md-icon-button [mdMenuTriggerFor]="menuQuestion" style="float: right; margin-right: 15px; margin-top: 15px;">
-                        <md-icon style="color: #cccccc">more_vert</md-icon>
+                    <button *ngIf="userType !== 'public'" mat-icon-button [matMenuTriggerFor]="menuQuestion" style="float: right; margin-right: 15px; margin-top: 15px;">
+                        <mat-icon style="color: #cccccc">more_vert</mat-icon>
                     </button>
-                    <md-menu #menuQuestion="mdMenu">
-                        <button *ngIf="userType==='owner' || isMyQuestion(question)" md-menu-item (click)="deleteQuestion(question)">
-                            <md-icon>delete</md-icon>
+                    <mat-menu #menuQuestion="matMenu">
+                        <button *ngIf="userType==='owner' || isMyQuestion(question)" mat-menu-item (click)="deleteQuestion(question)">
+                            <mat-icon>delete</mat-icon>
                             <span>Delete</span>
                         </button>
-                    </md-menu>
+                    </mat-menu>
                     <div class="mat-title pre-wrapped margin-bottom-10">{{question.text | titlecase}}?</div>
                     <div *ngIf="question.peer.length>0">
                         <div class="clickable" style="float: left; ">
@@ -77,23 +77,23 @@
                     </div>
                     <div style="margin-top: 20px;">
                         <a href="javascript:void(0);" class="answerButton" (click)="createAnswerForm(question)"><b>Answer</b></a>
-                        <md-icon style="font-size: 5px; top: -2px; height: 20px; width: 12px; margin-left: 12px;">fiber_manual_record</md-icon>
+                        <mat-icon style="font-size: 5px; top: -2px; height: 20px; width: 12px; margin-left: 12px;">fiber_manual_record</mat-icon>
                         <a *ngIf="!hasUpvoted(question.upvotes)" class="clickable upvoteButton" [ngClass]="{'hasUpvoted': !!hasUpvoted(question.upvotes)}" (click)="addQuestionUpvote(question)"><b>{{question.upvotes.length}} Upvote</b></a>
                         <a *ngIf="hasUpvoted(question.upvotes)" class="clickable upvoteButton" [ngClass]="{'hasUpvoted': !!hasUpvoted(question.upvotes)}"><b>{{question.upvotes.length}} Upvote</b></a>
-                        <md-icon style="font-size: 5px; top: -2px; height: 20px; width: 12px;margin-left: 12px;">fiber_manual_record</md-icon>
-                        <a class="clickable commentButton" (click)="createQuestionCommentForm(question)"><b>Comment <md-chip class="square smallSquare" *ngIf="question.comments">{{question.comments.length}}</md-chip></b></a>
-                        <md-icon style="font-size: 5px; top: -2px; height: 20px; width: 12px;margin-left: 12px;">fiber_manual_record</md-icon>
-                        <a class="clickable followButton" [ngClass]="{'hasFollowed': !!isFollowing(question.followers)}" (click)="addFollower(question)"><b>Follow <md-chip class="square smallSquare" *ngIf="question.followers">{{question.followers.length}}</md-chip></b></a>
+                        <mat-icon style="font-size: 5px; top: -2px; height: 20px; width: 12px;margin-left: 12px;">fiber_manual_record</mat-icon>
+                        <a class="clickable commentButton" (click)="createQuestionCommentForm(question)"><b>Comment <mat-chip class="square smallSquare" *ngIf="question.comments">{{question.comments.length}}</mat-chip></b></a>
+                        <mat-icon style="font-size: 5px; top: -2px; height: 20px; width: 12px;margin-left: 12px;">fiber_manual_record</mat-icon>
+                        <a class="clickable followButton" [ngClass]="{'hasFollowed': !!isFollowing(question.followers)}" (click)="addFollower(question)"><b>Follow <mat-chip class="square smallSquare" *ngIf="question.followers">{{question.followers.length}}</mat-chip></b></a>
                     </div>
                     <!--FORM TO ADD NEW ANSWER-->
                     <div class="col-md-12 margin-top-30 answerForm" *ngIf="answerForm && answeringToQuestionId===question.id">
                         <form [formGroup]="answerForm" (ngSubmit)="postAnswer(question)">
                             <app-profile-popup [peer]="loggedInUser"></app-profile-popup>
-                            <md-input-container style="margin-left: 15px; width: 88%; margin-bottom: 20px;">
-                                <textarea mdInput #answerText maxlength="1000" rows="3" formControlName="text" placeholder="Answer the above question"></textarea>
-                                <md-hint align="end">{{answerText.value.length}} / 1000</md-hint>
-                            </md-input-container>
-                            <button [disabled]="!answerForm.valid" md-raised-button class="pull-right" color="primary">
+                            <mat-input-container style="margin-left: 15px; width: 88%; margin-bottom: 20px;">
+                                <textarea matInput #answerText maxlength="1000" rows="3" formControlName="text" placeholder="Answer the above question"></textarea>
+                                <mat-hint align="end">{{answerText.value.length}} / 1000</mat-hint>
+                            </mat-input-container>
+                            <button [disabled]="!answerForm.valid" mat-raised-button class="pull-right" color="primary">
                                 <span *ngIf="!busyAnswer">Post answer</span>
                                 <ngx-loading [show]="busyAnswer"></ngx-loading>
                             </button>
@@ -105,11 +105,11 @@
                         <div class="margin-top-30 questionCommentForm" *ngIf="commentForm && commentingToQuestionId===question.id">
                             <form [formGroup]="commentForm" (ngSubmit)="postCommentToQuestion(question)">
                                 <app-profile-popup [peer]="loggedInUser"></app-profile-popup>
-                                <md-input-container style="margin-left: 15px; width: 88%;">
-                                    <input mdInput type="text" formControlName="description" placeholder="Write your comment on the above question">
-                                </md-input-container>
+                                <mat-input-container style="margin-left: 15px; width: 88%;">
+                                    <input matInput type="text" formControlName="description" placeholder="Write your comment on the above question">
+                                </mat-input-container>
                                 <div style="text-align: right">
-                                    <button [disabled]="!commentForm.valid" md-raised-button color="primary">
+                                    <button [disabled]="!commentForm.valid" mat-raised-button color="primary">
                                         <span *ngIf="!busyComment">Comment</span>
                                         <ngx-loading [show]="busyComment"></ngx-loading>
                                     </button>
@@ -118,26 +118,26 @@
                         </div>
                         <div class="row margin-top-20 questionCommentsBox" *ngFor="let comment of question.comments">
                             <div class="col-md-1 margin-top-10" style="text-align: center; color: #cccccc;" [ngClass]="{'hasUpvoted': !!hasUpvoted(comment.upvotes)}">
-                                <md-icon *ngIf="!hasUpvoted(comment.upvotes)" style="cursor: pointer;" (click)="addCommentUpvote(comment)">arrow_drop_up</md-icon>
-                                <md-icon *ngIf="hasUpvoted(comment.upvotes)">arrow_drop_up</md-icon>
+                                <mat-icon *ngIf="!hasUpvoted(comment.upvotes)" style="cursor: pointer;" (click)="addCommentUpvote(comment)">arrow_drop_up</mat-icon>
+                                <mat-icon *ngIf="hasUpvoted(comment.upvotes)">arrow_drop_up</mat-icon>
                                 <div>
                                     {{(comment.upvotes) ? comment.upvotes.length : '0'}}
                                 </div>
                             </div>
                             <div class="col-md-11">
-                                <button *ngIf="userType !== 'public'" md-icon-button [mdMenuTriggerFor]="menuComment" style="float: right; margin-right: 15px; margin-top: 15px;">
-                                    <md-icon style="color: #cccccc">more_vert</md-icon>
+                                <button *ngIf="userType !== 'public'" mat-icon-button [matMenuTriggerFor]="menuComment" style="float: right; margin-right: 15px; margin-top: 15px;">
+                                    <mat-icon style="color: #cccccc">more_vert</mat-icon>
                                 </button>
-                                <md-menu #menuComment="mdMenu">
-                                    <button *ngIf="userType==='participant'" md-menu-item>
-                                        <md-icon>flag</md-icon>
+                                <mat-menu #menuComment="matMenu">
+                                    <button *ngIf="userType==='participant'" mat-menu-item>
+                                        <mat-icon>flag</mat-icon>
                                         <span>Flag</span>
                                     </button>
-                                    <button *ngIf="userType==='owner' || isMyComment(comment)" md-menu-item (click)="deleteComment(comment)">
-                                        <md-icon>delete</md-icon>
+                                    <button *ngIf="userType==='owner' || isMyComment(comment)" mat-menu-item (click)="deleteComment(comment)">
+                                        <mat-icon>delete</mat-icon>
                                         <span>Delete</span>
                                     </button>
-                                </md-menu>
+                                </mat-menu>
                                 <div class="mat-body-1 pre-wrapped">{{comment.description | titlecase}}</div>
                                 <div style="margin-top: 10px;" class="" *ngIf="comment.peer.length>0">
                                     <div class="clickable" style="float: left;">
@@ -156,15 +156,15 @@
                                 </div>
                                 <div style="margin-top: 10px;" *ngIf="!(replyForm && replyingToCommentId===comment.id)">
                                     <a href="javascript:void(0);" (click)="createReplyForm(comment)">
-                                        <md-icon style="top: 5px;">reply</md-icon> Reply</a>
+                                        <mat-icon style="top: 5px;">reply</mat-icon> Reply</a>
                                 </div>
                                 <div class="col-md-11 col-md-offset-1 margin-top-30" *ngIf="replyForm && replyingToCommentId===comment.id" style="margin-left: -15px;">
                                     <form [formGroup]="replyForm" (ngSubmit)="postReply(comment)">
                                         <app-profile-popup [peer]="loggedInUser"></app-profile-popup>
-                                        <md-input-container style="margin-left: 15px; width: 85%;">
-                                            <input mdInput type="text" formControlName="description" placeholder="Reply to above comment...">
-                                        </md-input-container>
-                                        <button [disabled]="!replyForm.valid" md-raised-button class="pull-right" color="primary">
+                                        <mat-input-container style="margin-left: 15px; width: 85%;">
+                                            <input matInput type="text" formControlName="description" placeholder="Reply to above comment...">
+                                        </mat-input-container>
+                                        <button [disabled]="!replyForm.valid" mat-raised-button class="pull-right" color="primary">
                                             <span *ngIf="!busyReply">Post</span>
                                             <ngx-loading [show]="busyReply"></ngx-loading>
                                         </button>
@@ -172,23 +172,23 @@
                                 </div>
                                 <div class="col-md-11 col-md-offset-1 margin-top-10">
                                     <div class="row margin-top-20" *ngFor="let reply of comment.replies">
-                                        <button *ngIf="userType !== 'public'" md-icon-button [mdMenuTriggerFor]="menuReply" style="float: right; margin-right: 15px; margin-top: 15px;">
-                                            <md-icon style="color: #cccccc;">more_vert</md-icon>
+                                        <button *ngIf="userType !== 'public'" mat-icon-button [matMenuTriggerFor]="menuReply" style="float: right; margin-right: 15px; margin-top: 15px;">
+                                            <mat-icon style="color: #cccccc;">more_vert</mat-icon>
                                         </button>
-                                        <md-menu #menuReply="mdMenu">
-                                            <button *ngIf="userType==='participant'" md-menu-item>
-                                                <md-icon>flag</md-icon>
+                                        <mat-menu #menuReply="matMenu">
+                                            <button *ngIf="userType==='participant'" mat-menu-item>
+                                                <mat-icon>flag</mat-icon>
                                                 <span>Flag</span>
                                             </button>
-                                            <button *ngIf="userType==='owner' || isMyComment(reply)" md-menu-item (click)="deleteReply(reply)">
-                                                <md-icon>delete</md-icon>
+                                            <button *ngIf="userType==='owner' || isMyComment(reply)" mat-menu-item (click)="deleteReply(reply)">
+                                                <mat-icon>delete</mat-icon>
                                                 <span>Delete</span>
                                             </button>
-                                        </md-menu>
+                                        </mat-menu>
                                         <div style="text-align: center; display: inline-block; color: #cccccc; vertical-align: top; margin-right: 25px;margin-top: 10px;  margin-left: -60px; float: left;"
                                              [ngClass]="{'hasUpvoted': !!hasUpvoted(reply.upvotes)}">
-                                            <md-icon *ngIf="!hasUpvoted(reply.upvotes)" style="cursor: pointer;" (click)="addReplyUpvote(reply)">arrow_drop_up</md-icon>
-                                            <md-icon *ngIf="hasUpvoted(reply.upvotes)">arrow_drop_up</md-icon>
+                                            <mat-icon *ngIf="!hasUpvoted(reply.upvotes)" style="cursor: pointer;" (click)="addReplyUpvote(reply)">arrow_drop_up</mat-icon>
+                                            <mat-icon *ngIf="hasUpvoted(reply.upvotes)">arrow_drop_up</mat-icon>
                                             <div>
                                                 <span *ngIf="reply.upvotes !== undefined">{{reply.upvotes.length}}</span>
                                                 <span *ngIf="reply.upvotes === undefined">0</span>
@@ -223,19 +223,19 @@
                     <!--LIST OF ANSWERS FOR QUESTION-->
                     <div class="col-md-12 answersBox margin-top-20">
                         <div class="row answerRow" *ngFor="let answer of question.answers">
-                            <button *ngIf="userType !== 'public'" md-icon-button [mdMenuTriggerFor]="menuAnswer" style="float: right; margin-right: 15px; margin-top: 15px;">
-                                <md-icon style="color: #cccccc;">more_vert</md-icon>
+                            <button *ngIf="userType !== 'public'" mat-icon-button [matMenuTriggerFor]="menuAnswer" style="float: right; margin-right: 15px; margin-top: 15px;">
+                                <mat-icon style="color: #cccccc;">more_vert</mat-icon>
                             </button>
-                            <md-menu #menuAnswer="mdMenu">
-                                <button *ngIf="userType==='participant'" md-menu-item>
-                                    <md-icon>flag</md-icon>
+                            <mat-menu #menuAnswer="matMenu">
+                                <button *ngIf="userType==='participant'" mat-menu-item>
+                                    <mat-icon>flag</mat-icon>
                                     <span>Flag</span>
                                 </button>
-                                <button *ngIf="userType==='owner' || isMyAnswer(answer)" md-menu-item (click)="deleteAnswer(answer)">
-                                    <md-icon>delete</md-icon>
+                                <button *ngIf="userType==='owner' || isMyAnswer(answer)" mat-menu-item (click)="deleteAnswer(answer)">
+                                    <mat-icon>delete</mat-icon>
                                     <span>Delete</span>
                                 </button>
-                            </md-menu>
+                            </mat-menu>
                             <div>
                                 <div class="margin-bottom-10" *ngIf="answer.peer && answer.peer.length>0">
                                     <div class="clickable" style="float: left;">
@@ -248,30 +248,30 @@
                                             </div>
                                         </div>
                                         <div class="">
-                                            <span class="mat-caption">Answered {{answer.createdAt |extractTime:'MMM Do'}}<md-icon style="font-size: 5px; top: -2px; height: 20px; width: 12px; margin-left: 12px;">fiber_manual_record</md-icon> {{(answer.upvotes) ? answer.upvotes.length : '0'}} upvotes</span>
+                                            <span class="mat-caption">Answered {{answer.createdAt |extractTime:'MMM Do'}}<mat-icon style="font-size: 5px; top: -2px; height: 20px; width: 12px; margin-left: 12px;">fiber_manual_record</mat-icon> {{(answer.upvotes) ? answer.upvotes.length : '0'}} upvotes</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mat-body-1 pre-wrapped">{{answer.text | titlecase}}</div>
                                 <div style="margin-top: 20px;">
                                     <a class="clickable commentButton" (click)="createAnswerCommentForm(answer)">
-                                        <b>Comment <md-chip class="square smallSquare" *ngIf="answer.comments">{{answer.comments.length}}</md-chip></b>
+                                        <b>Comment <mat-chip class="square smallSquare" *ngIf="answer.comments">{{answer.comments.length}}</mat-chip></b>
                                     </a>
-                                    <md-icon style="font-size: 5px; top: -2px; height: 20px; width: 12px; margin-left: 12px;">fiber_manual_record</md-icon>
+                                    <mat-icon style="font-size: 5px; top: -2px; height: 20px; width: 12px; margin-left: 12px;">fiber_manual_record</mat-icon>
                                     <a *ngIf="!hasUpvoted(answer.upvotes)" class="clickable upvoteButton" [ngClass]="{'hasUpvoted': !!hasUpvoted(answer.upvotes)}" (click)="addAnswerUpvote(answer)"><b>{{(answer.upvotes) ? answer.upvotes.length : '0'}} Upvote</b></a>
                                     <a *ngIf="hasUpvoted(answer.upvotes)" class="clickable upvoteButton" [ngClass]="{'hasUpvoted': !!hasUpvoted(answer.upvotes)}"><b>{{(answer.upvotes) ? answer.upvotes.length : '0'}} Upvote</b></a>
-                                    <md-icon style="font-size: 5px; top: -2px; height: 20px; width: 12px;margin-left: 12px;">fiber_manual_record</md-icon>
+                                    <mat-icon style="font-size: 5px; top: -2px; height: 20px; width: 12px;margin-left: 12px;">fiber_manual_record</mat-icon>
                                     <a class="clickable reportButton"><b>Report</b></a>
                                 </div>
                                 <!--FORM TO ADD NEW COMMENT TO ANSWER-->
                                 <div class="margin-top-30 commentForm" *ngIf="commentForm && commentingToAnswerId===answer.id">
                                     <form [formGroup]="commentForm" (ngSubmit)="postCommentToAnswer(answer)">
                                         <app-profile-popup [peer]="loggedInUser"></app-profile-popup>
-                                        <md-input-container style="margin-left: 15px; width: 88%;">
-                                            <input mdInput type="text" formControlName="description" placeholder="Write your comment on the above answer">
-                                        </md-input-container>
+                                        <mat-input-container style="margin-left: 15px; width: 88%;">
+                                            <input matInput type="text" formControlName="description" placeholder="Write your comment on the above answer">
+                                        </mat-input-container>
                                         <div style="text-align: right">
-                                            <button [disabled]="!commentForm.valid" md-raised-button color="primary">
+                                            <button [disabled]="!commentForm.valid" mat-raised-button color="primary">
                                                 <span *ngIf="!busyComment">Comment</span>
                                                 <ngx-loading [show]="busyComment"></ngx-loading>
                                             </button>
@@ -281,26 +281,26 @@
                                 <!--LIST OF COMMENTS FOR ANSWER-->
                                 <div class="row margin-top-20 commentsBox" *ngFor="let comment of answer.comments">
                                     <div class="col-md-1 margin-top-10" style="text-align: center; color: #cccccc;" [ngClass]="{'hasUpvoted': !!hasUpvoted(comment.upvotes)}">
-                                        <md-icon *ngIf="!hasUpvoted(comment.upvotes)" style="cursor: pointer;" (click)="addCommentUpvote(comment)">arrow_drop_up</md-icon>
-                                        <md-icon *ngIf="hasUpvoted(comment.upvotes)">arrow_drop_up</md-icon>
+                                        <mat-icon *ngIf="!hasUpvoted(comment.upvotes)" style="cursor: pointer;" (click)="addCommentUpvote(comment)">arrow_drop_up</mat-icon>
+                                        <mat-icon *ngIf="hasUpvoted(comment.upvotes)">arrow_drop_up</mat-icon>
                                         <div>
                                             {{(comment.upvotes) ? comment.upvotes.length : '0'}}
                                         </div>
                                     </div>
                                     <div class="col-md-11">
-                                        <button *ngIf="userType !== 'public'" md-icon-button [mdMenuTriggerFor]="menuComment" style="float: right; margin-right: 15px; margin-top: 15px;">
-                                            <md-icon style="color: #cccccc">more_vert</md-icon>
+                                        <button *ngIf="userType !== 'public'" mat-icon-button [matMenuTriggerFor]="menuComment" style="float: right; margin-right: 15px; margin-top: 15px;">
+                                            <mat-icon style="color: #cccccc">more_vert</mat-icon>
                                         </button>
-                                        <md-menu #menuComment="mdMenu">
-                                            <button *ngIf="userType==='participant'" md-menu-item>
-                                                <md-icon>flag</md-icon>
+                                        <mat-menu #menuComment="matMenu">
+                                            <button *ngIf="userType==='participant'" mat-menu-item>
+                                                <mat-icon>flag</mat-icon>
                                                 <span>Flag</span>
                                             </button>
-                                            <button *ngIf="userType==='owner' || isMyComment(comment)" md-menu-item (click)="deleteComment(comment)">
-                                                <md-icon>delete</md-icon>
+                                            <button *ngIf="userType==='owner' || isMyComment(comment)" mat-menu-item (click)="deleteComment(comment)">
+                                                <mat-icon>delete</mat-icon>
                                                 <span>Delete</span>
                                             </button>
-                                        </md-menu>
+                                        </mat-menu>
                                         <div class="mat-body-1 pre-wrapped">{{comment.description | titlecase}}</div>
                                         <div style="margin-top: 10px;" class="" *ngIf="comment.peer.length>0">
                                             <div class="clickable" style="float: left;">
@@ -319,15 +319,15 @@
                                         </div>
                                         <div style="margin-top: 10px;" *ngIf="!(replyForm && replyingToCommentId===comment.id)">
                                             <a href="javascript:void(0);" (click)="createReplyForm(comment)">
-                                                <md-icon style="top: 5px;">reply</md-icon> Reply</a>
+                                                <mat-icon style="top: 5px;">reply</mat-icon> Reply</a>
                                         </div>
                                         <div class="col-md-11 col-md-offset-1 margin-top-30" *ngIf="replyForm && replyingToCommentId===comment.id" style="margin-left: -15px;">
                                             <form [formGroup]="replyForm" (ngSubmit)="postReply(comment)">
                                                 <app-profile-popup [peer]="loggedInUser"></app-profile-popup>
-                                                <md-input-container style="margin-left: 15px; width: 85%;">
-                                                    <input mdInput type="text" formControlName="description" placeholder="Reply to above comment...">
-                                                </md-input-container>
-                                                <button [disabled]="!replyForm.valid" md-raised-button class="pull-right" color="primary">
+                                                <mat-input-container style="margin-left: 15px; width: 85%;">
+                                                    <input matInput type="text" formControlName="description" placeholder="Reply to above comment...">
+                                                </mat-input-container>
+                                                <button [disabled]="!replyForm.valid" mat-raised-button class="pull-right" color="primary">
                                                     <span *ngIf="!busyReply">Post</span>
                                                     <ngx-loading [show]="busyReply"></ngx-loading>
                                                 </button>
@@ -335,23 +335,23 @@
                                         </div>
                                         <div class="col-md-11 col-md-offset-1 margin-top-10">
                                             <div class="row margin-top-20" *ngFor="let reply of comment.replies">
-                                                <button *ngIf="userType !== 'public'" md-icon-button [mdMenuTriggerFor]="menuReply" style="float: right; margin-right: 15px; margin-top: 15px;">
-                                                    <md-icon style="color: #cccccc;">more_vert</md-icon>
+                                                <button *ngIf="userType !== 'public'" mat-icon-button [matMenuTriggerFor]="menuReply" style="float: right; margin-right: 15px; margin-top: 15px;">
+                                                    <mat-icon style="color: #cccccc;">more_vert</mat-icon>
                                                 </button>
-                                                <md-menu #menuReply="mdMenu">
-                                                    <button *ngIf="userType==='participant'" md-menu-item>
-                                                        <md-icon>flag</md-icon>
+                                                <mat-menu #menuReply="matMenu">
+                                                    <button *ngIf="userType==='participant'" mat-menu-item>
+                                                        <mat-icon>flag</mat-icon>
                                                         <span>Flag</span>
                                                     </button>
-                                                    <button *ngIf="userType==='owner' || isMyComment(reply)" md-menu-item (click)="deleteReply(reply)">
-                                                        <md-icon>delete</md-icon>
+                                                    <button *ngIf="userType==='owner' || isMyComment(reply)" mat-menu-item (click)="deleteReply(reply)">
+                                                        <mat-icon>delete</mat-icon>
                                                         <span>Delete</span>
                                                     </button>
-                                                </md-menu>
+                                                </mat-menu>
                                                 <div style="text-align: center; display: inline-block; color: #cccccc; vertical-align: top; margin-right: 25px;margin-top: 10px;  margin-left: -60px; float: left;"
                                                      [ngClass]="{'hasUpvoted': !!hasUpvoted(reply.upvotes)}">
-                                                    <md-icon *ngIf="!hasUpvoted(reply.upvotes)" style="cursor: pointer;" (click)="addReplyUpvote(reply)">arrow_drop_up</md-icon>
-                                                    <md-icon *ngIf="hasUpvoted(reply.upvotes)">arrow_drop_up</md-icon>
+                                                    <mat-icon *ngIf="!hasUpvoted(reply.upvotes)" style="cursor: pointer;" (click)="addReplyUpvote(reply)">arrow_drop_up</mat-icon>
+                                                    <mat-icon *ngIf="hasUpvoted(reply.upvotes)">arrow_drop_up</mat-icon>
                                                     <div>
                                                         <span *ngIf="reply.upvotes !== undefined">{{reply.upvotes.length}}</span>
                                                         <span *ngIf="reply.upvotes === undefined">0</span>

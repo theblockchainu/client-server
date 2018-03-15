@@ -1,18 +1,18 @@
-import {Component, OnInit, ElementRef, ViewChild} from '@angular/core';
-import {CollectionService} from '../../_services/collection/collection.service';
-import {TopicService} from '../../_services/topic/topic.service';
-import {ProfileService} from '../../_services/profile/profile.service';
-import {CookieUtilsService} from '../../_services/cookieUtils/cookie-utils.service';
-import {AppConfig} from '../../app.config';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { CollectionService } from '../../_services/collection/collection.service';
+import { TopicService } from '../../_services/topic/topic.service';
+import { ProfileService } from '../../_services/profile/profile.service';
+import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
+import { AppConfig } from '../../app.config';
 import * as _ from 'lodash';
-import {Observable} from 'rxjs/Observable';
-import {MdDialog} from '@angular/material';
-import {SelectTopicsComponent} from '../dialogs/select-topics/select-topics.component';
+import { Observable } from 'rxjs/Observable';
+import { MatDialog } from '@angular/material';
+import { SelectTopicsComponent } from '../dialogs/select-topics/select-topics.component';
 import 'rxjs/add/operator/do';
 import * as moment from 'moment';
-import {animate, state, style, transition, trigger} from '@angular/animations';
-import {DialogsService} from '../../_services/dialogs/dialog.service';
-import {CommunityService} from '../../_services/community/community.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { DialogsService } from '../../_services/dialogs/dialog.service';
+import { CommunityService } from '../../_services/community/community.service';
 
 @Component({
     selector: 'app-communities',
@@ -48,14 +48,14 @@ export class CommunitiesComponent implements OnInit {
     private today = moment();
 
     constructor(public _collectionService: CollectionService,
-                public _profileService: ProfileService,
-                private _cookieUtilsService: CookieUtilsService,
-                private _topicService: TopicService,
-                public config: AppConfig,
-                public dialog: MdDialog,
-                public elRef: ElementRef,
-                public _dialogsService: DialogsService,
-                public _communityService: CommunityService) {
+        public _profileService: ProfileService,
+        private _cookieUtilsService: CookieUtilsService,
+        private _topicService: TopicService,
+        public config: AppConfig,
+        public dialog: MatDialog,
+        public elRef: ElementRef,
+        public _dialogsService: DialogsService,
+        public _communityService: CommunityService) {
         this.userId = _cookieUtilsService.getValue('userId');
     }
 
@@ -83,7 +83,7 @@ export class CommunitiesComponent implements OnInit {
             (response) => {
                 const availableTopics = [];
                 response.forEach(topic => {
-                    availableTopics.push({'topic': topic, 'checked': false});
+                    availableTopics.push({ 'topic': topic, 'checked': false });
                 });
                 return availableTopics;
             }, (err) => {
@@ -97,32 +97,32 @@ export class CommunitiesComponent implements OnInit {
         this.selectedTopics = [];
         for (const topicObj of this.availableTopics) {
             if (topicObj['checked']) {
-                this.selectedTopics.push({'name': topicObj['topic'].name});
+                this.selectedTopics.push({ 'name': topicObj['topic'].name });
             }
         }
         if (this.selectedTopics.length < 1) {
             for (const topicObj of this.availableTopics) {
-                this.selectedTopics.push({'name': topicObj['topic'].name});
+                this.selectedTopics.push({ 'name': topicObj['topic'].name });
             }
         }
         query = {
             'include': [
                 {
                     'relation': 'communities', 'scope': {
-                    'include': [
-                        'topics',
-                        'views',
-                        'invites',
-                        'rooms',
-                        {'collections': ['owners']},
-                        'links',
-                        {'participants': [{'profiles': ['work']}]},
-                        {'owners': [{'profiles': ['work']}]}
-                    ]
-                }
+                        'include': [
+                            'topics',
+                            'views',
+                            'invites',
+                            'rooms',
+                            { 'collections': ['owners'] },
+                            'links',
+                            { 'participants': [{ 'profiles': ['work'] }] },
+                            { 'owners': [{ 'profiles': ['work'] }] }
+                        ]
+                    }
                 }
             ],
-            'where': {or: this.selectedTopics}
+            'where': { or: this.selectedTopics }
         };
 
         this._topicService.getTopics(query)

@@ -17,7 +17,7 @@ export class CollectionService {
   public now: Date;
   constructor(
     private httpClient: HttpClient,
-    private config: AppConfig,
+    public config: AppConfig,
     private _cookieService: CookieService,
     private route: ActivatedRoute,
     public router: Router,

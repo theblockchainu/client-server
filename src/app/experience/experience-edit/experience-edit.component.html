@@ -1,33 +1,33 @@
 <div class="main-content" style="background: #fff; padding: 0px; min-height: 100vh;">
-  <md-sidenav-container style="max-height: 90vh; min-height: 100vh; overflow-y: scroll">
-    <md-sidenav mode="side" opened="true">
+  <mat-sidenav-container style="max-height: 90vh; min-height: 100vh; overflow-y: scroll">
+    <mat-sidenav mode="side" opened="true">
       <app-left-sidebar [menuFile]="sidebarFilePath" (menuArray)="getMenuArray($event)"></app-left-sidebar>
-    </md-sidenav>
+    </mat-sidenav>
     <!-- Page Content -->
     <div class="navbar-page-content" style="padding: 25px 50px; background: #fff; max-height: 100vh; min-height: 100vh; overflow-y: scroll">
       <div class="pull-right" *ngIf="step!=1 && step !=5 && step !=12 && experience.controls['status'].value !== 'active'">
-        <button md-button (click)="saveandexit()">
+        <button mat-button (click)="saveandexit()">
           <span *ngIf="!busySave">Save &amp; Exit</span>
           <span *ngIf="busySave"> </span>
           <ngx-loading [show]="busySave"></ngx-loading>
         </button>
       </div>
       <div class="pull-right" *ngIf="step!=1 && step !=5 && step !=12 && experience.controls['status'].value === 'active'">
-        <button md-button (click)="exit()">Exit</button>
+        <button mat-button (click)="exit()">Exit</button>
       </div>
       <div class="pull-right" *ngIf="step!=1 && step !=5 && step !=12">
-        <button md-button (click)="openExperience()">
+        <button mat-button (click)="openExperience()">
           <span *ngIf="!busyPreview">Preview</span>
           <span *ngIf="busyPreview"> </span>
           <ngx-loading [show]="busyPreview"></ngx-loading>
         </button>
       </div>
       <div class="pull-left">
-        <md-chip-list>
-          <md-chip>
+        <mat-chip-list>
+          <mat-chip>
             {{experience.controls['status'].value | titlecase}}
-          </md-chip>
-        </md-chip-list>
+          </mat-chip>
+        </mat-chip-list>
       </div>
       <br/>
       <br/>
@@ -54,7 +54,7 @@
               </li>
             </ul>
             <div class="margin-top-20">
-              <button md-raised-button (click)="goto(2)" color="accent" class="pull-right">
+              <button mat-raised-button (click)="goto(2)" color="accent" class="pull-right">
                 <span *ngIf="!busyBasics">Next</span>
                 <span *ngIf="busyBasics"> </span>
                 <ngx-loading [show]="busyBasics"></ngx-loading>
@@ -88,10 +88,10 @@
                 </div>
 
                 <!--<div class="flex flexContainer margin-top-30">
-                  <button md-button class="padding-left-0" type="button" color="grey" [disabled]="interests.length >= maxTopics" (click)="addNewTopic()">
-                      <md-icon class="iconVC" color="accent">
+                  <button mat-button class="padding-left-0" type="button" color="grey" [disabled]="interests.length >= maxTopics" (click)="addNewTopic()">
+                      <mat-icon class="iconVC" color="accent">
                         add
-                      </md-icon><span class="addIconText">Add New Topic</span></button>
+                      </mat-icon><span class="addIconText">Add New Topic</span></button>
                   <span class="flex"></span>
                   &lt;!&ndash; <div class="col-sm-12 margin-top-30">
                     <div class="text-uppercase text-grey margin-bottom-10">Suggested Topics</div>
@@ -99,10 +99,10 @@
                   <div class="col-sm-3">
                     <div class="lookingFor interest">
                       <div class="lookingFor-thumb" style="text-align: center; padding-top: 20%">
-                        <a md-button [disabled]="interests.length >= maxTopics" (click)="addNewTopic()">
-                          <md-icon style="font-size: 30px">
+                        <a mat-button [disabled]="interests.length >= maxTopics" (click)="addNewTopic()">
+                          <mat-icon style="font-size: 30px">
                             add
-                          </md-icon>
+                          </mat-icon>
                         </a>
                       </div>
                     </div>
@@ -110,9 +110,9 @@
                   &lt;!&ndash; <div class="col-sm-3" *ngFor="let topic of suggestedTopics">
                     <div class="lookingFor interest">
                       <label class="check">
-                        <md-icon *ngIf="topic.checked" color="accent">
+                        <mat-icon *ngIf="topic.checked" color="accent">
                           check_circle
-                        </md-icon>
+                        </mat-icon>
                       </label>
                       <div class="lookingFor-thumb">
                         <i class="topic.id"></i>
@@ -122,9 +122,9 @@
                   </div> &ndash;&gt;
                 </div>-->
                 <div style="margin-top:60px;">
-                  <!-- <a md-button (click)=goto(1)>Back</a> -->
-                  <span class="pull-right" mdTooltip="Add at least one interest to continue" [mdTooltipDisabled]="interests.length !== 0">
-                    <button md-raised-button color="accent" (click)="interests.length == 0 || submitInterests()" [disabled]="interests.length == 0">
+                  <!-- <a mat-button (click)=goto(1)>Back</a> -->
+                  <span class="pull-right" matTooltip="Add at least one interest to continue" [matTooltipDisabled]="interests.length !== 0">
+                    <button mat-raised-button color="accent" (click)="interests.length == 0 || submitInterests()" [disabled]="interests.length == 0">
                       <span *ngIf="!busyInterest">Next</span>
                       <span *ngIf="busyInterest"> </span>
                       <ngx-loading [show]="busyInterest"></ngx-loading>
@@ -145,18 +145,18 @@
               <br/>
               <form [formGroup]="experience" (ngSubmit)="submitExperience(experience)">
                 <div class="row margin-top-60">
-                  <md-form-field class="col-md-4">
-                    <input type="text" name="other_languages" style="border-bottom: 0px;" placeholder="Select Language" mdInput formControlName="selectedLanguage"
-                      [mdAutocomplete]="auto">
-                    <md-autocomplete #auto="mdAutocomplete">
-                      <md-option *ngFor="let l of filteredLanguageOptions | async" [value]="l" (click)="languageChange(l)">{{l}}</md-option>
-                    </md-autocomplete>
-                  </md-form-field>
+                  <mat-form-field class="col-md-4">
+                    <input type="text" name="other_languages" style="border-bottom: 0px;" placeholder="Select Language" matInput formControlName="selectedLanguage"
+                      [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete">
+                      <mat-option *ngFor="let l of filteredLanguageOptions | async" [value]="l" (click)="languageChange(l)">{{l}}</mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
                 </div>
                 <div style="margin-top:100px;">
-                  <!-- <a md-button (click)=goto(2)>Back</a> -->
-                  <span class="pull-right" mdTooltip="Select a language to continue" [mdTooltipDisabled]="selectedLanguages!==undefined">
-                    <button md-raised-button color="accent" type="Submit" [disabled]="selectedLanguages===undefined">
+                  <!-- <a mat-button (click)=goto(2)>Back</a> -->
+                  <span class="pull-right" matTooltip="Select a language to continue" [matTooltipDisabled]="selectedLanguages!==undefined">
+                    <button mat-raised-button color="accent" type="Submit" [disabled]="selectedLanguages===undefined">
                       <span *ngIf="!busyLanguage">Next</span>
                       <span *ngIf="busyLanguage"> </span>
                       <ngx-loading [show]="busyLanguage"></ngx-loading>
@@ -177,16 +177,16 @@
               <form [formGroup]="experience" (ngSubmit)="submitExperience(experience)">
                 <div class="row margin-bottom-30 margin-top-30" style="margin-top: 30px;">
                   <div class="col-sm-12">
-                    <md-input-container class="pb-block" style="margin-bottom: 20px">
-                      <textarea mdInput #aboutHost maxlength="500" rows="4" formControlName="aboutHost" placeholder="Put in your background information"></textarea>
-                      <md-hint align="end">{{aboutHost.value.length}} / 500</md-hint>
-                    </md-input-container>
+                    <mat-input-container class="pb-block" style="margin-bottom: 20px">
+                      <textarea matInput #aboutHost maxlength="500" rows="4" formControlName="aboutHost" placeholder="Put in your background information"></textarea>
+                      <mat-hint align="end">{{aboutHost.value.length}} / 500</mat-hint>
+                    </mat-input-container>
                   </div>
                 </div>
                 <div style="margin-top:50px;">
-                  <!-- <a md-button (click)=goto(3)>Back</a> -->
-                  <span class="pull-right" mdTooltip="A brief description about yourself is mandatory to continue" [mdTooltipDisabled]="aboutHost.value.length !== 0">
-                    <button md-raised-button color="accent" type="Submit" [disabled]="aboutHost.value.length == 0">
+                  <!-- <a mat-button (click)=goto(3)>Back</a> -->
+                  <span class="pull-right" matTooltip="A brief description about yourself is mandatory to continue" [matTooltipDisabled]="aboutHost.value.length !== 0">
+                    <button mat-raised-button color="accent" type="Submit" [disabled]="aboutHost.value.length == 0">
                       <span *ngIf="!busyHost">Next</span>
                       <span *ngIf="busyHost"> </span>
                       <ngx-loading [show]="busyHost"></ngx-loading>
@@ -207,7 +207,7 @@
               </p>
               <br/>
               <div style="margin-top:60px;">
-                <a md-raised-button (click)="goto(6)" color="accent" class="pull-right">
+                <a mat-raised-button (click)="goto(6)" color="accent" class="pull-right">
                   <span *ngIf="!busyExperiencePage">Next</span>
                   <span *ngIf="busyExperiencePage"> </span>
                   <ngx-loading [show]="busyExperiencePage"></ngx-loading>
@@ -229,11 +229,11 @@
                         Make it short and sweet
                       </p>
                       <br/>
-                      <md-input-container class="pb-block" style="margin-bottom: 20px">
-                        <input mdInput #title formControlName="title" maxlength="100" placeholder="Enter Name">
-                        <md-hint align="start">{{100 - title.value.length}} more characters needed</md-hint>
-                        <md-hint align="end">{{title.value.length}} / 100</md-hint>
-                      </md-input-container>
+                      <mat-input-container class="pb-block" style="margin-bottom: 20px">
+                        <input matInput #title formControlName="title" maxlength="100" placeholder="Enter Name">
+                        <mat-hint align="start">{{100 - title.value.length}} more characters needed</mat-hint>
+                        <mat-hint align="end">{{title.value.length}} / 100</mat-hint>
+                      </mat-input-container>
                     </div>
                   </div>
                   <div class="col-sm-12 margin-bottom-30">
@@ -244,11 +244,11 @@
                         <br/> Start with a verb that tells peers what they will do.
                       </p>
                       <br/>
-                      <md-input-container class="pb-block" style="margin-bottom: 20px">
-                        <input mdInput #headline formControlName="headline" maxlength="100" placeholder="Write headline">
-                        <md-hint align="start">{{100 - headline.value.length}} more characters needed</md-hint>
-                        <md-hint align="end">{{headline.value.length}} / 100</md-hint>
-                      </md-input-container>
+                      <mat-input-container class="pb-block" style="margin-bottom: 20px">
+                        <input matInput #headline formControlName="headline" maxlength="100" placeholder="Write headline">
+                        <mat-hint align="start">{{100 - headline.value.length}} more characters needed</mat-hint>
+                        <mat-hint align="end">{{headline.value.length}} / 100</mat-hint>
+                      </mat-input-container>
                     </div>
                   </div>
                 </div>
@@ -267,7 +267,7 @@
                     <div *ngIf="urlForImages.length" class="pic delete">
                       <div *ngFor="let file of urlForImages" class="col-md-6 padding-left-0 imageContainer">
                         <img src="{{config.apiUrl + file}}" width="150" style="border: 0.5px solid #ccc">
-                        <md-icon (click)="deleteFromContainer(file, 'image')" class="delete-button">close</md-icon>
+                        <mat-icon (click)="deleteFromContainer(file, 'image')" class="delete-button">close</mat-icon>
                       </div>
                     </div>
                     <div class="loading-container" [hidden]="!uploadingImage">
@@ -277,10 +277,10 @@
                 </div>
 
                 <div style="margin-top:60px;">
-                  <!-- <a md-button (click)=goto(5)>Back</a> -->
-                  <span class="pull-right" mdTooltip="Please type in a headline to continue." [mdTooltipDisabled]="title.value.length !== 0 || headline.value.length !== 0">
-                    <span mdTooltip="An image is mandatory to continue" [mdTooltipDisabled]="urlForImages.length !== 0">
-                      <button md-raised-button color="accent" type="Submit" [disabled]="urlForImages.length === 0 && title.value.length == 0 && headline.value.length == 0">Next</button>
+                  <!-- <a mat-button (click)=goto(5)>Back</a> -->
+                  <span class="pull-right" matTooltip="Please type in a headline to continue." [matTooltipDisabled]="title.value.length !== 0 || headline.value.length !== 0">
+                    <span matTooltip="An image is mandatory to continue" [matTooltipDisabled]="urlForImages.length !== 0">
+                      <button mat-raised-button color="accent" type="Submit" [disabled]="urlForImages.length === 0 && title.value.length == 0 && headline.value.length == 0">Next</button>
                     </span>
                   </span>
                 </div>
@@ -297,16 +297,16 @@
                   <div class="col-sm-12 margin-bottom-30">
                     <h2 class="title">What’s the experience about?</h2>
                     <p class="subtitle">Give a detailed description to learners of what they will do in this experience</p>
-                    <md-input-container class="pb-block" style="margin-top: 20px; margin-bottom: 20px">
-                      <textarea mdInput #description maxlength="800" rows="4" formControlName="description" placeholder="What we'll do in this experience?"></textarea>
-                      <md-hint align="end">{{description.value.length}} / 800</md-hint>
-                    </md-input-container>
+                    <mat-input-container class="pb-block" style="margin-top: 20px; margin-bottom: 20px">
+                      <textarea matInput #description maxlength="800" rows="4" formControlName="description" placeholder="What we'll do in this experience?"></textarea>
+                      <mat-hint align="end">{{description.value.length}} / 800</mat-hint>
+                    </mat-input-container>
                   </div>
                 </div>
                 <div style="margin-top:60px;">
-                  <!-- <a md-button (click)=goto(6)>Back</a> -->
-                  <span class="pull-right" mdTooltip="Describe your experience in detail to continue" [mdTooltipDisabled]="description.value.length !== 0">
-                    <button md-raised-button color="accent" type="Submit" [disabled]="description.value.length == 0">Next</button>
+                  <!-- <a mat-button (click)=goto(6)>Back</a> -->
+                  <span class="pull-right" matTooltip="Describe your experience in detail to continue" [matTooltipDisabled]="description.value.length !== 0">
+                    <button mat-raised-button color="accent" type="Submit" [disabled]="description.value.length == 0">Next</button>
                   </span>
                 </div>
               </form>
@@ -321,23 +321,23 @@
                 <h2 class="title">Who should come?</h2>
                 <p class="subtitle">Start with a level of difficulty</p>
                 <div class="col-sm-12 margin-bottom-30 padding-left-0">
-                  <md-select [floatPlaceholder]="false" class="margin-bottom-50" formControlName="difficultyLevel">
-                    <md-option [value]="">--Select--</md-option>
-                    <md-option *ngFor="let d of difficulties" [value]="d">{{d}}</md-option>
-                  </md-select>
+                  <mat-select   class="margin-bottom-50" formControlName="difficultyLevel">
+                    <mat-option [value]="">--Select--</mat-option>
+                    <mat-option *ngFor="let d of difficulties" [value]="d">{{d}}</mat-option>
+                  </mat-select>
                 </div>
                 <h3 class="title">Pre-requisites</h3>
                 <p class="subtitle">Describe the knowledge prerequisites, if there are any, that learners should know of.</p>
                 <div class="col-sm-12 margin-bottom-30 padding-left-0">
-                  <md-input-container class="pb-block">
-                    <textarea mdInput #notes maxlength="500" rows="4" formControlName="notes"></textarea>
-                    <md-hint align="end">{{notes.value.length}} / 500</md-hint>
-                  </md-input-container>
+                  <mat-input-container class="pb-block">
+                    <textarea matInput #notes maxlength="500" rows="4" formControlName="notes"></textarea>
+                    <mat-hint align="end">{{notes.value.length}} / 500</mat-hint>
+                  </mat-input-container>
                 </div>
                 <div style="margin-top:60px;">
-                  <!-- <a md-button (click)=goto(7)>Back</a> -->
-                  <span class="pull-right" mdTooltip="Please fill all the details" [mdTooltipDisabled]="experience.controls['difficultyLevel'].value && experience.controls['notes'].value">
-                    <button md-raised-button color="accent" type="Submit" [disabled]="!experience.controls['difficultyLevel'].value && notes.value.length == 0">Next</button>
+                  <!-- <a mat-button (click)=goto(7)>Back</a> -->
+                  <span class="pull-right" matTooltip="Please fill all the details" [matTooltipDisabled]="experience.controls['difficultyLevel'].value && experience.controls['notes'].value">
+                    <button mat-raised-button color="accent" type="Submit" [disabled]="!experience.controls['difficultyLevel'].value && notes.value.length == 0">Next</button>
                   </span>
                 </div>
               </form>
@@ -355,16 +355,16 @@
               </p>
               <form [formGroup]="experience" (ngSubmit)="submitExperience(experience)">
                 <div class="col-sm-4 padding-left-0">
-                  <md-input-container class="pb-block" style="margin-top: 20px; margin-bottom: 20px">
-                    <input type="number" mdInput #maxSpots min="1" formControlName="maxSpots" placeholder="Enter Number">
-                  </md-input-container>
+                  <mat-input-container class="pb-block" style="margin-top: 20px; margin-bottom: 20px">
+                    <input type="number" matInput #maxSpots min="1" formControlName="maxSpots" placeholder="Enter Number">
+                  </mat-input-container>
                 </div>
                 <br/>
                 <div style="padding-top:60px;">
-                  <!-- <a md-button (click)=goto(8)>Back</a> -->
-                  <span class="pull-right" mdTooltip="Enter the maximum number of participants you can teach in each Cohort of this experience"
-                    [mdTooltipDisabled]="maxSpots.value.length !== 0 && maxSpots.value > 0">
-                    <button md-raised-button color="accent" type="Submit" [disabled]="maxSpots.value.length == 0 || maxSpots.value < 0">Next</button>
+                  <!-- <a mat-button (click)=goto(8)>Back</a> -->
+                  <span class="pull-right" matTooltip="Enter the maximum number of participants you can teach in each Cohort of this experience"
+                    [matTooltipDisabled]="maxSpots.value.length !== 0 && maxSpots.value > 0">
+                    <button mat-raised-button color="accent" type="Submit" [disabled]="maxSpots.value.length == 0 || maxSpots.value < 0">Next</button>
                   </span>
                 </div>
               </form>
@@ -398,7 +398,7 @@
                           <video controls width="150" class="uploaded_picture" style="border: 0.5px solid #ccc;" preload="metadata">
                             <source src="{{config.apiUrl + file}}"> Your browser does not support the video tag.
                           </video>
-                          <md-icon (click)="deleteFromContainer(file, 'video')" class="delete-video">close</md-icon>
+                          <mat-icon (click)="deleteFromContainer(file, 'video')" class="delete-video">close</mat-icon>
                         </div>
                       </div>
                       <div class="loading-container" [hidden]="!uploadingVideo">
@@ -409,7 +409,7 @@
                   <div class="row">
                     <div class="margin-top-60">
                       <span class="pull-right">
-                        <button md-raised-button color="accent" type="Submit">Next</button>
+                        <button mat-raised-button color="accent" type="Submit">Next</button>
                       </span>
                     </div>
                   </div>
@@ -431,39 +431,39 @@
                 <h3 class="title">Price</h3>
                 <div class="row">
                   <div class="col-md-3">
-                    <md-checkbox [(ngModel)]="freeExperience" (ngModelChange)="onFreeChange($event)" [ngModelOptions]="{standalone: true}">Free</md-checkbox>
+                    <mat-checkbox [(ngModel)]="freeExperience" (ngModelChange)="onFreeChange($event)" [ngModelOptions]="{standalone: true}">Free</mat-checkbox>
                   </div>
                 </div>
                 <div class="row margin-left-0" *ngIf="!freeExperience">
                   <div class="col-md-3 padding-left-0">
-                    <md-input-container [floatPlaceholder]="'never'" class="margin-top-20">
-                      <span mdPrefix>
+                    <mat-input-container   class="margin-top-20">
+                      <span matPrefix>
                         {{0| currency: experience.controls['currency'].value : true | slice:0:1}} &nbsp;
                       </span>
-                      <input type="number" mdInput #price formControlName="price" placeholder="0" min="1" required>
-                    </md-input-container>
+                      <input type="number" matInput #price formControlName="price" placeholder="0" min="1" required>
+                    </mat-input-container>
                   </div>
                   <div class="col-md-2 col-md-offset-2 priceAlignParent">
-                    <md-select [floatPlaceholder]="'never'" formControlName="currency" class="priceAlign padding-top-0 margin-top-20" placeholder="USD">
-                      <md-option *ngFor="let c of currencies" [value]="c">{{c}}</md-option>
-                    </md-select>
+                    <mat-select   formControlName="currency" class="priceAlign padding-top-0 margin-top-20" placeholder="USD">
+                      <mat-option *ngFor="let c of currencies" [value]="c">{{c}}</mat-option>
+                    </mat-select>
                   </div>
                 </div>
                 <h3 class="title">Cancellation Policy</h3>
                 <div class="row margin-left-0">
                   <div class="col-sm-12 padding-left-0">
                     Students will get a full refund if they cancel within
-                    <md-select [floatPlaceholder]="'never'" formControlName="cancellationPolicy" style="margin: 20px 10px; position: relative; top: -5px;"
+                    <mat-select   formControlName="cancellationPolicy" style="margin: 20px 10px; position: relative; top: -5px;"
                       placeholder="3 Days">
-                      <md-option *ngFor="let cp of cancellationPolicies" [value]="cp">{{cp}}</md-option>
-                    </md-select>
+                      <mat-option *ngFor="let cp of cancellationPolicies" [value]="cp">{{cp}}</mat-option>
+                    </mat-select>
                     of signing up.
                   </div>
                 </div>
                 <div style="margin-top:100px;">
-                  <!-- <a md-button (click)=goto(10)>Back</a> -->
-                  <span class="pull-right" mdTooltip="Enter a price you wish to charge for this experience and its cancellation policy" [mdTooltipDisabled]="experience.controls['price'].value && experience.controls['currency'].value  && experience.controls['cancellationPolicy'].value">
-                    <button md-raised-button color="accent" type="Submit" [disabled]="(!experience.controls['price'].value || !experience.controls['cancellationPolicy'].value  || !experience.controls['currency'].value) && !freeExperience">Next</button>
+                  <!-- <a mat-button (click)=goto(10)>Back</a> -->
+                  <span class="pull-right" matTooltip="Enter a price you wish to charge for this experience and its cancellation policy" [matTooltipDisabled]="experience.controls['price'].value && experience.controls['currency'].value  && experience.controls['cancellationPolicy'].value">
+                    <button mat-raised-button color="accent" type="Submit" [disabled]="(!experience.controls['price'].value || !experience.controls['cancellationPolicy'].value  || !experience.controls['currency'].value) && !freeExperience">Next</button>
                   </span>
                 </div>
               </form>
@@ -479,8 +479,8 @@
                 <p class="subtitle">Create a detailed timeline of your experience and add content for every event in your itinerary. Learners
                   will see this before they sign up for your experience.</p>
                 <div style="margin-top:60px;">
-                  <!-- <a md-button (click)=goto(11)>Back</a> -->
-                  <button class="pull-right" md-raised-button color="accent" (click)="goto(13)">Next</button>
+                  <!-- <a mat-button (click)=goto(11)>Back</a> -->
+                  <button class="pull-right" mat-raised-button color="accent" (click)="goto(13)">Next</button>
                 </div>
               </form>
             </div>
@@ -499,19 +499,19 @@
                 <div formGroupName="calendar" *ngIf="(!timeline.controls.calendar.value.startDate && !timeline.controls.calendar.value.endDate) || datesEditable">
                   <div class="row" style="margin: 30px 0px 15px -15px;">
                     <div class="col-sm-6">
-                      <md-form-field class="dateStyles">
-                        <input mdInput [mdDatepicker]="startDatePicker" placeholder="Start date" formControlName="startDate">
-                        <md-datepicker-toggle mdSuffix [for]="startDatePicker" class="svgStyle {{activeExperience}}"></md-datepicker-toggle>
-                      </md-form-field>
-                      <md-datepicker touchUi="true" #startDatePicker></md-datepicker>
+                      <mat-form-field class="dateStyles">
+                        <input matInput [matDatepicker]="startDatePicker" placeholder="Start date" formControlName="startDate">
+                        <mat-datepicker-toggle matSuffix [for]="startDatePicker" class="svgStyle {{activeExperience}}"></mat-datepicker-toggle>
+                      </mat-form-field>
+                      <mat-datepicker touchUi="true" #startDatePicker></mat-datepicker>
                     </div>
                     <div class="col-sm-6">
-                      <md-form-field class="dateStyles">
-                        <input mdInput [mdDatepicker]="endDatePicker" [min]="timeline.controls['calendar'].value.startDate" placeholder="End date"
+                      <mat-form-field class="dateStyles">
+                        <input matInput [matDatepicker]="endDatePicker" [min]="timeline.controls['calendar'].value.startDate" placeholder="End date"
                           formControlName="endDate">
-                        <md-datepicker-toggle mdSuffix [for]="endDatePicker" class="svgStyle"></md-datepicker-toggle>
-                      </md-form-field>
-                      <md-datepicker touchUi="true" #endDatePicker></md-datepicker>
+                        <mat-datepicker-toggle matSuffix [for]="endDatePicker" class="svgStyle"></mat-datepicker-toggle>
+                      </mat-form-field>
+                      <mat-datepicker touchUi="true" #endDatePicker></mat-datepicker>
                     </div>
                   </div>
                 </div>
@@ -520,9 +520,9 @@
                     <div class="col-md-12 selected-dates">
                       {{timeline.controls['calendar'].value.startDate | date: 'dd MMM'}} - {{timeline.controls['calendar'].value.endDate | date:
                       'dd MMM'}} &emsp;
-                      <md-icon color="accent">
+                      <mat-icon color="accent">
                         date_range
-                      </md-icon>
+                      </mat-icon>
                       <a style="cursor: pointer; color: #33bd9e;" (click)="makeDatesEditable()">Change dates</a>
                     </div>
                   </div>
@@ -534,9 +534,9 @@
                 </div>
                 <div class="row">
                   <div style="margin-top:100px;">
-                    <!-- <a md-button (click)=goto(12)>Back</a> -->
-                    <span class="pull-right" mdTooltip="A minimum of 1 day experience is mandatory to continue" [mdTooltipDisabled]="(timeline.controls['calendar'].value.startDate || timeline.controls['calendar'].value.endDate)">
-                      <button md-raised-button color="accent" type="Submit" [disabled]="(!timeline.controls['calendar'].value.startDate && !timeline.controls['calendar'].value.endDate)">Next</button>
+                    <!-- <a mat-button (click)=goto(12)>Back</a> -->
+                    <span class="pull-right" matTooltip="A minimum of 1 day experience is mandatory to continue" [matTooltipDisabled]="(timeline.controls['calendar'].value.startDate || timeline.controls['calendar'].value.endDate)">
+                      <button mat-raised-button color="accent" type="Submit" [disabled]="(!timeline.controls['calendar'].value.startDate && !timeline.controls['calendar'].value.endDate)">Next</button>
                     </span>
                   </div>
                 </div>
@@ -551,14 +551,14 @@
               <h2 class="title">Review and submit</h2>
               <div *ngIf="!isSubmitted">
                 <div style="margin-top:40px;">
-                  <md-checkbox value="val1" [(ngModel)]="selectedValues[0]">You meet our standards.</md-checkbox>
+                  <mat-checkbox value="val1" [(ngModel)]="selectedValues[0]">You meet our standards.</mat-checkbox>
                 </div>
                 <div style="margin-top:20px;">
-                  <md-checkbox value="val2" [(ngModel)]="selectedValues[1]">You agree to our terms and conditions.</md-checkbox>
+                  <mat-checkbox value="val2" [(ngModel)]="selectedValues[1]">You agree to our terms and conditions.</mat-checkbox>
                 </div>
-                <span class="pull-right" mdTooltip="You need to agree to Peerbuds community terms to submit this experience for approval"
-                  [mdTooltipDisabled]="selectedValues[0] && selectedValues[1]">
-                  <button md-raised-button color="accent" (click)="submitForReview();" [disabled]="!selectedValues[0] || !selectedValues[1]">
+                <span class="pull-right" matTooltip="You need to agree to Peerbuds community terms to submit this experience for approval"
+                  [matTooltipDisabled]="selectedValues[0] && selectedValues[1]">
+                  <button mat-raised-button color="accent" (click)="submitForReview();" [disabled]="!selectedValues[0] || !selectedValues[1]">
                     Submit for Review</button>
                 </span>
               </div>
@@ -577,36 +577,36 @@
               <div class="subtitle">Phone numbers make it easy for learners to reach out to you in case of urgent queries.</div>
               <form [formGroup]="phoneDetails">
                 <div style="margin-top:50px;">
-                  <md-radio-group>
-                    <md-radio-button class="pb-block margin-bottom-20" name="phone" value="1" (click)="toggleChoice(1)" *ngIf="!isPhoneVerified">Yes</md-radio-button>
+                  <mat-radio-group>
+                    <mat-radio-button class="pb-block margin-bottom-20" name="phone" value="1" (click)="toggleChoice(1)" *ngIf="!isPhoneVerified">Yes</mat-radio-button>
                     <div *ngIf="selectedOption === 1 || isPhoneVerified" style="margin: 20px 0px 30px 0px;">
-                        <md-input-container [floatPlaceholder]="true" style="margin: 20px 0px;">
-                            <input type="tel" mdInput #countryCode formControlName="countryCode" placeholder="Country Code" [readOnly]="true">
-                        </md-input-container>
-                        <md-input-container [floatPlaceholder]="true" class="pb-block" style="margin: 20px 0px;">
-                        <input type="tel" mdInput #phoneNo formControlName="phoneNo" placeholder="Phone number from profile" [readOnly]="true">
-                        <md-hint *ngIf="!isPhoneVerified">We will send the confirmation code on your mobile</md-hint>
-                        <md-hint *ngIf="isPhoneVerified">Update your phone number from profile to change it for this experience</md-hint>
-                      </md-input-container>
-                      <button md-raised-button #sendOtpButton color="accent" (click)="submitPhoneNo($event.target, 'Sending OTP...')" *ngIf="!isPhoneVerified">
+                        <mat-input-container   style="margin: 20px 0px;">
+                            <input type="tel" matInput #countryCode formControlName="countryCode" placeholder="Country Code" [readOnly]="true">
+                        </mat-input-container>
+                        <mat-input-container   class="pb-block" style="margin: 20px 0px;">
+                        <input type="tel" matInput #phoneNo formControlName="phoneNo" placeholder="Phone number from profile" [readOnly]="true">
+                        <mat-hint *ngIf="!isPhoneVerified">We will send the confirmation code on your mobile</mat-hint>
+                        <mat-hint *ngIf="isPhoneVerified">Update your phone number from profile to change it for this experience</mat-hint>
+                      </mat-input-container>
+                      <button mat-raised-button #sendOtpButton color="accent" (click)="submitPhoneNo($event.target, 'Sending OTP...')" *ngIf="!isPhoneVerified">
                         Send Code as SMS
                       </button>
-                      <button md-raised-button #sendOtpButton color="accent" *ngIf="isPhoneVerified">
-                        <md-icon md-prefix style="margin-top: -12px; margin-right: 5px; color: white;">check_circle</md-icon> Phone Verified
+                      <button mat-raised-button #sendOtpButton color="accent" *ngIf="isPhoneVerified">
+                        <mat-icon mat-prefix style="margin-top: -12px; margin-right: 5px; color: white;">check_circle</mat-icon> Phone Verified
                       </button>
                     </div>
                     <div *ngIf="otpSent && !isPhoneVerified" style="margin: 20px 0px 50px 0px;">
                       <p>Type the 4 digit verification code</p>
-                      <md-input-container class="pb-block inputOTP" style="margin: 20px 0px;">
-                        <input type="text" mdInput #inputOTP formControlName="inputOTP" placeholder="Verification code">
-                      </md-input-container>
-                      <button md-raised-button color="accent" (click)="submitOTP()">Confirm Code</button>
+                      <mat-input-container class="pb-block inputOTP" style="margin: 20px 0px;">
+                        <input type="text" matInput #inputOTP formControlName="inputOTP" placeholder="Verification code">
+                      </mat-input-container>
+                      <button mat-raised-button color="accent" (click)="submitOTP()">Confirm Code</button>
                     </div>
-                    <md-radio-button class="pb-block margin-bottom-20" name="phone" value="0" (click)="toggleChoice(0)" *ngIf="!isPhoneVerified">No, thanks</md-radio-button>
-                  </md-radio-group>
+                    <mat-radio-button class="pb-block margin-bottom-20" name="phone" value="0" (click)="toggleChoice(0)" *ngIf="!isPhoneVerified">No, thanks</mat-radio-button>
+                  </mat-radio-group>
                 </div>
-                <span class="pull-right" mdTooltip="Please verify your phone number to continue" [mdTooltipDisabled]="selectedOption !==-1 || isPhoneVerified">
-                  <button md-raised-button (click)="takeToPayment()" color="accent" [disabled]="selectedOption ===-1 && !isPhoneVerified">
+                <span class="pull-right" matTooltip="Please verify your phone number to continue" [matTooltipDisabled]="selectedOption !==-1 || isPhoneVerified">
+                  <button mat-raised-button (click)="takeToPayment()" color="accent" [disabled]="selectedOption ===-1 && !isPhoneVerified">
                     <span *ngIf="!busyPayment">Next</span>
                     <span *ngIf="busyPayment"> </span>
                     <ngx-loading [show]="busyPayment"></ngx-loading>
@@ -647,7 +647,7 @@
                     <div class="col-md-12">
                       <ng-container *ngIf="!addingAccount && payoutAccounts">
                         <form [formGroup]="paymentInfo">
-                          <md-radio-group formControlName="id">
+                          <mat-radio-group formControlName="id">
                             <div class="row" *ngFor="let account of payoutAccounts" style="padding-top: 5px; padding-bottom: 5px">
                               <div class="col-md-3" [ngSwitch]="account.external_accounts.data[0].object">
                                 <b *ngSwitchCase="'card'">Card</b>
@@ -663,11 +663,11 @@
                                 <b *ngIf="!account.external_accounts.data[0].status">Ready</b>
                               </div>
                               <div class="col-md-3">
-                                <md-radio-button value="{{account.payoutaccount.id}}">
-                                </md-radio-button>
+                                <mat-radio-button value="{{account.payoutaccount.id}}">
+                                </mat-radio-button>
                               </div>
                             </div>
-                          </md-radio-group>
+                          </mat-radio-group>
                         </form>
 
                       </ng-container>
@@ -682,18 +682,18 @@
               </div>
               <!-- <form [formGroup]="paymentInfo "> -->
               <div style="margin-top:10px; " *ngIf="!payoutLoading">
-                <!--<button md-raised-button>PayTM</button> &emsp;-->
-                <button md-raised-button>
+                <!--<button mat-raised-button>PayTM</button> &emsp;-->
+                <button mat-raised-button>
                   <a [href]="connectPaymentUrl">
                     <img src="../../../assets/images/stripe.png" style="width: 50px;" />
                   </a>
                 </button> &emsp;
-                <!--<button md-raised-button>Paypal</button> &emsp;-->
+                <!--<button mat-raised-button>Paypal</button> &emsp;-->
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </md-sidenav-container>
+  </mat-sidenav-container>
 </div>

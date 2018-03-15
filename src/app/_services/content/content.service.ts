@@ -17,7 +17,7 @@ export class ContentService {
 
   public options;
 
-  constructor(private http: HttpClient, private config: AppConfig,
+  constructor(private http: HttpClient, public config: AppConfig,
     private _cookieService: CookieService,
     private route: ActivatedRoute,
     public router: Router,

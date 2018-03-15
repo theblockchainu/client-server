@@ -3,14 +3,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { NgModule } from '@angular/core';
-import { MdDialogRef, MdDialog, MdDialogConfig, MdSnackBar } from '@angular/material';
+import { MatDialogRef, MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
 import { FormGroup, FormArray, FormBuilder, FormControl, AbstractControl, Validators } from '@angular/forms';
 
 import { LoginComponentDialog } from '../../_services/dialogs/login-dialog/login-dialog.component';
 import {
-  MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule,
-  MdIconModule, MdAutocompleteModule, MdInputModule, MdNativeDateModule,
-  MdProgressSpinnerModule, MdProgressBarModule
+  MatButtonModule, MatCardModule, MatMenuModule, MatToolbarModule,
+  MatIconModule, MatAutocompleteModule, MatInputModule, MatNativeDateModule,
+  MatProgressSpinnerModule, MatProgressBarModule
 } from '@angular/material';
 import { AuthenticationService } from '../../_services/authentication/authentication.service';
 import { AppHeaderComponent } from '../../app-header/app-header.component';
@@ -32,9 +32,9 @@ export class IndexComponent implements OnInit {
     private authenticationService: AuthenticationService,
     public _fb: FormBuilder,
     private _router: Router,
-    public dialog: MdDialog,
+    public dialog: MatDialog,
     private http: HttpClient,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     private dialogsService: DialogsService,
     private _activatedRoute: ActivatedRoute) {
     this.isLoggedIn = authenticationService.isLoggedIn();

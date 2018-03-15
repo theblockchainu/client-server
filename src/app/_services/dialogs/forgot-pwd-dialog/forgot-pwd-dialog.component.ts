@@ -1,13 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { AlertService } from '../../alert/alert.service';
 import { AuthenticationService } from '../../authentication/authentication.service';
 import { Observable } from 'rxjs/Observable';
 import {
   FormGroup, FormArray, FormBuilder, FormControl, AbstractControl, Validators
 } from '@angular/forms';
-import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-forgot-pwd-dialog',  // <login></login>
@@ -35,9 +35,9 @@ export class RequestPasswordDialogComponent implements OnInit {
     public router: Router,
     public authenticationService: AuthenticationService,
     private alertService: AlertService,
-    public dialogRef: MdDialogRef<RequestPasswordDialogComponent>,
+    public dialogRef: MatDialogRef<RequestPasswordDialogComponent>,
     private _fb: FormBuilder,
-    @Inject(MD_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any) {
     this.isLoggedIn = this.authenticationService.isLoggedIn();
   }
 

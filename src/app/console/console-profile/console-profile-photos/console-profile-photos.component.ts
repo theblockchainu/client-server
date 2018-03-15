@@ -15,7 +15,7 @@ declare var moment: any;
 })
 export class ConsoleProfilePhotosComponent implements OnInit {
   public picture_url: string;
-  private userId;
+  public userId;
   public profile_picture_array = [];
   public profile_video: string;
   private uploadingImage = false;

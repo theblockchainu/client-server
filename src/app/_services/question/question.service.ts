@@ -9,7 +9,7 @@ export class QuestionService {
     public options;
 
     constructor(private http: HttpClient,
-        private config: AppConfig,
+        public config: AppConfig,
         private requestHeaderService: RequestHeaderService) {
         this.options = requestHeaderService.getOptions();
     }

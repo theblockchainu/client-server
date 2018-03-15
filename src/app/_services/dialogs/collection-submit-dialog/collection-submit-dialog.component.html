@@ -1,4 +1,4 @@
-<div class="dialog-container" md-dialog-content>
+<div class="dialog-container" mat-dialog-content>
   <div class="mat-display-1">{{data.type | titlecase}} Submitted for Review</div>
   <div style="display:inline-block">
     <div style="margin-top: 50px; margin-bottom: 40px;font-size:16px;">
@@ -10,7 +10,7 @@
       <br/> You can set repeat {{data.type}}s once your {{data.type}} is approved.
     </div>
   </div>
-  <md-dialog-actions class="col-md-offset-5 col-md-4">
-    <button md-raised-button (click)="closeDialog()" color="accent">Dismiss</button>
-  </md-dialog-actions>
+  <mat-dialog-actions class="col-md-offset-5 col-md-4">
+    <button mat-raised-button (click)="closeDialog()" color="accent">Dismiss</button>
+  </mat-dialog-actions>
 </div>

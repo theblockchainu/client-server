@@ -1,5 +1,5 @@
-<md-progress-bar *ngIf="loadingHome" mode="indeterminate" color="primary" style="top: 64px;position: fixed;">
-</md-progress-bar>
+<mat-progress-bar *ngIf="loadingHome" mode="indeterminate" color="primary" style="top: 64px;position: fixed;">
+</mat-progress-bar>
 <div class="main-content" id="content" *ngIf="!loadingHome">
     <div class="center margin-top-100">
         <p class="mat-display-3 margin-bottom-20" style="color:black">Learning is Earning</p>
@@ -55,9 +55,9 @@
             <p class="notif center"> Be notified when peerbuds go live </p>
             <form [formGroup]="notifyForm">
                 <div class="center">
-                    <input mdInput type="text" placeholder="Your email here" formControlName="email" class="mail-bg emailInput">
+                    <input matInput type="text" placeholder="Your email here" formControlName="email" class="mail-bg emailInput">
                     <div id="emailBase">
-                        <button md-button class="md-raised email-btn" (click)="sendEmailSubscriptions()">Notify me!</button>
+                        <button mat-button class="mat-raised email-btn" (click)="sendEmailSubscriptions()">Notify me!</button>
                     </div>
                 </div>
             </form>

@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class CurrencyPickerService {
 
-  constructor(private http: HttpClient, private config: AppConfig
+  constructor(private http: HttpClient, public config: AppConfig
     , private route: ActivatedRoute, public router: Router) {
   }
 

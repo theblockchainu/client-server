@@ -1,11 +1,12 @@
-<div md-dialog-content class="dialog-container">
+<div mat-dialog-content class="dialog-container">
     <div class="row">
         <div class="col-md-12 collectionContent">
-            <button disableRipple md-button [md-dialog-close]="getDiscardDialogData()" *ngIf="!isEdit" style="min-width: 20px;padding: 0px 10px 0px 0px;vertical-align: middle;">
-                <md-icon class="mat-icon material-icons mat-icon-small">close</md-icon>
+            <button disableRipple mat-button [mat-dialog-close]="getDiscardDialogData()" *ngIf="!isEdit" style="min-width: 20px;padding: 0px 10px 0px 0px;vertical-align: middle;">
+                <mat-icon class="mat-icon material-icons mat-icon-small">close</mat-icon>
             </button>
-            <button disableRipple md-button *ngIf="isEdit" style="min-width: 20px;padding: 0px 10px 0px 0px;vertical-align: middle;" (click)="dialogRef.close()">
-                <md-icon class="mat-icon material-icons mat-icon-small">close</md-icon>
+            <button disableRipple mat-button *ngIf="isEdit" style="min-width: 20px;padding: 0px 10px 0px 0px;vertical-align: middle;"
+                (click)="dialogRef.close()">
+                <mat-icon class="mat-icon material-icons mat-icon-small">close</mat-icon>
             </button>
             <div style="display: inline-block">
                 <div class="mat-display-1" style="margin-bottom: 20px;">{{getAddOrEditText()}} video activity for {{itenaryForm.value.date | date: 'MMM dd, y'}}</div>
@@ -18,18 +19,18 @@
         </div>
     </div>
     <div *ngIf="lastIndex>-1">
-        <form [formGroup]="itenaryForm.controls.contents.controls[lastIndex]">
+        <form [formGroup]="itenaryForm.controls['contents']['controls'][lastIndex]">
             <div>
                 <div class="row">
                     <div class="col-sm-12 margin-bottom-30">
-                        <md-input-container class="pb-block margin-top-20 margin-bot-20">
-                            <input mdInput #title formControlName="title" placeholder="Video Title">
-                        </md-input-container>
+                        <mat-input-container class="pb-block margin-top-20 margin-bot-20">
+                            <input matInput #title formControlName="title" placeholder="Video Title">
+                        </mat-input-container>
 
-                        <md-input-container class="pb-block margin-top-20 margin-bot-20">
-                            <textarea mdInput #description maxlength="500" rows="5" formControlName="description" placeholder="What will we do?" [required]="true"></textarea>
-                            <md-hint align="end">{{description.value.length}} / 500</md-hint>
-                        </md-input-container>
+                        <mat-input-container class="pb-block margin-top-20 margin-bot-20">
+                            <textarea matInput #description maxlength="500" rows="5" formControlName="description" placeholder="What will we do?" [required]="true"></textarea>
+                            <mat-hint align="end">{{description.value.length}} / 500</mat-hint>
+                        </mat-input-container>
 
                         <div class="form-group">
                             <label>Upload Video:</label>
@@ -37,25 +38,29 @@
                                 <div class="loading-container" [hidden]="!uploadingVideo">
                                     <ngx-loading [show]="true"></ngx-loading>
                                 </div>
-                                <p-fileUpload *ngIf="!uploadingVideo" #fubauto accept="video/*" name="video" customUpload="true" (uploadHandler)="imageUploadNew($event)" maxFileSize="10000000" chooseLabel="Browse">
+                                <p-fileUpload *ngIf="!uploadingVideo" #fubauto accept="video/*" name="video" customUpload="true" (uploadHandler)="imageUploadNew($event)"
+                                    maxFileSize="10000000" chooseLabel="Browse">
                                     <ng-template pTemplate="toolbar">
                                         <div style="font-size: 80%; margin-top: 5px;">You can upload a maximum of 1 video</div>
                                     </ng-template>
-                                </p-fileUpload>                  <h5>Max File Size               <b>10MB</b>             </h5>
+                                </p-fileUpload>
+                                <h5>Max File Size
+                                    <b>10MB</b>
+                                </h5>
                                 <!-- <ng-template pTemplate="content"> -->
-                                <!-- <md-grid-list cols="2" rowHeight="100px" gutterSize="10px" *ngIf="urlForVideo">
-                                    <md-grid-tile>
+                                <!-- <mat-grid-list cols="2" rowHeight="100px" gutterSize="10px" *ngIf="urlForVideo">
+                                    <mat-grid-tile>
                                     <video controls width="150" style="border: 0.5px solid #ccc" preload="metadata">
                                         <source src="{{config.apiUrl + urlForVideo}}"> Your browser does not support the video tag.
                                     </video>
-                                    <md-icon (click)="deleteFromContainer(urlForVideo, 'video')" class="delete-button">close</md-icon>
-                                    </md-grid-tile>
-                                </md-grid-list> -->
+                                    <mat-icon (click)="deleteFromContainer(urlForVideo, 'video')" class="delete-button">close</mat-icon>
+                                    </mat-grid-tile>
+                                </mat-grid-list> -->
                                 <div *ngIf="urlForVideo" class="col-md-4 padding-left-0 pic delete imageContainer">
                                     <video controls width="150" style="border: 0.5px solid #ccc; position: relative; top: -20px;" preload="metadata">
                                         <source src="{{config.apiUrl + urlForVideo}}"> Your browser does not support the video tag.
                                     </video>
-                                    <md-icon (click)="deleteFromContainer(urlForVideo, 'video')" class="delete-button">close</md-icon>
+                                    <mat-icon (click)="deleteFromContainer(urlForVideo, 'video')" class="delete-button">close</mat-icon>
                                 </div>
                                 <!-- </ng-template> -->
                             </div>
@@ -73,30 +78,36 @@
                                 <ngx-loading [show]="true"></ngx-loading>
                             </div>
                             <p-fileUpload *ngIf="!uploadingAttachments" name="attachments" customUpload="true" accept="application/pdf,application/msword,
-                        application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/*,video/*" (uploadHandler)="uploadNew($event)" multiple="multiple" maxFileSize="10000000" (onClear)="resetNewUrls($event)" (onRemove)="itemEditRemoved($event)">
+                        application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/*,video/*" (uploadHandler)="uploadNew($event)"
+                                multiple="multiple" maxFileSize="10000000" (onClear)="resetNewUrls($event)" (onRemove)="itemEditRemoved($event)">
                                 <ng-template pTemplate="toolbar">
                                     <div style="font-size: 80%; margin-top: 5px;">You can upload a maximum of 2 attachments</div>
                                 </ng-template>
-                            </p-fileUpload>                  <h5>Max File Size               <b>10MB</b>             </h5>
+                            </p-fileUpload>
+                            <h5>Max File Size
+                                <b>10MB</b>
+                            </h5>
                             <!-- <ng-template pTemplate="content">  -->
-                            <!-- <md-grid-list cols="1" gutterSize="10px" rowHeight="50px" *ngIf="attachmentUrls.length">
-                                <md-grid-tile *ngFor="let file of attachmentUrls">
+                            <!-- <mat-grid-list cols="1" gutterSize="10px" rowHeight="50px" *ngIf="attachmentUrls.length">
+                                <mat-grid-tile *ngFor="let file of attachmentUrls">
                                     <div style="float: left; margin-right: 15px; cursor: pointer;">
-                                        <md-icon (click)="deleteFromContainer(file, 'file')" class="">close</md-icon>
+                                        <mat-icon (click)="deleteFromContainer(file, 'file')" class="">close</mat-icon>
                                     </div>
                                     <a href="{{config.apiUrl + file}}">{{file}}</a>
-                                </md-grid-tile>
-                            </md-grid-list> -->
+                                </mat-grid-tile>
+                            </mat-grid-list> -->
                             <div *ngIf="attachmentUrls.length" class="pic delete">
                                 <div *ngFor="let file of attachmentUrls" class="col-md-6 padding-left-0 imageContainer">
                                     <img *ngIf="file.type.includes('image')" src="{{config.apiUrl + file.url}}" width="150" style="border: 0.5px solid #ccc">
-                                    <md-icon *ngIf="file.type.includes('image')" (click)="deleteFromContainer(file.url, 'file')" class="delete-image">close</md-icon>
-                                    <div *ngIf="file.type.includes('application')" class="uploaded_file"><a href="{{config.apiUrl + file.url}}" target="_blank">{{file.originalFilename}}</a></div>
-                                    <md-icon *ngIf="file.type.includes('application')" (click)="deleteFromContainer(file.url, 'file')" class="delete-file">close</md-icon>
+                                    <mat-icon *ngIf="file.type.includes('image')" (click)="deleteFromContainer(file.url, 'file')" class="delete-image">close</mat-icon>
+                                    <div *ngIf="file.type.includes('application')" class="uploaded_file">
+                                        <a href="{{config.apiUrl + file.url}}" target="_blank">{{file.originalFilename}}</a>
+                                    </div>
+                                    <mat-icon *ngIf="file.type.includes('application')" (click)="deleteFromContainer(file.url, 'file')" class="delete-file">close</mat-icon>
                                     <video *ngIf="file.type.includes('video')" controls width="150" style="border: 0.5px solid #ccc; position: relative;" preload="metadata">
                                         <source src="{{config.apiUrl + file.url}}">
                                     </video>
-                                    <md-icon *ngIf="file.type.includes('video')" (click)="deleteFromContainer(file.url, '')" class="delete-button">close</md-icon>
+                                    <mat-icon *ngIf="file.type.includes('video')" (click)="deleteFromContainer(file.url, '')" class="delete-button">close</mat-icon>
                                 </div>
                             </div>
                             <!-- </ng-template> -->
@@ -104,12 +115,12 @@
                     </div>
                 </div>
             </div>
-            <md-dialog-actions>
-                <button md-raised-button [md-dialog-close]="getSaveDialogData()" color="accent" *ngIf="!isEdit">Save</button> &emsp;
-                <button md-raised-button [md-dialog-close]="getEditDialogData()" color="accent" *ngIf="isEdit">Update</button> &emsp;
-                <button md-button [md-dialog-close]="getDiscardDialogData()" *ngIf="!isEdit">Discard</button>
-                <button md-button [md-dialog-close]="getDeleteDialogData()" *ngIf="isEdit">Delete</button>
-            </md-dialog-actions>
+            <mat-dialog-actions>
+                <button mat-raised-button [mat-dialog-close]="getSaveDialogData()" color="accent" *ngIf="!isEdit">Save</button> &emsp;
+                <button mat-raised-button [mat-dialog-close]="getEditDialogData()" color="accent" *ngIf="isEdit">Update</button> &emsp;
+                <button mat-button [mat-dialog-close]="getDiscardDialogData()" *ngIf="!isEdit">Discard</button>
+                <button mat-button [mat-dialog-close]="getDeleteDialogData()" *ngIf="isEdit">Delete</button>
+            </mat-dialog-actions>
         </form>
     </div>
 </div>

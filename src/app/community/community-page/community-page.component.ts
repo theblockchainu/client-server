@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params, NavigationStart } from '@angular/router';
-import { MdDialog, MdDialogConfig, MdDialogRef, MdSnackBar, SELECT_MAX_OPTIONS_DISPLAYED } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatDialogRef, MatSnackBar } from '@angular/material';
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
 import { CollectionService } from '../../_services/collection/collection.service';
 import { CommentService } from '../../_services/comment/comment.service';
@@ -130,11 +130,11 @@ export class CommunityPageComponent implements OnInit, AfterViewChecked {
         public _searchService: SearchService,
         public config: AppConfig,
         private _fb: FormBuilder,
-        private dialog: MdDialog,
+        private dialog: MatDialog,
         private http: HttpClient,
         private _cdRef: ChangeDetectorRef,
         private dialogsService: DialogsService,
-        private snackBar: MdSnackBar) {
+        private snackBar: MatSnackBar) {
         this.activatedRoute.params.subscribe(params => {
             if (this.initialised && this.communityId !== params['communityId']) {
                 location.reload();

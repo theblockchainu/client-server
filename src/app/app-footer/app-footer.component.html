@@ -1,8 +1,8 @@
 <!-- <footer *ngIf="!(isLoggedIn | async)">
 y  <div class="layout-row footer" layout="row" color="white">
     <div layout="row" class="col-sm-8">
-      <a class="footer-btn footerButtons col-sm-2" md-button routerLink="/philosophy"> About Us </a>
-      <a class="footer-btn footerButtons col-sm-2" md-button routerLink="/contact-us">
+      <a class="footer-btn footerButtons col-sm-2" mat-button routerLink="/philosophy"> About Us </a>
+      <a class="footer-btn footerButtons col-sm-2" mat-button routerLink="/contact-us">
         Contact Us
       </a>
       <span class="center">
@@ -10,10 +10,10 @@ y  <div class="layout-row footer" layout="row" color="white">
           <img src="/assets/images/pb_logo.png" alt="logo">
         </a>
       </span>
-      <a class="footer-btn footerButtons col-sm-2" md-button routerLink="/privacy-policy">
+      <a class="footer-btn footerButtons col-sm-2" mat-button routerLink="/privacy-policy">
         Privacy Policy
       </a>
-      <a class="footer-btn footerButtons col-sm-2" md-button routerLink="/terms-of-service">
+      <a class="footer-btn footerButtons col-sm-2" mat-button routerLink="/terms-of-service">
         Terms Of Service
       </a>
     </div>
@@ -30,10 +30,10 @@ y  <div class="layout-row footer" layout="row" color="white">
   </div> -->
   <div class="row mat-body-1">
     <div class="col-md-3 center">
-      <md-select [(value)]="selectedCurrency" (valueChange)="updateCurrencyCookie()">
-        <md-option [value]="'inr'"> INR </md-option>
-        <md-option [value]="'usd'"> USD </md-option>
-      </md-select>
+      <mat-select [(value)]="selectedCurrency" (valueChange)="updateCurrencyCookie()">
+        <mat-option [value]="'inr'"> INR </mat-option>
+        <mat-option [value]="'usd'"> USD </mat-option>
+      </mat-select>
     </div>
     <div class="col-md-3">
       <div class="row">

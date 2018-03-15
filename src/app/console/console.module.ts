@@ -5,9 +5,9 @@ import { ConsoleRoutingModule } from './console-routing.module';
 import { ConsoleComponent } from './console.component';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule
-  , MdProgressBarModule, MdListModule, MdTabsModule, MdChipsModule, MdInputModule
-  , MdSelectModule, MdSnackBarModule, MdAutocompleteModule
+  MatButtonModule, MatCardModule, MatMenuModule, MatToolbarModule, MatIconModule
+  , MatProgressBarModule, MatListModule, MatTabsModule, MatChipsModule, MatInputModule
+  , MatSelectModule, MatSnackBarModule, MatAutocompleteModule
 } from '@angular/material';
 import { RatingModule } from 'primeng/primeng';
 import { ConsoleDashboardComponent } from './console-dashboard/console-dashboard.component';
@@ -49,19 +49,19 @@ import { ContentLearningBookmarksComponent } from './console-learning/content-le
     SharedModule,
     ConsoleRoutingModule,
     RatingModule,
-    MdCardModule,
-    MdButtonModule,
-    MdMenuModule,
-    MdToolbarModule,
-    MdIconModule,
-    MdProgressBarModule,
-    MdListModule,
-    MdTabsModule,
-    MdChipsModule,
-    MdInputModule,
-    MdSelectModule,
-    MdSnackBarModule,
-    MdAutocompleteModule
+    MatCardModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatListModule,
+    MatTabsModule,
+    MatChipsModule,
+    MatInputModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    MatAutocompleteModule
   ],
   declarations: [
     ConsoleComponent,

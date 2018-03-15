@@ -1,8 +1,8 @@
-<div md-dialog-content class="dialog-container">
+<div mat-dialog-content class="dialog-container">
   <div class="row">
     <div class="col-md-12 collectionContent">
-      <button disableRipple md-button style="min-width: 20px;padding: 0px 10px 0px 0px;vertical-align: middle;" (click)="dialogRef.close()">
-        <md-icon class="mat-icon material-icons mat-icon-small">close</md-icon>
+      <button disableRipple mat-button style="min-width: 20px;padding: 0px 10px 0px 0px;vertical-align: middle;" (click)="dialogRef.close()">
+        <mat-icon class="mat-icon material-icons mat-icon-small">close</mat-icon>
       </button>
       <div class="mat-display-1" style="margin-bottom: 20px;">
         How was your experience with students of <a (click)="_collectionService.viewCollection(data);dialogRef.close();">{{data.title | titlecase}}</a>
@@ -26,15 +26,15 @@
                 <p-rating name="score_{{i}}" [(ngModel)]="participant.score" stars="5" [cancel]="false" style="font-size: 13px;"></p-rating>
             </div>
             <div class="col-md-5 vcenter">
-                <md-form-field style="width:100%">
-                    <textarea placeholder="How was {{participant.profiles[0].first_name | ucwords}}'s performance?" mdInput type="text" name="review_{{i}}" [(ngModel)]="participant.description"></textarea>
-                </md-form-field>
+                <mat-form-field style="width:100%">
+                    <textarea placeholder="How was {{participant.profiles[0].first_name | ucwords}}'s performance?" matInput type="text" name="review_{{i}}" [(ngModel)]="participant.description"></textarea>
+                </mat-form-field>
             </div>
         </div>
       </div>
     </div>
-    <div md-dialog-actions class="pull-right" *ngIf="notReviewedParticipantCount > 0">
-      <button md-raised-button color="primary" (click)="saveReviews()" tabindex="2">Submit</button>
+    <div mat-dialog-actions class="pull-right" *ngIf="notReviewedParticipantCount > 0">
+      <button mat-raised-button color="primary" (click)="saveReviews()" tabindex="2">Submit</button>
     </div>
   </form>
 </div>

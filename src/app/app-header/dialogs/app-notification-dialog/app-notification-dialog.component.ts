@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppConfig } from '../../../app.config';
 import { NotificationService } from '../../../_services/notification/notification.service';
 import { Router } from '@angular/router';
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 import { UcWordsPipe } from 'ngx-pipes';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 declare var moment: any;
@@ -17,14 +17,14 @@ export class AppNotificationDialogComponent implements OnInit {
     public picture_url = false;
     public notifications = [];
     public loaded = false;
-    private userId;
+    public userId;
 
     constructor(
         public config: AppConfig,
         public _notificationService: NotificationService,
         public router: Router,
         private ucwords: UcWordsPipe,
-        public dialogRef: MdDialogRef<AppNotificationDialogComponent>,
+        public dialogRef: MatDialogRef<AppNotificationDialogComponent>,
         public _cookieUtilsService: CookieUtilsService
     ) {
         this.userId = _cookieUtilsService.getValue('userId');

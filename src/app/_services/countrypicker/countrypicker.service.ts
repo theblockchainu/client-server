@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class CountryPickerService {
 
-  constructor(private http: HttpClient, private config: AppConfig
+  constructor(private http: HttpClient, public config: AppConfig
     , private route: ActivatedRoute, public router: Router) {
   }
 

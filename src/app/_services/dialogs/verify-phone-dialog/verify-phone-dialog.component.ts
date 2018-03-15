@@ -5,8 +5,8 @@ import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@ang
 import { HttpClient } from '@angular/common/http';
 import { MediaUploaderService } from '../../mediaUploader/media-uploader.service';
 import { AppConfig } from '../../../app.config';
-import { MdSnackBar } from '@angular/material';
-import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ProfileService } from '../../profile/profile.service';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 
@@ -31,11 +31,11 @@ export class VerifyPhoneDialogComponent implements OnInit {
     private _fb: FormBuilder,
     public _profileService: ProfileService,
     private http: HttpClient,
-    private config: AppConfig,
-    public snackBar: MdSnackBar,
-    public dialogRef: MdDialogRef<VerifyPhoneDialogComponent>,
+    public config: AppConfig,
+    public snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<VerifyPhoneDialogComponent>,
     public _cookieUtilsService: CookieUtilsService,
-    @Inject(MD_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any) {
     this.activatedRoute.params.subscribe(params => {
     });
     this.userId = _cookieUtilsService.getValue('userId');

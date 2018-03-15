@@ -1,31 +1,31 @@
 <div class="row" style="margin-top: 20px;">
   <div class="col-md-3">
-    <md-list>
-      <!--<md-list-item [class.mat-list-item-focus]="false" [routerLink]="'/console/teaching/all'" [class.bold]="getActiveTab() === 'all'">
+    <mat-list>
+      <!--<mat-list-item [class.mat-list-item-focus]="false" [routerLink]="'/console/teaching/all'" [class.bold]="getActiveTab() === 'all'">
         View All
-      </md-list-item>-->
-      <!--<md-list-item [class.mat-list-item-focus]="false" [routerLink]="'/console/teaching/workshops'" [class.bold]="getActiveTab() === 'workshops'">
+      </mat-list-item>-->
+      <!--<mat-list-item [class.mat-list-item-focus]="false" [routerLink]="'/console/teaching/workshops'" [class.bold]="getActiveTab() === 'workshops'">
         Workshops
-      </md-list-item>-->
-      <md-list-item [class.mat-list-item-focus]="false" [routerLink]="'/console/teaching/experiences'" [class.bold]="getActiveTab() === 'experiences'">
+      </mat-list-item>-->
+      <mat-list-item [class.mat-list-item-focus]="false" [routerLink]="'/console/teaching/experiences'" [class.bold]="getActiveTab() === 'experiences'">
         Experiences
-      </md-list-item>
-      <!--<md-list-item [class.mat-list-item-focus]="false" [routerLink]="'/console/teaching/sessions'" [class.bold]="getActiveTab() === 'sessions'">
+      </mat-list-item>
+      <!--<mat-list-item [class.mat-list-item-focus]="false" [routerLink]="'/console/teaching/sessions'" [class.bold]="getActiveTab() === 'sessions'">
         Sessions
-      </md-list-item>-->
-      <md-list-item *ngIf="getActiveTab() === 'workshops' ">
-        <span mdTooltip="Please wait for your account to be verified before creating a new workshop." [mdTooltipDisabled]="accountVerified">
-          <button md-raised-button (click)="createWorkshop()" [disabled]="!accountVerified" color="primary">New Workshop</button>
+      </mat-list-item>-->
+      <mat-list-item *ngIf="getActiveTab() === 'workshops' ">
+        <span matTooltip="Please wait for your account to be verified before creating a new workshop." [matTooltipDisabled]="accountVerified">
+          <button mat-raised-button (click)="createWorkshop()" [disabled]="!accountVerified" color="primary">New Workshop</button>
         </span>
-      </md-list-item>
-      <md-list-item *ngIf="activeTab === 'experiences'">
-        <span mdTooltip="Please wait for your account to be verified before creating a new experience." [mdTooltipDisabled]="accountVerified">
-          <button md-raised-button (click)="createExperience()" [disabled]="!accountVerified" color="primary">New Experience</button>
+      </mat-list-item>
+      <mat-list-item *ngIf="activeTab === 'experiences'">
+        <span matTooltip="Please wait for your account to be verified before creating a new experience." [matTooltipDisabled]="accountVerified">
+          <button mat-raised-button (click)="createExperience()" [disabled]="!accountVerified" color="primary">New Experience</button>
         </span>
-      </md-list-item>
-      <md-list-item *ngIf="getActiveTab() === 'sessions'">
-        <span mdTooltip="Account Verification Pending!" [mdTooltipDisabled]="accountVerified">
-          <button md-raised-button [disabled]="!accountVerified" color="primary">
+      </mat-list-item>
+      <mat-list-item *ngIf="getActiveTab() === 'sessions'">
+        <span matTooltip="Account Verification Pending!" [matTooltipDisabled]="accountVerified">
+          <button mat-raised-button [disabled]="!accountVerified" color="primary">
             <span *ngIf="!session" (click)="enableSessions()">
               Enable Live Session
             </span>
@@ -34,8 +34,8 @@
             </span>
           </button>
         </span>
-      </md-list-item>
-    </md-list>
+      </mat-list-item>
+    </mat-list>
   </div>
   <div class="col-md-9">
     <router-outlet></router-outlet>

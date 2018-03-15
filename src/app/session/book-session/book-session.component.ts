@@ -8,7 +8,7 @@ import { PaymentService } from '../../_services/payment/payment.service';
 import { HttpClient } from '@angular/common/http';
 import { CollectionService } from '../../_services/collection/collection.service';
 import * as _ from 'lodash';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 declare var Stripe: any;
@@ -59,7 +59,7 @@ export class BookSessionComponent implements OnInit {
     public profileService: ProfileService,
     public paymentService: PaymentService,
     private router: Router,
-    private snackBar: MdSnackBar
+    private snackBar: MatSnackBar
   ) {
     this.activatedRoute.params.subscribe(params => {
       this.teacherId = params['peerId'];

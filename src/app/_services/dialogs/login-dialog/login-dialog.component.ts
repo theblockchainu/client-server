@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import {
   FormGroup, FormArray, FormBuilder, FormControl, AbstractControl, Validators
 } from '@angular/forms';
-import { MdDialogRef, MD_DIALOG_DATA, MdDialog, MdDialogConfig } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material';
 import { RequestPasswordDialogComponent } from '../forgot-pwd-dialog/forgot-pwd-dialog.component';
 import { AppConfig } from '../../../app.config';
 
@@ -39,13 +39,13 @@ export class LoginComponentDialog implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public router: Router,
-    private dialog: MdDialog,
+    private dialog: MatDialog,
     public authenticationService: AuthenticationService,
     private alertService: AlertService,
-    public dialogRef: MdDialogRef<LoginComponentDialog>,
+    public dialogRef: MatDialogRef<LoginComponentDialog>,
     private _fb: FormBuilder,
     public config: AppConfig,
-    @Inject(MD_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     // private dialogsService: DialogsService
   ) {
     this.isLoggedIn = this.authenticationService.isLoggedIn();

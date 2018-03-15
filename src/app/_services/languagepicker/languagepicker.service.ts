@@ -9,7 +9,7 @@ import { AppConfig } from '../../app.config';
 @Injectable()
 export class LanguagePickerService {
 
-    constructor(private http: HttpClient, private config: AppConfig
+    constructor(private http: HttpClient, public config: AppConfig
         , private route: ActivatedRoute, public router: Router) {
     }
 

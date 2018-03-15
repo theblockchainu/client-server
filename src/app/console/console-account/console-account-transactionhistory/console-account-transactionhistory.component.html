@@ -11,8 +11,8 @@
       <div>
         <div style="margin-top:20px;" class="col-md-10">
           <div class="row" style="margin-right: 15px;">
-            <md-tab-group disableRipple>
-              <md-tab label="Completed Transactions">
+            <mat-tab-group disableRipple>
+              <mat-tab label="Completed Transactions">
                 <div style="margin-top: 25px; margin-bottom: 50px;" class="lightText">
                   Here you will see all the transactions that were either paid out to your account we have on record or is scheduled to be
                   paid out on completion of your workshop, experience or session.
@@ -24,31 +24,31 @@
                 <form [formGroup]="filterForm">
                   <div class="row" style="line-height: 120%">
                     <div class="col-sm-3">
-                      <md-select placeholder="Payout Method" formControlName="payout_method" style="margin-bottom: 20px">
-                        <md-option *ngFor="let pm of payment_methods" [value]="pm">
+                      <mat-select placeholder="Payout Method" formControlName="payout_method" style="margin-bottom: 20px">
+                        <mat-option *ngFor="let pm of payment_methods" [value]="pm">
                           {{ pm }}
-                        </md-option>
-                      </md-select>
+                        </mat-option>
+                      </mat-select>
                     </div>
                     <div class="col-sm-3">
-                      <md-input-container class="pb-block" style="margin-bottom: 20px;margin-top: 7.5px;">
-                        <input mdInput type="text" formControlName="content" placeholder="Content">
-                      </md-input-container>
+                      <mat-input-container class="pb-block" style="margin-bottom: 20px;margin-top: 7.5px;">
+                        <input matInput type="text" formControlName="content" placeholder="Content">
+                      </mat-input-container>
                     </div>
                     <div class="col-sm-2">
-                      <md-select placeholder="Year" formControlName="year" style="margin-bottom: 20px">
-                        <md-option *ngFor="let year of years" [value]="year">{{year}}</md-option>
-                      </md-select>
+                      <mat-select placeholder="Year" formControlName="year" style="margin-bottom: 20px">
+                        <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
+                      </mat-select>
                     </div>
                     <div class="col-sm-2">
-                      <md-select placeholder="From Month" formControlName="fromMonth" style="margin-bottom: 20px">
-                        <md-option *ngFor="let month of months;  let idx = index" [value]="idx+1">{{month}}</md-option>
-                      </md-select>
+                      <mat-select placeholder="From Month" formControlName="fromMonth" style="margin-bottom: 20px">
+                        <mat-option *ngFor="let month of months;  let idx = index" [value]="idx+1">{{month}}</mat-option>
+                      </mat-select>
                     </div>
                     <div class="col-sm-2">
-                      <md-select placeholder="To Month" formControlName="toMonth" style="margin-bottom: 20px">
-                        <md-option *ngFor="let month of months;  let idx = index" [value]="idx+1">{{month}}</md-option>
-                      </md-select>
+                      <mat-select placeholder="To Month" formControlName="toMonth" style="margin-bottom: 20px">
+                        <mat-option *ngFor="let month of months;  let idx = index" [value]="idx+1">{{month}}</mat-option>
+                      </mat-select>
                     </div>
                   </div>
                 </form>
@@ -90,8 +90,8 @@
                     </div>
                   </div>
                 </div>
-              </md-tab>
-              <md-tab label="Future Transactions">
+              </mat-tab>
+              <mat-tab label="Future Transactions">
                 <div style="margin-top: 25px; margin-bottom: 50px;" class="lightText">
                   Here you will see all the transactions that were either paid out to your account we have on record or is scheduled to be
                   paid out on completion of your workshop, experience or session.
@@ -103,31 +103,31 @@
                 <form [formGroup]="filterFutureForm">
                   <div class="row" style="line-height: 120%">
                     <div class="col-sm-3">
-                      <md-select placeholder="Payout Method" formControlName="payout_method" style="margin-bottom: 20px">
-                        <md-option *ngFor="let pm of payment_methods" [value]="pm">
+                      <mat-select placeholder="Payout Method" formControlName="payout_method" style="margin-bottom: 20px">
+                        <mat-option *ngFor="let pm of payment_methods" [value]="pm">
                           {{ pm }}
-                        </md-option>
-                      </md-select>
+                        </mat-option>
+                      </mat-select>
                     </div>
                     <div class="col-sm-3">
-                      <md-input-container class="pb-block" style="margin-bottom: 20px;margin-top: 7.5px;">
-                        <input mdInput type="text" formControlName="content" placeholder="Content">
-                      </md-input-container>
+                      <mat-input-container class="pb-block" style="margin-bottom: 20px;margin-top: 7.5px;">
+                        <input matInput type="text" formControlName="content" placeholder="Content">
+                      </mat-input-container>
                     </div>
                     <div class="col-sm-2">
-                      <md-select placeholder="Year" formControlName="year" style="margin-bottom: 20px">
-                        <md-option *ngFor="let year of years" [value]="year">{{year}}</md-option>
-                      </md-select>
+                      <mat-select placeholder="Year" formControlName="year" style="margin-bottom: 20px">
+                        <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
+                      </mat-select>
                     </div>
                     <div class="col-sm-2">
-                      <md-select placeholder="From Month" formControlName="fromMonth" style="margin-bottom: 20px">
-                        <md-option *ngFor="let month of months;  let idx = index" [value]="idx+1">{{month}}</md-option>
-                      </md-select>
+                      <mat-select placeholder="From Month" formControlName="fromMonth" style="margin-bottom: 20px">
+                        <mat-option *ngFor="let month of months;  let idx = index" [value]="idx+1">{{month}}</mat-option>
+                      </mat-select>
                     </div>
                     <div class="col-sm-2">
-                      <md-select placeholder="To Month" formControlName="toMonth" style="margin-bottom: 20px">
-                        <md-option *ngFor="let month of months;  let idx = index" [value]="idx+1">{{month}}</md-option>
-                      </md-select>
+                      <mat-select placeholder="To Month" formControlName="toMonth" style="margin-bottom: 20px">
+                        <mat-option *ngFor="let month of months;  let idx = index" [value]="idx+1">{{month}}</mat-option>
+                      </mat-select>
                     </div>
                   </div>
                 </form>
@@ -172,8 +172,8 @@
                     </div>
                   </div>
                 </div>
-              </md-tab>
-            </md-tab-group>
+              </mat-tab>
+            </mat-tab-group>
           </div>
         </div>
       </div>

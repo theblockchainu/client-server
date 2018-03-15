@@ -19,12 +19,12 @@ export class ConsoleAccountNotificationsComponent implements OnInit {
     public picture_url = false;
     public notifications = [];
     public loaded = false;
-    private userId;
+    public userId;
 
     constructor(
         public activatedRoute: ActivatedRoute,
         public consoleAccountComponent: ConsoleAccountComponent,
-        private config: AppConfig,
+        public config: AppConfig,
         public _notificationService: NotificationService,
         private ucwords: UcWordsPipe,
         public router: Router,

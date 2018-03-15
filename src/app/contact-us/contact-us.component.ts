@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 
-import { MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdAutocompleteModule, MdInputModule, MdNativeDateModule, MdProgressSpinnerModule, MdProgressBarModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatMenuModule, MatToolbarModule, MatIconModule, MatAutocompleteModule, MatInputModule, MatNativeDateModule, MatProgressSpinnerModule, MatProgressBarModule } from '@angular/material';
 import { FormGroup, FormArray, FormBuilder, FormControl, AbstractControl, Validators } from '@angular/forms';
 import { AuthenticationService } from '../_services/authentication/authentication.service';
 
@@ -24,7 +24,7 @@ export class ContactComponent implements OnInit {
 
   constructor(public _fb: FormBuilder,
     private authenticationService: AuthenticationService,
-   ) {
+  ) {
   }
 
   ngOnInit() {
@@ -37,15 +37,15 @@ export class ContactComponent implements OnInit {
         message: ['', Validators.required]
       }
     );
-}
-public createGuestContacts() {
-  // this.loading = true;
-  this.first_name = this.contactUsForm.controls['first_name'].value;
-  this.last_name = this.contactUsForm.controls['last_name'].value;
-  this.email = this.contactUsForm.controls['email'].value;
-  this.subject = this.contactUsForm.controls['subject'].value;
-  this.message = this.contactUsForm.controls['message'].value;
-  this.authenticationService.createGuestContacts(this.first_name, this.last_name, this.email, this.subject, this.message)
+  }
+  public createGuestContacts() {
+    // this.loading = true;
+    this.first_name = this.contactUsForm.controls['first_name'].value;
+    this.last_name = this.contactUsForm.controls['last_name'].value;
+    this.email = this.contactUsForm.controls['email'].value;
+    this.subject = this.contactUsForm.controls['subject'].value;
+    this.message = this.contactUsForm.controls['message'].value;
+    this.authenticationService.createGuestContacts(this.first_name, this.last_name, this.email, this.subject, this.message)
       .subscribe();
-}
+  }
 }

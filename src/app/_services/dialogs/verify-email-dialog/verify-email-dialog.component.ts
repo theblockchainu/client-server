@@ -5,7 +5,7 @@ import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@ang
 import { HttpClient } from '@angular/common/http';
 import { MediaUploaderService } from '../../mediaUploader/media-uploader.service';
 import { AppConfig } from '../../../app.config';
-import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ProfileService } from '../../profile/profile.service';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -33,10 +33,10 @@ export class VerifyEmailDialogComponent implements OnInit {
     private _fb: FormBuilder,
     public _profileService: ProfileService,
     private http: HttpClient,
-    private config: AppConfig,
-    public dialogRef: MdDialogRef<VerifyEmailDialogComponent>,
+    public config: AppConfig,
+    public dialogRef: MatDialogRef<VerifyEmailDialogComponent>,
     private _cookieUtilsService: CookieUtilsService,
-    @Inject(MD_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any) {
     this.activatedRoute.params.subscribe(params => {
     });
     this.userId = _cookieUtilsService.getValue('userId');

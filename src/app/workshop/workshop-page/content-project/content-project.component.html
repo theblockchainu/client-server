@@ -1,8 +1,8 @@
-<div md-dialog-content class="dialog-container">
+<div mat-dialog-content class="dialog-container">
   <div class="row">
     <div class="col-md-12 collectionContent">
-      <button disableRipple md-button style="min-width: 20px;padding: 0px 10px 0px 0px;vertical-align: middle;" (click)="dialogRef.close()">
-        <md-icon class="mat-icon material-icons mat-icon-small">close</md-icon>
+      <button disableRipple mat-button style="min-width: 20px;padding: 0px 10px 0px 0px;vertical-align: middle;" (click)="dialogRef.close()">
+        <mat-icon class="mat-icon material-icons mat-icon-small">close</mat-icon>
       </button>
       <div class="mat-display-1" style="margin-bottom: 20px;" *ngIf="data.content">
         {{data.content.title | titlecase}}
@@ -107,12 +107,12 @@
     </div>
     <div class="margin-top-20 margin-bottom-10" style="clear:both">
       <button (click)="openSubmitEntryDialog(data)" *ngIf="data.userType==='participant' && !data.peerHasSubmission && isSubmissionPossible"
-        md-button class="mat-border-button" tabindex="-1">Submit Entry</button>
-      <button *ngIf="data.userType==='participant' && !isSubmissionPossible" md-button class="mat-border-button" tabindex="-1"
+        mat-button class="mat-border-button" tabindex="-1">Submit Entry</button>
+      <button *ngIf="data.userType==='participant' && !isSubmissionPossible" mat-button class="mat-border-button" tabindex="-1"
         [disabled]="true">Submission date passed</button>
-      <button *ngIf="data.userType==='participant' && data.peerHasSubmission" md-button class="mat-border-button" tabindex="-1">Submitted</button>
+      <button *ngIf="data.userType==='participant' && data.peerHasSubmission" mat-button class="mat-border-button" tabindex="-1">Submitted</button>
       <button (click)="openViewEntryDialog(data)" *ngIf="data.userType==='teacher' && data.content.submissions && data.content.submissions.length"
-        md-button class="mat-border-button" tabindex="-1">View Entries</button>
+        mat-button class="mat-border-button" tabindex="-1">View Entries</button>
     </div>
     <hr>
     <div class="submission-box margin-bottom-40" *ngIf="data.content.submissions">

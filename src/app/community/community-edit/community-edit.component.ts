@@ -16,7 +16,7 @@ import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.ser
 import { AppConfig } from '../../app.config';
 import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
 import * as _ from 'lodash';
-import { MdDialog, MdSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { LeftSidebarService } from '../../_services/left-sidebar/left-sidebar.service';
 
 import { DialogsService } from '../../_services/dialogs/dialog.service';
@@ -54,10 +54,10 @@ export class CommunityEditComponent implements OnInit {
   public paymentInfo: FormGroup;
 
   public supplementUrls = new FormArray([]);
-  private uploadingImage = false;
-  private uploadingVideo = false;
+  public uploadingImage = false;
+  public uploadingVideo = false;
 
-  private communityId: string;
+  public communityId: string;
   public communityData: any;
   public isWorkShopActive = false;
   public activeCommunity = '';
@@ -143,10 +143,10 @@ export class CommunityEditComponent implements OnInit {
     public _collectionService: CollectionService,
     private mediaUploader: MediaUploaderService,
     public requestHeaderService: RequestHeaderService,
-    private dialog: MdDialog,
+    private dialog: MatDialog,
     private _leftSideBarService: LeftSidebarService,
     private dialogsService: DialogsService,
-    private snackBar: MdSnackBar,
+    private snackBar: MatSnackBar,
     private _cookieUtilsService: CookieUtilsService,
     private _topicService: TopicService,
     private _paymentService: PaymentService,
@@ -225,7 +225,7 @@ export class CommunityEditComponent implements OnInit {
     this.phoneDetails = this._fb.group({
       phoneNo: '',
       inputOTP: '',
-        countryCode: ''
+      countryCode: ''
     });
 
     this.paymentInfo = this._fb.group({
@@ -258,7 +258,7 @@ export class CommunityEditComponent implements OnInit {
 
       if (this.communityData.status === 'active') {
         this.isWorkShopActive = true;
-        this.activeCommunity = 'disabledMD';
+        this.activeCommunity = 'disabledMAT';
       }
       this.timeline.controls.calendar.patchValue(calendar);
       this.initializeContentForm(res);
@@ -466,8 +466,8 @@ export class CommunityEditComponent implements OnInit {
           }
 
         },
-        err => console.log('error'),
-        () => console.log('Completed!'));
+          err => console.log('error'),
+          () => console.log('Completed!'));
 
     } else {
       console.log('NO COLLECTION');
@@ -1047,11 +1047,11 @@ export class CommunityEditComponent implements OnInit {
         });
         this.step++;
       },
-      (error) => {
-        this.snackBar.open(error.message, 'close', {
-          duration: 500
+        (error) => {
+          this.snackBar.open(error.message, 'close', {
+            duration: 500
+          });
         });
-      });
   }
 
   takeToPayment() {

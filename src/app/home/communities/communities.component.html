@@ -11,7 +11,7 @@
                 </div>-->
                 <div class="col-md-12">
                     <div style="float: left;">
-                        <button md-button class="mat-border-button" #topicButton (click)="openTopicsDialog()" style="color: rgba(0,0,0,0.54) !important;">Topics</button>
+                        <button mat-button class="mat-border-button" #topicButton (click)="openTopicsDialog()" style="color: rgba(0,0,0,0.54) !important;">Topics</button>
                     </div>
                 </div>
             </div>
@@ -32,14 +32,14 @@
                 </div>
                 <div class="community-card" *ngFor="let community of communities; let i =index">
                     <span class="share-panel">
-                        <button md-icon-button class="bookmark" (click)="toggleBookmark(i)">
-                            <md-icon *ngIf="!(community.bookmarks && community.bookmarks[0] && community.bookmarks[0].peer && community.bookmarks[0].peer[0] && community.bookmarks[0].peer[0].id===userId)">
-                                bookmark</md-icon>
-                            <md-icon *ngIf="community.bookmarks && community.bookmarks[0] && community.bookmarks[0].peer && community.bookmarks[0].peer[0] && community.bookmarks[0].peer[0].id===userId"
-                                color="primary">bookmark</md-icon>
+                        <button mat-icon-button class="bookmark" (click)="toggleBookmark(i)">
+                            <mat-icon *ngIf="!(community.bookmarks && community.bookmarks[0] && community.bookmarks[0].peer && community.bookmarks[0].peer[0] && community.bookmarks[0].peer[0].id===userId)">
+                                bookmark</mat-icon>
+                            <mat-icon *ngIf="community.bookmarks && community.bookmarks[0] && community.bookmarks[0].peer && community.bookmarks[0].peer[0] && community.bookmarks[0].peer[0].id===userId"
+                                color="primary">bookmark</mat-icon>
                         </button>
-                        <button md-icon-button class="share" (click)="_dialogsService.shareCollection('community',community.id,community.title)">
-                            <md-icon>share</md-icon>
+                        <button mat-icon-button class="share" (click)="_dialogsService.shareCollection('community',community.id,community.title)">
+                            <mat-icon>share</mat-icon>
                         </button>
                     </span>
                     <a *ngIf="i<5" [routerLink]="'/community/'+community.id">

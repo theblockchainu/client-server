@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CollectionService } from '../../../_services/collection/collection.service';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 import { DialogsService } from '../../../_services/dialogs/dialog.service';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 declare var moment: any;
 import * as _ from 'lodash';
 
@@ -20,7 +20,7 @@ export class ConsoleLearningExperiencesComponent implements OnInit {
     public now: Date;
     private outputResult: any;
     public activeTab: string;
-    private userId;
+    public userId;
 
     public ongoingArray: Array<any>;
     public upcomingArray: Array<any>;
@@ -36,7 +36,7 @@ export class ConsoleLearningExperiencesComponent implements OnInit {
         public router: Router,
         private _cookieUtilsService: CookieUtilsService,
         private _dialogService: DialogsService,
-        public snackBar: MdSnackBar
+        public snackBar: MatSnackBar
     ) {
         activatedRoute.pathFromRoot[4].url.subscribe((urlSegment) => {
             console.log(urlSegment[0].path);

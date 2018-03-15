@@ -9,9 +9,9 @@ import { LoginComponent } from './login/login.component';
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MdButtonModule, MdCardModule, MdMenuModule,
-  MdToolbarModule, MdIconModule, MdAutocompleteModule, MdInputModule,
-  MdNativeDateModule, MdProgressSpinnerModule, MdProgressBarModule, MdTooltipModule
+  MatButtonModule, MatCardModule, MatMenuModule,
+  MatToolbarModule, MatIconModule, MatAutocompleteModule, MatInputModule,
+  MatNativeDateModule, MatProgressSpinnerModule, MatProgressBarModule, MatTooltipModule, MatListModule
 } from '@angular/material';
 import { DialogsModule } from './_services/dialogs/dialogs.module';
 import { GlobalErrorHandlerComponent } from './error-handler/globalerrorhandler';
@@ -76,17 +76,17 @@ export class RavenErrorHandler implements ErrorHandler {
     CoreModule,
     AppFooterModule,
     BrowserAnimationsModule,
-    MdCardModule,
-    MdButtonModule,
-    MdMenuModule,
-    MdToolbarModule,
-    MdIconModule,
-    MdAutocompleteModule,
-    MdInputModule,
-    MdNativeDateModule,
-    MdProgressSpinnerModule,
-    MdProgressBarModule,
-    MdTooltipModule,
+    MatCardModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatTooltipModule,
     DialogsModule,
     AppRoutingModule,
     DefaultModule,
@@ -98,7 +98,8 @@ export class RavenErrorHandler implements ErrorHandler {
       secondaryColour: '#ff5b5f',
       tertiaryColour: '#ff6d71'
     }),
-    TransferHttpCacheModule
+    TransferHttpCacheModule,
+    MatListModule
   ],
   bootstrap: [AppComponent],
   // providers: [

@@ -5,13 +5,13 @@
         </div>
         <div class="row" *ngIf="!loadingCards">
             <div class="col-md-4" style="margin-top: 20px;">
-                <md-card class="credit-card">
-                    <md-card-content>
+                <mat-card class="credit-card">
+                    <mat-card-content>
                         <div class="row">
                             <div class="col-md-10">
                                 <a class="text-center" (click)="addCard()">
                                     <div class="col-md-12">
-                                        <md-icon style="font-size:70px">add</md-icon>
+                                        <mat-icon style="font-size:70px">add</mat-icon>
                                     </div>
                                     <div class="col-md-12">
                                         <span>Add Payment Method</span>
@@ -19,12 +19,12 @@
                                 </a>
                             </div>
                         </div>
-                    </md-card-content>
-                </md-card>
+                    </mat-card-content>
+                </mat-card>
             </div>
             <div class="col-md-4" *ngFor="let card of listAllCards" style="margin-top: 20px;">
-                <md-card class="credit-card">
-                    <md-card-content>
+                <mat-card class="credit-card">
+                    <mat-card-content>
                         <div class="row">
                             <div class="col-md-10">
                                 <div class="row">
@@ -40,8 +40,8 @@
                                         <a class="lightText" (click)="deleteCard(card.id)">
                                             Remove
                                         </a>
-                                        <span mdTooltip="Do you want to remove this card ?" style="cursor:pointer">
-                                            <md-icon style="font-size: 14px">help</md-icon>
+                                        <span matTooltip="Do you want to remove this card ?" style="cursor:pointer">
+                                            <mat-icon style="font-size: 14px">help</mat-icon>
                                         </span>
                                     </div>
                                     <div class="col-md-2">
@@ -50,8 +50,8 @@
                                 </div>
                             </div>
                         </div>
-                    </md-card-content>
-                </md-card>
+                    </mat-card-content>
+                </mat-card>
             </div>
         </div>
     </div>

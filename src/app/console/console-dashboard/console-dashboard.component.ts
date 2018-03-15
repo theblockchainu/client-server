@@ -6,10 +6,10 @@ import { NotificationService } from '../../_services/notification/notification.s
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
 import { UcFirstPipe, UcWordsPipe } from 'ngx-pipes';
 import { CollectionService } from '../../_services/collection/collection.service';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { DialogsService } from '../../_services/dialogs/dialog.service';
 import { ProfileService } from '../../_services/profile/profile.service';
-
+import { ConsoleLearningComponent } from '../console-learning/console-learning.component';
 declare var moment: any;
 import * as _ from 'lodash';
 
@@ -27,7 +27,7 @@ export class ConsoleDashboardComponent implements OnInit {
     public learningCollectionsLoaded = false;
     public profileLoaded = false;
     public collectionsLoaded = false;
-    private userId;
+    public userId;
     public activityMapping:
         { [k: string]: string } = { '=0': 'No activity', '=1': 'One activity', 'other': '# activities' };
     public hourMapping:
@@ -75,16 +75,17 @@ export class ConsoleDashboardComponent implements OnInit {
     constructor(
         public activatedRoute: ActivatedRoute,
         public consoleComponent: ConsoleComponent,
-        private config: AppConfig,
+        public config: AppConfig,
         public _notificationService: NotificationService,
         private ucwords: UcWordsPipe,
         private ucFirstPipe: UcFirstPipe,
         public router: Router,
         private _cookieUtilsService: CookieUtilsService,
         public _collectionService: CollectionService,
-        private snackBar: MdSnackBar,
+        private snackBar: MatSnackBar,
         private _dialogService: DialogsService,
-        private _profileService: ProfileService
+        public _profileService: ProfileService,
+        public consoleLearningComponent: ConsoleLearningComponent
     ) {
         activatedRoute.pathFromRoot[3].url.subscribe((urlSegment) => {
             console.log(urlSegment[0].path);

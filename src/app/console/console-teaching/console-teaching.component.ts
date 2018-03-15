@@ -19,7 +19,7 @@ export class ConsoleTeachingComponent implements OnInit {
     public loaded: boolean;
     public activeTab: string;
     public now: Date;
-    private userId;
+    public userId;
     public accountVerified: boolean;
     public session: any;
     constructor(

@@ -8,7 +8,7 @@ import { AppConfig } from '../app.config';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { DialogsService } from '../_services/dialogs/dialog.service';
 import { AppNotificationDialogComponent } from './dialogs/app-notification-dialog/app-notification-dialog.component';
 import { NotificationService } from '../_services/notification/notification.service';
@@ -41,9 +41,9 @@ export class AppHeaderComponent implements OnInit {
     public config: AppConfig,
     private http: HttpClient,
     private _cookieService: CookieService,
-    private _profileService: ProfileService,
+    public _profileService: ProfileService,
     private router: Router,
-    private dialog: MdDialog,
+    private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private _notificationService: NotificationService,
     public _searchService: SearchService,

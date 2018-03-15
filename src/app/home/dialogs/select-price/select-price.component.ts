@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import {CookieUtilsService} from '../../../_services/cookieUtils/cookie-utils.service';
 
 @Component({
@@ -12,9 +12,9 @@ export class SelectPriceComponent implements OnInit {
   public userCurrency = 'USD';
 
   constructor(
-    public dialogRef: MdDialogRef<SelectPriceComponent>,
+    public dialogRef: MatDialogRef<SelectPriceComponent>,
     private _cookieService: CookieUtilsService,
-    @Inject(MD_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
 
   ngOnInit() {

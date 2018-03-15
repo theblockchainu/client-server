@@ -16,7 +16,7 @@
         Delete your Peerbuds account permanently
       </div>
       <div class="col-md-4">
-        <button md-button color="primary" (click)="deleteAccount()" class="mat-border-button">
+        <button mat-button color="primary" (click)="deleteAccount()" class="mat-border-button">
           <span *ngIf="!busyDeleteAccount">Delete my account</span>
           <span *ngIf="busyDeleteAccount"> </span>
           <ngx-loading [show]="busyDeleteAccount"></ngx-loading>
@@ -30,7 +30,7 @@
   <div class="col-md-12">
     <div class="row margin-top-30">
       <div class="col-md-1">
-        <md-checkbox [checked]="true"></md-checkbox>
+        <mat-checkbox [checked]="true"></mat-checkbox>
       </div>
       <div class="col-md-11">
         <b>Make me invisible in Google Search</b>
@@ -40,7 +40,7 @@
     </div>
     <div class="row margin-top-30">
       <div class="col-md-1">
-        <md-checkbox [checked]="true"></md-checkbox>
+        <mat-checkbox [checked]="true"></mat-checkbox>
       </div>
       <div class="col-md-11">
         <b>Let other peers to message you</b>

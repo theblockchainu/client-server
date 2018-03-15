@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConsoleProfileComponent } from '../console-profile.component';
 import { ProfileService } from '../../../_services/profile/profile.service';
-import { AccordionItem } from '@angular/material';
-import { MdSnackBar } from '@angular/material';
+import { MatAccordion } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { NG_VALIDATORS, FormControl, Validator, ValidationErrors } from '@angular/forms';
 
 import { DialogsService } from '../../../_services/dialogs/dialog.service';
@@ -18,7 +18,7 @@ import { AppConfig } from '../../../app.config';
 })
 export class ConsoleProfileTopicsComponent implements OnInit {
 
-  private userId;
+  public userId;
   public loading: boolean;
   public topicsLearning: Array<any> = [];
   public topicsTeaching: Array<any> = [];
@@ -28,19 +28,16 @@ export class ConsoleProfileTopicsComponent implements OnInit {
   private selectedTopicsLearning = [];
   private selectedTopicsTeaching = [];
 
-  @ViewChild('expansionpanelLearning') expansionpanelLearning: AccordionItem;
-  @ViewChild('expansionpanelTeaching') expansionpanelTeaching: AccordionItem;
-
 
   constructor(
     public activatedRoute: ActivatedRoute,
     public consoleProfileComponent: ConsoleProfileComponent,
     public router: Router,
     public _profileService: ProfileService,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     public _dialogService: DialogsService,
     private _cookieUtilsService: CookieUtilsService,
-    private config: AppConfig
+    public config: AppConfig
   ) {
     activatedRoute.pathFromRoot[4].url.subscribe((urlSegment) => {
       console.log(urlSegment[0].path);
@@ -128,7 +125,6 @@ topic:any   */
         }).subscribe((response => {
           this.topicsLearning = this.topicsLearning.concat(this.newTopics);
           this.newTopics = [];
-          this.expansionpanelLearning.close();
         }));
       } else if (type === 'teaching') {
         this._profileService.followMultipleTopicsTeaching(this.userId, {
@@ -136,7 +132,6 @@ topic:any   */
         }).subscribe((response => {
           this.topicsTeaching = this.topicsTeaching.concat(this.newTopics);
           this.newTopics = [];
-          this.expansionpanelTeaching.close();
         }));
       } else {
         console.log('unknown type');

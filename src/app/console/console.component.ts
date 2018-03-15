@@ -33,7 +33,7 @@ export class ConsoleComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private cookieUtilsService: CookieUtilsService,
     private _collectionService: CollectionService,
-    private _profileService: ProfileService,
+    public _profileService: ProfileService,
     private appConfig: AppConfig,
     private _cookieUtilsService: CookieUtilsService) {
     this.activatedRoute.firstChild.url.subscribe((urlSegment) => {

@@ -16,7 +16,7 @@ declare var moment: any;
 })
 export class ConsoleProfileComponent implements OnInit {
 
-  private userId;
+  public userId;
   public workshops: any;
   public loaded: boolean;
   public activeTab: string;

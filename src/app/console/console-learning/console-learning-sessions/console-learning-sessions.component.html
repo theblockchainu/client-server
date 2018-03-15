@@ -25,12 +25,12 @@
           <div style="margin-top:20px;" class="col-md-12">
             <div class="row">
               <div *ngFor="let session of ongoingSessions" class="col-md-4" style="margin-top: 20px;">
-                <md-card style="text-align: center; padding: 20px;">
-                  <md-card-content>
+                <mat-card style="text-align: center; padding: 20px;">
+                  <mat-card-content>
                     <div style="text-align: right">
                       <div class="pull-right">
-                        <a [mdMenuTriggerFor]="ongoingCardMenu" style="text-align: right; padding: 0px">
-                          <md-icon>more_vert</md-icon>
+                        <a [matMenuTriggerFor]="ongoingCardMenu" style="text-align: right; padding: 0px">
+                          <mat-icon>more_vert</mat-icon>
                         </a>
                       </div>
                     </div>
@@ -47,7 +47,7 @@
                       <span>{{session.collections[0].owners[0].profiles[0].headline}} </span>
                     </div>
                     <div class="collectionTitle">Session</div>
-                    <!-- <md-progress-bar mode="determinate" value="{{consoleLearningComponent.getProgressValue(collection)}}"></md-progress-bar> -->
+                    <!-- <mat-progress-bar mode="determinate" value="{{consoleLearningComponent.getProgressValue(collection)}}"></mat-progress-bar> -->
                     <p class="upcomingEventLabel">
                       On going
                     </p>
@@ -57,28 +57,28 @@
                     <div class="upcomingEventTime">
                       {{session.startTime |extractTime:'Do MMM, HH:mm'}} - {{session.endTime |extractTime:'Do MMM, HH:mm'}}
                     </div>
-                  </md-card-content>
+                  </mat-card-content>
                   <br>
-                  <md-card-footer class="cardFooter">
-                    <button md-button (click)="joinLiveSession(session)">Join</button>
-                  </md-card-footer>
-                </md-card>
-                <md-menu #ongoingCardMenu>
-                  <!-- <button md-menu-item>
+                  <mat-card-footer class="cardFooter">
+                    <button mat-button (click)="joinLiveSession(session)">Join</button>
+                  </mat-card-footer>
+                </mat-card>
+                <mat-menu #ongoingCardMenu>
+                  <!-- <button mat-menu-item>
                     Cancel
                   </button> -->
-                  <button *ngIf="session.collections" [routerLink]="'/profile/'+session.collections[0].owners[0].id" md-menu-item>
+                  <button *ngIf="session.collections" [routerLink]="'/profile/'+session.collections[0].owners[0].id" mat-menu-item>
                     Message Teacher
                   </button>
-                </md-menu>
+                </mat-menu>
               </div>
               <div *ngFor="let session of upcomingSessions" class="col-md-4" style="margin-top: 20px;">
-                <md-card style="text-align: center; padding: 20px;">
-                  <md-card-content>
+                <mat-card style="text-align: center; padding: 20px;">
+                  <mat-card-content>
                     <div style="text-align: right">
                       <div class="pull-right">
-                        <a [mdMenuTriggerFor]="upcomingCardMenu" style="text-align: right; padding: 0px">
-                          <md-icon>more_vert</md-icon>
+                        <a [matMenuTriggerFor]="upcomingCardMenu" style="text-align: right; padding: 0px">
+                          <mat-icon>more_vert</mat-icon>
                         </a>
                       </div>
                     </div>
@@ -95,7 +95,7 @@
                       <span>{{session.collections[0].owners[0].profiles[0].headline}} </span>
                     </div>
                     <div class="collectionTitle">Session</div>
-                    <!-- <md-progress-bar mode="determinate" value="{{consoleLearningComponent.getProgressValue(collection)}}"></md-progress-bar> -->
+                    <!-- <mat-progress-bar mode="determinate" value="{{consoleLearningComponent.getProgressValue(collection)}}"></mat-progress-bar> -->
                     <p class="upcomingEventLabel">
                       Upcoming
                     </p>
@@ -105,16 +105,16 @@
                     <div class="upcomingEventTime">
                       {{session.startTime |extractTime:'Do MMM, HH:mm'}} - {{session.endTime |extractTime:'Do MMM, HH:mm'}}
                     </div>
-                  </md-card-content>
-                </md-card>
-                <md-menu #upcomingCardMenu>
-                  <!-- <button md-menu-item>
+                  </mat-card-content>
+                </mat-card>
+                <mat-menu #upcomingCardMenu>
+                  <!-- <button mat-menu-item>
                       Cancel
                     </button> -->
-                  <button *ngIf="session.collections" [routerLink]="'/profile/'+session.collections[0].owners[0].id" md-menu-item>
+                  <button *ngIf="session.collections" [routerLink]="'/profile/'+session.collections[0].owners[0].id" mat-menu-item>
                     Message Teacher
                   </button>
-                </md-menu>
+                </mat-menu>
               </div>
             </div>
           </div>
@@ -131,12 +131,12 @@
         <div style="margin-top:20px;" class="col-md-12">
           <div class="row">
             <div *ngFor="let session of notApproved" class="col-md-4" style="margin-top: 20px;">
-              <md-card style="text-align: center; padding: 20px;">
-                <md-card-content>
+              <mat-card style="text-align: center; padding: 20px;">
+                <mat-card-content>
                   <div style="text-align: right">
                     <div class="pull-right">
-                      <a [mdMenuTriggerFor]="unapprovedCardMenu" style="text-align: right; padding: 0px">
-                        <md-icon>more_vert</md-icon>
+                      <a [matMenuTriggerFor]="unapprovedCardMenu" style="text-align: right; padding: 0px">
+                        <mat-icon>more_vert</mat-icon>
                       </a>
                     </div>
                   </div>
@@ -155,7 +155,7 @@
                     </div>
                   </span>
                   <div class="collectionTitle">Session</div>
-                  <!-- <md-progress-bar mode="determinate" value="{{consoleLearningComponent.getProgressValue(collection)}}"></md-progress-bar> -->
+                  <!-- <mat-progress-bar mode="determinate" value="{{consoleLearningComponent.getProgressValue(collection)}}"></mat-progress-bar> -->
                   <p class="upcomingEventLabel">
                     Unapproved
                   </p>
@@ -165,16 +165,16 @@
                   <div class="upcomingEventTime">
                     {{session.startTime |extractTime:'Do MMM, HH:mm'}} - {{session.endTime |extractTime:'Do MMM, HH:mm'}}
                   </div>
-                </md-card-content>
-              </md-card>
-              <md-menu #unapprovedCardMenu>
-                <!-- <button md-menu-item>
+                </mat-card-content>
+              </mat-card>
+              <mat-menu #unapprovedCardMenu>
+                <!-- <button mat-menu-item>
                       Cancel
                     </button> -->
-                <button *ngIf="session.collections" [routerLink]="'/profile/'+session.collections[0].owners[0].id" md-menu-item>
+                <button *ngIf="session.collections" [routerLink]="'/profile/'+session.collections[0].owners[0].id" mat-menu-item>
                   Message Teacher
                 </button>
-              </md-menu>
+              </mat-menu>
             </div>
           </div>
         </div>
@@ -189,12 +189,12 @@
         <div style="margin-top:20px;" class="col-md-12">
           <div class="row">
             <div *ngFor="let session of pastSessions" class="col-md-4" style="margin-top: 20px;">
-              <md-card style="text-align: center; padding: 20px;">
-                <md-card-content>
+              <mat-card style="text-align: center; padding: 20px;">
+                <mat-card-content>
                   <div style="text-align: right">
                     <div class="pull-right">
-                      <a [mdMenuTriggerFor]="pastCardMenu" style="text-align: right; padding: 0px">
-                        <md-icon>more_vert</md-icon>
+                      <a [matMenuTriggerFor]="pastCardMenu" style="text-align: right; padding: 0px">
+                        <mat-icon>more_vert</mat-icon>
                       </a>
                     </div>
                   </div>
@@ -211,7 +211,7 @@
                     <span>{{session.collections[0].owners[0].profiles[0].headline}} </span>
                   </div>
                   <div class="collectionTitle">Session</div>
-                  <!-- <md-progress-bar mode="determinate" value="{{consoleLearningComponent.getProgressValue(collection)}}"></md-progress-bar> -->
+                  <!-- <mat-progress-bar mode="determinate" value="{{consoleLearningComponent.getProgressValue(collection)}}"></mat-progress-bar> -->
                   <p class="upcomingEventLabel">
                     Past
                   </p>
@@ -221,16 +221,16 @@
                   <div class="upcomingEventTime">
                     {{session.startTime |extractTime:'Do MMM, HH:mm'}} - {{session.endTime |extractTime:'Do MMM, HH:mm'}}
                   </div>
-                </md-card-content>
-              </md-card>
-              <md-menu #pastCardMenu>
-                <!-- <button md-menu-item>
+                </mat-card-content>
+              </mat-card>
+              <mat-menu #pastCardMenu>
+                <!-- <button mat-menu-item>
                         Cancel
                       </button> -->
-                <button *ngIf="session.collections" [routerLink]="'/profile/'+session.collections[0].owners[0].id" md-menu-item>
+                <button *ngIf="session.collections" [routerLink]="'/profile/'+session.collections[0].owners[0].id" mat-menu-item>
                   Message Teacher
                 </button>
-              </md-menu>
+              </mat-menu>
             </div>
           </div>
         </div>

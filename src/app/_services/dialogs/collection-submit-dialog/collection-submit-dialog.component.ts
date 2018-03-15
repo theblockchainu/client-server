@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdDialogRef, MD_DIALOG_DATA, MdSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-collection-submit-dialog',
@@ -11,9 +11,9 @@ import { MdDialogRef, MD_DIALOG_DATA, MdSnackBar } from '@angular/material';
 export class CollectionSubmitDialogComponent implements OnInit {
 
   constructor(
-    public dialogRef: MdDialogRef<CollectionSubmitDialogComponent>,
+    public dialogRef: MatDialogRef<CollectionSubmitDialogComponent>,
     private router: Router,
-    @Inject(MD_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
   ngOnInit() {

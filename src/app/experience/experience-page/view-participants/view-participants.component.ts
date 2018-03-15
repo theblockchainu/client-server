@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MdDialogRef, MD_DIALOG_DATA, MdDialog, MdSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
 import { AppConfig } from '../../../app.config';
 import { MessageParticipantComponent } from '../message-participant/message-participant.component';
 import { CollectionService } from '../../../_services/collection/collection.service';
@@ -15,13 +15,13 @@ export class ViewParticipantsComponent implements OnInit {
 
     public userId;
 
-  constructor(public dialogRef: MdDialogRef<ViewParticipantsComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any,
+  constructor(public dialogRef: MatDialogRef<ViewParticipantsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     public config: AppConfig,
-    private dialog: MdDialog,
+    private dialog: MatDialog,
   public _collectionService: CollectionService,
     public _dialogsService: DialogsService,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     public _profileService: ProfileService,
               public _cookieUtilsService: CookieUtilsService
   ) { }

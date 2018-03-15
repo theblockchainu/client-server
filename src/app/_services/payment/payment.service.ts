@@ -17,7 +17,7 @@ export class PaymentService {
   private options;
 
   constructor(private http: HttpClient,
-    private config: AppConfig,
+    public config: AppConfig,
     private _cookieService: CookieService,
     private route: ActivatedRoute,
     public router: Router,

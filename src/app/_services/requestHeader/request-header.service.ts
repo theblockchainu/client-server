@@ -1,8 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { RequestOptions, Headers } from '@angular/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { AppConfig } from '../../app.config';
+
+class RequestOptions {
+
+  headers?: HttpHeaders | {
+    [header: string]: string | string[];
+  };
+  observe?: 'body';
+  params?: HttpParams | {
+    [param: string]: string | string[];
+  };
+  reportProgress?: boolean;
+  responseType: 'arraybuffer';
+  withCredentials?: boolean;
+
+}
 
 @Injectable()
 export class RequestHeaderService {
@@ -13,10 +27,13 @@ export class RequestHeaderService {
   }
 
   getOptions() {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
-    const options = new RequestOptions({ headers: headers, withCredentials: true });
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+    const options = new RequestOptions();
+    options.headers = headers;
+    options.withCredentials = true;
     return options;
   }
 

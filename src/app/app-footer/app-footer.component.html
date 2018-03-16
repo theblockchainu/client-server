@@ -30,10 +30,10 @@ y  <div class="layout-row footer" layout="row" color="white">
   </div> -->
   <div class="row mat-body-1">
     <div class="col-md-3 center">
-      <mat-select [(value)]="selectedCurrency" (valueChange)="updateCurrencyCookie()">
+      <mat-form-field [floatLabel]="'always'">                 <mat-select [(value)]="selectedCurrency" (valueChange)="updateCurrencyCookie()">
         <mat-option [value]="'inr'"> INR </mat-option>
         <mat-option [value]="'usd'"> USD </mat-option>
-      </mat-select>
+      </mat-select>               </mat-form-field>
     </div>
     <div class="col-md-3">
       <div class="row">

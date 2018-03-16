@@ -21,9 +21,9 @@
         </div>
         <div *ngIf="!showMessage && !showError">
           <div>
-            <mat-input-container class="pb-block">
+            <mat-form-field [floatLabel]="'always'" class="pb-block">
               <input matInput #email placeholder="Email" formControlName="email" type="email">
-            </mat-input-container>
+            </mat-form-field>
           </div>
           <div>
             <span matTooltip="Invalid email" [matTooltipDisabled]="email.value.length != 0 && !email.invalid">

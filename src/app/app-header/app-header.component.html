@@ -9,10 +9,10 @@
       <mat-icon>search</mat-icon>
     </span>
     <span class="search-form">
-      <mat-input-container style="color:#333333 !important" placeholder="never" class="mat-block" *ngIf="(isLoggedIn | async)">
+      <mat-form-field [floatLabel]="'always'" style="color:#333333 !important" placeholder="never" class="mat-block" *ngIf="(isLoggedIn | async)">
         <input name="search" style="color:#767676 !important" class="mat-block search-box" matInput [formControl]="myControl" [matAutocomplete]="auto"
           placeholder="Try 'Mumbai' ">
-      </mat-input-container>
+      </mat-form-field>
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option *ngFor="let option of options" [value]="_searchService.getSearchOptionText(option)" (click)="_searchService.onSearchOptionClicked(option)">
           <span class="lightText">

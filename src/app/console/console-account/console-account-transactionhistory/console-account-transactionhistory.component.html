@@ -24,31 +24,31 @@
                 <form [formGroup]="filterForm">
                   <div class="row" style="line-height: 120%">
                     <div class="col-sm-3">
-                      <mat-select placeholder="Payout Method" formControlName="payout_method" style="margin-bottom: 20px">
+                      <mat-form-field [floatLabel]="'always'">                 <mat-select placeholder="Payout Method" formControlName="payout_method" style="margin-bottom: 20px">
                         <mat-option *ngFor="let pm of payment_methods" [value]="pm">
                           {{ pm }}
                         </mat-option>
-                      </mat-select>
+                      </mat-select>               </mat-form-field>
                     </div>
                     <div class="col-sm-3">
-                      <mat-input-container class="pb-block" style="margin-bottom: 20px;margin-top: 7.5px;">
+                      <mat-form-field [floatLabel]="'always'" class="pb-block" style="margin-bottom: 20px;margin-top: 7.5px;">
                         <input matInput type="text" formControlName="content" placeholder="Content">
-                      </mat-input-container>
+                      </mat-form-field>
                     </div>
                     <div class="col-sm-2">
-                      <mat-select placeholder="Year" formControlName="year" style="margin-bottom: 20px">
+                      <mat-form-field [floatLabel]="'always'">                 <mat-select placeholder="Year" formControlName="year" style="margin-bottom: 20px">
                         <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
-                      </mat-select>
+                      </mat-select>               </mat-form-field>
                     </div>
                     <div class="col-sm-2">
-                      <mat-select placeholder="From Month" formControlName="fromMonth" style="margin-bottom: 20px">
+                      <mat-form-field [floatLabel]="'always'">                 <mat-select placeholder="From Month" formControlName="fromMonth" style="margin-bottom: 20px">
                         <mat-option *ngFor="let month of months;  let idx = index" [value]="idx+1">{{month}}</mat-option>
-                      </mat-select>
+                      </mat-select>               </mat-form-field>
                     </div>
                     <div class="col-sm-2">
-                      <mat-select placeholder="To Month" formControlName="toMonth" style="margin-bottom: 20px">
+                      <mat-form-field [floatLabel]="'always'">                 <mat-select placeholder="To Month" formControlName="toMonth" style="margin-bottom: 20px">
                         <mat-option *ngFor="let month of months;  let idx = index" [value]="idx+1">{{month}}</mat-option>
-                      </mat-select>
+                      </mat-select>               </mat-form-field>
                     </div>
                   </div>
                 </form>
@@ -103,31 +103,31 @@
                 <form [formGroup]="filterFutureForm">
                   <div class="row" style="line-height: 120%">
                     <div class="col-sm-3">
-                      <mat-select placeholder="Payout Method" formControlName="payout_method" style="margin-bottom: 20px">
+                      <mat-form-field [floatLabel]="'always'">                 <mat-select placeholder="Payout Method" formControlName="payout_method" style="margin-bottom: 20px">
                         <mat-option *ngFor="let pm of payment_methods" [value]="pm">
                           {{ pm }}
                         </mat-option>
-                      </mat-select>
+                      </mat-select>               </mat-form-field>
                     </div>
                     <div class="col-sm-3">
-                      <mat-input-container class="pb-block" style="margin-bottom: 20px;margin-top: 7.5px;">
+                      <mat-form-field [floatLabel]="'always'" class="pb-block" style="margin-bottom: 20px;margin-top: 7.5px;">
                         <input matInput type="text" formControlName="content" placeholder="Content">
-                      </mat-input-container>
+                      </mat-form-field>
                     </div>
                     <div class="col-sm-2">
-                      <mat-select placeholder="Year" formControlName="year" style="margin-bottom: 20px">
+                      <mat-form-field [floatLabel]="'always'">                 <mat-select placeholder="Year" formControlName="year" style="margin-bottom: 20px">
                         <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
-                      </mat-select>
+                      </mat-select>               </mat-form-field>
                     </div>
                     <div class="col-sm-2">
-                      <mat-select placeholder="From Month" formControlName="fromMonth" style="margin-bottom: 20px">
+                      <mat-form-field [floatLabel]="'always'">                 <mat-select placeholder="From Month" formControlName="fromMonth" style="margin-bottom: 20px">
                         <mat-option *ngFor="let month of months;  let idx = index" [value]="idx+1">{{month}}</mat-option>
-                      </mat-select>
+                      </mat-select>               </mat-form-field>
                     </div>
                     <div class="col-sm-2">
-                      <mat-select placeholder="To Month" formControlName="toMonth" style="margin-bottom: 20px">
+                      <mat-form-field [floatLabel]="'always'">                 <mat-select placeholder="To Month" formControlName="toMonth" style="margin-bottom: 20px">
                         <mat-option *ngFor="let month of months;  let idx = index" [value]="idx+1">{{month}}</mat-option>
-                      </mat-select>
+                      </mat-select>               </mat-form-field>
                     </div>
                   </div>
                 </form>

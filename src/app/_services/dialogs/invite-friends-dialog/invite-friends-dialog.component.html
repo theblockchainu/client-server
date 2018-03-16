@@ -15,9 +15,9 @@
       Share this link with your friends to invite them to join this experience
     </div>
     <div class="col-md-12 ">
-      <mat-input-container   class="pb-block" style="margin: 20px 0px; font-size: 20px;">
+      <mat-form-field [floatLabel]="'always'"   class="pb-block" style="margin: 20px 0px; font-size: 20px;">
         <input #urlInput matInput [readOnly]="true" value="{{url}}" />
-      </mat-input-container>
+      </mat-form-field>
     </div>
     <div class="col-md-12 margin-top-20">
       <button mat-raised-button color="primary" [ngxClipboard]="urlInput" (cbOnSuccess)="onCopySuccess()">Copy</button> &emsp;

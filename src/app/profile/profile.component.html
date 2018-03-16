@@ -590,11 +590,11 @@
 
                 </div>
                 <div class="col-md-2">
-                    <mat-select [(value)]="learningJourneyFilter" placeholder="Filter">
+                    <mat-form-field [floatLabel]="'always'">                 <mat-select [(value)]="learningJourneyFilter" placeholder="Filter">
                         <mat-option>All</mat-option>
                         <mat-option value="workshop">Workshop</mat-option>
                         <mat-option value="experience">Experience</mat-option>
-                    </mat-select>
+                    </mat-select>               </mat-form-field>
                 </div>
                 <div class="col-md-2" *ngIf="participatingWorkshops && participatingWorkshops.length > 5">
                     <a class="pull-right" [routerLink]="'/home/workshops'">

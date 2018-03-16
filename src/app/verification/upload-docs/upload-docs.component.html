@@ -66,10 +66,10 @@
             <h2 class="headline">How can we reach you securely?</h2>
             <p class="description1 margin-bottom-40">Please let us know how can we reach you by email. To help keep your Peerbuds account secure, make sure only you
               can log into this email address.</p>
-            <mat-input-container style="width:50% !important" class="pb-block margin-bottom-60 margin-top-20">
+            <mat-form-field [floatLabel]="'always'" style="width:50% !important" class="pb-block margin-bottom-60 margin-top-20">
               <!-- <input type="text" formControlName="email" class="form-control display-inline-block email-address-input" placeholder="Email Address" /> -->
               <input type="email" matInput #email formControlName="email" placeholder="Email Address" />
-            </mat-input-container>
+            </mat-form-field>
           </div>
         </div>
         <div class="fixedFooter col-sm-12">
@@ -101,9 +101,9 @@
                 <label class="display-block margin-bottom-0"><strong>OTP</strong></label>
                 <input type="text" formControlName = "inputOTP" class="form-control display-inline-block otp-input" />
               </div> -->
-            <mat-input-container style="width:20% !important" class="margin-bottom-10">
+            <mat-form-field [floatLabel]="'always'" style="width:20% !important" class="margin-bottom-10">
               <input type="number" matInput #inputOTP formControlName="inputOTP" />
-            </mat-input-container>
+            </mat-form-field>
             <span *ngIf="otpError" style="color:red;margin-left:10px;">{{otpError}}</span>
             <div>
               <p class="description1">

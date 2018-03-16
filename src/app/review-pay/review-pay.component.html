@@ -21,9 +21,9 @@
                         <h3>Select payment method</h3>
                         <div class="row margin-top-50">
                             <div class="col-sm-6">
-                                <mat-select placeholder="Select card" (change)="getcardDetails($event)">
+                                <mat-form-field [floatLabel]="'always'">                 <mat-select placeholder="Select card" (change)="getcardDetails($event)">
                                     <mat-option value="{{card.id}}" *ngFor="let card of listAllCards">{{ card.brand }} {{card.object}} ending with {{card.last4}}</mat-option>
-                                </mat-select>
+                                </mat-select>               </mat-form-field>
                             </div>
                             <div class="col-sm-6" *ngIf="cardDetails['id']">
                                 <span class="text-grey" *ngIf="cardDetails['brand'] === 'Visa'">

@@ -14,9 +14,9 @@
         </div>
         <div class="row">
             <div class="col-md-11">
-                <mat-select #selectedWorkshop class="pb-block workshopSelector margin-top-20" placeholder="Select from your existing workshops"  >
+                <mat-form-field [floatLabel]="'always'">                 <mat-select #selectedWorkshop class="pb-block workshopSelector margin-top-20" placeholder="Select from your existing workshops"  >
                     <mat-option *ngFor="let workshop of ownedWorkshops" [value]="workshop.id">{{workshop.title | ucwords}}</mat-option>
-                </mat-select>
+                </mat-select>               </mat-form-field>
             </div>
             <div class="col-md-1" style="top: 30px;">
                 <mat-icon class="clickable" style="color: #33bd9e;" (click)="addWorkshop(selectedWorkshop.value)">check_circle</mat-icon>

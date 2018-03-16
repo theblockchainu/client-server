@@ -133,7 +133,7 @@ export class ConsoleAccountTransactionhistoryComponent implements OnInit {
       console.log(err);
     });
 
-    const query2 = { 'include': [{ 'payments': [{ 'peers': 'profiles' }, 'collections'] }] };
+    const query2 = { 'include': [{ 'payments': [{ 'peers': 'profiles' }, 'collections'] }]};
     this.futureTransactions = [];
     this._collectionService.getOwnedCollections(this.userId, JSON.stringify(query2), (err, response) => {
       response.forEach(collection => {

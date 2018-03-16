@@ -23,25 +23,25 @@
       <div>
         <div class="row">
           <div class="col-sm-12 margin-bottom-30">
-            <mat-input-container class="pb-block margin-top-20 margin-bot-20">
+            <mat-form-field class="pb-block margin-top-20 margin-bot-20">
               <input matInput #title formControlName="title" placeholder="Title" class="title" [required]="true">
-            </mat-input-container>
+            </mat-form-field>
 
             <div formGroupName="schedule">
-              <mat-input-container class="timeInput margin-top-20 margin-bot-20" style="width:20%">
+              <mat-form-field class="timeInput margin-top-20 margin-bot-20" style="width:20%">
                 <input matInput #startTime [owlDateTimeTrigger]="startTimePicker" [owlDateTime]="startTimePicker" formControlName="startTime" placeholder="Start Time" [required]="'true'">
                   <owl-date-time #startTimePicker [hour12Timer]="'true'" [pickerType]="'timer'"></owl-date-time>
-              </mat-input-container>
-              <mat-input-container class="timeInput margin-top-20 margin-bot-20" style="margin-left: 20px; width:20%">
+              </mat-form-field>
+              <mat-form-field class="timeInput margin-top-20 margin-bot-20" style="margin-left: 20px; width:20%">
                 <input matInput #endTime [owlDateTimeTrigger]="endTimePicker" [owlDateTime]="endTimePicker" formControlName="endTime" placeholder="End Time" [required]="'true'">
                   <owl-date-time #endTimePicker [hour12Timer]="'true'" [pickerType]="'timer'"></owl-date-time>
-              </mat-input-container>
+              </mat-form-field>
             </div>
             <div formGroupName="location" class="margin-top-20 margin-bottom-20">
               <button mat-button color="primary" class="mat-border-button" (click)="openAddLocationDialog()">{{getAddOrEditText()}} location</button>
-              <mat-input-container style="display: inline-block; margin-left: 20px; width: 360px;"  >
+              <mat-form-field style="display: inline-block; margin-left: 20px; width: 360px;"  >
                 <input matInput #location formControlName="location_name" placeholder="No location added yet" [disabled]="'true'" [readOnly]="true">
-              </mat-input-container>
+              </mat-form-field>
             </div>
             <div class="form-group margin-top-20">
               <label class="title">Upload a photo:</label>
@@ -65,16 +65,16 @@
                 </div>
               </div>
             </div>
-            <mat-input-container class="pb-block" style="margin-top: 20px; margin-bottom: 20px">
+            <mat-form-field class="pb-block" style="margin-top: 20px; margin-bottom: 20px">
               <textarea matInput #description maxlength="500" rows="2" formControlName="description" placeholder="What will we do?" [required]="true"
                 class="title"></textarea>
               <mat-hint align="end">{{description.value.length}} / 500</mat-hint>
-            </mat-input-container>
-            <mat-input-container class="pb-block" style="margin-top: 20px; margin-bottom: 20px">
+            </mat-form-field>
+            <mat-form-field class="pb-block" style="margin-top: 20px; margin-bottom: 20px">
               <textarea matInput #prerequisites maxlength="500" rows="2" formControlName="prerequisites" placeholder="What do learners need to know?"
                 class="title" [required]="true"></textarea>
               <mat-hint align="end">{{prerequisites.value.length}} / 500</mat-hint>
-            </mat-input-container>
+            </mat-form-field>
             <div class="form-group">
               <label class="display-block title">Add supporting material</label>
               <div class="loading-container" [hidden]="!uploadingAttachments">

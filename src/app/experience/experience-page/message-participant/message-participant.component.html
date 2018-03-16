@@ -5,9 +5,9 @@
     </div>
     <form [formGroup]="messageForm" (ngSubmit)="sendMessage()">
       <div class="col-md-12">
-        <mat-input-container>
+        <mat-form-field>
           <input matInput type="text" formControlName="message" class="form-control" placeholder="Type something to send...">
-        </mat-input-container>
+        </mat-form-field>
       </div>
       <div class="col-md-12">
         <span matTooltip="Invalid input!" [matTooltipDisabled]="messageForm.valid">

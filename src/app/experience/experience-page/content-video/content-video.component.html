@@ -90,9 +90,9 @@
         <b *ngIf="comments !== undefined">Discussion ({{comments.length}})</b>
         <b *ngIf="comments === undefined">Discussion (0)</b>
         <form [formGroup]="chatForm" (ngSubmit)="postComment()">
-          <mat-input-container class="full-width">
+          <mat-form-field class="full-width">
             <input matInput type="text" formControlName="description" placeholder="Post your thoughts on this activity" tabindex="-1">
-          </mat-input-container>
+          </mat-form-field>
           <span matTooltip="Invalid input!" [matTooltipDisabled]="chatForm.valid">
 
             <button mat-raised-button color="primary" [disabled]="!chatForm.valid" class="pull-right" tabindex="-1">Post</button>
@@ -155,9 +155,9 @@
               <div class="col-md-11 col-md-offset-1 margin-top-30" *ngIf="replyForm && replyingToCommentId===comment.id" style="margin-left: -25px;">
                 <form [formGroup]="replyForm" (ngSubmit)="postReply(comment)">
                   <img src="/assets/images/avatar.png" alt="A" class="circle-thumb margin-top-5">
-                  <mat-input-container style="margin-left: 15px; width: 88%;">
+                  <mat-form-field style="margin-left: 15px; width: 88%;">
                     <input matInput type="text" formControlName="description" placeholder="Reply to above comment..." tabindex="-1">
-                  </mat-input-container>
+                  </mat-form-field>
                   <span matTooltip="Invalid input!" [matTooltipDisabled]="replyForm.valid">
 
                     <button [disabled]="!replyForm.valid" mat-raised-button class="pull-right" color="primary" tabindex="-1">Post</button>

@@ -25,7 +25,7 @@ export class AppHeaderComponent implements OnInit {
   isLoggedIn: Observable<boolean>;
   loggedIn: boolean;
   public hasNewNotification = false;
-  public profile: any = {};
+  public profile: any;
   public userType = '';
   public myControl = new FormControl('');
   @ViewChild('notificationsButton') notificationsButton;
@@ -48,6 +48,7 @@ export class AppHeaderComponent implements OnInit {
     private _notificationService: NotificationService,
     public _searchService: SearchService,
     private dialogsService: DialogsService) {
+    this.profile = {};
     this.isLoggedIn = authService.isLoggedIn();
     authService.isLoggedIn().subscribe((res) => {
       this.loggedIn = res;
@@ -95,12 +96,14 @@ export class AppHeaderComponent implements OnInit {
   getProfile() {
     if (this.loggedIn) {
       this._profileService.getCompactProfile(this.userId).subscribe(profile => {
+        if (profile && profile.length > 0) {
         this.profile = profile[0];
-        if (this.profile.peer[0].ownedCollections !== undefined && this.profile.peer[0].ownedCollections.length > 0) {
-          this.isTeacher = true;
+          if (this.profile.peer[0].ownedCollections !== undefined && this.profile.peer[0].ownedCollections.length > 0) {
+            this.isTeacher = true;
+          }
+          this.profileCompletionObject = this._profileService.getProfileProgressObject(this.profile);
+          console.log(this.profileCompletionObject);
         }
-        this.profileCompletionObject = this._profileService.getProfileProgressObject(this.profile);
-        console.log(this.profileCompletionObject);
       });
     } else {
       return null;

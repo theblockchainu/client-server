@@ -62,10 +62,11 @@ export class AuthenticationService {
     // this.isLoginSubject.next(true);
     const body = `{"email":"${email}","password":"${password}","rememberMe":${rememberMe}}`;
     return this.http
-      .post(this.config.apiUrl + '/auth/local', body)
+      .post(this.config.apiUrl + '/auth/local', body, this.options)
       .map((response: any) => {
+        console.log(response);
         // if res code is xxx and response "error"
-        // login successful if there's a jwt token in the response
+        // login successful if there's a jwt token in the respon  se
         const user = response;
         if (user && user.access_token) {
           Raven.setUserContext({

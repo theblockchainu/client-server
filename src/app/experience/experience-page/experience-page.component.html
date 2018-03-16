@@ -337,9 +337,9 @@
                 <h3 *ngIf="comments !== undefined">Discussion ({{comments.length}})</h3>
                 <h3 *ngIf="comments === undefined">Discussion (0)</h3>
                 <form [formGroup]="chatForm" (ngSubmit)="postComment()">
-                  <mat-input-container class="full-width margin-top-10">
+                  <mat-form-field [floatLabel]="'always'" class="full-width margin-top-10">
                     <input matInput type="text" formControlName="description" placeholder="Post your thoughts on this experience">
-                  </mat-input-container>
+                  </mat-form-field>
                   <mat-checkbox [formControlName]="'isAnnouncement'" *ngIf="userType==='teacher'">Make Announcement</mat-checkbox>
                   <button mat-raised-button color="primary" [disabled]="!chatForm.valid" class="pull-right">
                     <span *ngIf="!busyDiscussion">Post</span>
@@ -430,9 +430,9 @@
                       <div class="col-md-11 col-md-offset-1 margin-top-30" *ngIf="replyForm && replyingToCommentId===comment.id" style="margin-left: -25px;">
                         <form [formGroup]="replyForm" (ngSubmit)="postReply(comment)">
                           <img src="/assets/images/user-placeholder.jpg" alt="A" class="circle-thumb margin-top-5">
-                          <mat-input-container style="margin-left: 15px; width: 88%;">
+                          <mat-form-field [floatLabel]="'always'" style="margin-left: 15px; width: 88%;">
                             <input matInput type="text" formControlName="description" placeholder="Reply to above comment...">
-                          </mat-input-container>
+                          </mat-form-field>
                           <button [disabled]="!replyForm.valid" mat-raised-button class="pull-right" color="primary">
                             <span *ngIf="!busyReply">Post</span>
                             <ngx-loading [show]="busyReply"></ngx-loading>
@@ -515,9 +515,9 @@
                 <div class="row margin-top-20" *ngIf="userType==='participant' && !hasReviewed(reviews)">
                   <div class="col-md-12">
                     <form [formGroup]="reviewForm" (ngSubmit)="postReview()">
-                      <mat-input-container class="full-width">
+                      <mat-form-field [floatLabel]="'always'" class="full-width">
                         <input matInput formControlName="description" placeholder="Describe your experience with this experience">
-                      </mat-input-container>
+                      </mat-form-field>
                       <span matTooltip="Have you given a star rating for this review?" [matTooltipDisabled]="isRatingReceived" class="pull-right">
                         <button [disabled]="!isRatingReceived || !reviewForm.valid" mat-raised-button color="primary">
                           <span *ngIf="!busyReview">Submit</span>

@@ -8,15 +8,15 @@
                         <p class="description1">Please review and provide any missing information to finish signing up.</p>
                     </div>
                     <div class="col-md-12 padding-left-0 padding-right-0">
-                        <mat-form-field style="width:48%">
+                        <mat-form-field [floatLabel]="'always'" style="width:48%">
                             <input matInput placeholder="First Name" formControlName="first_name">
                         </mat-form-field>
-                        <mat-form-field style="width:48%;margin-left:3%">
+                        <mat-form-field [floatLabel]="'always'" style="width:48%;margin-left:3%">
                             <input matInput placeholder="Last Name" formControlName="last_name">
                         </mat-form-field>
                     </div>
                     <div class="col-md-12 padding-left-0 padding-right-0">
-                        <mat-form-field style="width:100%">
+                        <mat-form-field [floatLabel]="'always'" style="width:100%">
                             <input matInput placeholder="Email" formControlName="email">
                             <mat-error *ngIf="signupSocialForm.hasError('pattern')">
                                 Please enter a valid email address
@@ -28,8 +28,8 @@
                         </mat-form-field>
                     </div>
                     <div class="col-md-12 padding-left-0 padding-right-0">
-                        <!-- <mat-form-field> -->
-                        <mat-select class="col-md-4 padding-left-0" placeholder="Month" formControlName="dobMonth" [(ngModel)]="selectedMonth">
+                        <!-- <mat-form-field [floatLabel]="'always'"> -->
+                        <mat-form-field [floatLabel]="'always'">                 <mat-select class="col-md-4 padding-left-0" placeholder="Month" formControlName="dobMonth" [(ngModel)]="selectedMonth">
                             <mat-option value="01">January</mat-option>
                             <mat-option value="02">February</mat-option>
                             <mat-option value="03">March</mat-option>
@@ -42,20 +42,20 @@
                             <mat-option value="10">October</mat-option>
                             <mat-option value="11">November</mat-option>
                             <mat-option value="12">December</mat-option>
-                        </mat-select>
+                        </mat-select>               </mat-form-field>
                         <!-- </mat-form-field> -->
 
-                        <!-- <mat-form-field> -->
-                        <mat-select class="col-md-4" placeholder="Day" formControlName="dobDay" [(ngModel)]="selectedDay">
+                        <!-- <mat-form-field [floatLabel]="'always'"> -->
+                        <mat-form-field [floatLabel]="'always'">                 <mat-select class="col-md-4" placeholder="Day" formControlName="dobDay" [(ngModel)]="selectedDay">
                             <mat-option *ngFor="let birthday of dobDay" [value]="birthday">
                                 {{ birthday }}
                             </mat-option>
-                        </mat-select>
+                        </mat-select>               </mat-form-field>
                         <!-- </mat-form-field> -->
-                        <!-- <mat-form-field> -->
-                        <mat-select class="col-md-4" placeholder="Year" formControlName="dobYear" [(ngModel)]="selectedYear">
+                        <!-- <mat-form-field [floatLabel]="'always'"> -->
+                        <mat-form-field [floatLabel]="'always'">                 <mat-select class="col-md-4" placeholder="Year" formControlName="dobYear" [(ngModel)]="selectedYear">
                             <mat-option [value]="birthyear" *ngFor="let birthyear of dobYear">{{ birthyear }}</mat-option>
-                        </mat-select>
+                        </mat-select>               </mat-form-field>
                         <!-- </mat-form-field> -->
                     </div>
                     <!-- <div class="checkbox">

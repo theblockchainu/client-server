@@ -14,9 +14,9 @@
         </div>
         <div class="row">
             <div class="col-md-11">
-                <mat-select #selectedExperience class="pb-block workshopSelector margin-top-20" placeholder="Select from your existing experiences"  >
+                <mat-form-field [floatLabel]="'always'">                 <mat-select #selectedExperience class="pb-block workshopSelector margin-top-20" placeholder="Select from your existing experiences"  >
                     <mat-option *ngFor="let experience of ownedExperiences" [value]="experience.id">{{experience.title | ucwords}}</mat-option>
-                </mat-select>
+                </mat-select>               </mat-form-field>
             </div>
             <div class="col-md-1" style="top: 30px;">
                 <mat-icon class="clickable" style="color: #33bd9e;" (click)="addExperience(selectedExperience.value)">check_circle</mat-icon>

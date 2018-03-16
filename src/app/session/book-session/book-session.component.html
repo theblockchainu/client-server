@@ -5,10 +5,10 @@
       <div class="col-md-offset-1 col-sm-6">
         <div [hidden]="step!==1">
           <span class="fw-bold">Package:</span>
-          <mat-select [(value)]="selectedPackageIndex" style="width: 40%;padding-left: 5%" (change)="resetSelectedSlots($event)">
+          <mat-form-field [floatLabel]="'always'">                 <mat-select [(value)]="selectedPackageIndex" style="width: 40%;padding-left: 5%" (change)="resetSelectedSlots($event)">
             <mat-option value="">Please Select</mat-option>
             <mat-option *ngFor="let pack of packages;let i=index" value="{{i}}"> {{pack.price | convertCurrency: pack.currency |async}} / {{convertTime(pack.duration)}} ~ {{pack.type}} </mat-option>
-          </mat-select>
+          </mat-select>               </mat-form-field>
           <div style="padding-top: 5%">
             <p-schedule [height]="500" [events]="availability" [defaultView]="'agendaWeek'" [editable]="false" (onEventClick)="handleEventClick($event)"></p-schedule>
           </div>
@@ -31,9 +31,9 @@
                 <h3>Select payment method</h3>
                 <div class="row margin-top-50">
                   <div class="col-sm-6">
-                    <mat-select placeholder="Select card" (change)="getcardDetails($event)">
+                    <mat-form-field [floatLabel]="'always'">                 <mat-select placeholder="Select card" (change)="getcardDetails($event)">
                       <mat-option value="{{card.id}}" *ngFor="let card of listAllCards">{{ card.brand }} {{card.object}} ending with {{card.last4}}</mat-option>
-                    </mat-select>
+                    </mat-select>               </mat-form-field>
                   </div>
                   <div class="col-sm-6" *ngIf="cardDetails.id">
                     <span class="text-grey" *ngIf="cardDetails.brand === 'Visa'">

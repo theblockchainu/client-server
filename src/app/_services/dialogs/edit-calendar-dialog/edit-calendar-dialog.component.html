@@ -43,17 +43,17 @@
                         <mat-radio-button class="repeat-workshop-button margin-bottom-10" value="days">
                             <span class="valignMiddle">after</span>
                             &nbsp;&nbsp;
-                            <mat-select formControlName="days" class="widthDays padding-top-0" (change)="computeDays($event.value)">
+                            <mat-form-field [floatLabel]="'always'">                 <mat-select formControlName="days" class="widthDays padding-top-0" (change)="computeDays($event.value)">
                                 <mat-option *ngFor="let day of daysOption" [value]="day">{{day}}</mat-option>
-                            </mat-select>
+                            </mat-select>               </mat-form-field>
                             <span class="valignMiddle">&nbsp;&nbsp;days</span>
                         </mat-radio-button>
                         <mat-radio-button class="repeat-workshop-button margin-bottom-10" value="weekdays">
                             <span class="valignMiddle">from the next</span>
                             &nbsp;&nbsp;
-                            <mat-select formControlName="weekdays" class="padding-top-0" (change)="computeWeekday($event.value)">
+                            <mat-form-field [floatLabel]="'always'">                 <mat-select formControlName="weekdays" class="padding-top-0" (change)="computeWeekday($event.value)">
                                 <mat-option *ngFor="let day of weekDayOption" [value]="day.value">{{day.text}}</mat-option>
-                            </mat-select>
+                            </mat-select>               </mat-form-field>
                         </mat-radio-button>
                     </mat-radio-group>
                     <div class="margin-top-40 flex-column">
@@ -62,25 +62,25 @@
                         <mat-radio-group class="repeat-workshop-group" formControlName="repeatTillOption" (change)="repeatTill($event.value)">
                             <mat-radio-button class="repeat-workshop-button margin-bottom-10" value="daysRepeat">
                                 &nbsp;&nbsp;
-                                <mat-select formControlName="daysRepeat" class="widthDays padding-top-0" (change)="repeatTillTrigger()">
+                                <mat-form-field [floatLabel]="'always'">                 <mat-select formControlName="daysRepeat" class="widthDays padding-top-0" (change)="repeatTillTrigger()">
                                     <mat-option *ngFor="let day of daysOption" [value]="day">{{day}}</mat-option>
-                                </mat-select>
+                                </mat-select>               </mat-form-field>
                                 <span class="valignMiddle">&nbsp;&nbsp;more sessions</span>
                             </mat-radio-button>
                             <mat-radio-button class="repeat-workshop-button margin-bottom-10" value="monthsRepeat">
                                 &nbsp;&nbsp;
-                                <mat-select formControlName="monthsRepeat" class="widthDays padding-top-0" (change)="repeatTillTrigger()">
+                                <mat-form-field [floatLabel]="'always'">                 <mat-select formControlName="monthsRepeat" class="widthDays padding-top-0" (change)="repeatTillTrigger()">
                                     <mat-option *ngFor="let month of monthOption" [value]="month">{{month}}</mat-option>
-                                </mat-select>
+                                </mat-select>               </mat-form-field>
                                 <span class="valignMiddle">&nbsp;&nbsp;more months</span>
                             </mat-radio-button>
                             <mat-radio-button class="repeat-workshop-button margin-bottom-10" value="dateRepeat">
                                 <span class="valignMiddle">the date</span>
                                 &nbsp;&nbsp;
-                                <mat-input-container>
+                                <mat-form-field [floatLabel]="'always'">
                                     <input matInput [min]="minDate" [matDatepicker]="dateRepeat" formControlName="dateRepeat" (change)="repeatTillTrigger()">
                                     <mat-datepicker-toggle matSuffix [for]="dateRepeat"></mat-datepicker-toggle>
-                                </mat-input-container>
+                                </mat-form-field>
                                 <mat-datepicker #dateRepeat></mat-datepicker>
                             </mat-radio-button>
                         </mat-radio-group>

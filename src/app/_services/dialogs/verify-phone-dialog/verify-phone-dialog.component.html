@@ -12,9 +12,9 @@
                                 </button>
                                 <h2 class="headline">How can we reach you securely?</h2>
                                 <p class="description1 margin-bottom-10">Please let us know how we can reach you on phone.</p>
-                                <mat-input-container style="width:50% !important" class="pb-block margin-bottom-60 margin-top-20">
+                                <mat-form-field [floatLabel]="'always'" style="width:50% !important" class="pb-block margin-bottom-60 margin-top-20">
                                     <input type="number" matInput #phone formControlName="phone" placeholder="Phone Number" />
-                                </mat-input-container>
+                                </mat-form-field>
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -42,9 +42,9 @@
                                 <h2 class="headline">Enter the OTP sent to your phone</h2>
                                 <p class="description1 margin-bottom-10">We have sent 4 digit code to {{phone.value}}. Please enter this code to verify your phone
                                     number.</p>
-                                <mat-input-container style="width:30% !important" class="pb-block margin-bottom-10">
+                                <mat-form-field [floatLabel]="'always'" style="width:30% !important" class="pb-block margin-bottom-10">
                                     <input type="text" matInput #inputOTP formControlName="inputOTP" />
-                                </mat-input-container>
+                                </mat-form-field>
                                 <div>
                                     <p class="description1">
                                         <a (click)="resendOTP()" style="cursor: pointer;">Resend code</a> please wait at least 5 minutes before

@@ -57,12 +57,12 @@
                   <i class="mati mati-close-circle matiIcon darkColor pull-left alignDelete" (click)="unfollowTopic('teaching', topic)" style="cursor: pointer;"></i>
 
                   <div class="topic-experience col-md-8 padding-left-0">
-                    <mat-input-container style="margin-bottom: 20px; width:100%" #experienceContainer>
+                    <mat-form-field [floatLabel]="'always'" style="margin-bottom: 20px; width:100%" #experienceContainer>
                       <textarea matInput #experience name="experience" rows="3" class="form-control" [(ngModel)]="topic.experience" placeholder="How much do you know this topic?"
                         required></textarea>
                       <mat-error>This field is required</mat-error>
                       <mat-hint align="end">{{experience.value.length}} / 1000</mat-hint>
-                    </mat-input-container>
+                    </mat-form-field>
                   </div>
                 </form>
               </div>

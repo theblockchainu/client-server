@@ -16,20 +16,20 @@
             </div>
         </div>
         <div class="col-md-3" style="text-align: right">
-            <mat-select [(value)]="questionsFilter" placeholder="Sort">
+            <mat-form-field [floatLabel]="'always'">                 <mat-select [(value)]="questionsFilter" placeholder="Sort">
                 <mat-option value="descending">Descending</mat-option>
                 <mat-option value="ascending">Ascending</mat-option>
                 <mat-option value="unsolved">Unsolved</mat-option>
                 <mat-option value="popular">Popular</mat-option>
-            </mat-select>
+            </mat-select>               </mat-form-field>
         </div>
     </div>
     <div class="row" style="margin-top: -20px;">
         <div class="col-md-12">
             <form [formGroup]="questionForm" (ngSubmit)="postQuestion()">
-                <mat-input-container class="full-width margin-top-10" style="font-size: 15px;"  >
+                <mat-form-field [floatLabel]="'always'" class="full-width margin-top-10" style="font-size: 15px;"  >
                     <input matInput formControlName="text" placeholder="Start your question with 'What', 'How', or 'Why', etc">
-                </mat-input-container>
+                </mat-form-field>
                 <button mat-raised-button color="primary" [disabled]="!questionForm.valid" class="pull-right">
                     <span *ngIf="!busyQuestion">Post question</span>
                     <span *ngIf="busyQuestion"> </span>
@@ -89,10 +89,10 @@
                     <div class="col-md-12 margin-top-30 answerForm" *ngIf="answerForm && answeringToQuestionId===question.id">
                         <form [formGroup]="answerForm" (ngSubmit)="postAnswer(question)">
                             <app-profile-popup [peer]="loggedInUser"></app-profile-popup>
-                            <mat-input-container style="margin-left: 15px; width: 88%; margin-bottom: 20px;">
+                            <mat-form-field [floatLabel]="'always'" style="margin-left: 15px; width: 88%; margin-bottom: 20px;">
                                 <textarea matInput #answerText maxlength="1000" rows="3" formControlName="text" placeholder="Answer the above question"></textarea>
                                 <mat-hint align="end">{{answerText.value.length}} / 1000</mat-hint>
-                            </mat-input-container>
+                            </mat-form-field>
                             <button [disabled]="!answerForm.valid" mat-raised-button class="pull-right" color="primary">
                                 <span *ngIf="!busyAnswer">Post answer</span>
                                 <ngx-loading [show]="busyAnswer"></ngx-loading>
@@ -105,9 +105,9 @@
                         <div class="margin-top-30 questionCommentForm" *ngIf="commentForm && commentingToQuestionId===question.id">
                             <form [formGroup]="commentForm" (ngSubmit)="postCommentToQuestion(question)">
                                 <app-profile-popup [peer]="loggedInUser"></app-profile-popup>
-                                <mat-input-container style="margin-left: 15px; width: 88%;">
+                                <mat-form-field [floatLabel]="'always'" style="margin-left: 15px; width: 88%;">
                                     <input matInput type="text" formControlName="description" placeholder="Write your comment on the above question">
-                                </mat-input-container>
+                                </mat-form-field>
                                 <div style="text-align: right">
                                     <button [disabled]="!commentForm.valid" mat-raised-button color="primary">
                                         <span *ngIf="!busyComment">Comment</span>
@@ -161,9 +161,9 @@
                                 <div class="col-md-11 col-md-offset-1 margin-top-30" *ngIf="replyForm && replyingToCommentId===comment.id" style="margin-left: -15px;">
                                     <form [formGroup]="replyForm" (ngSubmit)="postReply(comment)">
                                         <app-profile-popup [peer]="loggedInUser"></app-profile-popup>
-                                        <mat-input-container style="margin-left: 15px; width: 85%;">
+                                        <mat-form-field [floatLabel]="'always'" style="margin-left: 15px; width: 85%;">
                                             <input matInput type="text" formControlName="description" placeholder="Reply to above comment...">
-                                        </mat-input-container>
+                                        </mat-form-field>
                                         <button [disabled]="!replyForm.valid" mat-raised-button class="pull-right" color="primary">
                                             <span *ngIf="!busyReply">Post</span>
                                             <ngx-loading [show]="busyReply"></ngx-loading>
@@ -267,9 +267,9 @@
                                 <div class="margin-top-30 commentForm" *ngIf="commentForm && commentingToAnswerId===answer.id">
                                     <form [formGroup]="commentForm" (ngSubmit)="postCommentToAnswer(answer)">
                                         <app-profile-popup [peer]="loggedInUser"></app-profile-popup>
-                                        <mat-input-container style="margin-left: 15px; width: 88%;">
+                                        <mat-form-field [floatLabel]="'always'" style="margin-left: 15px; width: 88%;">
                                             <input matInput type="text" formControlName="description" placeholder="Write your comment on the above answer">
-                                        </mat-input-container>
+                                        </mat-form-field>
                                         <div style="text-align: right">
                                             <button [disabled]="!commentForm.valid" mat-raised-button color="primary">
                                                 <span *ngIf="!busyComment">Comment</span>
@@ -324,9 +324,9 @@
                                         <div class="col-md-11 col-md-offset-1 margin-top-30" *ngIf="replyForm && replyingToCommentId===comment.id" style="margin-left: -15px;">
                                             <form [formGroup]="replyForm" (ngSubmit)="postReply(comment)">
                                                 <app-profile-popup [peer]="loggedInUser"></app-profile-popup>
-                                                <mat-input-container style="margin-left: 15px; width: 85%;">
+                                                <mat-form-field [floatLabel]="'always'" style="margin-left: 15px; width: 85%;">
                                                     <input matInput type="text" formControlName="description" placeholder="Reply to above comment...">
-                                                </mat-input-container>
+                                                </mat-form-field>
                                                 <button [disabled]="!replyForm.valid" mat-raised-button class="pull-right" color="primary">
                                                     <span *ngIf="!busyReply">Post</span>
                                                     <ngx-loading [show]="busyReply"></ngx-loading>

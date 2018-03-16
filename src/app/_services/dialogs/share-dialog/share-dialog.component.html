@@ -24,9 +24,9 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <mat-input-container   class="pb-block" style="font-size: 20px;">
+      <mat-form-field [floatLabel]="'always'"   class="pb-block" style="font-size: 20px;">
         <input #urlInput matInput [readOnly]="true" value="{{generatedUrl}}" />
-      </mat-input-container>
+      </mat-form-field>
     </div>
   </div>
 </div>

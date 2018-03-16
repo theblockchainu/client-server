@@ -11,18 +11,18 @@
       Change password
     </div>
     <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()" class="margin-top-20">
-      <mat-input-container class="pb-block margin-bottom-30">
+      <mat-form-field [floatLabel]="'always'" class="pb-block margin-bottom-30">
         <input matInput formControlName="old_password" type="password" placeholder="Old password" required>
         <mat-error>This field is required</mat-error>
-      </mat-input-container>
-      <mat-input-container class="pb-block margin-bottom-30">
+      </mat-form-field>
+      <mat-form-field [floatLabel]="'always'" class="pb-block margin-bottom-30">
         <input matInput formControlName="new_password" type="password" placeholder="New password" required>
         <mat-error>This field is required</mat-error>
-      </mat-input-container>
-      <mat-input-container class="pb-block margin-bottom-20">
+      </mat-form-field>
+      <mat-form-field [floatLabel]="'always'" class="pb-block margin-bottom-20">
         <input matInput formControlName="confirm_password" type="password" placeholder="Confirm password" required>
         <mat-error>This field is required</mat-error>
-      </mat-input-container>
+      </mat-form-field>
     </form>
     <button mat-button color="accent" (click)="changePassword()" class="mat-border-button">
       <span *ngIf="!busyChangePassword">Update Password</span>

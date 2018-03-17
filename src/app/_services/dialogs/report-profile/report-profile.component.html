@@ -13,7 +13,7 @@
   <div mat-dialog-content class="alignContent" style="padding-left:0px!important">
     <div class="content">
     <p>Please Specify the reason for which you want to report this profile</p>
-    <mat-form-field style="width:100%">
+    <mat-form-field [floatLabel]="'always'" style="width:100%">
       <textarea class="col-md-10" matInput type="text" [(ngModel)]="reason"></textarea>
     </mat-form-field>
     </div>

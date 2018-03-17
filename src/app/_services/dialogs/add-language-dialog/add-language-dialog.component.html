@@ -2,7 +2,7 @@
   <h3 mat-dialog-title>
     Add New Language</h3>
   <form [formGroup]="newLanguage" (ngSubmit)="addNewLanguage()">
-    <mat-form-field class="form-group" [ngClass]="{'has-error':!newLanguage.controls['name'].valid}">
+    <mat-form-field [floatLabel]="'always'" class="form-group" [ngClass]="{'has-error':!newLanguage.controls['name'].valid}">
       <input matInput tabindex="1" formControlName="name">
     </mat-form-field>
     <div>

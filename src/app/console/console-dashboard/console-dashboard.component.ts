@@ -9,7 +9,6 @@ import { CollectionService } from '../../_services/collection/collection.service
 import { MatSnackBar } from '@angular/material';
 import { DialogsService } from '../../_services/dialogs/dialog.service';
 import { ProfileService } from '../../_services/profile/profile.service';
-import { ConsoleLearningComponent } from '../console-learning/console-learning.component';
 declare var moment: any;
 import * as _ from 'lodash';
 
@@ -85,7 +84,6 @@ export class ConsoleDashboardComponent implements OnInit {
         private snackBar: MatSnackBar,
         private _dialogService: DialogsService,
         public _profileService: ProfileService,
-        public consoleLearningComponent: ConsoleLearningComponent
     ) {
         activatedRoute.pathFromRoot[3].url.subscribe((urlSegment) => {
             console.log(urlSegment[0].path);

@@ -26,7 +26,7 @@
                 <p-rating name="score_{{i}}" [(ngModel)]="participant.score" stars="5" [cancel]="false" style="font-size: 13px;"></p-rating>
             </div>
             <div class="col-md-5 vcenter">
-                <mat-form-field style="width:100%">
+                <mat-form-field [floatLabel]="'always'" style="width:100%">
                     <textarea placeholder="How was {{participant.profiles[0].first_name | ucwords}}'s performance?" matInput type="text" name="review_{{i}}" [(ngModel)]="participant.description"></textarea>
                 </mat-form-field>
             </div>

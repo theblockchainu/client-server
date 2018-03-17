@@ -29,14 +29,14 @@
                     </div>
                     
                    <div class="margin-bottom-10">
-                     <mat-input-container class="pb-block">
+                     <mat-form-field [floatLabel]="'always'" class="pb-block">
                        <input matInput placeholder="Email" formControlName="email" type="email">
-                     </mat-input-container>
+                     </mat-form-field>
                    </div>
                    <div class="margin-bottom-10">
-                     <mat-input-container class="pb-block">
+                     <mat-form-field [floatLabel]="'always'" class="pb-block">
                        <input matInput placeholder="Password" formControlName="password" type="password">
-                     </mat-input-container>
+                     </mat-form-field>
                    </div>
                    <div class="check margin-top-10 margin-bottom-10">
                      <mat-checkbox formControlName="rememberMe" [checked]="false" (change)="toggle()"> Remember me </mat-checkbox>

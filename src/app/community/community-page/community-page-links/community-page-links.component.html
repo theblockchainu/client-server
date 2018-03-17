@@ -16,20 +16,20 @@
             </div>
         </div>
         <div class="col-md-3" style="text-align: right">
-            <mat-select [(value)]="linksFilter" placeholder="Sort">
+            <mat-form-field [floatLabel]="'always'">                 <mat-select [(value)]="linksFilter" placeholder="Sort">
                 <mat-option value="descending">Descending</mat-option>
                 <mat-option value="ascending">Ascending</mat-option>
                 <mat-option value="unsolved">Unsolved</mat-option>
                 <mat-option value="popular">Popular</mat-option>
-            </mat-select>
+            </mat-select>               </mat-form-field>
         </div>
     </div>
     <div class="row" style="margin-top: -20px;">
         <div class="col-md-12">
             <form [formGroup]="linksForm" (ngSubmit)="postLink()">
-                <mat-input-container class="full-width margin-top-10" style="font-size: 15px;"  >
+                <mat-form-field [floatLabel]="'always'" class="full-width margin-top-10" style="font-size: 15px;"  >
                     <input matInput formControlName="text" placeholder="Type or paste your link here...">
-                </mat-input-container>
+                </mat-form-field>
                 <button mat-raised-button color="primary" [disabled]="!linksForm.valid" class="pull-right">
                     <span *ngIf="!busyLink">Share</span>
                     <span *ngIf="busyLink"> </span>

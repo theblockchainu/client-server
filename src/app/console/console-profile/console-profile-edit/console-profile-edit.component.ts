@@ -165,10 +165,13 @@ export class ConsoleProfileEditComponent implements OnInit {
     this.disableEndYearBool = !this.disableEndYearBool;
   }
 
-  autoCompleteCallback(data: any): any {
-    this.profileForm.controls['location_string'].patchValue(data.name);
-    this.profileForm.controls['location_lat'].patchValue(data.geometry.location.lat);
-    this.profileForm.controls['location_lng'].patchValue(data.geometry.location.lng);
+  autoCompleteCallback(callbackData: any): any {
+    if (callbackData.response) {
+      const data = callbackData.data;
+      this.profileForm.controls['location_string'].patchValue(data.name);
+      this.profileForm.controls['location_lat'].patchValue(Number(data.geometry.location.lat));
+      this.profileForm.controls['location_lng'].patchValue(Number(data.geometry.location.lng));
+    }
   }
 
   getLanguages() {
@@ -244,6 +247,8 @@ export class ConsoleProfileEditComponent implements OnInit {
         this.userSettings['inputString'] = profiles[0].location_string;
       }
       if (profiles[0].location_lat && profiles[0].location_lng) {
+        this.profileForm.controls['location_lat'].patchValue(Number(profiles[0].location_lat));
+        this.profileForm.controls['location_lng'].patchValue(Number(profiles[0].location_lng));
         this.userSettings.geoLocation = [profiles[0].location_lat, profiles[0].location_lng];
       }
       if (profiles[0].other_languages && profiles[0].other_languages.length > 0) {

@@ -157,10 +157,10 @@
                         </div>
                         <div class="row margin-bottom-20">
                             <div class="col-md-12">
-                                <mat-input-container style="color:#767676 !important" placeholder="never" class="pb-block">
+                                <mat-form-field [floatLabel]="'always'" style="color:#767676 !important" placeholder="never" class="pb-block">
                                     <input name="search" style="color:#767676 !important" class="mat-block search-box" matInput [formControl]="searchControl"
                                         [matAutocomplete]="auto" placeholder="Search in the community...">
-                                </mat-input-container>
+                                </mat-form-field>
                                 <mat-autocomplete #auto="matAutocomplete">
                                     <mat-option *ngFor="let option of searchResults" [value]="_searchService.getSearchOptionText(option)" (click)="_searchService.onSearchOptionClicked(option)">
                                         <span class="lightText">

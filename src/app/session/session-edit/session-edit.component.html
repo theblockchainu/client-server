@@ -74,20 +74,20 @@
                     </div>
                     <div class="row">
                       <div class="col-sm-12">
-                        <mat-input-container class="pb-block" style="margin-bottom: 20px">
+                        <mat-form-field [floatLabel]="'always'" class="pb-block" style="margin-bottom: 20px">
                           <input matInput #title formControlName="headline" maxlength="50" placeholder="Theoritical Physicist, American Expat in Germany ... ">
                           <mat-hint align="start">{{50 - profileForm.controls['headline'].value.length}} more characters needed</mat-hint>
                           <mat-hint align="end">{{profileForm.controls['headline'].value.length}} / 50</mat-hint>
-                        </mat-input-container>
+                        </mat-form-field>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-sm-12">
-                        <mat-input-container class="pb-block" style="margin-bottom: 20px">
+                        <mat-form-field [floatLabel]="'always'" class="pb-block" style="margin-bottom: 20px">
                           <input matInput #title formControlName="description" maxlength="50" placeholder="Give a short description about yourself">
                           <mat-hint align="start">{{50 - profileForm.controls['description'].value.length}} more characters needed</mat-hint>
                           <mat-hint align="end">{{profileForm.controls['description'].value.length}} / 50</mat-hint>
-                        </mat-input-container>
+                        </mat-form-field>
                       </div>
                     </div>
                   </div>
@@ -206,9 +206,9 @@
               </div>
               <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
                 <div class="row margin-top-60" formArrayName="other_languages" *ngFor="let control of profileForm.controls['other_languages']['controls']; let i=index">
-                  <mat-input-container>
+                  <mat-form-field [floatLabel]="'always'">
                     <input type="text" style="border-bottom: 0px;" placeholder="Select Language" matInput [formControlName]="i" [matAutocomplete]="auto">
-                  </mat-input-container>
+                  </mat-form-field>
                 </div>
                 <a (click)="addLanguageField()"> Add language</a>
                 <mat-autocomplete #auto="matAutocomplete">
@@ -245,21 +245,21 @@
                     Work Experience
                   </div>
                   <div *ngFor="let workObj of workForm.controls['work']['controls']; let i=index" [formGroupName]="i" class="margin-bottom-10">
-                    <mat-input-container style="margin-right:10px;">
+                    <mat-form-field [floatLabel]="'always'" style="margin-right:10px;">
                       <input matInput formControlName="position" type="text" style="border-bottom: 0px;" placeholder="Position">
                       <!-- <mat-error>This field is required</mat-error> -->
-                    </mat-input-container>
-                    <mat-input-container>
+                    </mat-form-field>
+                    <mat-form-field [floatLabel]="'always'">
                       <input matInput formControlName="company" type="text" style="border-bottom: 0px;" placeholder="Company">
                       <!-- <mat-error>This field is required</mat-error> -->
-                    </mat-input-container>
-                    <mat-form-field style="margin-right:10px;" [ngClass]="{'customWidth30': i == 0, 'customWidth33': i > 0}">
+                    </mat-form-field>
+                    <mat-form-field [floatLabel]="'always'" style="margin-right:10px;" [ngClass]="{'customWidth30': i == 0, 'customWidth33': i > 0}">
                       <input matInput formControlName="startDate" [matDatepicker]="startPicker" placeholder="Start Date">
                       <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
                       <mat-datepicker #startPicker></mat-datepicker>
                     </mat-form-field>
                     <!-- <mat-error>This field is required</mat-error> -->
-                    <mat-form-field style="margin-right:10px;" [ngClass]="{ 'customWidth30': i == 0, 'customWidth33': i > 0}">
+                    <mat-form-field [floatLabel]="'always'" style="margin-right:10px;" [ngClass]="{ 'customWidth30': i == 0, 'customWidth33': i > 0}">
                       <!--'disabled': disableEndDate,-->
                       <input matInput formControlName="endDate" [matDatepicker]="endPicker" placeholder="End Date">
                       <!--[ngClass]="{'disabled': disableEndDate}"-->
@@ -279,21 +279,21 @@
                 </div>
                 <div formArrayName="education">
                   <div *ngFor="let educationObj of workForm.controls['education']['controls']; let i = index" [formGroupName]="i" class="margin-bottom-10">
-                    <mat-input-container style="margin-right:10px;">
+                    <mat-form-field [floatLabel]="'always'" style="margin-right:10px;">
                       <input matInput formControlName="degree" type="text" style="border-bottom: 0px;" placeholder="Degree">
                       <!-- <mat-error>This field is required</mat-error> -->
-                    </mat-input-container>
-                    <mat-input-container style="margin-right:10px;">
+                    </mat-form-field>
+                    <mat-form-field [floatLabel]="'always'" style="margin-right:10px;">
                       <input matInput formControlName="school" type="text" style="border-bottom: 0px;" placeholder="School / College">
                       <!-- <mat-error>This field is required</mat-error> -->
-                    </mat-input-container>
-                    <mat-select placeholder="Start Year" style="margin-bottom: 20px;margin-right:10px;" formControlName="startYear" [ngClass]="{'customWidth30': i == 0, 'customWidth33': i > 0}">
+                    </mat-form-field>
+                    <mat-form-field [floatLabel]="'always'">                 <mat-select placeholder="Start Year" style="margin-bottom: 20px;margin-right:10px;" formControlName="startYear" [ngClass]="{'customWidth30': i == 0, 'customWidth33': i > 0}">
                       <mat-option *ngFor="let syear of years" [value]="syear">{{syear}}</mat-option>
-                    </mat-select>
-                    <mat-select placeholder="End Year" style="margin-bottom: 20px;margin-right:10px;" formControlName="endYear" [ngClass]="{'customWidth30': i == 0, 'customWidth33': i > 0}">
+                    </mat-select>               </mat-form-field>
+                    <mat-form-field [floatLabel]="'always'">                 <mat-select placeholder="End Year" style="margin-bottom: 20px;margin-right:10px;" formControlName="endYear" [ngClass]="{'customWidth30': i == 0, 'customWidth33': i > 0}">
                       <!--'disabled': disableEndYearBool,-->
                       <mat-option *ngFor="let eyear of years" [value]="eyear">{{eyear}}</mat-option>
-                    </mat-select>
+                    </mat-select>               </mat-form-field>
                     <mat-checkbox [hidden]="i>0" class="presentlyWorking" formControlName="presentlyPursuing" (click)="disableEndYear()">Presently pursuing</mat-checkbox>
 
                     <i class="mati mati-close-circle matiIcon pull-right darkColor" (click)="deleteEducation(i)" style="cursor: pointer;"></i>
@@ -375,12 +375,12 @@
                     (click)="updateChanges('teaching', topic)" style="cursor: pointer;"></i>
                   <i class="mati mati-close-circle matiIcon darkColor pull-left alignDelete" (click)="unfollowTopic('teaching', topic)" style="cursor: pointer;"></i>
                   <div class="topic-experience col-md-8 padding-left-0">
-                    <mat-input-container style="margin-bottom: 20px; width:100%" #experienceContainer>
+                    <mat-form-field [floatLabel]="'always'" style="margin-bottom: 20px; width:100%" #experienceContainer>
                       <textarea matInput #experience name="experience" rows="3" class="form-control" [(ngModel)]="topic.experience" placeholder="How much do you know this topic?"
                         required></textarea>
                       <mat-error>This field is required</mat-error>
                       <mat-hint align="end">{{experience.value.length}} / 1000</mat-hint>
-                    </mat-input-container>
+                    </mat-form-field>
                   </div>
                 </form>
               </div>
@@ -404,9 +404,9 @@
               <form [formGroup]="provisionForm" (ngSubmit)="saveProvision()">
                 <div formArrayName="provisions">
                   <div *ngFor="let provisionObj of provisionForm.controls['provisions']['controls']; let i=index" [formGroupName]="i" class="margin-bottom-10">
-                    <mat-input-container>
+                    <mat-form-field [floatLabel]="'always'">
                       <input matInput style="border-bottom: 0px;" formControlName="text" type="text">
-                    </mat-input-container>
+                    </mat-form-field>
                   </div>
                 </div>
                 <a (click)="addProvisionField()"> Add Item</a>
@@ -457,31 +457,31 @@
                   </div>
                   <div class="row margin-left-0" *ngIf="!packageForm.controls['trialPackage']['controls']['isFree'].value">
                     <div class="col-md-3 padding-left-0">
-                      <mat-input-container class="margin-top-20">
+                      <mat-form-field [floatLabel]="'always'" class="margin-top-20">
                         <input type="number" matInput #price formControlName="price" placeholder="0" min="1" required>
-                      </mat-input-container>
+                      </mat-form-field>
                     </div>
                     <div class="col-md-2 col-md-offset-2 priceAlignParent">
-                      <mat-select formControlName="currency" class="priceAlign padding-top-0 margin-top-20" placeholder="USD">
+                      <mat-form-field [floatLabel]="'always'">                 <mat-select formControlName="currency" class="priceAlign padding-top-0 margin-top-20" placeholder="USD">
                         <mat-option *ngFor="let c of currencies" [value]="c">{{c}}</mat-option>
-                      </mat-select>
+                      </mat-select>               </mat-form-field>
                     </div>
                   </div>
                   <h3 class="title">Duration (each) </h3>
                   <div class="row margin-left-0">
                     <div class="col-sm-12 padding-left-0">
-                      <mat-select formControlName="duration" style="margin: 20px 10px; position: relative; top: -5px;" placeholder="3 Days">
+                      <mat-form-field [floatLabel]="'always'">                 <mat-select formControlName="duration" style="margin: 20px 10px; position: relative; top: -5px;" placeholder="3 Days">
                         <mat-option *ngFor="let d of availableDurations" [value]="d.value">{{d.text}}</mat-option>
-                      </mat-select>
+                      </mat-select>               </mat-form-field>
                     </div>
                   </div>
                   <h3 class="title">Cancellation Policy</h3>
                   <div class="row margin-left-0">
                     <div class="col-sm-12 padding-left-0">
                       Students will get full refund if they cancel within
-                      <mat-select formControlName="cancellationPolicy" style="margin: 20px 10px; position: relative; top: -5px;" placeholder="3 Days">
+                      <mat-form-field [floatLabel]="'always'">                 <mat-select formControlName="cancellationPolicy" style="margin: 20px 10px; position: relative; top: -5px;" placeholder="3 Days">
                         <mat-option *ngFor="let cp of cancellationPolicies" [value]="cp">{{cp}}</mat-option>
-                      </mat-select>
+                      </mat-select>               </mat-form-field>
                       days of signing up.
                     </div>
                   </div>
@@ -497,31 +497,31 @@
                     </div>
                     <div class="row margin-left-0" *ngIf="!packageForm.controls['paidPackages']['controls'][i]['controls']['isFree'].value">
                       <div class="col-md-3 padding-left-0">
-                        <mat-input-container class="margin-top-20">
+                        <mat-form-field [floatLabel]="'always'" class="margin-top-20">
                           <input type="number" matInput #price formControlName="price" placeholder="0" min="1" required>
-                        </mat-input-container>
+                        </mat-form-field>
                       </div>
                       <div class="col-md-2 col-md-offset-2 priceAlignParent">
-                        <mat-select formControlName="currency" class="priceAlign padding-top-0 margin-top-20" placeholder="USD">
+                        <mat-form-field [floatLabel]="'always'">                 <mat-select formControlName="currency" class="priceAlign padding-top-0 margin-top-20" placeholder="USD">
                           <mat-option *ngFor="let c of currencies" [value]="c">{{c}}</mat-option>
-                        </mat-select>
+                        </mat-select>               </mat-form-field>
                       </div>
                     </div>
                     <h3 class="title">Duration (each) </h3>
                     <div class="row margin-left-0">
                       <div class="col-sm-12 padding-left-0">
-                        <mat-select formControlName="duration" style="margin: 20px 10px; position: relative; top: -5px;" placeholder="3 Days">
+                        <mat-form-field [floatLabel]="'always'">                 <mat-select formControlName="duration" style="margin: 20px 10px; position: relative; top: -5px;" placeholder="3 Days">
                           <mat-option *ngFor="let d of availableDurations" [value]="d.value">{{d.text}}</mat-option>
-                        </mat-select>
+                        </mat-select>               </mat-form-field>
                       </div>
                     </div>
                     <h3 class="title">Cancellation Policy</h3>
                     <div class="row margin-left-0">
                       <div class="col-sm-12 padding-left-0">
                         Students will get full refund if they cancel within
-                        <mat-select formControlName="cancellationPolicy" style="margin: 20px 10px; position: relative; top: -5px;" placeholder="3 Days">
+                        <mat-form-field [floatLabel]="'always'">                 <mat-select formControlName="cancellationPolicy" style="margin: 20px 10px; position: relative; top: -5px;" placeholder="3 Days">
                           <mat-option *ngFor="let cp of cancellationPolicies" [value]="cp">{{cp}}</mat-option>
-                        </mat-select>
+                        </mat-select>               </mat-form-field>
                         days of signing up.
                       </div>
                     </div>
@@ -586,7 +586,7 @@
               <h2 class="title">Custom Url</h2>
               <div class="subtitle">Select custom URL for your page</div>
               <form [formGroup]="preferencesForm" (ngSubmit)="savePreferences()">
-                <mat-form-field>
+                <mat-form-field [floatLabel]="'always'">
                   <input type="text" style="border-bottom: 0px;" matInput #price formControlName="customUrl">
                   <span matPrefix>peerbuds.com/</span>
                 </mat-form-field>
@@ -646,11 +646,11 @@
                   <mat-radio-group>
                     <mat-radio-button class="pb-block margin-bottom-20" name="phone" value="1" (click)="toggleChoice(1)" *ngIf="!isPhoneVerified">Yes</mat-radio-button>
                     <div *ngIf="selectedOption === 1 || isPhoneVerified" style="margin: 20px 0px 30px 0px;">
-                      <mat-input-container class="pb-block" style="margin: 20px 0px;">
+                      <mat-form-field [floatLabel]="'always'" class="pb-block" style="margin: 20px 0px;">
                         <input type="tel" matInput #phoneNo formControlName="phoneNo" placeholder="Enter Phone Number" [readOnly]="true">
                         <mat-hint *ngIf="!isPhoneVerified">We will send the confirmation code on your mobile</mat-hint>
                         <mat-hint *ngIf="isPhoneVerified">Update your phone number from profile to change it for this session</mat-hint>
-                      </mat-input-container>
+                      </mat-form-field>
                       <button mat-raised-button #sendOtpButton color="accent" (click)="submitPhoneNo($event.target, 'Sending OTP...')" *ngIf="!isPhoneVerified">
                         Send OTP
                       </button>
@@ -660,9 +660,9 @@
                     </div>
                     <div *ngIf="otpSent && !isPhoneVerified" style="margin: 20px 0px 50px 0px;">
                       <p>Type the 4 digit verification code</p>
-                      <mat-input-container class="pb-block inputOTP" style="margin: 20px 0px;">
+                      <mat-form-field [floatLabel]="'always'" class="pb-block inputOTP" style="margin: 20px 0px;">
                         <input type="text" style="border-bottom: 0px;" matInput #inputOTP formControlName="inputOTP" placeholder="OTP">
-                      </mat-input-container>
+                      </mat-form-field>
                       <button mat-raised-button color="accent" (click)="submitOTP()">Confirm OTP</button>
                     </div>
                     <mat-radio-button class="pb-block margin-bottom-20" name="phone" value="0" (click)="toggleChoice(0)" *ngIf="!isPhoneVerified">No, thanks</mat-radio-button>

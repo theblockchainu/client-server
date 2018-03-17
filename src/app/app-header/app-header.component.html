@@ -9,20 +9,20 @@
       <mat-icon>search</mat-icon>
     </span>
     <span class="search-form">
-      <mat-form-field [floatLabel]="'always'" style="color:#333333 !important" placeholder="never" class="mat-block" *ngIf="(isLoggedIn | async)">
+      <mat-form-field style="color:#333333 !important" class="mat-block" *ngIf="(isLoggedIn | async)" [floatLabel]="'never'">
         <input name="search" style="color:#767676 !important" class="mat-block search-box" matInput [formControl]="myControl" [matAutocomplete]="auto"
           placeholder="Try 'Mumbai' ">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of options" [value]="_searchService.getSearchOptionText(option)" (click)="_searchService.onSearchOptionClicked(option)">
+              <span class="lightText">
+                {{_searchService.getSearchOptionType(option)}}
+              </span>
+              <span>
+                {{_searchService.getSearchOptionText(option)}}
+              </span>
+            </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let option of options" [value]="_searchService.getSearchOptionText(option)" (click)="_searchService.onSearchOptionClicked(option)">
-          <span class="lightText">
-            {{_searchService.getSearchOptionType(option)}}
-          </span>
-          <span>
-            {{_searchService.getSearchOptionText(option)}}
-          </span>
-        </mat-option>
-      </mat-autocomplete>
     </span>
     <!-- This fills the remaining space of the current row -->
     <span class="example-spacer"></span>

@@ -182,12 +182,12 @@
     </div>
     <!--NOTIFICATIONS-->
     <div class="notifications margin-bottom-40" *ngIf="notifications.length > 0">
-      <div class="mat-body-2">
+      <div class="mat-body-2 margin-bottom-20">
         Notifications ({{notifications.length}})
       </div>
-      <mat-list>
+      <div>
         <div *ngFor="let notification of notifications; let i = index;">
-          <mat-list-item *ngIf="!notification.hidden && i <= 3">
+          <div *ngIf="!notification.hidden && i <= 3">
             <div [ngClass]="{'row': true, 'full-width': true, 'notificationsRow': true, 'notificationsRowUnread': !notification.seen}"
               (click)="onNotificationClick(notification)">
               <div class="col-md-1">
@@ -204,9 +204,9 @@
                 <mat-icon class="lightText" style="font-size: 10px; cursor: pointer;" (click)="hideNotification(notification)">close</mat-icon>
               </div>
             </div>
-          </mat-list-item>
+          </div>
         </div>
-      </mat-list>
+      </div>
       <div class="text-center margin-top-20">
         <button mat-button class="mat-border-button center margin-top-20" [routerLink]="['/console/account/notifications']">View all</button>
       </div>

@@ -20,17 +20,17 @@
         <div class="row">
           <div class="col-sm-6 margin-bottom-30">
             <ng4geo-autocomplete class="geoLocation" required [userSettings]="userSettings" (componentCallback)="autoCompleteCallback($event)"></ng4geo-autocomplete>
-            <mat-form-field [floatLabel]="'always'" class="pb-block margin-top-20 margin-bottom-20">
+            <mat-form-field class="pb-block margin-top-20 margin-bottom-20">
               <input name="country" #country style="border-bottom: 0px;" placeholder="Country" matInput formControlName="country" [matAutocomplete]="auto"
                 [required]="true">
               <mat-autocomplete #auto="matAutocomplete">
                 <mat-option *ngFor="let l of filteredCountryOptions | async" [value]="l" (click)="countryChange(l)">{{l}}</mat-option>
               </mat-autocomplete>
             </mat-form-field>
-            <mat-form-field [floatLabel]="'always'" class="pb-block margin-top-20 margin-bottom-20">
+            <mat-form-field class="pb-block margin-top-20 margin-bottom-20">
               <input matInput #street_address formControlName="street_address" placeholder="Street Address" [required]="true">
             </mat-form-field>
-            <mat-form-field [floatLabel]="'always'" class="pb-block margin-top-20 margin-bottom-20">
+            <mat-form-field class="pb-block margin-top-20 margin-bottom-20">
               <input matInput #apt_suite formControlName="apt_suite" placeholder="Apt / Suite">
             </mat-form-field>
           </div>
@@ -45,17 +45,17 @@
         </div>
         <div class="row">
           <div class="col-sm-6">
-            <mat-form-field [floatLabel]="'always'" class="pb-block margin-top-20 margin-bottom-20">
+            <mat-form-field class="pb-block margin-top-20 margin-bottom-20">
               <input matInput #city formControlName="city" placeholder="City" [required]="true">
             </mat-form-field>
           </div>
           <div class="col-sm-6">
-            <mat-form-field [floatLabel]="'always'" class="pb-block margin-top-20 margin-bottom-20">
+            <mat-form-field class="pb-block margin-top-20 margin-bottom-20">
               <input matInput #state formControlName="state" placeholder="State" [required]="true">
             </mat-form-field>
           </div>
           <div class="col-sm-6">
-            <mat-form-field [floatLabel]="'always'" class="pb-block margin-top-20 margin-bottom-20">
+            <mat-form-field class="pb-block margin-top-20 margin-bottom-20">
               <input matInput #zip formControlName="zip" placeholder="Zip" [required]="true">
             </mat-form-field>
           </div>

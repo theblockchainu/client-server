@@ -108,27 +108,27 @@
               <mat-hint class="hint" align="start">This is only shared once you have a confirmed booking with another peerbuds user. This is how we can all get
                 in touch.</mat-hint>
               <br>
-              <mat-form-field [floatLabel]="'always'" placeholder="never" class="mat-block margin-top-30 max-height-40">
+              <mat-form-field [floatLabel]="'always'" placeholder="never" class="pb-block margin-top-30 max-height-40">
                 <input type="text" placeholder="Preferred Language" matInput formControlName="preferred_language" [matAutocomplete]="auto">
-              </mat-form-field>
               <mat-autocomplete #auto="matAutocomplete">
                 <mat-option *ngFor="let language of filteredOptions" [value]="language.name">
                   {{ language.name }}
                 </mat-option>
               </mat-autocomplete>
               <mat-hint class="hint" align="start">We'll send you messages in this language.</mat-hint>
-              <br>
-              <br>
-              <br>
-              <mat-form-field [floatLabel]="'always'" placeholder="never" class="mat-block max-height-40">
-                <input type="text" placeholder="Preferred Currency" matInput formControlName="currency" [matAutocomplete]="auto2">
               </mat-form-field>
+              <br>
+              <br>
+              <br>
+              <mat-form-field [floatLabel]="'always'" placeholder="never" class="pb-block max-height-40">
+                <input type="text" placeholder="Preferred Currency" matInput formControlName="currency" [matAutocomplete]="auto2">
               <mat-autocomplete #auto2="matAutocomplete">
                 <mat-option *ngFor="let currency of filteredCurrencies" [value]="currency.code">
                   {{ currency.name }}
                 </mat-option>
               </mat-autocomplete>
               <mat-hint class="hint" align="start">Weʼll show you prices in this currency.</mat-hint>
+              </mat-form-field>
               <br>
               <br>
               <ng4geo-autocomplete class="geoLocation" required [userSettings]="userSettings" (componentCallback)="autoCompleteCallback($event)"></ng4geo-autocomplete>
@@ -221,17 +221,16 @@
                 <a style="font-size: 12px">+ Add another education detail</a>
               </div>
 
-              <mat-form-field [floatLabel]="'always'" placeholder="never" class="mat-block margin-top-30 max-height-25">
+              <mat-form-field [floatLabel]="'always'" placeholder="never" class="pb-block margin-top-30 max-height-25">
                 <input type="text" placeholder="Timezone" matInput formControlName="timezone" [matAutocomplete]="auto3">
-              </mat-form-field>
               <mat-autocomplete #auto3="matAutocomplete">
                 <mat-option *ngFor="let timezone of filteredTimezones" [value]="timezone.value">
                   {{ timezone.text }}
                 </mat-option>
               </mat-autocomplete>
-              <br/>
               <mat-hint class="hint" align="start">Your home time zone.</mat-hint>
-              <div formArrayName="other_languages" class="margin-top-40 other_languages">
+              </mat-form-field>
+              <div formArrayName="other_languages" class="margin-top-60 other_languages">
                 <p class="mat-body-2">Other languages</p>
                 <app-generic-multiselect-autocomplete [list]="languages" [preSelectedItems]="profileForm.controls['other_languages'].value"
                   (selectedOutput)="selected($event)" (removedOutput)="removed($event)"></app-generic-multiselect-autocomplete>

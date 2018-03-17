@@ -24,12 +24,12 @@
             <div>
                 <div class="row">
                     <div class="col-sm-12 margin-bottom-30">
-                        <mat-form-field [floatLabel]="'always'" class="pb-block margin-top-20 margin-bottom-20">
+                        <mat-form-field class="pb-block margin-top-20 margin-bottom-20">
                             <input matInput #title formControlName="title" placeholder="Project Title" class="title" [required]="true">
                         </mat-form-field>
 
                         <div formGroupName="schedule" class="margin-top-20 margin-bottom-20">
-                            <mat-form-field [floatLabel]="'always'" class="dateStyles">
+                            <mat-form-field class="dateStyles">
                                 <input matInput [matDatepicker]="endDayDatePicker" [min]="itenaryForm.value.date" [max]="collectionEndDate" placeholder="Deadline"
                                     formControlName="endDay" [required]="true">
                                 <mat-datepicker-toggle matSuffix [for]="endDayDatePicker" class="svgStyle"></mat-datepicker-toggle>
@@ -68,12 +68,12 @@
                             </div>
                         </div>
 
-                        <mat-form-field [floatLabel]="'always'" class="pb-block margin-top-20 margin-bottom-20">
+                        <mat-form-field class="pb-block margin-top-20 margin-bottom-20">
                             <textarea matInput #description maxlength="500" rows="5" formControlName="description" placeholder="What will we do?" [required]="true"></textarea>
                             <mat-hint align="end">{{description.value.length}} / 500</mat-hint>
                         </mat-form-field>
 
-                        <mat-form-field [floatLabel]="'always'" class="pb-block margin-top-20 margin-bottom-20">
+                        <mat-form-field class="pb-block margin-top-20 margin-bottom-20">
                             <textarea matInput #prerequisites maxlength="500" rows="5" formControlName="prerequisites" placeholder="What do learners need to know?"
                                 [required]="true"></textarea>
                             <mat-hint align="end">{{prerequisites.value.length}} / 500</mat-hint>

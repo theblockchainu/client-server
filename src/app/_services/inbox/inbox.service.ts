@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/map';
 
-import { CookieService } from 'ngx-cookie-service';
 
 import { AppConfig } from '../../app.config';
 import { RequestHeaderService } from '../requestHeader/request-header.service';
@@ -17,7 +16,6 @@ export class InboxService {
 
   constructor(private http: HttpClient,
     public config: AppConfig,
-    private _cookieService: CookieService,
     private route: ActivatedRoute,
     public router: Router,
     public _requestHeaderService: RequestHeaderService,

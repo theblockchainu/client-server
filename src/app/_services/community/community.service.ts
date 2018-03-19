@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AppConfig } from '../../app.config';
-import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { RequestHeaderService } from '../requestHeader/request-header.service';
@@ -18,7 +17,6 @@ export class CommunityService {
 
     constructor(private http: HttpClient,
         public config: AppConfig,
-        private _cookieService: CookieService,
         private route: ActivatedRoute,
         public router: Router,
         private authService: AuthenticationService,

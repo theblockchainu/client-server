@@ -6,8 +6,9 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
 
-import { CookieService } from 'ngx-cookie-service';
-import {RequestHeaderService} from '../requestHeader/request-header.service';
+import { RequestHeaderService } from '../requestHeader/request-header.service';
+
+import { CookieUtilsService } from '../cookieUtils/cookie-utils.service';
 
 @Injectable()
 export class AuthService {
@@ -16,19 +17,19 @@ export class AuthService {
   private options;
 
   constructor(
-      private _cookieService: CookieService,
-      public _requestHeaderService: RequestHeaderService
-      ) {
+    private _cookieService: CookieUtilsService,
+    public _requestHeaderService: RequestHeaderService
+  ) {
     this.isLoggedIn = !!this.getCookie(this.key);
     this.options = this._requestHeaderService.getOptions();
   }
 
   getCookie(key: string): any {
-    return this._cookieService.get(key);
+    return this._cookieService.getValue(key);
   }
 
   removeCookie(key: string) {
-    this._cookieService.delete(key);
+    this._cookieService.deleteValue(key);
   }
 
   login(): void {

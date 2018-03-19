@@ -4,7 +4,6 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { CollectionService } from '../../_services/collection/collection.service';
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
 import { ConsoleComponent } from '../console.component';
-import { CookieService } from 'ngx-cookie-service';
 
 declare var moment: any;
 
@@ -26,7 +25,6 @@ export class ConsoleLearningComponent implements OnInit {
     public router: Router,
     public _collectionService: CollectionService,
     public consoleComponent: ConsoleComponent,
-    public _cookieService: CookieService,
     private _cookieUtilsService: CookieUtilsService) {
     activatedRoute.pathFromRoot[3].url.subscribe((urlSegment) => {
       console.log(urlSegment[0].path);
@@ -98,15 +96,15 @@ export class ConsoleLearningComponent implements OnInit {
   }
 
   public getLatestCalendar(calendars) {
-      return calendars.sort((a, b) => {
-          if (a.startDate < b.startDate) {
-              return -1;
-          }
-          if (a.startDate > b.startDate) {
-              return 1;
-          }
-          return 0;
-      })[0];
+    return calendars.sort((a, b) => {
+      if (a.startDate < b.startDate) {
+        return -1;
+      }
+      if (a.startDate > b.startDate) {
+        return 1;
+      }
+      return 0;
+    })[0];
   }
 
   /**
@@ -142,7 +140,7 @@ export class ConsoleLearningComponent implements OnInit {
     const calendars = collection.calendars;
     let currentCalendar = this.getLearnerCalendar(collection);
     if (!currentCalendar) {
-        currentCalendar = this.getLatestCalendar(calendars);
+      currentCalendar = this.getLatestCalendar(calendars);
     }
     contents.sort((a, b) => {
       if (a.schedules[0].startDay < b.schedules[0].startDay) {
@@ -160,11 +158,11 @@ export class ConsoleLearningComponent implements OnInit {
       fillerWord = 'session';
     } else if (contents[0].type === 'video') {
       fillerWord = 'recording';
-         } else if (contents[0].type === 'project') {
+    } else if (contents[0].type === 'project') {
       fillerWord = 'submission';
-         } else if (contents[0].type === 'in-person') {
-        fillerWord = 'session';
-         }
+    } else if (contents[0].type === 'in-person') {
+      fillerWord = 'session';
+    }
     if (currentCalendar) {
       const contentStartDate = moment(currentCalendar.startDate).add(contents[0].schedules[0].startDay, 'days');
       const timeToStart = contentStartDate.diff(moment(), 'days');
@@ -206,10 +204,10 @@ export class ConsoleLearningComponent implements OnInit {
           break;
 
         case 'in-person':
-            if (content.presence && content.presence.length > 0) {
-                progress++;
-            }
-            break;
+          if (content.presence && content.presence.length > 0) {
+            progress++;
+          }
+          break;
 
         default:
           break;
@@ -242,7 +240,7 @@ export class ConsoleLearningComponent implements OnInit {
    * viewCollection
    */
   public viewCollection(collection) {
-      this.router.navigate([collection.type, collection.id]);
+    this.router.navigate([collection.type, collection.id]);
   }
 
   /**

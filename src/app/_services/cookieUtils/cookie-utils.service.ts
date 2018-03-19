@@ -1,26 +1,47 @@
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
+import { CookiesService } from '@ngx-utils/cookies';
+
+
 import * as moment from 'moment';
 
 @Injectable()
 export class CookieUtilsService {
 
-  constructor(private _cookieService: CookieService) {
+  constructor(private _cookieService: CookiesService) {
   }
 
   public getValue(key: string) {
-    const cookieValue = this._cookieService.get(key).split(/[ \:.]+/);
-    console.log('getting cookie value of ' + key + ' as : ' + cookieValue);
-    return cookieValue.length > 1 ? cookieValue[1] : cookieValue[0];
+    const cookieValueCrypt = this._cookieService.get(key);
+    if (cookieValueCrypt) {
+      const cookieValue = cookieValueCrypt.split(/[ \:.]+/);
+      console.log('getting cookie value of ' + key + ' as : ' + cookieValue);
+      return cookieValue.length > 1 ? cookieValue[1] : cookieValue[0];
+    } else {
+      return '';
+    }
+
+
   }
 
-    public setValue(name: string, value: string) {
-        this._cookieService.delete(name, '/', 'localhost');
-        this._cookieService.set(name, value, moment().add(2, 'days').toDate(), '/', 'localhost');
-    }
+  public setValue(name: string, value: string) {
+    this._cookieService.remove(name, {
+      domain: 'localhost',
+      path: '/'
+    });
+    this._cookieService.put(name, value, {
+      domain: 'localhost',
+      path: '/',
+      expires: moment().add(2, 'days').toDate()
+    });
 
-    public deleteValue(key) {
-      this._cookieService.delete(key, '/', 'localhost');
-    }
+    // moment().add(2, 'days').toDate(), '/', 'localhost'
+  }
+
+  public deleteValue(key) {
+    this._cookieService.remove(key, {
+      domain: 'localhost',
+      path: '/'
+    });
+  }
 
 }

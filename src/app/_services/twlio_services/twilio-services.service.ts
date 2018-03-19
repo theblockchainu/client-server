@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { RequestHeaderService } from '../requestHeader/request-header.service';
 import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../../app.config';
-import { CookieService } from 'ngx-cookie-service';
+import { CookieUtilsService } from '../cookieUtils/cookie-utils.service';
 
 
 @Injectable()
@@ -14,19 +14,10 @@ export class TwilioServicesService {
     public _requestHeaderService: RequestHeaderService,
     private http: HttpClient,
     public config: AppConfig,
-    private _cookieService: CookieService
+    private _cookieService: CookieUtilsService
   ) {
-    this.userId = this.getCookieValue('userId');
+    this.userId = this._cookieService.getValue('userId');
     this.options = this._requestHeaderService.getOptions();
-  }
-
-  private getCookieValue(key: string) {
-    const cookie = this._cookieService.get(key);
-    if (cookie) {
-      const cookieValue = this._cookieService.get(key).split(/[ \:.]+/);
-      this.userId = cookieValue[1];
-    }
-    return this.userId;
   }
 
 

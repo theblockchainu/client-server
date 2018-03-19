@@ -63,7 +63,7 @@ export class AppHeaderComponent implements OnInit {
         this.loggedIn = false;
       }
     });
-    this.userId = this.userIdObservable || this.getCookieValue(this.key);
+    this.userId = this.userIdObservable || this._cookieService.getValue('userId');
 
   }
 
@@ -82,15 +82,6 @@ export class AppHeaderComponent implements OnInit {
         }
       });
     });
-  }
-
-  private getCookieValue(key: string) {
-    const cookie = this._cookieService.getValue(key);
-    if (cookie) {
-      const cookieValue = this._cookieService.getValue(key).split(/[ \:.]+/);
-      this.userId = cookieValue[1];
-    }
-    return this.userId;
   }
 
   getProfile() {

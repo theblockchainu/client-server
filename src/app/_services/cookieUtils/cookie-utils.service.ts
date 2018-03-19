@@ -1,13 +1,15 @@
-import { Injectable } from '@angular/core';
-import { CookiesService } from '@ngx-utils/cookies';
-
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { CookieService } from 'ngx-cookie';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 import * as moment from 'moment';
 
 @Injectable()
 export class CookieUtilsService {
 
-  constructor(private _cookieService: CookiesService) {
+  constructor(private _cookieService: CookieService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
   }
 
   public getValue(key: string) {
@@ -19,8 +21,6 @@ export class CookieUtilsService {
     } else {
       return '';
     }
-
-
   }
 
   public setValue(name: string, value: string) {

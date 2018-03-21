@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConsoleProfileComponent } from '../console-profile.component';
-import { CookieService } from 'ngx-cookie-service';
 import { ProfileService } from '../../../_services/profile/profile.service';
 import { LanguagePickerService } from '../../../_services/languagepicker/languagepicker.service';
 import { CurrencyPickerService } from '../../../_services/currencypicker/currencypicker.service';
@@ -65,7 +64,6 @@ export class ConsoleProfileEditComponent implements OnInit {
     public activatedRoute: ActivatedRoute,
     public consoleProfileComponent: ConsoleProfileComponent,
     public router: Router,
-    public _cookieService: CookieService,
     public _profileService: ProfileService,
     public _languageService: LanguagePickerService,
     public _currencyService: CurrencyPickerService,

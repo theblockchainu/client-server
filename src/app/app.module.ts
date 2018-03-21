@@ -36,7 +36,7 @@ import { PressComponent } from './press/press.component';
 import { PolicyComponent } from './policy/policy.component';
 import { TrustComponent } from './trust/trust.component';
 import { DigestModule } from './digest/digest.module';
-
+import { CookieModule } from 'ngx-cookie';
 
 /*Raven
   .config('https://6c6efc37493d4ff2974b8b4a506c670a@sentry.io/289434', { release: 'dev_aakash' })
@@ -47,7 +47,6 @@ export class RavenErrorHandler implements ErrorHandler {
     Raven.captureException(err);
   }
 }*/
-
 
 @NgModule({
   declarations: [
@@ -99,7 +98,8 @@ export class RavenErrorHandler implements ErrorHandler {
       tertiaryColour: '#ff6d71'
     }),
     TransferHttpCacheModule,
-    MatListModule
+    MatListModule,
+    CookieModule.forRoot()
   ],
   bootstrap: [AppComponent],
   // providers: [
@@ -111,7 +111,7 @@ export class RavenErrorHandler implements ErrorHandler {
   //     provide: ErrorHandler,
   //     useClass: GlobalErrorHandlerComponent
   //   },
-  //   Title
+  //   Title,
   // ],
   entryComponents: [AppNotificationDialogComponent]
 })

@@ -11,7 +11,6 @@ import {
 
 import { SpinnerService } from './_services/spinner/spinner.service';
 import { SocketService } from './_services/socket/socket.service';
-import { CookieService } from 'ngx-cookie-service';
 import { AuthenticationService } from './_services/authentication/authentication.service';
 import { Title } from '@angular/platform-browser';
 
@@ -34,7 +33,6 @@ export class AppComponent implements OnInit {
   constructor(private router: Router,
     private _spinnerService: SpinnerService,
     private _socketService: SocketService,
-    private _cookieService: CookieService,
     private _authService: AuthenticationService,
     private titleService: Title
   ) {

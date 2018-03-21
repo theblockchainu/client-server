@@ -5,7 +5,6 @@ import { AuthenticationService } from '../_services/authentication/authenticatio
 import { AuthGuardService } from '../_services/auth-guard/auth-guard.service';
 import { AuthService } from '../_services/auth/auth.service';
 import { AppConfig } from '../app.config';
-import { CookieService } from 'ngx-cookie-service';
 import { AlertService } from '../_services/alert/alert.service';
 import { FormsModule, ReactiveFormsModule, NgModel } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,7 +26,6 @@ import { PaymentService } from '../_services/payment/payment.service';
     AuthGuardService,
     AuthService,
     AppConfig,
-    CookieService,
     AlertService,
     AuthenticationService,
     ProfileService,
@@ -35,7 +33,7 @@ import { PaymentService } from '../_services/payment/payment.service';
   ]
 })
 export class CoreModule {
-  constructor( @Optional() @SkipSelf() parentModule: CoreModule) {
+  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
     if (parentModule) {
       throw new Error(
         'CoreModule is already loaded. Import it in the AppModule only');

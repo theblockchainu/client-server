@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../../app.config';
-import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RequestHeaderService } from '../requestHeader/request-header.service';
 import { AuthenticationService } from '../authentication/authentication.service';
@@ -15,7 +14,6 @@ export class NotificationService {
 
     constructor(private http: HttpClient,
         public config: AppConfig,
-        private _cookieService: CookieService,
         private route: ActivatedRoute,
         public router: Router,
         private authService: AuthenticationService,

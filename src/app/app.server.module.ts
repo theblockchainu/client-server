@@ -24,6 +24,5 @@ import { CookieService, CookieBackendService } from 'ngx-cookie';
 export class AppServerModule {
 
   constructor() {
-    console.log('AppserverModule');
   }
 }

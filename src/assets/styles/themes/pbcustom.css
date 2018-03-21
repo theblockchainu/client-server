@@ -125,7 +125,7 @@ button:focus {
 
 /* Scroll Bar custom Ends */
 
-/* md-icon {
+/* mat-icon {
     position: relative !important;
 } */
 
@@ -135,19 +135,19 @@ button:focus {
     color: rgba(0,0,0,0.75);
 }
 
-md-input-container .mat-has-icon {
+mat-input-container .mat-has-icon {
     padding-right: 36px
 }
 
-md-input-container .mat-has-icon>label {
+mat-input-container .mat-has-icon>label {
     left: 36px
 }
 
-md-input-container.mat-block {
+mat-input-container.mat-block {
     display: block
 }
 
-md-sidenav {
+mat-sidenav {
     width: 300px;
     background: -webkit-linear-gradient(top, #FF6071, #FF6D71); /* FFA6AA For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(bottom, #FF6071, #FF6D71); /* For Opera 11.1 to 12.0 */
@@ -157,17 +157,29 @@ md-sidenav {
     color: #fff;
 }
 
-md-sidenav a {
+mat-sidenav a {
     color: #eaeaea;
     cursor: pointer;
 }
 
-md-sidenav a:hover {
+mat-sidenav a:hover {
     text-decoration: none;
     color: #eaeaea;
 }
 
-md-subheader {
+.mat-nav-list .mat-list-item {
+    color: #eeeeee;
+}
+
+.mat-nav-list .mat-list-item:hover {
+    background: none !important;
+}
+
+.mat-nav-list a {
+    font-weight: 300;
+}
+
+mat-subheader {
     margin: 1.5rem 0;
 }
 
@@ -611,7 +623,7 @@ h3.calendarTitle  {
     font-size: 18px !important;
 }
 
-.dateStyles .svgStyle md-icon {
+.dateStyles .svgStyle mat-icon {
     font-size: 20px !important;
 }
 
@@ -670,6 +682,14 @@ h3.calendarTitle  {
 .ui-fileupload-buttonbar {
     background-color: #fff !important;
     padding-left: 0px !important;
+}
+
+.ui-fileupload-content {
+    padding: 1em 0em !important;
+}
+
+.ui-fileupload-row>div {
+    border: 1px solid #eee;
 }
 
 .ui-autocomplete-token {
@@ -897,7 +917,7 @@ h3.calendarTitle  {
     width: 50px
 }
 
-.signin-header .logo a md-icon {
+.signin-header .logo a mat-icon {
     height: 34px;
     width: 34px;
     line-height: 34px
@@ -1028,7 +1048,7 @@ h3.calendarTitle  {
     width: 50px
 }
 
-.page-err-header .logo a md-icon {
+.page-err-header .logo a mat-icon {
     height: 34px;
     width: 34px
 }
@@ -1108,20 +1128,20 @@ h3.calendarTitle  {
 
 /* Landing Page Starts*/
 
-md-input-container.mail-bg .mat-input-wrapper {
+mat-input-container.mail-bg .mat-input-wrapper {
     text-align: left;
     padding-left: 20px;
 }
 
-md-input-container.mail-bg .mat-form-field-wrapper {
+mat-input-container.mail-bg .mat-form-field-wrapper {
     padding-bottom: 0px !important;
 }
 
-md-input-container.mail-bg .mat-form-field-underline {
+mat-input-container.mail-bg .mat-form-field-underline {
     display: none !important;
 }
 
-md-input-container.mail-bg .mat-input-subscript-wrapper {
+mat-input-container.mail-bg .mat-input-subscript-wrapper {
     display: none !important;
 }
 /* Landing Page Ends */
@@ -1316,7 +1336,7 @@ md-input-container.mail-bg .mat-input-subscript-wrapper {
 
 
 
-md-datepicker-toggle.disableMD, md-datepicker-toggle.disableMD button, md-datepicker-toggle.disableMD .mat-icon-button{
+mat-datepicker-toggle.disableMD, mat-datepicker-toggle.disableMD button, mat-datepicker-toggle.disableMD .mat-icon-button{
     pointer-events: none !important;
     color:grey !important;
 }

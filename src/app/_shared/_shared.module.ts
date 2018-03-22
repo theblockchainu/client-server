@@ -50,7 +50,6 @@ import { LanguagePickerService } from '../_services/languagepicker/languagepicke
 import { AppointmentService } from '../_services/appointment/appointment.service';
 import { RequestHeaderService } from '../_services/requestHeader/request-header.service';
 import { MediaUploaderService } from '../_services/mediaUploader/media-uploader.service';
-import { CookieUtilsService } from '../_services/cookieUtils/cookie-utils.service';
 import { ContentService } from '../_services/content/content.service';
 import { LeftSidebarService } from '../_services/left-sidebar/left-sidebar.service';
 import { CurrencyPickerService } from '../_services/currencypicker/currencypicker.service';
@@ -117,7 +116,6 @@ import { TopicRowComponent } from './topic-row/topic-row.component';
         AppointmentService,
         RequestHeaderService,
         MediaUploaderService,
-        CookieUtilsService,
         ContentService,
         LeftSidebarService,
         CurrencyPickerService,

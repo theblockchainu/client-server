@@ -36,7 +36,7 @@ import { PressComponent } from './press/press.component';
 import { PolicyComponent } from './policy/policy.component';
 import { TrustComponent } from './trust/trust.component';
 import { DigestModule } from './digest/digest.module';
-import { CookieModule } from 'ngx-cookie';
+import { CookieUtilsService } from './_services/cookieUtils/cookie-utils.service';
 
 /*Raven
   .config('https://6c6efc37493d4ff2974b8b4a506c670a@sentry.io/289434', { release: 'dev_aakash' })
@@ -71,7 +71,7 @@ export class RavenErrorHandler implements ErrorHandler {
     PolicyComponent,
     TrustComponent],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'peerbuds-client' }),
+    BrowserModule.withServerTransition({ appId: 'app-id' }),
     CoreModule,
     AppFooterModule,
     BrowserAnimationsModule,
@@ -99,20 +99,19 @@ export class RavenErrorHandler implements ErrorHandler {
     }),
     TransferHttpCacheModule,
     MatListModule,
-    CookieModule.forRoot()
   ],
-  bootstrap: [AppComponent],
-  // providers: [
-  //   {
-  //     provide: ErrorHandler,
-  //     useClass: RavenErrorHandler
-  //   },
-  //   {
-  //     provide: ErrorHandler,
-  //     useClass: GlobalErrorHandlerComponent
-  //   },
-  //   Title,
-  // ],
+  providers: [
+    // {
+    //   provide: ErrorHandler,
+    //   useClass: RavenErrorHandler
+    // },
+    // {
+    //   provide: ErrorHandler,
+    //   useClass: GlobalErrorHandlerComponent
+    // },
+    Title,
+    CookieUtilsService
+  ],
   entryComponents: [AppNotificationDialogComponent]
 })
 export class AppModule { }

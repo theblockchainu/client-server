@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, Params, NavigationStart } from '@angular/router
 import { MatDialog, MatDialogConfig, MatDialogRef, MatSnackBar } from '@angular/material';
 import * as moment from 'moment';
 import * as _ from 'lodash';
+import { Title } from '@angular/platform-browser';
 
 
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
@@ -41,7 +42,7 @@ import { DialogsService } from '../../_services/dialogs/dialog.service';
 import { TopicService } from '../../_services/topic/topic.service';
 import { ContentInpersonComponent } from './content-inperson/content-inperson.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-
+import { AuthenticationService } from '../../_services/authentication/authentication.service';
 declare var FB: any;
 
 const colors: any = {
@@ -109,7 +110,7 @@ export class ExperiencePageComponent implements OnInit {
   public isReadonly = true;
   public noOfReviews = 3;
   private initialised = false;
-  public bookmarks;
+  public bookmark;
   public hasBookmarked = false;
   public replyingToCommentId: string;
   public itenaryArray: Array<any>;
@@ -121,7 +122,7 @@ export class ExperiencePageComponent implements OnInit {
   public messagingParticipant: any;
   public allItenaries: Array<any>;
   public itenariesObj: any;
-  public reviews;
+  public reviews: Array<any>;
   public defaultProfileUrl = '/assets/images/avatar.png';
   public noWrapSlides = true;
   public peerHasSubmission = false;
@@ -131,6 +132,8 @@ export class ExperiencePageComponent implements OnInit {
   public allParticipants: Array<any>;
   public isRatingReceived = false;
   public maxLength = 140;
+  public editReviewForm: FormGroup;
+  public bookmarking = false;
 
   public replyForm: FormGroup;
   public reviewForm: FormGroup;
@@ -203,8 +206,21 @@ export class ExperiencePageComponent implements OnInit {
     private dialog: MatDialog,
     private dialogsService: DialogsService,
     private snackBar: MatSnackBar,
+    private _authenticationService: AuthenticationService,
+    private titleService: Title
     // private location: Location
   ) {
+  }
+
+  ngOnInit() {
+    this.initializePage();
+    this._authenticationService.getLoggedInUser.subscribe(res => {
+      delete this.userType;
+      this.initializePage();
+    });
+  }
+
+  initializePage() {
     this.activatedRoute.params.subscribe(params => {
       if (this.initialised && (this.experienceId !== params['collectionId'] || this.calendarId !== params['calendarId'])) {
         location.reload();
@@ -213,11 +229,10 @@ export class ExperiencePageComponent implements OnInit {
       this.calendarId = params['calendarId'];
       this.toOpenDialogName = params['dialogName'];
     });
-    this.userId = _cookieUtilsService.getValue('userId');
+    this.userId = this._cookieUtilsService.getValue('userId');
+    console.log('userId is ' + this.userId);
     this.accountApproved = this._cookieUtilsService.getValue('accountApproved');
-  }
 
-  ngOnInit() {
     this.initialised = true;
     this.initializeExperience();
     this.initializeForms();
@@ -450,6 +465,7 @@ export class ExperiencePageComponent implements OnInit {
         .subscribe(res => {
           console.log(res);
           this.experience = res;
+          // this.titleService.setTitle(this.experience.title);
           this.setCurrentCalendar();
           this.itenariesObj = {};
           this.itenaryArray = [];
@@ -580,7 +596,18 @@ export class ExperiencePageComponent implements OnInit {
       if (err) {
         console.log(err);
       } else {
-        this.reviews = response;
+        console.log(response);
+        const currentPeerReviews = [];
+        const otherPeerReviews = [];
+        response.forEach(review => {
+          if (this.userId && review.peer[0].id === this.userId) {
+            currentPeerReviews.push(review);
+          } else {
+            otherPeerReviews.push(review);
+          }
+        });
+        this.reviews = currentPeerReviews.concat(otherPeerReviews);
+        console.log(this.reviews);
         this.userRating = this._collectionService.calculateRating(this.reviews);
         this.loadingReviews = false;
       }
@@ -609,10 +636,13 @@ export class ExperiencePageComponent implements OnInit {
       if (err) {
         console.log(err);
       } else {
-        this.bookmarks = response;
-        this.bookmarks.forEach(bookmark => {
+        console.log(response);
+        this.hasBookmarked = false;
+        response.forEach(bookmark => {
           if (bookmark.peer[0].id === this.userId) {
+            console.log('user bookmarked');
             this.hasBookmarked = true;
+            this.bookmark = bookmark;
           }
         });
       }
@@ -780,12 +810,29 @@ export class ExperiencePageComponent implements OnInit {
    * saveBookmark
    */
   public saveBookmark() {
+    this.bookmarking = true;
     if (!this.hasBookmarked) {
       this._collectionService.saveBookmark(this.experienceId, (err, response) => {
         if (err) {
           console.log(err);
         } else {
+          this.snackBar.open('Bookmarked', 'close', {
+            duration: 800
+          });
           this.getBookmarks();
+          this.bookmarking = false;
+        }
+      });
+    } else {
+      this._collectionService.removeBookmark(this.bookmark.id, (err, response) => {
+        if (err) {
+          console.log(err);
+        } else {
+          this.snackBar.open('Removed Bookmark', 'close', {
+            duration: 800
+          });
+          this.getBookmarks();
+          this.bookmarking = false;
         }
       });
     }
@@ -1202,6 +1249,10 @@ export class ExperiencePageComponent implements OnInit {
     this.isRatingReceived = true;
   }
 
+  public updateRating(event) {
+    this.editReviewForm.controls['score'].setValue(event.value);
+  }
+
   /**
    * postReview
    */
@@ -1219,6 +1270,26 @@ export class ExperiencePageComponent implements OnInit {
       }
     );
   }
+
+  public updateReview() {
+    const reviewBody = this.editReviewForm.value;
+    const reviewId = reviewBody.id;
+    reviewBody.score = this.newUserRating;
+    delete reviewBody.id;
+    this._collectionService.updateReview(reviewId, reviewBody).subscribe(
+      result => {
+        if (result) {
+          this.busyReview = false;
+          delete this.editReviewForm;
+          this.getReviews();
+        }
+      }, err => {
+        this.busyReview = false;
+        console.log(err);
+      }
+    );
+  }
+
 
   addCommentUpvote(comment: any) {
     this._commentService.addCommentUpvote(comment.id, {}).subscribe(
@@ -1465,6 +1536,18 @@ export class ExperiencePageComponent implements OnInit {
 
   public backToCollection(collection) {
     this.router.navigate([collection.type, collection.id]);
+  }
+
+  public editReview(review: any) {
+    this.editReviewForm = this._fb.group({
+      description: [review.description, Validators.required],
+      like: review.like,
+      score: review.score,
+      collectionId: review.collectionId,
+      collectionCalendarId: review.collectionCalendarId,
+      id: review.id
+    });
+    this.newUserRating = review.score;
   }
 
 }

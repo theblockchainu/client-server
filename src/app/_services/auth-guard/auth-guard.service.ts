@@ -7,7 +7,7 @@ import {
   NavigationExtras,
   CanLoad, Route
 } from '@angular/router';
-import {AuthenticationService} from '../authentication/authentication.service';
+import { AuthenticationService } from '../authentication/authentication.service';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
@@ -34,7 +34,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
     if (this.authService.isLoggedIn) { return true; }
 
     // Navigate to the login page with extras
-    this.router.navigate(['/login'], { queryParams: { returnUrl: url }});
+    // this.router.navigate(['/login'], { queryParams: { returnUrl: url }});
     return false;
   }
 

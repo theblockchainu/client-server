@@ -7,7 +7,7 @@ import { CollectionService } from '../../../_services/collection/collection.serv
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 import { SocketService } from '../../../_services/socket/socket.service';
 import { Router } from '@angular/router';
-import { DeviceDetectorService } from 'ngx-device-detector';
+// import { DeviceDetectorService } from 'ngx-device-detector';
 import { VgAPI } from 'videogular2/core';
 import * as moment from 'moment';
 import { ContentService } from '../../../_services/content/content.service';
@@ -41,7 +41,7 @@ export class ContentVideoComponent implements OnInit, OnDestroy {
         private cookieUtilsService: CookieUtilsService,
         private _socketService: SocketService,
         private router: Router,
-        private deviceService: DeviceDetectorService,
+        // private deviceService: DeviceDetectorService,
         private contentService: ContentService
     ) {
         this.userType = data.userType;
@@ -203,7 +203,7 @@ export class ContentVideoComponent implements OnInit, OnDestroy {
                 type: 'user',
                 url: this.router.url,
                 ip_address: '',
-                browser: this.deviceService.getDeviceInfo().browser,
+                browser: '', // this.deviceService.getDeviceInfo().browser,
                 viewedModelName: 'content',
                 startTime: new Date(),
                 content: this.data.content,

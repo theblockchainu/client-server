@@ -723,6 +723,11 @@ collectionID:string,userId:string,calendarId:string   */
       .post(this.config.apiUrl + '/api/peers/' + peerId + '/reviewsAboutYou', reviewBody, this.options);
   }
 
+  public updateReview(reviewId: string, reviewBody: any) {
+    return this.httpClient
+      .patch(this.config.apiUrl + '/api/reviews/' + reviewId, reviewBody, this.options);
+  }
+
   public calculateRating(reviewArray?: any) {
     let reviewScore = 0;
     for (const reviewObject of reviewArray) {

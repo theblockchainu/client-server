@@ -73,7 +73,6 @@ export class AuthenticationService {
           this.isLoginSubject.next(true);
           this.getLoggedInUser.emit(user.userId);
           this._socketService.addUser(user.userId);
-          // responseStatus = true;
         }
       }, (err) => {
         console.log('Error: ' + err);
@@ -84,6 +83,12 @@ export class AuthenticationService {
   * Log out the user then tell all the subscribers about the new status
   */
   logout(): void {
+    console.log(this.route.toString());
+    this.removeCookie(this.key);
+    this.removeCookie('userId');
+    this.removeCookie('accountApproved');
+    this.isLoginSubject.next(false);
+    this.getLoggedInUser.emit(0);
     if (this.getCookie(this.key)) {
       console.log(this.options);
       this.http.get(this.config.apiUrl + '/auth/logout', this.options)
@@ -91,12 +96,6 @@ export class AuthenticationService {
           (res: any) => {
             console.log(res);
             console.log('Logged out from server');
-            this.removeCookie(this.key);
-            this.removeCookie('userId');
-            this.removeCookie('accountApproved');
-            this.isLoginSubject.next(false);
-            this.getLoggedInUser.emit(0);
-            this.router.navigate(['/']);
           }, err => {
             console.log(err);
           }

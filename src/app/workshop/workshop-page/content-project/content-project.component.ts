@@ -6,7 +6,7 @@ import { ProjectSubmissionService } from '../../../_services/project-submission/
 import * as moment from 'moment';
 import { ContentService } from '../../../_services/content/content.service';
 import { VgAPI } from 'videogular2/core';
-import { DeviceDetectorService } from 'ngx-device-detector';
+// import { DeviceDetectorService } from 'ngx-device-detector';
 import { Router } from '@angular/router';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 import { SocketService } from '../../../_services/socket/socket.service';
@@ -37,7 +37,7 @@ export class ContentProjectComponent implements OnInit {
         public dialogRef: MatDialogRef<ContentProjectComponent>,
         public projectSubmissionService: ProjectSubmissionService,
         private contentService: ContentService,
-        private deviceService: DeviceDetectorService,
+        // private deviceService: DeviceDetectorService,
         private router: Router,
         private cookieUtilsService: CookieUtilsService,
         private _socketService: SocketService,
@@ -76,7 +76,7 @@ export class ContentProjectComponent implements OnInit {
                 type: 'user',
                 url: this.router.url,
                 ip_address: '',
-                browser: this.deviceService.getDeviceInfo().browser,
+                browser: '', // this.deviceService.getDeviceInfo().browser,
                 viewedModelName: 'content',
                 startTime: new Date(),
                 content: this.data.content,

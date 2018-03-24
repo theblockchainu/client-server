@@ -110,14 +110,14 @@
     "ts-loader": "^2.3.7",
     "ts-node": "~3.0.4",
     "twilio-video": "^1.6.0",
-    "typescript": "2.6.2",
+    "typescript": "2.4.2",
     "valid-url": "^1.0.9",
     "videogular2": "^6.0.6",
     "webpack-sources": "^1.1.0",
     "zone.js": "^0.8.20"
   },
   "devDependencies": {
-    "@angular/cli": "1.7.3",
+    "@angular/cli": "^1.5",
     "@angular/compiler-cli": "5.2.9",
     "@angular/language-service": "5.2.9",
     "codelyzer": "^4.0.2",

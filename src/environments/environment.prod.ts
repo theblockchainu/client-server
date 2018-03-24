@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+    hmr: false,
     host: 'peerbuds.com',
     apiUrl: 'https://peerbuds.com:3000',
     searchUrl: 'https://peerbuds.com:4000',

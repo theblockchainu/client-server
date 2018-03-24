@@ -1,4 +1,5 @@
 import { CoreModule } from './_core/_core.module';
+import 'hammerjs';
 import { AppComponent } from './app.component';
 import { DefaultComponent } from './default/default.component';
 import { NoContentComponent } from './no-content/no-content.component';
@@ -30,8 +31,8 @@ import { CareerComponent } from './career/career.component';
 import { PressComponent } from './press/press.component';
 import { PolicyComponent } from './policy/policy.component';
 import { TrustComponent } from './trust/trust.component';
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import {ErrorHandler, NgModule} from '@angular/core';
+import {BrowserModule, Title} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {CookieService} from 'angular2-cookie/core';
 
@@ -87,7 +88,14 @@ import {CookieService} from 'angular2-cookie/core';
     TransferHttpCacheModule,
     MatListModule
   ],
-    providers: [CookieService],
+    providers: [
+        CookieService,
+        {
+            provide: ErrorHandler,
+            useClass: GlobalErrorHandler
+        },
+        Title
+    ],
   bootstrap: [AppComponent],
   entryComponents: [AppNotificationDialogComponent]
 })

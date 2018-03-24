@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgxCarousel, NgxCarouselStore } from 'ngx-carousel';
+import { NguCarouselStore } from '@ngu/carousel';
 import { CollectionService } from '../../_services/collection/collection.service';
 @Component({
   selector: 'app-text-icon-carousel',
@@ -45,7 +45,7 @@ export class TextIconCarouselComponent implements OnInit {
   }
 
   /* It will be triggered on every slide*/
-  onmoveFn(data: NgxCarouselStore) {
+  onmoveFn(data: NguCarouselStore) {
     this.currentTestimonial = data.currentSlide;
   }
 

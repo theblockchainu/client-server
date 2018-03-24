@@ -3,9 +3,6 @@ import { Observable } from 'rxjs/observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import 'rxjs/add/operator/map';
-
-import { CookieService } from 'ngx-cookie-service';
-
 import { AppConfig } from '../../app.config';
 import { RequestHeaderService } from '../requestHeader/request-header.service';
 import { SocketService } from '../socket/socket.service';
@@ -24,7 +21,6 @@ export class AuthenticationService {
   isLoginSubject = new BehaviorSubject<boolean>(this.hasToken());
 
   constructor(private http: HttpClient, public config: AppConfig,
-    private _cookieService: CookieService,
     private _cookieUtilsService: CookieUtilsService,
     private route: ActivatedRoute,
     public router: Router,
@@ -43,11 +39,11 @@ export class AuthenticationService {
   }
 
   public getCookie(key: string) {
-    return this._cookieService.get(key);
+    return this._cookieUtilsService.getValue(key);
   }
 
   public setCookie(key: string, value: string) {
-    this._cookieService.set(key, value);
+    this._cookieUtilsService.setValue(key, value);
   }
 
   public removeCookie(key: string) {

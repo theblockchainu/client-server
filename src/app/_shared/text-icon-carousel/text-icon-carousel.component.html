@@ -11,8 +11,8 @@
 
     <div class="row carousel-component">
       <div class="col-md-12">
-        <ngx-carousel [inputs]="carouselBanner" [moveToSlide]="gotoSlide" (onMove)="onmoveFn($event)">
-          <ngx-item NgxCarouselItem class="bannerStyle" *ngFor="let testimonial of testimonialArray">
+        <ngu-carousel [inputs]="carouselBanner">
+          <ngu-item NguCarouselItem class="bannerStyle" *ngFor="let testimonial of testimonialArray">
             <div class="row">
               <div class="col-md-12">
                 <p class="text text-center">"{{testimonial.review}}"</p>
@@ -21,10 +21,10 @@
                 <p class="author center">{{testimonial.title}}</p>
               </div>
             </div>
-          </ngx-item>
-          <img NgxCarouselPrev src="/assets/images/images_landing/arrow-left.png" class="arrow arrow-left" />
-          <img NgxCarouselNext src="/assets/images/images_landing/arrow-right.png" class="arrow arrow-right" />
-        </ngx-carousel>
+          </ngu-item>
+          <img NguCarouselPrev src="/assets/images/images_landing/arrow-left.png" class="arrow arrow-left" />
+          <img NguCarouselNext src="/assets/images/images_landing/arrow-right.png" class="arrow arrow-right" />
+        </ngu-carousel>
       </div>
     </div>
   </div>

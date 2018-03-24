@@ -463,7 +463,7 @@
                               <span *ngIf="reply.upvotes === undefined">0</span>
                             </div>
                           </div>
-                          <div style="width: 90%;">
+                          <div style="width: 90%; display: inline-block;">
                             <div class="mat-body-1">{{reply.description}}</div>
                             <div class="" style="margin-top: 10px;" *ngIf="reply.peer && reply.peer.length>0">
                               <div class="clickable" style="float: left; margin-left: 15px;">
@@ -810,17 +810,17 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div style="width: 340px; height: 500px;" *ngIf="carouselImages">
-                      <ngx-carousel [inputs]="carouselBanner">
-                        <ngx-item NgxCarouselItem class="bannerStyle" *ngFor="let imageUrl of carouselImages">
+                      <ngu-carousel [inputs]="carouselBanner">
+                        <ngu-item NguCarouselItem class="bannerStyle" *ngFor="let imageUrl of carouselImages">
                           <div class="row">
                             <div class="col-md-12">
-                              <img src="imageUrl">
+                              <img src="{{imageUrl}}">
                             </div>
                           </div>
-                        </ngx-item>
-                        <img NgxCarouselPrev src="/assets/images/images_landing/arrow-left.png" class="arrow arrow-left" />
-                        <img NgxCarouselNext src="/assets/images/images_landing/arrow-right.png" class="arrow arrow-right" />
-                      </ngx-carousel>
+                        </ngu-item>
+                        <img NguCarouselPrev src="/assets/images/images_landing/arrow-left.png" class="arrow arrow-left" />
+                        <img NguCarouselNext src="/assets/images/images_landing/arrow-right.png" class="arrow arrow-right" />
+                      </ngu-carousel>
                     </div>
                   </div>
                 </div>

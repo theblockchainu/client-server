@@ -39,7 +39,7 @@ import {
 } from 'primeng/primeng';
 import { NgPipesModule } from 'ngx-pipes';
 import { CalendarModule } from 'angular-calendar';
-import { NgxCarouselModule } from 'ngx-carousel';
+import { NguCarouselModule } from '@ngu/carousel';
 import { MultiselectAutocompleteModule } from './multiselect-autocomplete/multiselect-autocomplete.module';
 import { GenericMultiselectAutocompleteComponentModule } from './generic-multiselect-autocomplete/generic-multiselect-autocomplete.module';
 import { SocialSyncModule } from './socialsync/socialsync.module';
@@ -95,7 +95,7 @@ import { TopicRowComponent } from './topic-row/topic-row.component';
         }),
         DeviceDetectorModule.forRoot(),
         StickyModule,
-        NgxCarouselModule,
+        NguCarouselModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyCCXlBKSUs2yVH1dUogUgb0Ku2VmmR61Ww',
             libraries: ['places'],
@@ -167,7 +167,7 @@ import { TopicRowComponent } from './topic-row/topic-row.component';
         SliderModule, MatProgressSpinnerModule, MatExpansionModule, MatSnackBarModule, ExtractTimePipe,
         LoadingModule, MatTooltipModule, ConvertCurrencyPipe, ProfilePopupComponent, TrimPipe, TitleCasePipe
         , TextIconCarouselComponent, Ng4GeoautocompleteModule, AgmCoreModule, TimeToNowPipe, TopicRowComponent,
-        NgxCarouselModule
+        NguCarouselModule
     ]
 })
 export class SharedModule {

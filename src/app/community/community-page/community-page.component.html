@@ -39,17 +39,17 @@
                         <!--COVER IMAGE-->
                         <div class="row coverImage">
                             <div class="col-md-12">
-                                <ngx-carousel [inputs]="carouselBanner">
-                                    <ngx-item NgxCarouselItem class="bannerStyle" *ngFor="let imageUrl of carouselImages">
+                                <ngu-carousel [inputs]="carouselBanner">
+                                    <ngu-item NguCarouselItem class="bannerStyle" *ngFor="let imageUrl of carouselImages">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <img src="imageUrl">
+                                                <img src="{{imageUrl}}">
                                             </div>
                                         </div>
-                                    </ngx-item>
-                                    <img NgxCarouselPrev src="/assets/images/images_landing/arrow-left.png" class="arrow arrow-left" />
-                                    <img NgxCarouselNext src="/assets/images/images_landing/arrow-right.png" class="arrow arrow-right" />
-                                </ngx-carousel>
+                                    </ngu-item>
+                                    <img NguCarouselPrev src="/assets/images/images_landing/arrow-left.png" class="arrow arrow-left" />
+                                    <img NguCarouselNext src="/assets/images/images_landing/arrow-right.png" class="arrow arrow-right" />
+                                </ngu-carousel>
                             </div>
                         </div>
                         <!--TITLE-->

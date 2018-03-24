@@ -6,13 +6,13 @@ import { ProfileService } from '../_services/profile/profile.service';
 import { FormControl } from '@angular/forms';
 import { AppConfig } from '../app.config';
 import { HttpClient } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { DialogsService } from '../_services/dialogs/dialog.service';
 import { AppNotificationDialogComponent } from './dialogs/app-notification-dialog/app-notification-dialog.component';
 import { NotificationService } from '../_services/notification/notification.service';
 import { SearchService } from '../_services/search/search.service';
+import { CookieUtilsService } from '../_services/cookieUtils/cookie-utils.service';
 
 @Component({
   selector: 'app-header',
@@ -40,7 +40,7 @@ export class AppHeaderComponent implements OnInit {
   constructor(public authService: AuthenticationService,
     public config: AppConfig,
     private http: HttpClient,
-    private _cookieService: CookieService,
+    private _cookieService: CookieUtilsService,
     public _profileService: ProfileService,
     private router: Router,
     private dialog: MatDialog,
@@ -63,7 +63,7 @@ export class AppHeaderComponent implements OnInit {
         this.loggedIn = false;
       }
     });
-    this.userId = this.userIdObservable || this.getCookieValue(this.key);
+    this.userId = this.userIdObservable || this._cookieService.getValue('userId');
 
   }
 
@@ -84,20 +84,11 @@ export class AppHeaderComponent implements OnInit {
     });
   }
 
-  private getCookieValue(key: string) {
-    const cookie = this._cookieService.get(key);
-    if (cookie) {
-      const cookieValue = this._cookieService.get(key).split(/[ \:.]+/);
-      this.userId = cookieValue[1];
-    }
-    return this.userId;
-  }
-
   getProfile() {
     if (this.loggedIn) {
       this._profileService.getCompactProfile(this.userId).subscribe(profile => {
         if (profile && profile.length > 0) {
-        this.profile = profile[0];
+          this.profile = profile[0];
           if (this.profile.peer[0].ownedCollections !== undefined && this.profile.peer[0].ownedCollections.length > 0) {
             this.isTeacher = true;
           }

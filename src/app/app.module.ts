@@ -92,7 +92,7 @@ import {CookieService} from 'angular2-cookie/core';
         CookieService,
         {
             provide: ErrorHandler,
-            useClass: GlobalErrorHandler
+            useClass: GlobalErrorHandlerComponent
         },
         Title
     ],

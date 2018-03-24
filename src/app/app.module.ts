@@ -26,7 +26,6 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { DefaultModule } from './default/default.module';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { AppFooterModule } from './app-footer/app-footer.module';
-import { TransferHttpCacheModule } from '@nguniversal/common';
 import { CareerComponent } from './career/career.component';
 import { PressComponent } from './press/press.component';
 import { PolicyComponent } from './policy/policy.component';
@@ -85,7 +84,6 @@ import {CookieService} from 'angular2-cookie/core';
       secondaryColour: '#ff5b5f',
       tertiaryColour: '#ff6d71'
     }),
-    TransferHttpCacheModule,
     MatListModule
   ],
     providers: [

@@ -54,10 +54,8 @@ export class DialogsService {
     }
 
     public openLogin() {
-        let dialogRef1: MatDialogRef<LoginComponentDialog>;
-
-        dialogRef1 = this.dialog.open(LoginComponentDialog);
-
+        console.log('openLogin dialog');
+        const dialogRef1: MatDialogRef<LoginComponentDialog> = this.dialog.open(LoginComponentDialog);
         return dialogRef1.afterClosed();
     }
     public addCard() {

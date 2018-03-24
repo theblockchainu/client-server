@@ -38,10 +38,7 @@ export class CookieUtilsService {
   }
 
   public deleteValue(key) {
-    this._cookieService.remove(key, {
-      domain: 'localhost',
-      path: '/'
-    });
+    this._cookieService.remove(key);
   }
 
 }

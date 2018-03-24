@@ -1,14 +1,11 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef, Renderer2, OnDestroy } from '@angular/core';
 import * as Video from 'twilio-video';
-import * as _ from 'lodash';
+import {environment} from '../../../../environments/environment';
 import { TwilioServicesService } from '../../twlio_services/twilio-services.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CookieUtilsService } from '../../cookieUtils/cookie-utils.service';
 import { SocketService } from '../../socket/socket.service';
 import { Router } from '@angular/router';
-// import { DeviceDetectorService } from 'ngx-device-detector';
-import { Observable } from 'rxjs/Observable';
-import { AppConfig } from '../../../app.config';
 import { TitleCasePipe } from '@angular/common';
 
 @Component({
@@ -28,6 +25,7 @@ export class LiveSessionDialogComponent implements OnInit, OnDestroy {
   public localAudioTrack: any;
   public localVideoTrack: any;
   public localParticipantId: string;
+  public envVariable;
   @ViewChild('mainStream') mainStream: ElementRef;
   @ViewChild('otherStream') otherStream: ElementRef;
   @ViewChild('localStream') localStream: ElementRef;
@@ -41,10 +39,9 @@ export class LiveSessionDialogComponent implements OnInit, OnDestroy {
     private cookieUtilsService: CookieUtilsService,
     private _socketService: SocketService,
     private router: Router,
-    // private deviceService: DeviceDetectorService,
-    private _config: AppConfig,
     private _titleCase: TitleCasePipe
   ) {
+      this.envVariable = environment;
     this.userId = cookieUtilsService.getValue('userId');
   }
 
@@ -264,7 +261,7 @@ export class LiveSessionDialogComponent implements OnInit, OnDestroy {
     if (isTeacher) {
       img.className = 'circle-thumb teacherStreamImage';
       if ((participant.identity === this.dialogData.teacher.id) && this.dialogData.teacher.profiles[0].picture_url) {
-        img.src = this._config.apiUrl + this.dialogData.teacher.profiles[0].picture_url;
+        img.src = environment.apiUrl + this.dialogData.teacher.profiles[0].picture_url;
       } else {
         img.src = '../../../assets/images/avatar.png';
       }
@@ -273,7 +270,7 @@ export class LiveSessionDialogComponent implements OnInit, OnDestroy {
       console.log('identity' + participant.identity);
       if ((participant.identity in this.registeredParticipantMapObj)
         && this.registeredParticipantMapObj[participant.identity].profiles[0].picture_url) {
-        img.src = this._config.apiUrl + this.registeredParticipantMapObj[participant.identity].profiles[0].picture_url;
+        img.src = environment.apiUrl + this.registeredParticipantMapObj[participant.identity].profiles[0].picture_url;
       } else {
         img.src = '../../../assets/images/avatar.png';
       }

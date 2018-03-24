@@ -3,9 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/map';
-import { CookieUtilsService } from '../cookieUtils/cookie-utils.service';
-
-import { AppConfig } from '../../app.config';
+import {environment} from '../../../environments/environment';
 import { RequestHeaderService } from '../requestHeader/request-header.service';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { forkJoin } from 'rxjs/observable/forkJoin';
@@ -16,14 +14,15 @@ export class CollectionService {
   public key = 'userId';
   public options;
   public now: Date;
+  public envVariable;
   constructor(
     private httpClient: HttpClient,
-    public config: AppConfig,
     private route: ActivatedRoute,
     public router: Router,
     private authService: AuthenticationService,
     private requestHeaderService: RequestHeaderService
   ) {
+      this.envVariable = environment;
     this.options = requestHeaderService.getOptions();
     this.now = new Date();
   }
@@ -32,7 +31,7 @@ export class CollectionService {
     const collections = [];
     if (userId) {
       this.httpClient
-        .get(this.config.apiUrl + '/api/peers/' + userId + '/ownedCollections')
+        .get(environment.apiUrl + '/api/peers/' + userId + '/ownedCollections')
         .subscribe(
           (response: any) => {
             const responseObj = response;
@@ -53,7 +52,7 @@ export class CollectionService {
   public getOwnedCollections(userId, options: string, cb) {
     if (userId) {
       this.httpClient
-        .get(this.config.apiUrl + '/api/peers/' + userId + '/ownedCollections?' + 'filter=' + options)
+        .get(environment.apiUrl + '/api/peers/' + userId + '/ownedCollections?' + 'filter=' + options)
         .subscribe(res => {
           cb(null, res);
         }, err => {
@@ -65,7 +64,7 @@ export class CollectionService {
   public getParticipatingCollections(userId, options: any, cb) {
     if (userId) {
       this.httpClient
-        .get(this.config.apiUrl + '/api/peers/' + userId + '/collections?' + 'filter=' + options)
+        .get(environment.apiUrl + '/api/peers/' + userId + '/collections?' + 'filter=' + options)
         .map((response) => {
           console.log(response);
           cb(null, response);
@@ -77,13 +76,13 @@ export class CollectionService {
 
   public getAllCollections(options: any) {
     return this.httpClient
-      .get(this.config.apiUrl + '/api/collections?' + 'filter=' + JSON.stringify(options))
+      .get(environment.apiUrl + '/api/collections?' + 'filter=' + JSON.stringify(options))
       .map(response => response);
   }
 
   public getCollectionDetails(id: string) {
     return this.httpClient
-      .get(this.config.apiUrl + '/api/collections/' + id)
+      .get(environment.apiUrl + '/api/collections/' + id)
       .map((response: any) => response, (err) => {
         console.log('Error: ' + err);
       });
@@ -93,7 +92,7 @@ export class CollectionService {
   public getCollectionDetail(id: string, param: any) {
     const filter = JSON.stringify(param);
     return this.httpClient
-      .get(this.config.apiUrl + '/api/collections/' + id + '?filter=' + filter)
+      .get(environment.apiUrl + '/api/collections/' + id + '?filter=' + filter)
       .map((response: any) => response, (err) => {
         console.log('Error: ' + err);
       });
@@ -107,7 +106,7 @@ export class CollectionService {
     const body = {
       'type': type
     };
-    return this.httpClient.post(this.config.apiUrl + '/api/peers/'
+    return this.httpClient.post(environment.apiUrl + '/api/peers/'
       + userId + '/ownedCollections', body, this.options).map(
         (response) => response, (err) => {
           console.log('Error: ' + err);
@@ -119,7 +118,7 @@ export class CollectionService {
    * patchCollection
    */
   public patchCollection(collectionId: string, body: any) {
-    return this.httpClient.patch(this.config.apiUrl +
+    return this.httpClient.patch(environment.apiUrl +
       '/api/collections/' + collectionId, body, this.options);
   }
 
@@ -127,7 +126,7 @@ export class CollectionService {
    * patchCalendar
    */
   public patchCalendar(calendarId: string, body: any) {
-    return this.httpClient.patch(this.config.apiUrl +
+    return this.httpClient.patch(environment.apiUrl +
       '/api/calendars/' + calendarId, body, this.options);
   }
 
@@ -135,7 +134,7 @@ export class CollectionService {
    * deleteCollection
    */
   public deleteCollection(collectionId: string) {
-    return this.httpClient.delete(this.config.apiUrl +
+    return this.httpClient.delete(environment.apiUrl +
       '/api/collections/' + collectionId);
   }
 
@@ -143,7 +142,7 @@ export class CollectionService {
    * delete Calendar
    */
   public deleteCalendar(calendarId: string) {
-    return this.httpClient.delete(this.config.apiUrl +
+    return this.httpClient.delete(environment.apiUrl +
       '/api/calendars/' + calendarId);
   }
 
@@ -164,12 +163,12 @@ export class CollectionService {
    * removeParticipant
    */
   public removeParticipant(collectionId: string, participantId: string) {
-    return this.httpClient.delete(this.config.apiUrl +
+    return this.httpClient.delete(environment.apiUrl +
       '/api/collections/' + collectionId + '/participants/rel/' + participantId);
   }
   /* Submit workshop for Review */
   public submitForReview(id: string) {
-    return this.httpClient.post(this.config.apiUrl + '/api/collections/' + id + '/submitForReview', {}, this.options).map(
+    return this.httpClient.post(environment.apiUrl + '/api/collections/' + id + '/submitForReview', {}, this.options).map(
       (response) => response, (err) => {
         console.log('Error: ' + err);
       });
@@ -471,7 +470,7 @@ export class CollectionService {
   public sendVerifySMS(phoneNo, countryCode) {
     const body = {};
     return this.httpClient
-      .post(this.config.apiUrl + '/api/peers/sendVerifySms?phone=' + phoneNo + '&countryCode=' + countryCode, body, this.options)
+      .post(environment.apiUrl + '/api/peers/sendVerifySms?phone=' + phoneNo + '&countryCode=' + countryCode, body, this.options)
       .map((response: any) => response, (err) => {
         console.log('Error: ' + err);
       });
@@ -481,7 +480,7 @@ export class CollectionService {
   public confirmSmsOTP(inputToken) {
     const body = {};
     return this.httpClient
-      .post(this.config.apiUrl + '/api/peers/confirmSmsOTP?token=' + inputToken, body, this.options)
+      .post(environment.apiUrl + '/api/peers/confirmSmsOTP?token=' + inputToken, body, this.options)
       .map((response: any) => response, (err) => {
         console.log('Error: ' + err);
       });
@@ -491,7 +490,7 @@ export class CollectionService {
   public saveBookmark(collectionId, cb) {
     const body = {};
     this.httpClient
-      .post(this.config.apiUrl + '/api/collections/' + collectionId + '/bookmarks', body, this.options)
+      .post(environment.apiUrl + '/api/collections/' + collectionId + '/bookmarks', body, this.options)
       .map((response) => {
         cb(null, response);
       }, (err) => {
@@ -502,7 +501,7 @@ export class CollectionService {
   public removeBookmark(bookmarkId, cb) {
     const body = {};
     this.httpClient
-      .delete(this.config.apiUrl + '/api/bookmarks/' + bookmarkId, this.options)
+      .delete(environment.apiUrl + '/api/bookmarks/' + bookmarkId, this.options)
       .map((response) => {
         cb(null, response);
       }, (err) => {
@@ -516,7 +515,7 @@ export class CollectionService {
   public getBookmarks(collectionId: string, query: any, cb) {
     const filter = JSON.stringify(query);
     this.httpClient
-      .get(this.config.apiUrl + '/api/collections/' + collectionId + '/bookmarks' + '?filter=' + filter, this.options)
+      .get(environment.apiUrl + '/api/collections/' + collectionId + '/bookmarks' + '?filter=' + filter, this.options)
       .map((response) => {
         cb(null, response);
       }, (err) => {
@@ -530,7 +529,7 @@ export class CollectionService {
   public getRecommendations(query) {
     const filter = JSON.stringify(query);
     return this.httpClient
-      .get(this.config.apiUrl + '/api/collections?' + 'filter=' + filter, this.options);
+      .get(environment.apiUrl + '/api/collections?' + 'filter=' + filter, this.options);
   }
 
   /**
@@ -539,7 +538,7 @@ export class CollectionService {
   public getParticipants(collectionId, query) {
     const filter = JSON.stringify(query);
     return this.httpClient
-      .get(this.config.apiUrl + '/api/collections/' + collectionId + '/participants?filter=' + filter, this.options);
+      .get(environment.apiUrl + '/api/collections/' + collectionId + '/participants?filter=' + filter, this.options);
   }
 
   /**
@@ -550,7 +549,7 @@ collectionID:string,userId:string,calendarId:string   */
       'calendarId': calendarId
     };
     this.httpClient
-      .put(this.config.apiUrl + '/api/collections/' + collectionId + '/participants/rel/' + userId, body, this.options)
+      .put(environment.apiUrl + '/api/collections/' + collectionId + '/participants/rel/' + userId, body, this.options)
       .map((response) => {
         cb(null, response);
       }, (err) => {
@@ -560,7 +559,7 @@ collectionID:string,userId:string,calendarId:string   */
 
   public linkCommunityToCollection(communityId, collectionId, cb) {
     this.httpClient
-      .put(this.config.apiUrl + '/api/communities/' + communityId + '/collections/rel/' + collectionId, {}, this.options)
+      .put(environment.apiUrl + '/api/communities/' + communityId + '/collections/rel/' + collectionId, {}, this.options)
       .map((response) => {
         cb(null, response);
       }, (err) => {
@@ -575,7 +574,7 @@ collectionID:string,userId:string,calendarId:string   */
    * @returns {Observable<any>}
    */
   public approveCollection(collection) {
-    return this.httpClient.post(this.config.apiUrl + '/api/collections/' + collection.id + '/approve', {}, this.options).map(
+    return this.httpClient.post(environment.apiUrl + '/api/collections/' + collection.id + '/approve', {}, this.options).map(
       (response) => response, (err) => {
         console.log('Error: ' + err);
       });
@@ -605,7 +604,7 @@ collectionID:string,userId:string,calendarId:string   */
 
   public postCalendars(id, calendars) {
     return this.httpClient
-      .post(this.config.apiUrl + '/api/collections/' + id + '/calendars', calendars, this.options)
+      .post(environment.apiUrl + '/api/collections/' + id + '/calendars', calendars, this.options)
       .map((response: any) => response, (err) => {
         console.log('Error: ' + err);
       });
@@ -617,7 +616,7 @@ collectionID:string,userId:string,calendarId:string   */
   public getComments(workshopId: string, query: any, cb) {
     const filter = JSON.stringify(query);
     this.httpClient
-      .get(this.config.apiUrl + '/api/collections/' + workshopId + '/comments' + '?filter=' + filter, this.options)
+      .get(environment.apiUrl + '/api/collections/' + workshopId + '/comments' + '?filter=' + filter, this.options)
       .map((response) => {
         cb(null, response);
       }, (err) => {
@@ -634,7 +633,7 @@ collectionID:string,userId:string,calendarId:string   */
   public getContentComments(contentId: string, query: any, cb) {
     const filter = JSON.stringify(query);
     this.httpClient
-      .get(this.config.apiUrl + '/api/contents/' + contentId + '/comments' + '?filter=' + filter, this.options)
+      .get(environment.apiUrl + '/api/contents/' + contentId + '/comments' + '?filter=' + filter, this.options)
       .map((response) => {
         cb(null, response);
       }, (err) => {
@@ -651,7 +650,7 @@ collectionID:string,userId:string,calendarId:string   */
   public getSubmissionComments(submissionId: string, query: any, cb) {
     const filter = JSON.stringify(query);
     this.httpClient
-      .get(this.config.apiUrl + '/api/submissions/' + submissionId + '/comments' + '?filter=' + filter, this.options)
+      .get(environment.apiUrl + '/api/submissions/' + submissionId + '/comments' + '?filter=' + filter, this.options)
       .map((response) => {
         cb(null, response);
       }, (err) => {
@@ -662,7 +661,7 @@ collectionID:string,userId:string,calendarId:string   */
   public getReviews(peerId: string, query: any, cb) {
     const filter = JSON.stringify(query);
     this.httpClient
-      .get(this.config.apiUrl + '/api/peers/' + peerId + '/reviewsAboutYou' + '?filter=' + filter, this.options)
+      .get(environment.apiUrl + '/api/peers/' + peerId + '/reviewsAboutYou' + '?filter=' + filter, this.options)
       .map((response) => {
         cb(null, response);
       }, (err) => {
@@ -675,7 +674,7 @@ collectionID:string,userId:string,calendarId:string   */
   worrkshopID   */
   public postComments(workshopId: string, commentBody: any, cb) {
     this.httpClient
-      .post(this.config.apiUrl + '/api/collections/' + workshopId + '/comments', commentBody, this.options)
+      .post(environment.apiUrl + '/api/collections/' + workshopId + '/comments', commentBody, this.options)
       .map((response) => {
         cb(null, response);
       }, (err) => {
@@ -691,7 +690,7 @@ collectionID:string,userId:string,calendarId:string   */
    */
   public postSubmissionComments(submissionId: string, commentBody: any, cb) {
     this.httpClient
-      .post(this.config.apiUrl + '/api/submissions/' + submissionId + '/comments', commentBody, this.options)
+      .post(environment.apiUrl + '/api/submissions/' + submissionId + '/comments', commentBody, this.options)
       .map((response) => {
         cb(null, response);
       }, (err) => {
@@ -707,7 +706,7 @@ collectionID:string,userId:string,calendarId:string   */
    */
   public postContentComments(contentId: string, commentBody: any, cb) {
     this.httpClient
-      .post(this.config.apiUrl + '/api/contents/' + contentId + '/comments', commentBody, this.options)
+      .post(environment.apiUrl + '/api/contents/' + contentId + '/comments', commentBody, this.options)
       .map((response) => {
         cb(null, response);
       }, (err) => {
@@ -720,12 +719,12 @@ collectionID:string,userId:string,calendarId:string   */
    */
   public postReview(peerId: string, reviewBody: any) {
     return this.httpClient
-      .post(this.config.apiUrl + '/api/peers/' + peerId + '/reviewsAboutYou', reviewBody, this.options);
+      .post(environment.apiUrl + '/api/peers/' + peerId + '/reviewsAboutYou', reviewBody, this.options);
   }
 
   public updateReview(reviewId: string, reviewBody: any) {
     return this.httpClient
-      .patch(this.config.apiUrl + '/api/reviews/' + reviewId, reviewBody, this.options);
+      .patch(environment.apiUrl + '/api/reviews/' + reviewId, reviewBody, this.options);
   }
 
   public calculateRating(reviewArray?: any) {
@@ -765,7 +764,7 @@ collectionID:string,userId:string,calendarId:string   */
    */
   public deleteReview(reviewId: string) {
     return this.httpClient
-      .delete(this.config.apiUrl + '/api/reviews/' + reviewId, this.options);
+      .delete(environment.apiUrl + '/api/reviews/' + reviewId, this.options);
   }
 
 
@@ -833,43 +832,43 @@ collectionID:string,userId:string,calendarId:string   */
       'isPresent': isPresent
     };
     return this.httpClient
-      .put(this.config.apiUrl + '/api/peers/' + peerId + '/rsvps/' + rsvpId, body, this.options)
+      .put(environment.apiUrl + '/api/peers/' + peerId + '/rsvps/' + rsvpId, body, this.options)
       .map((response: any) => response);
   }
 
   public updateProvisions(collectionId: string, body: any) {
-    return this.httpClient.delete(this.config.apiUrl + '/api/collections/' + collectionId + '/provisions', this.options).flatMap(res => {
+    return this.httpClient.delete(environment.apiUrl + '/api/collections/' + collectionId + '/provisions', this.options).flatMap(res => {
       return this.httpClient
-        .post(this.config.apiUrl + '/api/collections/' + collectionId + '/provisions', body, this.options)
+        .post(environment.apiUrl + '/api/collections/' + collectionId + '/provisions', body, this.options)
         .map((response: any) => response);
     });
 
   }
 
   public postPackages(collectionId: string, body: any) {
-    return this.httpClient.delete(this.config.apiUrl + '/api/collections/' + collectionId + '/packages', this.options).flatMap(res => {
+    return this.httpClient.delete(environment.apiUrl + '/api/collections/' + collectionId + '/packages', this.options).flatMap(res => {
       console.log('deleted');
       console.log('posting', body);
       return this.httpClient
-        .post(this.config.apiUrl + '/api/collections/' + collectionId + '/packages', body, this.options)
+        .post(environment.apiUrl + '/api/collections/' + collectionId + '/packages', body, this.options)
         .map((response: any) => response);
     });
   }
 
   public postPreferences(collectionId: string, body: any) {
-    return this.httpClient.delete(this.config.apiUrl + '/api/collections/' + collectionId + '/preferences', this.options).flatMap(res => {
+    return this.httpClient.delete(environment.apiUrl + '/api/collections/' + collectionId + '/preferences', this.options).flatMap(res => {
       console.log('deleted');
       console.log('posting', body);
       return this.httpClient
-        .post(this.config.apiUrl + '/api/collections/' + collectionId + '/preferences', body, this.options)
+        .post(environment.apiUrl + '/api/collections/' + collectionId + '/preferences', body, this.options)
         .map((response: any) => response);
     });
   }
 
   public updateAvailability(collectionId: string, body: any) {
-    return this.httpClient.delete(this.config.apiUrl + '/api/collections/' + collectionId + '/availability').flatMap(
+    return this.httpClient.delete(environment.apiUrl + '/api/collections/' + collectionId + '/availability').flatMap(
       res => {
-        return this.httpClient.post(this.config.apiUrl + '/api/collections/' + collectionId + '/availability', body, this.options)
+        return this.httpClient.post(environment.apiUrl + '/api/collections/' + collectionId + '/availability', body, this.options)
           .map((response: any) => response);
       }
     );
@@ -885,19 +884,19 @@ collectionID:string,userId:string,calendarId:string   */
     });
     const availabilityLinkRequestArray = [];
     const peerLinkRequestArray = [];
-    return this.httpClient.post(this.config.apiUrl + '/api/collections/' + collectionId + '/contents', contentObjs, this.options)
+    return this.httpClient.post(environment.apiUrl + '/api/collections/' + collectionId + '/contents', contentObjs, this.options)
       .flatMap((res: any) => {
         const result = res;
         result.forEach((savedContent, index) => {
           const targetIds = [];
           availabilities[index].forEach(element => {
             availabilityLinkRequestArray.push(
-              this.httpClient.put(this.config.apiUrl + '/api/contents/'
+              this.httpClient.put(environment.apiUrl + '/api/contents/'
                 + savedContent.id + '/availabilities/rel/' + element.id, this.options)
             );
           });
           peerLinkRequestArray.push(
-            this.httpClient.put(this.config.apiUrl + '/api/peers/' + userId + '/contents/rel/' + savedContent.id, this.options)
+            this.httpClient.put(environment.apiUrl + '/api/peers/' + userId + '/contents/rel/' + savedContent.id, this.options)
           );
         });
         return forkJoin(availabilityLinkRequestArray);
@@ -908,7 +907,7 @@ collectionID:string,userId:string,calendarId:string   */
 
   public approveSessionJoinRequest(sessionId) {
     const body = { 'sessionIsApproved': true };
-    return this.httpClient.patch(this.config.apiUrl + '/api/contents/' + sessionId, body, this.options).map(res => res);
+    return this.httpClient.patch(environment.apiUrl + '/api/contents/' + sessionId, body, this.options).map(res => res);
   }
 
 }

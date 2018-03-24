@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { RequestHeaderService } from '../_services/requestHeader/request-header.service';
 import { ProfileService } from '../_services/profile/profile.service';
 import { FormControl } from '@angular/forms';
-import { AppConfig } from '../app.config';
+import {environment} from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
@@ -31,6 +31,7 @@ export class AppHeaderComponent implements OnInit {
   @ViewChild('notificationsButton') notificationsButton;
   public userId;
   public userIdObservable;
+  public envVariable;
   private key = 'userId';
   public options: any[];
   public defaultProfileUrl = '/assets/images/default-user.jpg';
@@ -38,7 +39,6 @@ export class AppHeaderComponent implements OnInit {
   public makeOldNotification = [];
   public profileCompletionObject: any;
   constructor(public authService: AuthenticationService,
-    public config: AppConfig,
     private http: HttpClient,
     private _cookieService: CookieUtilsService,
     public _profileService: ProfileService,
@@ -48,6 +48,7 @@ export class AppHeaderComponent implements OnInit {
     private _notificationService: NotificationService,
     public _searchService: SearchService,
     private dialogsService: DialogsService) {
+      this.envVariable = environment;
     this.profile = {};
     this.isLoggedIn = authService.isLoginSubject.asObservable();
     authService.isLoggedIn().subscribe((res) => {

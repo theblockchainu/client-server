@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
 import { RequestHeaderService } from '../requestHeader/request-header.service';
 
-import { AppConfig } from '../../app.config';
+import {environment} from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class CommentService {
   public options;
+  public envVariable;
 
   constructor(private http: HttpClient,
-    public config: AppConfig,
     private requestHeaderService: RequestHeaderService) {
     this.options = requestHeaderService.getOptions();
+      this.envVariable = environment;
   }
   /**
    * replyToComment
    */
   public replyToComment(commentId, replyBody) {
     return this.http
-      .post(this.config.apiUrl + '/api/comments/' + commentId + '/replies', replyBody, this.options);
+      .post(environment.apiUrl + '/api/comments/' + commentId + '/replies', replyBody, this.options);
   }
 
   /**
@@ -29,7 +30,7 @@ export class CommentService {
    */
   public addCommentUpvote(commentId, upvoteBody) {
     return this.http
-      .post(this.config.apiUrl + '/api/comments/' + commentId + '/upvotes', upvoteBody, this.options);
+      .post(environment.apiUrl + '/api/comments/' + commentId + '/upvotes', upvoteBody, this.options);
   }
 
   /**
@@ -40,7 +41,7 @@ export class CommentService {
    */
   public addReplyUpvote(replyId, upvoteBody) {
     return this.http
-      .post(this.config.apiUrl + '/api/replies/' + replyId + '/upvotes', upvoteBody, this.options);
+      .post(environment.apiUrl + '/api/replies/' + replyId + '/upvotes', upvoteBody, this.options);
   }
 
   /**
@@ -48,7 +49,7 @@ export class CommentService {
    */
   public deleteReply(replyId: string) {
     return this.http
-      .delete(this.config.apiUrl + '/api/replies/' + replyId, this.options);
+      .delete(environment.apiUrl + '/api/replies/' + replyId, this.options);
   }
 
   /**
@@ -56,7 +57,7 @@ export class CommentService {
    */
   public deleteComment(commentId: string) {
     return this.http
-      .delete(this.config.apiUrl + '/api/comments/' + commentId, this.options);
+      .delete(environment.apiUrl + '/api/comments/' + commentId, this.options);
   }
 
 }

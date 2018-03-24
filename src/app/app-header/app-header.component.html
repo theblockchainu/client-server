@@ -55,7 +55,7 @@
       <div class="headerButtons" [matMenuTriggerFor]="headerUserMenu" *ngIf="(isLoggedIn | async)" style="font-size: 1rem; cursor: pointer; display: inline-block; margin: 0 15px;">
         <div>
           <img *ngIf="!profile.picture_url" src="/assets/images/user-placeholder.jpg" alt="A" class="circle-thumb">
-          <img *ngIf="profile.picture_url" src="{{config.apiUrl + profile.picture_url}}" alt="A" class="circle-thumb">
+          <img *ngIf="profile.picture_url" src="{{envVariable.apiUrl + profile.picture_url}}" alt="A" class="circle-thumb">
         </div>
       </div>
 

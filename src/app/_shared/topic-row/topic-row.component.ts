@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CollectionService } from '../../_services/collection/collection.service';
-import { AppConfig } from '../../app.config';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-topic-row',
@@ -10,13 +10,15 @@ import { AppConfig } from '../../app.config';
 export class TopicRowComponent implements OnInit {
   public translateX: number;
   public transformStyle: any;
+  public envVariable;
   @Input() availableTopics: Array<any>;
   @Output() topciClickedEvent = new EventEmitter<number>();
 
   constructor(
-    public _collectionService: CollectionService,
-    public config: AppConfig,
-  ) { }
+    public _collectionService: CollectionService
+  ) {
+      this.envVariable = environment;
+  }
 
   ngOnInit() {
     this.translateX = 0;

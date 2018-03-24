@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/map';
-import { AppConfig } from '../../app.config';
 
 export class SideBarMenuItem {
     active: boolean;
@@ -19,7 +18,7 @@ export class LeftSidebarService {
     sidebarMenuItems: Observable<SideBarMenuItem>;
 
     constructor(
-        private http: HttpClient, public config: AppConfig,
+        private http: HttpClient,
         private route: ActivatedRoute, public router: Router
     ) { }
 

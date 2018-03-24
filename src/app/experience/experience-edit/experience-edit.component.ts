@@ -13,12 +13,11 @@ import { LanguagePickerService } from '../../_services/languagepicker/languagepi
 import { CollectionService } from '../../_services/collection/collection.service';
 import { MediaUploaderService } from '../../_services/mediaUploader/media-uploader.service';
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
-import { AppConfig } from '../../app.config';
 import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
 import * as _ from 'lodash';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { LeftSidebarService } from '../../_services/left-sidebar/left-sidebar.service';
-
+import {environment} from '../../../environments/environment';
 import { DialogsService } from '../../_services/dialogs/dialog.service';
 import { Observable } from 'rxjs/Observable';
 import { TopicService } from '../../_services/topic/topic.service';
@@ -38,6 +37,7 @@ export class ExperienceEditComponent implements OnInit {
   public busyLanguage = false;
   public busyBasics = false;
   public busyHost = false;
+  public envVariable;
   public busyExperiencePage = false;
   public busyPayment = false;
   public sidebarFilePath = 'assets/menu/experience-static-left-sidebar-menu.json';
@@ -104,7 +104,7 @@ export class ExperienceEditComponent implements OnInit {
   public _CANVAS;
   public _VIDEO;
   public _CTX;
-
+    public showBackground = false;
   public urlForVideo = [];
   public urlForImages = [];
 
@@ -138,7 +138,6 @@ export class ExperienceEditComponent implements OnInit {
     public router: Router,
     private activatedRoute: ActivatedRoute,
     private http: HttpClient,
-    public config: AppConfig,
     private languagePickerService: LanguagePickerService,
     private _fb: FormBuilder,
     private countryPickerService: CountryPickerService,
@@ -154,18 +153,21 @@ export class ExperienceEditComponent implements OnInit {
     private _paymentService: PaymentService,
     private location: Location
   ) {
+      this.envVariable = environment;
     this.activatedRoute.params.subscribe(params => {
       this.experienceId = params['collectionId'];
       this.step = params['step'];
-      // this.connectPaymentUrl = 'https://connect.stripe.com/express/oauth/authorize?response_type=code&' +
-      //   'client_id=ca_AlhauL6d5gJ66yM3RaXBHIwt0R8qeb9q&scope=read_write&redirect_uri=' + this.config.apiUrl
-      //   + '/experience/' + this.experienceId + '/edit/' + this.step + '&state=1';
+      if (this.step && this.step.toString() === '5') {
+          this.showBackground = true;
+      } else {
+          this.showBackground = false;
+      }
       this.connectPaymentUrl = 'https://connect.stripe.com/express/oauth/authorize?response_type=code' +
-        '&client_id=ca_AlhauL6d5gJ66yM3RaXBHIwt0R8qeb9q&scope=read_write&redirect_uri=' + this.config.clientUrl
-        + '/console/account/payoutmethods&state=' + this.config.clientUrl + '/experience/' + this.experienceId
+        '&client_id=' + environment.stripeClientId + '&scope=read_write&redirect_uri=' + environment.clientUrl
+        + '/console/account/payoutmethods&state=' + environment.clientUrl + '/experience/' + this.experienceId
         + '/edit/' + this.step;
-      this.searchTopicURL = config.searchUrl + '/api/search/' + this.config.uniqueDeveloperCode + '_topics/suggest?field=name&query=';
-      this.createTopicURL = config.apiUrl + '/api/' + this.config.uniqueDeveloperCode + '_topics';
+      this.searchTopicURL = environment.searchUrl + '/api/search/' + environment.uniqueDeveloperCode + '_topics/suggest?field=name&query=';
+      this.createTopicURL = environment.apiUrl + '/api/' + environment.uniqueDeveloperCode + '_topics';
     });
 
 
@@ -450,7 +452,7 @@ export class ExperienceEditComponent implements OnInit {
       });
 
     if (this.interests.length === 0) {
-      this.http.get(this.config.searchUrl + '/api/search/topics')
+      this.http.get(environment.searchUrl + '/api/search/topics')
         .map((response: any) => {
           this.suggestedTopics = response.slice(0, 7);
         }).subscribe();
@@ -531,7 +533,7 @@ export class ExperienceEditComponent implements OnInit {
     this.removedInterests = event;
     if (this.removedInterests.length !== 0) {
       this.removedInterests.forEach((topic) => {
-        this.http.delete(this.config.apiUrl + '/api/collections/' + this.experienceId + '/topics/rel/' + topic.id, options)
+        this.http.delete(environment.apiUrl + '/api/collections/' + this.experienceId + '/topics/rel/' + topic.id, options)
           .map((response) => {
             console.log(response);
           }).subscribe();
@@ -789,7 +791,7 @@ export class ExperienceEditComponent implements OnInit {
     const body = data.value.calendar;
     const itinerary = data.controls.contentGroup.value.itenary;
     if (body.startDate && body.endDate && itinerary && itinerary.length > 0) {
-      this.http.patch(this.config.apiUrl + '/api/collections/' + collectionId + '/calendar', body)
+      this.http.patch(environment.apiUrl + '/api/collections/' + collectionId + '/calendar', body)
         .subscribe((response) => {
           this.step++;
           this.experienceStepUpdate();
@@ -826,7 +828,7 @@ export class ExperienceEditComponent implements OnInit {
 
     if (topicArray.length !== 0) {
       let observable: Observable<any>;
-      observable = this.http.patch(this.config.apiUrl + '/api/collections/' + this.experienceId + '/topics/rel', body)
+      observable = this.http.patch(environment.apiUrl + '/api/collections/' + this.experienceId + '/topics/rel', body)
         .map(response => response).publishReplay().refCount();
       observable.subscribe((res) => {
         this.step++;
@@ -878,6 +880,8 @@ export class ExperienceEditComponent implements OnInit {
       this.busyBasics = true;
       this.busyBasics = false;
     }
+    this.showBackground = !!(this.step && this.step.toString() === '5');
+
     if (toggleStep === 6) {
       this.busyExperiencePage = true;
     }
@@ -913,7 +917,7 @@ export class ExperienceEditComponent implements OnInit {
       const data = this.timeline;
       const body = data.value.calendar;
       if (body.startDate && body.endDate) {
-        this.http.patch(this.config.apiUrl + '/api/collections/' + this.experienceId + '/calendar', body, this.options)
+        this.http.patch(environment.apiUrl + '/api/collections/' + this.experienceId + '/calendar', body, this.options)
           .map((response) => {
             this.busySave = false;
             this.router.navigate(['console/teaching/experiences']);
@@ -1030,7 +1034,7 @@ export class ExperienceEditComponent implements OnInit {
   deleteFromContainer(fileUrl, fileType) {
     const fileurl = fileUrl;
     fileUrl = _.replace(fileUrl, 'download', 'files');
-    this.http.delete(this.config.apiUrl + fileUrl)
+    this.http.delete(environment.apiUrl + fileUrl)
       .map((response) => {
         console.log(response);
         if (fileType === 'video') {
@@ -1054,7 +1058,7 @@ export class ExperienceEditComponent implements OnInit {
       let file = event.target.files[i];
       const fileurl = file;
       file = _.replace(file, 'download', 'files');
-      this.http.delete(this.config.apiUrl + file)
+      this.http.delete(environment.apiUrl + file)
         .map((response) => {
           console.log(response);
           if (fileType === 'video') {

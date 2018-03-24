@@ -1,16 +1,14 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
 import { AlertService } from '../../alert/alert.service';
 import { AuthenticationService } from '../../authentication/authentication.service';
-
 import { Observable } from 'rxjs/Observable';
 import {
   FormGroup, FormArray, FormBuilder, FormControl, AbstractControl, Validators
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material';
 import { RequestPasswordDialogComponent } from '../forgot-pwd-dialog/forgot-pwd-dialog.component';
-import { AppConfig } from '../../../app.config';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-login-dialog',  // <login></login>
@@ -34,6 +32,7 @@ export class LoginComponentDialog implements OnInit {
   // TypeScript public modifiers
   public isChecked = false;
   public showError = false;
+  public envVariable;
 
   constructor(
     private route: ActivatedRoute,
@@ -43,10 +42,9 @@ export class LoginComponentDialog implements OnInit {
     private alertService: AlertService,
     public dialogRef: MatDialogRef<LoginComponentDialog>,
     private _fb: FormBuilder,
-    public config: AppConfig,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    // private dialogsService: DialogsService
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+      this.envVariable = environment;
     this.isLoggedIn = this.authenticationService.isLoggedIn();
   }
 

@@ -4,8 +4,8 @@ import { ConsoleTeachingComponent } from '../console-teaching.component';
 import { CollectionService } from '../../../_services/collection/collection.service';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 import * as moment from 'moment';
-import { AppConfig } from '../../../app.config';
 import { DialogsService } from '../../../_services/dialogs/dialog.service';
+import {environment} from '../../../../environments/environment';
 @Component({
   selector: 'app-console-teaching-session',
   templateUrl: './console-teaching-session.component.html',
@@ -23,15 +23,16 @@ export class ConsoleTeachingSessionComponent implements OnInit {
   public notApproved: Array<any>;
   public sessionEnabled = false;
   public teacher: any;
+  public envVariable;
   constructor(
     public activatedRoute: ActivatedRoute,
     public consoleTeachingComponent: ConsoleTeachingComponent,
     public router: Router,
     public _collectionService: CollectionService,
     private _cookieUtilsService: CookieUtilsService,
-    public config: AppConfig,
     private dialogsService: DialogsService
   ) {
+      this.envVariable = environment;
     activatedRoute.pathFromRoot[4].url.subscribe((urlSegment) => {
       console.log(urlSegment[0].path);
       consoleTeachingComponent.setActiveTab(urlSegment[0].path);

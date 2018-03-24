@@ -1,17 +1,15 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import { AppConfig } from '../../../app.config';
-import { HttpClient } from '@angular/common/http';
 import { ProjectSubmissionService } from '../../../_services/project-submission/project-submission.service';
 import * as moment from 'moment';
 import { ContentService } from '../../../_services/content/content.service';
 import { VgAPI } from 'videogular2/core';
-// import { DeviceDetectorService } from 'ngx-device-detector';
 import { Router } from '@angular/router';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 import { SocketService } from '../../../_services/socket/socket.service';
 import { CollectionService } from '../../../_services/collection/collection.service';
 import { DialogsService } from '../../../_services/dialogs/dialog.service';
+import {environment} from '../../../../environments/environment';
 @Component({
   selector: 'app-content-project',
   templateUrl: './content-project.component.html',
@@ -29,8 +27,9 @@ export class ContentProjectComponent implements OnInit {
   public userId;
   public startedView;
   public userType = 'public';
+  public envVariable;
 
-  constructor(public config: AppConfig,
+  constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<ContentProjectComponent>,
@@ -43,6 +42,7 @@ export class ContentProjectComponent implements OnInit {
     public _collectionService: CollectionService,
     public _dialogsService: DialogsService
   ) {
+      this.envVariable = environment;
     this.userType = data.userType;
     if (data.content.submissions !== undefined) {
       data.content.submissions.forEach(submission => {

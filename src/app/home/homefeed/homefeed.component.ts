@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CollectionService } from '../../_services/collection/collection.service';
 import { ProfileService } from '../../_services/profile/profile.service';
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
-import { AppConfig } from '../../app.config';
 import { TopicService } from '../../_services/topic/topic.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
@@ -53,7 +52,6 @@ export class HomefeedComponent implements OnInit {
         public _collectionService: CollectionService,
         public _profileService: ProfileService,
         private _cookieUtilsService: CookieUtilsService,
-        public config: AppConfig,
         private _topicService: TopicService,
         public _dialogsService: DialogsService,
         public _communityService: CommunityService

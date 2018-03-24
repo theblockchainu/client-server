@@ -3,9 +3,9 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConsoleAccountComponent } from '../console-account.component';
 import { PaymentService } from '../../../_services/payment/payment.service';
-import { AppConfig } from '../../../app.config';
 import { CollectionService } from '../../../_services/collection/collection.service';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
+import {environment} from '../../../../environments/environment';
 @Component({
   selector: 'app-console-account-payoutmethods',
   templateUrl: './console-account-payoutmethods.component.html',
@@ -16,17 +16,18 @@ export class ConsoleAccountPayoutmethodsComponent implements OnInit {
   public loadingRules: boolean;
   public payoutAccounts: Array<any>;
   public userId: string;
+  public envVariable;
   public ownedCollections: Array<any>;
   constructor(
     public activatedRoute: ActivatedRoute,
     public consoleAccountComponent: ConsoleAccountComponent,
     private _paymentService: PaymentService,
     private location: Location,
-    public config: AppConfig,
     public router: Router,
     private _collectionService: CollectionService,
     private _cookieUtilsService: CookieUtilsService
   ) {
+      this.envVariable = environment;
     this.loading = true;
     this.loadingRules = true;
     this.userId = this._cookieUtilsService.getValue('userId');
@@ -69,7 +70,7 @@ export class ConsoleAccountPayoutmethodsComponent implements OnInit {
       } else {
         res.forEach(collection => {
           payoutAccounts.forEach(account => {
-            if (account.payoutaccount.id === collection.payoutrules[0].payoutId1) {
+            if (collection.payoutrules && collection.payoutrules.length > 0 && account.payoutaccount.id === collection.payoutrules[0].payoutId1) {
               collection.payoutrules[0].external_account = account.external_accounts.data[0];
             }
           });

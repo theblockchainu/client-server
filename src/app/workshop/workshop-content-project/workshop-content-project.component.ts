@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { AppConfig } from '../../app.config';
+import {environment} from '../../../environments/environment';
 import { MediaUploaderService } from '../../_services/mediaUploader/media-uploader.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import * as _ from 'lodash';
@@ -24,6 +24,7 @@ export class WorkshopContentProjectComponent implements OnInit {
         status: 'discard',
         data: 0
     };
+    public envVariable;
     public isEdit = false;
     public collectionStartDate;
     public collectionEndDate;
@@ -37,13 +38,14 @@ export class WorkshopContentProjectComponent implements OnInit {
 
     constructor(
         private _fb: FormBuilder,
-        private http: HttpClient, public config: AppConfig,
+        private http: HttpClient,
         private mediaUploader: MediaUploaderService,
         @Inject(MAT_DIALOG_DATA) public inputData: any,
         public dialogRef: MatDialogRef<WorkshopContentProjectComponent>,
         private requestHeaders: RequestHeaderService,
         private contentService: ContentService
     ) {
+        this.envVariable = environment;
         this.options = requestHeaders.getOptions();
         this.collectionEndDate = inputData.collectionEndDate;
         this.collectionStartDate = inputData.collectionStartDate;
@@ -92,7 +94,7 @@ export class WorkshopContentProjectComponent implements OnInit {
     deleteFromContainer(fileUrl, fileType) {
         const fileurl = fileUrl;
         fileUrl = _.replace(fileUrl, 'download', 'files');
-        this.http.delete(this.config.apiUrl + fileUrl)
+        this.http.delete(environment.apiUrl + fileUrl)
             .map((response) => {
                 console.log(response);
                 if (fileType === 'file') {
@@ -126,7 +128,7 @@ export class WorkshopContentProjectComponent implements OnInit {
     }
 
     deleteFromContent(contentForm, body) {
-        this.http.patch(this.config.apiUrl + '/api/contents/' + contentForm.controls['id'].value, body, this.options)
+        this.http.patch(environment.apiUrl + '/api/contents/' + contentForm.controls['id'].value, body, this.options)
             .map((response) => { })
             .subscribe();
     }

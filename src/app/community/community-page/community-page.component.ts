@@ -8,12 +8,11 @@ import { MatDialog, MatDialogConfig, MatDialogRef, MatSnackBar } from '@angular/
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
 import { CollectionService } from '../../_services/collection/collection.service';
 import { CommentService } from '../../_services/comment/comment.service';
-import { AppConfig } from '../../app.config';
 import { ViewParticipantsComponent } from './view-participants/view-participants.component';
 import { CommunityService } from '../../_services/community/community.service';
 import { QuestionService } from '../../_services/question/question.service';
 import { HttpClient } from '@angular/common/http';
-
+import {environment} from '../../../environments/environment';
 import { SearchService } from '../../_services/search/search.service';
 import {
     startOfDay,
@@ -67,6 +66,7 @@ declare var FB: any;
 export class CommunityPageComponent implements OnInit, AfterViewChecked {
 
     public communityId: string;
+    public envVariable;
     public userId;
     public userType;
     public totalDuration: string;
@@ -128,13 +128,13 @@ export class CommunityPageComponent implements OnInit, AfterViewChecked {
         private _questionService: QuestionService,
         private _communityService: CommunityService,
         public _searchService: SearchService,
-        public config: AppConfig,
         private _fb: FormBuilder,
         private dialog: MatDialog,
         private http: HttpClient,
         private _cdRef: ChangeDetectorRef,
         private dialogsService: DialogsService,
         private snackBar: MatSnackBar) {
+        this.envVariable = environment;
         this.activatedRoute.params.subscribe(params => {
             if (this.initialised && this.communityId !== params['communityId']) {
                 location.reload();
@@ -231,7 +231,7 @@ export class CommunityPageComponent implements OnInit, AfterViewChecked {
                         this.fixTopics();
                         this.getParticipants();
                         this.getBookmarks();
-                        this.carouselImages = this.community.imageUrls.map(url => this.config.apiUrl + url);
+                        this.carouselImages = this.community.imageUrls.map(url => environment.apiUrl + url);
                     });
         } else {
             console.log('NO COMMUNITY');

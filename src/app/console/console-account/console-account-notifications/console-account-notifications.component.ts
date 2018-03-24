@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ConsoleAccountComponent } from '../console-account.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppConfig } from '../../../app.config';
 import { NotificationService } from '../../../_services/notification/notification.service';
 import { UcWordsPipe } from 'ngx-pipes';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
+import {environment} from '../../../../environments/environment';
 
 declare var moment: any;
 
@@ -20,16 +20,17 @@ export class ConsoleAccountNotificationsComponent implements OnInit {
     public notifications = [];
     public loaded = false;
     public userId;
+    public envVariable;
 
     constructor(
         public activatedRoute: ActivatedRoute,
         public consoleAccountComponent: ConsoleAccountComponent,
-        public config: AppConfig,
         public _notificationService: NotificationService,
         private ucwords: UcWordsPipe,
         public router: Router,
         private _cookieUtilsService: CookieUtilsService
     ) {
+        this.envVariable = environment;
         activatedRoute.pathFromRoot[4].url.subscribe((urlSegment) => {
             if (urlSegment[0] === undefined) {
                 consoleAccountComponent.setActiveTab('notifications');

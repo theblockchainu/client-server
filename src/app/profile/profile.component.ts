@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { AppConfig } from '../app.config';
 import { Router, ActivatedRoute, Params, NavigationStart } from '@angular/router';
 import { ProfileService } from '../_services/profile/profile.service';
 import { CollectionService } from '../_services/collection/collection.service';
@@ -9,6 +7,7 @@ import { TopicService } from '../_services/topic/topic.service';
 import { CookieUtilsService } from '../_services/cookieUtils/cookie-utils.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import {environment} from '../../environments/environment';
 
 import * as moment from 'moment';
 import * as _ from 'lodash';
@@ -35,6 +34,7 @@ export class ProfileComponent implements OnInit {
   public loadingProfile = false;
   public loadingLearningJourney = true;
   public loadingPeers = true;
+  public envVariable;
   public urluserId: string;
   public profileObj: any;
   public interestsArray: Array<string>;
@@ -68,7 +68,6 @@ export class ProfileComponent implements OnInit {
   public learningJourneyFilter: string;
 
   constructor(
-    public config: AppConfig,
     public _profileService: ProfileService,
     private _cookieUtilsService: CookieUtilsService,
     private activatedRoute: ActivatedRoute,
@@ -79,6 +78,7 @@ export class ProfileComponent implements OnInit {
     public snackBar: MatSnackBar,
     public _dialogsService: DialogsService
   ) {
+      this.envVariable = environment;
     this.activatedRoute.params.subscribe((param) => {
       const calledUserId = param['profileId'];
       if (this.urluserId !== calledUserId) {

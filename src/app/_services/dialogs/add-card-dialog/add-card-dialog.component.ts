@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PaymentService } from '../../payment/payment.service';
 import { MatDialogRef } from '@angular/material';
-import { AppConfig } from '../../../app.config';
+import { environment } from '../../../../environments/environment';
 declare var Stripe: any;
 
 @Component({
@@ -19,13 +19,12 @@ export class AddCardDialogComponent implements OnInit {
   constructor(
     public activatedRoute: ActivatedRoute,
     public paymentService: PaymentService,
-    public dialogRef: MatDialogRef<AddCardDialogComponent>,
-    private _config: AppConfig
+    public dialogRef: MatDialogRef<AddCardDialogComponent>
   ) {
   }
 
   ngOnInit() {
-    this.stripe = Stripe(this._config.stripePublishableKey);
+    this.stripe = Stripe(environment.stripePublishableKey);
     const elements = this.stripe.elements();
     this.card = elements.create('card', {
       iconStyle: 'solid',

@@ -10,7 +10,7 @@
         <div class="col-md-3 {{offsetString}} left-panel">
             <div class="row text-center">
                 <div class="col-md-12">
-                    <img class="img-rounded profile-pic" *ngIf="profileObj.picture_url" src="{{config.apiUrl+profileObj.picture_url}}" alt="profile_pic">
+                    <img class="img-rounded profile-pic" *ngIf="profileObj.picture_url" src="{{envVariable.apiUrl+profileObj.picture_url}}" alt="profile_pic">
                     <img class="img-rounded profile-pic" *ngIf="!profileObj.picture_url" src="/assets/images/user-placeholder.jpg" alt="profile_pic">
                 </div>
                 <div class="col-md-12" style="margin-top: 25px;">
@@ -357,7 +357,7 @@
                                         <div class="col-md-12 margin-top-10" *ngIf="i<2">
                                             <a [routerLink]="['/workshop',collectionObj.id]" style="color:rgba(0,0,0,0.87)">
                                                 <div class="col-md-3 padding-left-0">
-                                                    <img class="img-rounded side-image" *ngIf="collectionObj.imageUrls && collectionObj.imageUrls.length>0" src="{{config.apiUrl+collectionObj.imageUrls[0]}}">
+                                                    <img class="img-rounded side-image" *ngIf="collectionObj.imageUrls && collectionObj.imageUrls.length>0" src="{{envVariable.apiUrl+collectionObj.imageUrls[0]}}">
                                                     <img class="img-rounded side-image" *ngIf="!collectionObj.imageUrls || collectionObj.imageUrls.length<=0" src="./assets/images/placeholder-image.jpg">
                                                 </div>
                                                 <div class="col-md-9">
@@ -385,7 +385,7 @@
                                         <div class="col-md-12 margin-top-10" *ngIf="i<2">
                                             <a [routerLink]="['/workshop',collectionObj.id]" style="color:rgba(0,0,0,0.87)">
                                                 <div class="col-md-3 padding-left-0">
-                                                    <img class="img-rounded side-image" *ngIf="collectionObj.imageUrls && collectionObj.imageUrls.length>0" src="{{config.apiUrl+collectionObj.imageUrls[0]}}">
+                                                    <img class="img-rounded side-image" *ngIf="collectionObj.imageUrls && collectionObj.imageUrls.length>0" src="{{envVariable.apiUrl+collectionObj.imageUrls[0]}}">
                                                     <img class="img-rounded side-image" *ngIf="!collectionObj.imageUrls || collectionObj.imageUrls.length<=0" src="./assets/images/placeholder-image.jpg">
                                                 </div>
                                                 <div class="col-md-9">
@@ -413,7 +413,7 @@
                                         <div class="col-md-12 margin-top-10" *ngIf="i<2">
                                             <a [routerLink]="['/workshop',collectionObj.id]" style="color:rgba(0,0,0,0.87)">
                                                 <div class="col-md-3 padding-left-0">
-                                                    <img class="img-rounded side-image" *ngIf="collectionObj.imageUrls && collectionObj.imageUrls.length>0" src="{{config.apiUrl+collectionObj.imageUrls[0]}}">
+                                                    <img class="img-rounded side-image" *ngIf="collectionObj.imageUrls && collectionObj.imageUrls.length>0" src="{{envVariable.apiUrl+collectionObj.imageUrls[0]}}">
                                                     <img class="img-rounded side-image" *ngIf="!collectionObj.imageUrls || collectionObj.imageUrls.length<=0" src="./assets/images/placeholder-image.jpg">
                                                 </div>
                                                 <div class="col-md-9">
@@ -450,7 +450,7 @@
                                         <div class="col-md-12 margin-top-10" *ngIf="i<2">
                                             <a [routerLink]="['/experience',collectionObj.id]" style="color:rgba(0,0,0,0.87)">
                                                 <div class="col-md-3 padding-left-0">
-                                                    <img class="img-rounded side-image" *ngIf="collectionObj.imageUrls && collectionObj.imageUrls.length>0" src="{{config.apiUrl+collectionObj.imageUrls[0]}}">
+                                                    <img class="img-rounded side-image" *ngIf="collectionObj.imageUrls && collectionObj.imageUrls.length>0" src="{{envVariable.apiUrl+collectionObj.imageUrls[0]}}">
                                                     <img class="img-rounded side-image" *ngIf="!collectionObj.imageUrls || collectionObj.imageUrls.length<=0" src="./assets/images/placeholder-image.jpg">
                                                 </div>
                                                 <div class="col-md-9">
@@ -478,7 +478,7 @@
                                         <div class="col-md-12 margin-top-10" *ngIf="i<2">
                                             <a [routerLink]="['/experience',collectionObj.id]" style="color:rgba(0,0,0,0.87)">
                                                 <div class="col-md-3 padding-left-0">
-                                                    <img class="img-rounded side-image" *ngIf="collectionObj.imageUrls && collectionObj.imageUrls.length>0" src="{{config.apiUrl+collectionObj.imageUrls[0]}}">
+                                                    <img class="img-rounded side-image" *ngIf="collectionObj.imageUrls && collectionObj.imageUrls.length>0" src="{{envVariable.apiUrl+collectionObj.imageUrls[0]}}">
                                                     <img class="img-rounded side-image" *ngIf="!collectionObj.imageUrls || collectionObj.imageUrls.length<=0" src="./assets/images/placeholder-image.jpg">
                                                 </div>
                                                 <div class="col-md-9">
@@ -506,7 +506,7 @@
                                         <div class="col-md-12 margin-top-10" *ngIf="i<2">
                                             <a [routerLink]="['/experience',collectionObj.id]" style="color:rgba(0,0,0,0.87)">
                                                 <div class="col-md-3 padding-left-0">
-                                                    <img class="img-rounded side-image" *ngIf="collectionObj.imageUrls && collectionObj.imageUrls.length>0" src="{{config.apiUrl+collectionObj.imageUrls[0]}}">
+                                                    <img class="img-rounded side-image" *ngIf="collectionObj.imageUrls && collectionObj.imageUrls.length>0" src="{{envVariable.apiUrl+collectionObj.imageUrls[0]}}">
                                                     <img class="img-rounded side-image" *ngIf="!collectionObj.imageUrls || collectionObj.imageUrls.length<=0" src="./assets/images/placeholder-image.jpg">
                                                 </div>
                                                 <div class="col-md-9">
@@ -590,11 +590,13 @@
 
                 </div>
                 <div class="col-md-2">
-                    <mat-form-field [floatLabel]="'always'">                 <mat-select [(value)]="learningJourneyFilter" placeholder="Filter">
-                        <mat-option>All</mat-option>
-                        <mat-option value="workshop">Workshop</mat-option>
-                        <mat-option value="experience">Experience</mat-option>
-                    </mat-select>               </mat-form-field>
+                    <mat-form-field [floatLabel]="'never'">
+                        <mat-select [(value)]="learningJourneyFilter" placeholder="Filter">
+                            <mat-option>All</mat-option>
+                            <mat-option value="workshop">Workshop</mat-option>
+                            <mat-option value="experience">Experience</mat-option>
+                        </mat-select>
+                    </mat-form-field>
                 </div>
                 <div class="col-md-2" *ngIf="participatingWorkshops && participatingWorkshops.length > 5">
                     <a class="pull-right" [routerLink]="'/home/workshops'">
@@ -607,7 +609,7 @@
                     <div class="recommendation-card" *ngIf="i<5 && (!learningJourneyFilter || workshop.type===learningJourneyFilter) ">
                         <a [routerLink]="'/workshop/'+workshop.id">
                             <div class="">
-                                <img class="recommendation-thumb" *ngIf="workshop.imageUrls && workshop.imageUrls.length>0" src="{{config.apiUrl+workshop.imageUrls[0]}}"
+                                <img class="recommendation-thumb" *ngIf="workshop.imageUrls && workshop.imageUrls.length>0" src="{{envVariable.apiUrl+workshop.imageUrls[0]}}"
                                     alt="workshpImg">
                                 <img class="recommendation-thumb" *ngIf="!workshop.imageUrls || workshop.imageUrls.length<=0" src="/assets/images/no-image.jpg"
                                     alt="workshpImg">
@@ -658,7 +660,7 @@
                 <div class="peer-recommendation-card" *ngFor="let peer of recommendedpeers; let i =index">
                     <a *ngIf="i<6" [routerLink]="'/profile/'+peer.id">
                         <div class="">
-                            <img class="peer-recommendation-thumb" *ngIf="peer.profiles[0].picture_url" src="{{config.apiUrl+peer.profiles[0].picture_url}}"
+                            <img class="peer-recommendation-thumb" *ngIf="peer.profiles[0].picture_url" src="{{envVariable.apiUrl+peer.profiles[0].picture_url}}"
                                 alt="peerImg">
                             <img class="peer-recommendation-thumb" *ngIf="!peer.profiles[0].picture_url" src="/assets/images/user-placeholder.jpg" alt="peerImg">
                         </div>

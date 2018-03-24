@@ -5,8 +5,6 @@ import { CollectionService } from '../_services/collection/collection.service';
 import { ProfileService } from '../_services/profile/profile.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
-import { AppConfig } from '../app.config';
-
 @Component({
   templateUrl: './console.component.html',
   styleUrls: ['./console.component.scss'],
@@ -34,7 +32,6 @@ export class ConsoleComponent implements OnInit {
     private cookieUtilsService: CookieUtilsService,
     private _collectionService: CollectionService,
     public _profileService: ProfileService,
-    private appConfig: AppConfig,
     private _cookieUtilsService: CookieUtilsService) {
     this.activatedRoute.firstChild.url.subscribe((urlSegment) => {
       console.log('activated route is: ' + JSON.stringify(urlSegment));

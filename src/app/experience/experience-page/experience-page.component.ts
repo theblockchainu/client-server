@@ -1,18 +1,14 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewContainerRef } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { Location } from '@angular/common';
 import { Router, ActivatedRoute, Params, NavigationStart } from '@angular/router';
 import { MatDialog, MatDialogConfig, MatDialogRef, MatSnackBar } from '@angular/material';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 import { Title } from '@angular/platform-browser';
-
-
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
 import { CollectionService } from '../../_services/collection/collection.service';
 import { ContentService } from '../../_services/content/content.service';
 import { CommentService } from '../../_services/comment/comment.service';
-import { AppConfig } from '../../app.config';
 import { ViewParticipantsComponent } from './view-participants/view-participants.component';
 import { ContentVideoComponent } from './content-video/content-video.component';
 import { ContentProjectComponent } from './content-project/content-project.component';
@@ -43,6 +39,7 @@ import { TopicService } from '../../_services/topic/topic.service';
 import { ContentInpersonComponent } from './content-inperson/content-inperson.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AuthenticationService } from '../../_services/authentication/authentication.service';
+import {environment} from '../../../environments/environment';
 declare var FB: any;
 
 const colors: any = {
@@ -94,6 +91,7 @@ export class MyCalendarUtils extends CalendarUtils {
 export class ExperiencePageComponent implements OnInit {
 
   public experienceId: string;
+  public envVariable;
   public userId;
   public userType: string;
   public totalDuration: string;
@@ -201,7 +199,6 @@ export class ExperiencePageComponent implements OnInit {
     public _contentService: ContentService,
     public _topicService: TopicService,
     private _commentService: CommentService,
-    public config: AppConfig,
     private _fb: FormBuilder,
     private dialog: MatDialog,
     private dialogsService: DialogsService,
@@ -210,6 +207,7 @@ export class ExperiencePageComponent implements OnInit {
     private titleService: Title
     // private location: Location
   ) {
+      this.envVariable = environment;
   }
 
   ngOnInit() {
@@ -568,7 +566,7 @@ export class ExperiencePageComponent implements OnInit {
 
   private setUpCarousel() {
     if (this.experience.imageUrls && this.experience.imageUrls.length > 0) {
-      this.carouselImages = this.experience.imageUrls.map(url => this.config.apiUrl + url);
+      this.carouselImages = this.experience.imageUrls.map(url => environment.apiUrl + url);
     }
   }
 

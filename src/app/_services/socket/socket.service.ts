@@ -2,20 +2,20 @@ import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { Observable } from 'rxjs/Observable';
 import { CookieUtilsService } from '../cookieUtils/cookie-utils.service';
-import {AppConfig} from '../../app.config';
-
+import {environment} from '../../../environments/environment';
 @Injectable()
 export class SocketService {
 
     private socket;
     public userId;
+    public envVariable;
 
     constructor(
-        private _cookieUtilsService: CookieUtilsService,
-        public config: AppConfig
+        private _cookieUtilsService: CookieUtilsService
     ) {
+        this.envVariable = environment;
         this.userId = _cookieUtilsService.getValue('userId');
-        this.socket = io(this.config.apiUrl);
+        this.socket = io(environment.apiUrl);
         this.addUser(this.userId);
         this.listenForNewMessage().subscribe(message => {
             console.log(message);

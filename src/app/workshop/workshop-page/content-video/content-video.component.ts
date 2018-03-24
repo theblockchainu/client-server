@@ -1,15 +1,13 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { AppConfig } from '../../../app.config';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommentService } from '../../../_services/comment/comment.service';
 import { CollectionService } from '../../../_services/collection/collection.service';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 import { SocketService } from '../../../_services/socket/socket.service';
 import { Router } from '@angular/router';
-// import { DeviceDetectorService } from 'ngx-device-detector';
+import {environment} from '../../../../environments/environment';
 import { VgAPI } from 'videogular2/core';
-import * as moment from 'moment';
 import { ContentService } from '../../../_services/content/content.service';
 
 @Component({
@@ -30,9 +28,9 @@ export class ContentVideoComponent implements OnInit, OnDestroy {
     api: VgAPI;
     public attachmentUrls = [];
     public duration = 0;
+    public envVariable;
 
     constructor(
-        public config: AppConfig,
         @Inject(MAT_DIALOG_DATA) public data: any,
         public _collectionService: CollectionService,
         public dialogRef: MatDialogRef<ContentVideoComponent>,
@@ -44,6 +42,7 @@ export class ContentVideoComponent implements OnInit, OnDestroy {
         // private deviceService: DeviceDetectorService,
         private contentService: ContentService
     ) {
+        this.envVariable = environment;
         this.userType = data.userType;
         this.workshopId = data.collectionId;
         this.userId = cookieUtilsService.getValue('userId');

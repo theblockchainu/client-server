@@ -1,13 +1,12 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { AppConfig } from '../../app.config';
 import { MediaUploaderService } from '../../_services/mediaUploader/media-uploader.service';
 import { ContentService } from '../../_services/content/content.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import * as _ from 'lodash';
 import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
-
+import {environment} from '../../../environments/environment';
 @Component({
     selector: 'app-workshop-content-online',
     templateUrl: './workshop-content-online.component.html',
@@ -17,6 +16,7 @@ import { RequestHeaderService } from '../../_services/requestHeader/request-head
 export class WorkshopContentOnlineComponent implements OnInit {
 
     public lastIndex: number;
+    public envVariable;
     public filesToUpload: number;
     public filesUploaded: number;
     public itenaryForm: FormGroup;
@@ -36,13 +36,13 @@ export class WorkshopContentOnlineComponent implements OnInit {
     constructor(
         private _fb: FormBuilder,
         private http: HttpClient,
-        public config: AppConfig,
         private mediaUploader: MediaUploaderService,
         private contentService: ContentService,
         @Inject(MAT_DIALOG_DATA) public inputData: any,
         public dialogRef: MatDialogRef<WorkshopContentOnlineComponent>,
         private requestHeaders: RequestHeaderService
     ) {
+        this.envVariable = environment;
         this.options = requestHeaders.getOptions();
         this.itenaryForm = inputData.itenaryForm;
         this.lastIndex = inputData.index;
@@ -202,7 +202,7 @@ export class WorkshopContentOnlineComponent implements OnInit {
     deleteFromContainer(fileUrl, fileType) {
         const fileurl = fileUrl;
         fileUrl = _.replace(fileUrl, 'download', 'files');
-        this.http.delete(this.config.apiUrl + fileUrl)
+        this.http.delete(environment.apiUrl + fileUrl)
             .map((response) => {
                 console.log(response);
                 if (fileType === 'file') {
@@ -240,7 +240,7 @@ export class WorkshopContentOnlineComponent implements OnInit {
     }
 
     deleteFromContent(contentForm, body) {
-        this.http.patch(this.config.apiUrl + '/api/contents/' + contentForm.controls['id'].value, body, this.options)
+        this.http.patch(environment.apiUrl + '/api/contents/' + contentForm.controls['id'].value, body, this.options)
             .map((response: any) => { })
             .subscribe();
     }

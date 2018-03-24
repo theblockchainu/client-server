@@ -18,7 +18,7 @@
     <div class="col-md-2" style="text-align: right">
       <img (click)="openProfilePage(data.collection.owners[0].id)" *ngIf="!data.collection.owners[0].profiles[0].picture_url" src="/assets/images/avatar.png"
         alt="A" class="clickable circle-thumb margin-top-5" style="width: 70px; height: 70px;">
-      <img (click)="openProfilePage(data.collection.owners[0].id)" *ngIf="data.collection.owners[0].profiles[0].picture_url" src="{{config.apiUrl+ data.collection.owners[0].profiles[0].picture_url}}"
+      <img (click)="openProfilePage(data.collection.owners[0].id)" *ngIf="data.collection.owners[0].profiles[0].picture_url" src="{{envVariable.apiUrl+ data.collection.owners[0].profiles[0].picture_url}}"
         class="clickable circle-thumb margin-top-5" alt="dp" style="width: 70px; height: 70px;">
     </div>
   </div>
@@ -28,7 +28,7 @@
     <div class="row">
       <div class="content-image" *ngIf="data.content.imageUrl">
         <img *ngIf="data.content.imageUrl.includes('.jpeg') || data.content.imageUrl.includes('.jpg') || data.content.imageUrl.includes('.png')"
-          class="img-responsive media-middle" width="100%" style="max-height: 400px;" src="{{config.apiUrl+data.content.imageUrl}}"
+          class="img-responsive media-middle" width="100%" style="max-height: 400px;" src="{{envVariable.apiUrl+data.content.imageUrl}}"
           alt="image">
         <!--If project has a video and not an image-->
         <div *ngIf="data.content.imageUrl.includes('.mp4') || data.content.imageUrl.includes('.mpeg') || data.content.imageUrl.includes('.mpg')"
@@ -61,7 +61,7 @@
             </vg-controls>
 
             <video [vgMedia]="media" #media id="singleVideo" width="100%" preload="auto" style="max-height: 300px;" crossorigin>
-              <source src="{{config.apiUrl+data.content.imageUrl}}" type="video/mp4">
+              <source src="{{envVariable.apiUrl+data.content.imageUrl}}" type="video/mp4">
             </video>
           </vg-player>
         </div>
@@ -99,9 +99,9 @@
       <br>
       <br>
       <div *ngFor="let file of attachmentUrls" class="col-md-6 padding-left-0 imageContainer">
-        <img *ngIf="file.type.includes('image')" src="{{config.apiUrl + file.url}}" width="150" style="border: 0.5px solid #ccc">
+        <img *ngIf="file.type.includes('image')" src="{{envVariable.apiUrl + file.url}}" width="150" style="border: 0.5px solid #ccc">
         <video *ngIf="file.type.includes('video')" controls width="150" style="border: 0.5px solid #ccc" preload="metadata">
-          <source src="{{config.apiUrl + file.url}}">
+          <source src="{{envVariable.apiUrl + file.url}}">
         </video>
       </div>
     </div>
@@ -125,11 +125,11 @@
       <div class="row margin-top-20">
         <div *ngFor="let submission of data.content.submissions; let i=index">
           <div class="col-sm-3" *ngIf="i < 4 && data.userType !== 'public'" (click)="viewSubmission(submission.id)" style="cursor: pointer">
-            <img class="img-responsive" src="{{ submission.picture_url ? config.apiUrl+submission.picture_url.split(',')[0] : noImage }}"
+            <img class="img-responsive" src="{{ submission.picture_url ? envVariable.apiUrl+submission.picture_url.split(',')[0] : noImage }}"
               alt="image" height="117" (error)="imgErrorHandler($event)" />
             <div class="submission-title">{{ submission.name | ucfirst | shorten : 14 : '...' }}</div>
             <div class="submission-owner" *ngIf="submission.peer && submission.peer.length>0">
-              <img class="circle-thumb" src="{{ submission.peer[0].profiles[0].picture_url ? config.apiUrl+submission.peer[0].profiles[0].picture_url : defaultProfileUrl }}"
+              <img class="circle-thumb" src="{{ submission.peer[0].profiles[0].picture_url ? envVariable.apiUrl+submission.peer[0].profiles[0].picture_url : defaultProfileUrl }}"
                 alt="thumb" style="margin-left: 0px; width: 20px; height: 20px;" (error)="imgErrorHandler($event)" />
               <span class="owner-name">{{ submission.peer[0].profiles[0].first_name }} {{ submission.peer[0].profiles[0].last_name }}</span>
             </div>
@@ -141,11 +141,11 @@
           </div>
           <div class="col-sm-3" *ngIf="i < 4 && data.userType ==='public' && submission.isPrivate==='false'" (click)="viewSubmission(submission.id)"
             style="cursor: pointer;">
-            <img class="img-responsive" src="{{ submission.picture_url ? config.apiUrl+submission.picture_url : noImage }}" alt="image"
+            <img class="img-responsive" src="{{ submission.picture_url ? envVariable.apiUrl+submission.picture_url : noImage }}" alt="image"
               height="117" (error)="imgErrorHandler($event)" />
             <div class="submission-title">{{ submission.name | ucfirst | shorten : 14 : '...' }}</div>
             <div class="submission-owner" *ngIf="submission.peer && submission.peer.length>0">
-              <img class="circle-thumb" src="{{ submission.peer[0].profiles[0].picture_url ? config.apiUrl+submission.peer[0].profiles[0].picture_url : defaultProfileUrl }}"
+              <img class="circle-thumb" src="{{ submission.peer[0].profiles[0].picture_url ? envVariable.apiUrl+submission.peer[0].profiles[0].picture_url : defaultProfileUrl }}"
                 alt="thumb" style="margin-left: 0px; width: 20px; height: 20px;" />
               <span class="owner-name">{{ submission.peer[0].profiles[0].first_name }} {{ submission.peer[0].profiles[0].last_name }}</span>
             </div>

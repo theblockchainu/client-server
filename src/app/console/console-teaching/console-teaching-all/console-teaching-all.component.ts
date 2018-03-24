@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConsoleTeachingComponent } from '../console-teaching.component';
 import { CollectionService } from '../../../_services/collection/collection.service';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
-import { AppConfig } from '../../../app.config';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import * as _ from 'lodash';
 import { DialogsService } from '../../../_services/dialogs/dialog.service';
@@ -40,7 +39,6 @@ export class ConsoleTeachingAllComponent implements OnInit {
         public _collectionService: CollectionService,
         private _dialogService: DialogsService,
         private _cookieUtilsService: CookieUtilsService,
-        public config: AppConfig,
         public dialog: MatDialog,
         public snackBar: MatSnackBar,
         private ucFirstPipe: UcFirstPipe

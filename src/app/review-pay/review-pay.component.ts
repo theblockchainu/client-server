@@ -1,13 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AppConfig } from '../app.config';
 import { Router, ActivatedRoute, Params, NavigationStart } from '@angular/router';
 import { CookieUtilsService } from '../_services/cookieUtils/cookie-utils.service';
 import { ProfileService } from '../_services/profile/profile.service';
 import * as moment from 'moment';
 import { PaymentService } from '../_services/payment/payment.service';
-import { HttpClient } from '@angular/common/http';
 import { CollectionService } from '../_services/collection/collection.service';
-
+import {environment} from '../../environments/environment';
 declare var Stripe: any;
 
 @Component({
@@ -17,6 +15,7 @@ declare var Stripe: any;
 })
 export class ReviewPayComponent implements OnInit {
     public stripe: any;
+    public envVariable;
     public elements: any;
     public card: any;
     @ViewChild('cardForm', { read: ElementRef }) cardForm: ElementRef;
@@ -43,7 +42,7 @@ export class ReviewPayComponent implements OnInit {
     public useAnotherCard = false;
     public loadingCards = true;
 
-    constructor(public config: AppConfig,
+    constructor(
         private _cookieUtilsService: CookieUtilsService,
         private activatedRoute: ActivatedRoute,
         private _collectionService: CollectionService,
@@ -51,6 +50,7 @@ export class ReviewPayComponent implements OnInit {
         public paymentService: PaymentService,
         private router: Router
     ) {
+        this.envVariable = environment;
         this.activatedRoute.params.subscribe(params => {
             this.collectionId = params['collectionId'];
             this.collectionCalendarId = params['calendarId'];
@@ -59,7 +59,7 @@ export class ReviewPayComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.stripe = Stripe(this.config.stripePublishableKey);
+        this.stripe = Stripe(environment.stripePublishableKey);
         const elements = this.stripe.elements();
         this.card = elements.create('card', {
             iconStyle: 'solid',

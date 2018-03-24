@@ -1,16 +1,15 @@
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { AppConfig } from '../../app.config';
 import { CountryPickerService } from '../../_services/countrypicker/countrypicker.service';
 import { ModalModule, ModalDirective } from 'ngx-bootstrap';
 import { MediaUploaderService } from '../../_services/mediaUploader/media-uploader.service';
-import * as _ from 'lodash';
 import { MatDialog } from '@angular/material';
 import { ExperienceContentProjectComponent } from '../experience-content-project/experience-content-project.component';
 import { ExperienceContentVideoComponent } from '../experience-content-video/experience-content-video.component';
 import { CollectionService } from '../../_services/collection/collection.service';
 import { ExperienceContentInpersonComponent } from '../experience-content-inperson/experience-content-inperson.component';
+import {environment} from '../../../environments/environment';
 
 declare var moment: any;
 
@@ -45,16 +44,17 @@ export class ContentViewComponent implements OnInit {
   public countries: any[];
   public filesToUpload: number;
   public filesUploaded: number;
+  public envVariable;
 
   constructor(
     private _fb: FormBuilder,
     private http: HttpClient,
-    public config: AppConfig,
     private countryPickerService: CountryPickerService,
     private mediaUploader: MediaUploaderService,
     private dialog: MatDialog,
     public _collectionService: CollectionService
   ) {
+      this.envVariable = environment;
     this.countryPickerService.getCountries()
       .subscribe((countries) => this.countries = countries);
   }

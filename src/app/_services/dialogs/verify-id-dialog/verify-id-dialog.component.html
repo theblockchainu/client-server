@@ -33,7 +33,7 @@
                     <b>10MB</b>
                   </h5>
                   <div *ngIf="verificationIdUrl" class="profilePic icon-remove delete">
-                    <img *ngIf="fileType.includes('image')" class="uploaded_picture" src="{{config.apiUrl + verificationIdUrl}}" width="150"
+                    <img *ngIf="fileType.includes('image')" class="uploaded_picture" src="{{envVariable.apiUrl + verificationIdUrl}}" width="150"
                       style="border: 0.5px solid #ccc">
                     <mat-icon *ngIf="fileType.includes('image')" (click)="deleteFromContainer(verificationIdUrl, 'image')" class="delete-image">close</mat-icon>
                     <mat-icon *ngIf="fileType.includes('application')" (click)="deleteFromContainer(verificationIdUrl, 'file')" class="delete-file">close</mat-icon>

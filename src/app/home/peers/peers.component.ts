@@ -2,9 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CollectionService } from '../../_services/collection/collection.service';
 import { ProfileService } from '../../_services/profile/profile.service';
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
-import { AppConfig } from '../../app.config';
 import { MatDialog } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-peers',
@@ -28,6 +28,7 @@ export class PeersComponent implements OnInit {
   public availableTopics: Array<any>;
   public userId;
   public loading = false;
+  public envVariable;
 
   @ViewChild('topicButton') topicButton;
   @ViewChild('priceButton') priceButton;
@@ -35,10 +36,9 @@ export class PeersComponent implements OnInit {
     public _collectionService: CollectionService,
     public _profileService: ProfileService,
     private _cookieUtilsService: CookieUtilsService,
-    public config: AppConfig,
     public dialog: MatDialog
   ) {
-
+      this.envVariable = environment;
     this.userId = _cookieUtilsService.getValue('userId');
   }
 

@@ -7,7 +7,7 @@ import {CommunityService} from '../../../_services/community/community.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import {DialogsService} from '../../../_services/dialogs/dialog.service';
-import {AppConfig} from '../../../app.config';
+import {environment} from '../../../../environments/environment';
 
 @Component({
     selector: 'app-community-page-workshops',
@@ -22,14 +22,15 @@ export class CommunityPageWorkshopsComponent implements OnInit {
     public workshops;
     private today = moment();
     public loadingWorkshops = true;
+    public envVariable;
 
     constructor(public activatedRoute: ActivatedRoute,
                 public communityPageComponent: CommunityPageComponent,
                 public _collectionService: CollectionService,
                 public _communityService: CommunityService,
                 public _dialogsService: DialogsService,
-                public config: AppConfig,
                 public _cookieUtilsService: CookieUtilsService) {
+        this.envVariable = environment;
         activatedRoute.pathFromRoot[3].url.subscribe((urlSegment) => {
             console.log('activated route is: ' + JSON.stringify(urlSegment));
             if (urlSegment[0] === undefined) {

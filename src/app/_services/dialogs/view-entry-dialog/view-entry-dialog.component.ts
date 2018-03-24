@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
-import {AppConfig} from '../../../app.config';
 import {CollectionService} from '../../collection/collection.service';
 import {ProjectSubmissionService} from '../../project-submission/project-submission.service';
 import {SubmissionViewComponent} from '../submission-view/submission-view.component';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-view-entry-dialog',
@@ -14,15 +14,17 @@ export class ViewEntryDialogComponent implements OnInit {
 
   public noImage = 'assets/images/no-image.jpg';
   public defaultProfileUrl = '/assets/images/avatar.png';
+  public envVariable;
 
   constructor(
       public dialogRef: MatDialogRef<ViewEntryDialogComponent>,
       @Inject(MAT_DIALOG_DATA) public data: any,
-      public config: AppConfig,
       private dialog: MatDialog,
       private _collectionService: CollectionService,
       private _projectSubmissionService: ProjectSubmissionService
-  ) { }
+  ) {
+      this.envVariable = environment;
+  }
 
   ngOnInit() {
 

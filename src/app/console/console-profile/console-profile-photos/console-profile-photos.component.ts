@@ -4,7 +4,7 @@ import { ConsoleProfileComponent } from '../console-profile.component';
 import { ProfileService } from '../../../_services/profile/profile.service';
 import { MediaUploaderService } from '../../../_services/mediaUploader/media-uploader.service';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
-import { AppConfig } from '../../../app.config';
+import {environment} from '../../../../environments/environment';
 
 declare var moment: any;
 
@@ -21,19 +21,20 @@ export class ConsoleProfilePhotosComponent implements OnInit {
   private uploadingImage = false;
   private uploadingVideo = false;
   public loadingMediaPage = false;
+  public envVariable;
   constructor(
     public activatedRoute: ActivatedRoute,
     public consoleProfileComponent: ConsoleProfileComponent,
     public router: Router,
     public _profileService: ProfileService,
     public mediaUploader: MediaUploaderService,
-    public config: AppConfig,
     private _cookieUtilsService: CookieUtilsService
   ) {
     activatedRoute.pathFromRoot[4].url.subscribe((urlSegment) => {
       console.log(urlSegment[0].path);
       consoleProfileComponent.setActiveTab(urlSegment[0].path);
     });
+    this.envVariable = environment;
     this.userId = _cookieUtilsService.getValue('userId');
   }
 

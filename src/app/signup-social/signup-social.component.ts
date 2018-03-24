@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { AppConfig } from '../app.config';
 import { Router, ActivatedRoute, Params, NavigationStart } from '@angular/router';
 import { ProfileService } from '../_services/profile/profile.service';
 import 'rxjs/add/operator/map';

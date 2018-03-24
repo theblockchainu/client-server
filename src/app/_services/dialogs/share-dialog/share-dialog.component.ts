@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { AppConfig } from '../../../app.config';
-
+import {environment} from '../../../../environments/environment';
 declare var FB: any;
 
 
@@ -14,15 +13,16 @@ export class ShareDialogComponent implements OnInit {
 
   public generatedUrl: string;
   public tweetUrl: string;
+  public envVariable;
   public LinkedInShareUrl: string;
   constructor(public dialogRef: MatDialogRef<ShareDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private snackBar: MatSnackBar,
-    public config: AppConfig) {
+    private snackBar: MatSnackBar) {
+      this.envVariable = environment;
     if (data.cohortId) {
-      this.generatedUrl = config.clientUrl + '/' + data.type + '/' + data.id + '/calendar/' + data.cohortId;
+      this.generatedUrl = environment.clientUrl + '/' + data.type + '/' + data.id + '/calendar/' + data.cohortId;
     } else {
-      this.generatedUrl = config.clientUrl + '/' + data.type + '/' + data.id;
+      this.generatedUrl = environment.clientUrl + '/' + data.type + '/' + data.id;
     }
     this.tweetUrl = 'https://twitter.com/intent/tweet?text=Join me for the ' + this.data.type + ' ' + this.data.title + '&url=' + this.generatedUrl;
     this.LinkedInShareUrl = 'https://www.linkedin.com/shareArticle?mini=true&url=' + this.generatedUrl + '&title=' + this.data.title + '&summary=Join me for the ' + this.data.type + ' ' + this.data.title + ' on ' + this.generatedUrl;

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import 'rxjs/add/operator/map';
-import { AppConfig } from '../../app.config';
 
 class RequestOptions {
 
@@ -22,8 +21,7 @@ class RequestOptions {
 export class RequestHeaderService {
 
   constructor(
-    private http: HttpClient,
-    public config: AppConfig) {
+    private http: HttpClient) {
   }
 
   getOptions() {

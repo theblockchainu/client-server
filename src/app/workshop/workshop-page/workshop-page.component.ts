@@ -1,15 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewContainerRef } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { Location } from '@angular/common';
 import { Router, ActivatedRoute, Params, NavigationStart } from '@angular/router';
 import { MatDialog, MatDialogConfig, MatDialogRef, MatSnackBar } from '@angular/material';
 import * as moment from 'moment';
 import * as _ from 'lodash';
-
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
 import { CollectionService } from '../../_services/collection/collection.service';
 import { CommentService } from '../../_services/comment/comment.service';
-import { AppConfig } from '../../app.config';
 import { ViewParticipantsComponent } from './view-participants/view-participants.component';
 import { ContentOnlineComponent } from './content-online/content-online.component';
 import { ContentVideoComponent } from './content-video/content-video.component';
@@ -38,7 +35,7 @@ import { CustomDateFormatter } from '../../_services/dialogs/edit-calendar-dialo
 import { DialogsService } from '../../_services/dialogs/dialog.service';
 import { TopicService } from '../../_services/topic/topic.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-
+import {environment} from '../../../environments/environment';
 declare var FB: any;
 
 const colors: any = {
@@ -106,7 +103,7 @@ export class WorkshopPageComponent implements OnInit {
   public loggedInUser;
   public maxLength = 140;
   public carouselBanner: any;
-
+  public envVariable;
   public isReadonly = true;
   public noOfReviews = 3;
   private initialised = false;
@@ -192,13 +189,13 @@ export class WorkshopPageComponent implements OnInit {
     public _collectionService: CollectionService,
     public _topicService: TopicService,
     private _commentService: CommentService,
-    public config: AppConfig,
     private _fb: FormBuilder,
     private dialog: MatDialog,
     private dialogsService: DialogsService,
     private snackBar: MatSnackBar,
     // private location: Location
   ) {
+      this.envVariable = environment;
     this.activatedRoute.params.subscribe(params => {
       if (this.initialised && (this.workshopId !== params['collectionId'] || this.calendarId !== params['calendarId'])) {
         location.reload();
@@ -507,7 +504,7 @@ export class WorkshopPageComponent implements OnInit {
 
   private setUpCarousel() {
     if (this.workshop.imageUrls && this.workshop.imageUrls.length > 0) {
-      this.carouselImages = this.workshop.imageUrls.map(url => this.config.apiUrl + url);
+      this.carouselImages = this.workshop.imageUrls.map(url => environment.apiUrl + url);
     }
   }
 

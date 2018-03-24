@@ -1,15 +1,15 @@
-import { AppConfig } from '../../app.config';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
+import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class MediaUploaderService {
   private options;
+  public envVariable;
 
   constructor(private http: HttpClient,
-    public config: AppConfig,
-    private sanitizer: DomSanitizer) { }
+    private sanitizer: DomSanitizer) { this.envVariable = environment; }
 
   public upload(file) {
     let type = file;
@@ -26,7 +26,7 @@ export class MediaUploaderService {
       type = 'file';
     }
     formData.append(type, file, file.name);
-    return this.http.post(this.config.apiUrl + '/api/media/upload?container=peerbuds-dev1290',
+    return this.http.post(environment.apiUrl + '/api/media/upload?container=peerbuds-dev1290',
       formData,
       { withCredentials: true })
       .map((response: any) => response);

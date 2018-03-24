@@ -3,7 +3,6 @@ import { CollectionService } from '../../_services/collection/collection.service
 import { TopicService } from '../../_services/topic/topic.service';
 import { ProfileService } from '../../_services/profile/profile.service';
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
-import { AppConfig } from '../../app.config';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs/Observable';
 import { MatDialog } from '@angular/material';
@@ -13,6 +12,7 @@ import * as moment from 'moment';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { DialogsService } from '../../_services/dialogs/dialog.service';
 import { CommunityService } from '../../_services/community/community.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
     selector: 'app-communities',
@@ -35,6 +35,7 @@ export class CommunitiesComponent implements OnInit {
 
     public availableTopics: Array<any>;
     public topicsBackup: Array<any>;
+    public envVariable;
 
     public userId;
     public communities: Array<any>;
@@ -51,12 +52,12 @@ export class CommunitiesComponent implements OnInit {
         public _profileService: ProfileService,
         private _cookieUtilsService: CookieUtilsService,
         private _topicService: TopicService,
-        public config: AppConfig,
         public dialog: MatDialog,
         public elRef: ElementRef,
         public _dialogsService: DialogsService,
         public _communityService: CommunityService) {
         this.userId = _cookieUtilsService.getValue('userId');
+        this.envVariable = environment;
     }
 
     ngOnInit() {

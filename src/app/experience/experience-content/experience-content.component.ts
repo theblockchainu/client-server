@@ -4,14 +4,13 @@ import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import * as _ from 'lodash';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AppConfig } from '../../app.config';
 import { AuthenticationService } from '../../_services/authentication/authentication.service';
 import { CollectionService } from '../../_services/collection/collection.service';
 import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
 import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
-import { forEach } from '@angular/router/src/utils/collection';
 import { DialogsService } from '../../_services/dialogs/dialog.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-experience-content',
@@ -40,9 +39,10 @@ export class ExperienceContentComponent implements OnInit {
   days = new EventEmitter<any>();
 
   private options;
+  public envVariable;
   constructor(
     public authenticationService: AuthenticationService,
-    private http: HttpClient, public config: AppConfig,
+    private http: HttpClient,
     private _fb: FormBuilder,
     private requestHeaders: RequestHeaderService,
     private dialog: MatDialog,
@@ -51,6 +51,7 @@ export class ExperienceContentComponent implements OnInit {
     private location: Location,
     private _dialogsService: DialogsService
   ) {
+      this.envVariable = environment;
     this.options = requestHeaders.getOptions();
   }
 
@@ -78,7 +79,7 @@ export class ExperienceContentComponent implements OnInit {
     let deleteIndex = 0;
 
     while (deleteIndex !== contents.length) {
-      this.http.delete(this.config.apiUrl + '/api/contents/' + contents[deleteIndex].id, this.options)
+      this.http.delete(environment.apiUrl + '/api/contents/' + contents[deleteIndex].id, this.options)
         .map((response: any) => {
           console.log(response);
         })
@@ -262,7 +263,7 @@ export class ExperienceContentComponent implements OnInit {
     }
     schedule.startDay = this.numberOfdays(scheduleDate, this.calendar.startDate);
 
-    this.http.post(this.config.apiUrl + '/api/collections/' + this.collection.id + '/contents', contentObj, this.options)
+    this.http.post(environment.apiUrl + '/api/collections/' + this.collection.id + '/contents', contentObj, this.options)
       .map((response: any) => {
 
         const result = response;
@@ -279,7 +280,7 @@ export class ExperienceContentComponent implements OnInit {
         }
         contentGroup.controls.id.setValue(contentId);
 
-        this.http.patch(this.config.apiUrl + '/api/contents/' + contentId + '/schedule', schedule, this.options)
+        this.http.patch(environment.apiUrl + '/api/contents/' + contentId + '/schedule', schedule, this.options)
           .map((resp: any) => {
             if (resp.status === 200) {
               const Itenary = <FormArray>this.myForm.controls.itenary;
@@ -297,7 +298,7 @@ export class ExperienceContentComponent implements OnInit {
 
         // Add a location to this content
         if (location !== undefined) {
-          this.http.patch(this.config.apiUrl + '/api/contents/' + contentId + '/location', location, this.options)
+          this.http.patch(environment.apiUrl + '/api/contents/' + contentId + '/location', location, this.options)
             .map((resp: any) => {
               if (resp.status === 200) {
                 const Itenary = <FormArray>this.myForm.controls.itenary;
@@ -362,7 +363,7 @@ export class ExperienceContentComponent implements OnInit {
       schedule.endTime = new Date(0, 0, 0, endHour, endMin, 0, 0);*/
         schedule.endTime = moment(schedule.endTime).format();
     }
-    this.http.put(this.config.apiUrl + '/api/collections/' + this.collection.id + '/contents/' + contentId, contentObj, this.options)
+    this.http.put(environment.apiUrl + '/api/collections/' + this.collection.id + '/contents/' + contentId, contentObj, this.options)
       .map((response: any) => {
         const result = response;
         if (result.isNewInstance) {
@@ -373,7 +374,7 @@ export class ExperienceContentComponent implements OnInit {
             }
           });
         }
-        this.http.patch(this.config.apiUrl + '/api/contents/' + contentId + '/schedule', schedule, this.options)
+        this.http.patch(environment.apiUrl + '/api/contents/' + contentId + '/schedule', schedule, this.options)
           .map((resp: any) => {
             if (resp.status === 200) {
               contentGroup.controls.pending.setValue(false);
@@ -383,7 +384,7 @@ export class ExperienceContentComponent implements OnInit {
 
         // Edit a location of this content
         if (location !== undefined) {
-          this.http.patch(this.config.apiUrl + '/api/contents/' + contentId + '/location', location, this.options)
+          this.http.patch(environment.apiUrl + '/api/contents/' + contentId + '/location', location, this.options)
             .map((resp: any) => {
               if (resp.status === 200) {
                 const Itenary = <FormArray>this.myForm.controls.itenary;
@@ -409,7 +410,7 @@ export class ExperienceContentComponent implements OnInit {
     if (eventIndex) {
       const contentObj = itenaryObj.contents[eventIndex];
       const contentId = contentObj.id;
-      this.http.delete(this.config.apiUrl + '/api/collections/' + this.collection.id + '/contents/' + contentId, this.options)
+      this.http.delete(environment.apiUrl + '/api/collections/' + this.collection.id + '/contents/' + contentId, this.options)
         .map((response: any) => {
           if (response !== null) {
             const result = response;
@@ -433,7 +434,7 @@ export class ExperienceContentComponent implements OnInit {
     } else {
       const contentArray = itenaryObj.contents;
       contentArray.forEach(content => {
-        this.http.delete(this.config.apiUrl + '/api/collections/' + this.collection.id + '/contents/' + content.id, this.options)
+        this.http.delete(environment.apiUrl + '/api/collections/' + this.collection.id + '/contents/' + content.id, this.options)
           .map((response: any) => {
             if (response !== null) {
               const result = response;

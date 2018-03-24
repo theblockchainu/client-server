@@ -13,7 +13,6 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import { HttpClient } from '@angular/common/http';
-import { AppConfig } from '../../../app.config';
 
 import { UcFirstPipe } from 'ngx-pipes';
 import * as _ from 'lodash';
@@ -71,7 +70,6 @@ export class ConsoleProfileEditComponent implements OnInit {
     public _fb: FormBuilder,
     public _timezoneService: TimezonePickerService,
     private http: HttpClient,
-    public config: AppConfig,
     private _cookieUtilsService: CookieUtilsService,
     private ucFirstPipe: UcFirstPipe) {
     activatedRoute.pathFromRoot[4].url.subscribe((urlSegment) => {
@@ -173,8 +171,6 @@ export class ConsoleProfileEditComponent implements OnInit {
   }
 
   getLanguages() {
-    // this.http.get(this.config.apiUrl + '/api/languages')
-    // .map(response => response ).subscribe(data => {
     this._languageService.getLanguages().subscribe(data => {
       this.languages = data;
       this.languagesAsync.next(this.languages);

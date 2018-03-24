@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AppConfig } from '../../app.config';
+import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class SearchService {
 
     public httpSubscription: any;
+    public envVariable;
 
     constructor(private router: Router,
-        private http: HttpClient,
-        public config: AppConfig) {
+        private http: HttpClient) {
+        this.envVariable = environment;
     }
 
 
@@ -20,7 +21,7 @@ export class SearchService {
                 this.httpSubscription.unsubscribe();
             }
             this.httpSubscription = this.http
-                .get(this.config.searchUrl + '/searchAll?' + 'query=' + query)
+                .get(environment.searchUrl + '/searchAll?' + 'query=' + query)
                 .map((response) => {
                     console.log(response);
                     cb(null, response);
@@ -33,7 +34,7 @@ export class SearchService {
     public getCommunitySearchResults(userId, query: any, cb) {
         if (userId) {
             this.http
-                .get(this.config.searchUrl + '/searchCommunity?' + 'query=' + query)
+                .get(environment.searchUrl + '/searchCommunity?' + 'query=' + query)
                 .map((response) => {
                     console.log(response);
                     cb(null, response);

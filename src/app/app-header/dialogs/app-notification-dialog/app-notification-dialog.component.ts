@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AppConfig } from '../../../app.config';
 import { NotificationService } from '../../../_services/notification/notification.service';
 import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material';
 import { UcWordsPipe } from 'ngx-pipes';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
+import {environment} from '../../../../environments/environment';
 declare var moment: any;
 @Component({
     selector: 'app-app-notification-dialog',
@@ -18,15 +18,16 @@ export class AppNotificationDialogComponent implements OnInit {
     public notifications = [];
     public loaded = false;
     public userId;
+    public envVariable;
 
     constructor(
-        public config: AppConfig,
         public _notificationService: NotificationService,
         public router: Router,
         private ucwords: UcWordsPipe,
         public dialogRef: MatDialogRef<AppNotificationDialogComponent>,
         public _cookieUtilsService: CookieUtilsService
     ) {
+        this.envVariable = environment;
         this.userId = _cookieUtilsService.getValue('userId');
     }
 

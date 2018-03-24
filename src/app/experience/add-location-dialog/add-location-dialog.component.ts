@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { AppConfig } from '../../app.config';
+import {environment} from '../../../environments/environment';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { CountryPickerService } from '../../_services/countrypicker/countrypicker.service';
 import { Observable } from 'rxjs/Observable';
@@ -29,18 +29,18 @@ export class AddLocationDialogComponent implements OnInit {
     };
     public lat = 37.76999;
     public lng = -122.44696;
-
+    public envVariable;
     public filteredCountryOptions: Observable<string[]>;
     private countriesArray: any[];
     public busyCountry = false;
     public selectedCountry;
 
     constructor(
-        public config: AppConfig,
         @Inject(MAT_DIALOG_DATA) public inputData: any,
         public dialogRef: MatDialogRef<AddLocationDialogComponent>,
         private countryPickerService: CountryPickerService
     ) {
+        this.envVariable = environment;
     }
 
     ngOnInit() {

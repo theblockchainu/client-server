@@ -56,14 +56,14 @@
                                 <!-- <ng-template pTemplate="content"> -->
                                 <!-- <mat-grid-list cols="4" gutterSize="10px" *ngIf="image.value">
                                         <mat-grid-tile>
-                                            <img src="{{config.apiUrl + image.value}}" width="150" (error)="imgErrorHandler($event)">
+                                            <img src="{{envVariable.apiUrl + image.value}}" width="150" (error)="imgErrorHandler($event)">
                                             <mat-icon (click)="deleteFromContainer(image.value, 'image')" class="delete-button">close</mat-icon>
                                         </mat-grid-tile>
                                     </mat-grid-list> -->
                                 <!-- </ng-template> -->
 
                                 <div *ngIf="image.value" class="col-md-6 padding-left-0 pic delete imageContainer">
-                                    <img src="{{config.apiUrl + image.value}}" width="150" style="border: 0.5px solid #ccc; position: relative; top: -20px;">
+                                    <img src="{{envVariable.apiUrl + image.value}}" width="150" style="border: 0.5px solid #ccc; position: relative; top: -20px;">
                                     <mat-icon (click)="deleteFromContainer(image.value, 'image')" class="delete-button">close</mat-icon>
 
                                 </div>
@@ -103,20 +103,20 @@
                                         <div style="float: left; margin-right: 15px; cursor: pointer;">
                                             <mat-icon (click)="deleteFromContainer(file, 'file')" class="">close</mat-icon>
                                         </div>
-                                        <a href="{{config.apiUrl + file}}">{{file}}</a>
+                                        <a href="{{envVariable.apiUrl + file}}">{{file}}</a>
                                     </mat-grid-tile>
                                 </mat-grid-list> -->
                             <!-- </ng-template> -->
                             <div *ngIf="attachmentUrls.length" class="pic delete">
                                 <div *ngFor="let file of attachmentUrls" class="col-md-6 padding-left-0 imageContainer">
-                                    <img *ngIf="file.type.includes('image')" src="{{config.apiUrl + file.url}}" width="150" style="border: 0.5px solid #ccc; position: relative;">
+                                    <img *ngIf="file.type.includes('image')" src="{{envVariable.apiUrl + file.url}}" width="150" style="border: 0.5px solid #ccc; position: relative;">
                                     <mat-icon *ngIf="file.type.includes('image')" (click)="deleteFromContainer(file.url, 'file')" class="delete-image">close</mat-icon>
                                     <div *ngIf="file.type.includes('application')" class="uploaded_file">
-                                        <a href="{{config.apiUrl + file.url}}" target="_blank">{{file.originalFilename}}</a>
+                                        <a href="{{envVariable.apiUrl + file.url}}" target="_blank">{{file.originalFilename}}</a>
                                     </div>
                                     <mat-icon *ngIf="file.type.includes('application')" (click)="deleteFromContainer(file.url, 'file')" class="delete-file">close</mat-icon>
                                     <video *ngIf="file.type.includes('video')" controls width="150" style="border: 0.5px solid #ccc" preload="metadata">
-                                        <source src="{{config.apiUrl + file.url}}">
+                                        <source src="{{envVariable.apiUrl + file.url}}">
                                     </video>
                                     <mat-icon *ngIf="file.type.includes('video')" (click)="deleteFromContainer(file.url, '')" class="delete-button">close</mat-icon>
                                 </div>

@@ -1,14 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MediaUploaderService } from '../../mediaUploader/media-uploader.service';
-import { AppConfig } from '../../../app.config';
 import { MatSnackBar } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ProfileService } from '../../profile/profile.service';
-import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
+import { CookieUtilsService } from '../../cookieUtils/cookie-utils.service';
 
 @Component({
   selector: 'app-verify-phone-dialog',
@@ -31,7 +29,6 @@ export class VerifyPhoneDialogComponent implements OnInit {
     private _fb: FormBuilder,
     public _profileService: ProfileService,
     private http: HttpClient,
-    public config: AppConfig,
     public snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<VerifyPhoneDialogComponent>,
     public _cookieUtilsService: CookieUtilsService,

@@ -2,32 +2,28 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
-
 import { FormGroup, FormArray, FormBuilder, FormControl, AbstractControl, Validators } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/publishReplay';
 import { Router, ActivatedRoute, Params, NavigationStart } from '@angular/router';
 import * as moment from 'moment';
-import { AuthenticationService } from '../../_services/authentication/authentication.service';
 import { CountryPickerService } from '../../_services/countrypicker/countrypicker.service';
 import { LanguagePickerService } from '../../_services/languagepicker/languagepicker.service';
 import { CollectionService } from '../../_services/collection/collection.service';
 import { MediaUploaderService } from '../../_services/mediaUploader/media-uploader.service';
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
-import { AppConfig } from '../../app.config';
 import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
 import * as _ from 'lodash';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { LeftSidebarService } from '../../_services/left-sidebar/left-sidebar.service';
-
 import { DialogsService } from '../../_services/dialogs/dialog.service';
 import { Observable } from 'rxjs/Observable';
-import { DISABLED } from '@angular/forms/src/model';
 import { TopicService } from '../../_services/topic/topic.service';
 import { PaymentService } from '../../_services/payment/payment.service';
 import { ProfileService } from '../../_services/profile/profile.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-session-edit',
@@ -41,6 +37,7 @@ export class SessionEditComponent implements OnInit {
   public busyLanguage = false;
   public busyBasics = false;
   public busyHost = false;
+  public envVariable;
   public busySessionPage = false;
   public busyPayment = false;
   public sidebarFilePath = 'assets/menu/session-static-left-sidebar-menu.json';
@@ -168,7 +165,6 @@ export class SessionEditComponent implements OnInit {
     public router: Router,
     private activatedRoute: ActivatedRoute,
     private http: HttpClient,
-    public config: AppConfig,
     private languagePickerService: LanguagePickerService,
     private _fb: FormBuilder,
     private countryPickerService: CountryPickerService,
@@ -185,12 +181,13 @@ export class SessionEditComponent implements OnInit {
     private location: Location,
     public _profileService: ProfileService,
   ) {
+      this.envVariable = environment;
     this.activatedRoute.params.subscribe(params => {
       this.sessionId = params['collectionId'];
       this.step = params['step'];
-      this.connectPaymentUrl = 'https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_AlhauL6d5gJ66yM3RaXBHIwt0R8qeb9q&scope=read_write&redirect_uri=' + this.config.clientUrl + '/console/account/payoutmethods&state=' + this.config.clientUrl + '/session/' + this.sessionId + '/edit/' + this.step;
-      this.searchTopicURL = config.searchUrl + '/api/search/' + this.config.uniqueDeveloperCode + '_topics/suggest?field=name&query=';
-      this.createTopicURL = config.apiUrl + '/api/' + this.config.uniqueDeveloperCode + '_topics';
+      this.connectPaymentUrl = 'https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_AlhauL6d5gJ66yM3RaXBHIwt0R8qeb9q&scope=read_write&redirect_uri=' + environment.clientUrl + '/console/account/payoutmethods&state=' + environment.clientUrl + '/session/' + this.sessionId + '/edit/' + this.step;
+      this.searchTopicURL = environment.searchUrl + '/api/search/' + environment.uniqueDeveloperCode + '_topics/suggest?field=name&query=';
+      this.createTopicURL = environment.apiUrl + '/api/' + environment.uniqueDeveloperCode + '_topics';
     });
     this.userId = _cookieUtilsService.getValue('userId');
     this.options = requestHeaderService.getOptions();
@@ -527,7 +524,7 @@ export class SessionEditComponent implements OnInit {
       });
 
     if (this.interests.length === 0) {
-      this.http.get(this.config.searchUrl + '/api/search/topics')
+      this.http.get(environment.searchUrl + '/api/search/topics')
         .map((response: any) => {
           this.suggestedTopics = response.slice(0, 7);
         }).subscribe();
@@ -635,7 +632,7 @@ export class SessionEditComponent implements OnInit {
     this.removedInterests = event;
     if (this.removedInterests.length !== 0) {
       this.removedInterests.forEach((topic) => {
-        this.http.delete(this.config.apiUrl + '/api/collections/' + this.sessionId + '/topics/rel/' + topic.id, options)
+        this.http.delete(environment.apiUrl + '/api/collections/' + this.sessionId + '/topics/rel/' + topic.id, options)
           .map((response) => {
           }).subscribe();
       });
@@ -912,7 +909,7 @@ export class SessionEditComponent implements OnInit {
   public submitTimeline(collectionId, data: FormGroup) {
     const body = data.value.calendar;
     if (body.startDate && body.endDate) {
-      this.http.patch(this.config.apiUrl + '/api/collections/' + collectionId + '/calendar', body)
+      this.http.patch(environment.apiUrl + '/api/collections/' + collectionId + '/calendar', body)
         .subscribe((response) => {
           this.step++;
           this.sessionStepUpdate();
@@ -940,7 +937,7 @@ export class SessionEditComponent implements OnInit {
       'targetIds': topicArray
     };
     if (topicArray.length !== 0) {
-      this.http.patch(this.config.apiUrl + '/api/peers/' + this.userId + '/topicsTeaching/rel', body)
+      this.http.patch(environment.apiUrl + '/api/peers/' + this.userId + '/topicsTeaching/rel', body)
         .map(response => response).publishReplay().refCount().subscribe((res) => {
           // this._collectionService.getCollectionDetail(this.sessionId, this.query)
           //   .subscribe((resData) => {
@@ -1002,7 +999,7 @@ export class SessionEditComponent implements OnInit {
       const data = this.timeline;
       const body = data.value.calendar;
       if (body.startDate && body.endDate) {
-        this.http.patch(this.config.apiUrl + '/api/collections/' + this.sessionId + '/calendar', body, this.options)
+        this.http.patch(environment.apiUrl + '/api/collections/' + this.sessionId + '/calendar', body, this.options)
           .map((response) => {
             this.busySave = false;
             this.router.navigate(['console/teaching/sessions']);
@@ -1310,7 +1307,7 @@ export class SessionEditComponent implements OnInit {
 
 
   getLanguages() {
-    // this.http.get(this.config.apiUrl + '/api/languages')
+    // this.http.get(environment.apiUrl + '/api/languages')
     // .map(response => response ).subscribe(data => {
     this.languagePickerService.getLanguages().subscribe(data => {
       this.languages = data;

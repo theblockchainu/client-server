@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
-import { AppConfig } from '../../../app.config';
 import { MessageParticipantComponent } from '../message-participant/message-participant.component';
 import { CollectionService } from '../../../_services/collection/collection.service';
 import { DialogsService } from '../../../_services/dialogs/dialog.service';
@@ -17,7 +16,6 @@ export class ViewParticipantsComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<ViewParticipantsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public config: AppConfig,
     private dialog: MatDialog,
   public _collectionService: CollectionService,
     public _dialogsService: DialogsService,

@@ -58,7 +58,7 @@ import {CookieService} from 'angular2-cookie/core';
     PolicyComponent,
     TrustComponent],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'peerbuds-client' }),
+    BrowserModule,
     CoreModule,
     AppFooterModule,
     BrowserAnimationsModule,

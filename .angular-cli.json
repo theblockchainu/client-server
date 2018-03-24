@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "ng-universal-demo"
+    "name": "peerbuds"
   },
   "apps": [
     {
@@ -17,39 +17,6 @@
       "polyfills": "polyfills.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
-      "testTsconfig": "tsconfig.spec.json",
-      "prefix": "app",
-      "styles": [
-        "styles.scss",
-        "assets/styles/themes/bootstrap.css",
-        "../node_modules/font-awesome/css/font-awesome.min.css",
-        "../node_modules/primeng/resources/themes/omega/theme.css",
-        "../node_modules/primeng/resources/primeng.min.css",
-        "assets/styles/themes/pbcustom.css",
-        "../node_modules/fullcalendar/dist/fullcalendar.min.css"
-      ],
-      "scripts": [
-        "../node_modules/moment/min/moment.min.js",
-        "../node_modules/fullcalendar/dist/fullcalendar.min.js"
-      ],
-      "environmentSource": "environments/environment.ts",
-      "environments": {
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-      }
-    },
-    {
-      "platform": "server",
-      "root": "src",
-      "outDir": "dist/server",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
-      "index": "index.html",
-      "main": "main.server.ts",
-      "test": "test.ts",
-      "tsconfig": "tsconfig.server.json",
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [

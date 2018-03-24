@@ -33,7 +33,7 @@ import { TrustComponent } from './trust/trust.component';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
-import {BrowserCookiesModule} from '@ngx-utils/cookies/browser';
+import {CookieService} from 'angular2-cookie/core';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,6 @@ import {BrowserCookiesModule} from '@ngx-utils/cookies/browser';
     TrustComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'peerbuds-client' }),
-      BrowserCookiesModule.forRoot(),
     CoreModule,
     AppFooterModule,
     BrowserAnimationsModule,
@@ -88,6 +87,7 @@ import {BrowserCookiesModule} from '@ngx-utils/cookies/browser';
     TransferHttpCacheModule,
     MatListModule
   ],
+    providers: [CookieService],
   bootstrap: [AppComponent],
   entryComponents: [AppNotificationDialogComponent]
 })

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
-import { AppConfig } from '../../../app.config';
+import {environment} from '../../../../environments/environment';
 @Component({
   selector: 'app-invite-friends-dialog',
   templateUrl: './invite-friends-dialog.component.html',
@@ -10,13 +10,14 @@ export class InviteFriendsDialogComponent implements OnInit {
 
   public url = '';
   public loggedinUserEmail = '';
+  public envVariable;
   constructor(
     public dialogRef: MatDialogRef<InviteFriendsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private snackBar: MatSnackBar,
-    public _appConfig: AppConfig
+    private snackBar: MatSnackBar
   ) {
-    this.url = this._appConfig.clientUrl + '/' + data.url;
+      this.envVariable = environment;
+    this.url = environment.clientUrl + '/' + data.url;
   }
 
   ngOnInit() {

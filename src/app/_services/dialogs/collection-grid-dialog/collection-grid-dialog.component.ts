@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
-import { AppConfig } from '../../../app.config';
 @Component({
   selector: 'app-collection-grid-dialog',
   templateUrl: './collection-grid-dialog.component.html',
@@ -11,8 +10,7 @@ export class CollectionGridDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<CollectionGridDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private router: Router,
-    public config: AppConfig) { }
+    private router: Router) { }
 
   ngOnInit() {
     console.log(this.data);

@@ -1,34 +1,35 @@
 import { Injectable } from '@angular/core';
-import { AppConfig } from '../../app.config';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { RequestHeaderService } from '../requestHeader/request-header.service';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { HttpClient } from '@angular/common/http';
+import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class CommunityService {
 
     public key = 'userId';
+    public envVariable;
     public options;
     public now: Date;
     public activeTab = new BehaviorSubject('question');
 
     constructor(private http: HttpClient,
-        public config: AppConfig,
         private route: ActivatedRoute,
         public router: Router,
         private authService: AuthenticationService,
         private requestHeaderService: RequestHeaderService) {
         this.options = requestHeaderService.getOptions();
         this.now = new Date();
+        this.envVariable = environment;
     }
 
     public getCommunityDetail(id: string, param: any) {
         const filter = JSON.stringify(param);
         return this.http
-            .get(this.config.apiUrl + '/api/communities/' + id + '?filter=' + filter)
+            .get(environment.apiUrl + '/api/communities/' + id + '?filter=' + filter)
             .map((response: any) => response, (err) => {
                 console.log('Error: ' + err);
             });
@@ -41,7 +42,7 @@ export class CommunityService {
     public getParticipants(communityId, query) {
         const filter = JSON.stringify(query);
         return this.http
-            .get(this.config.apiUrl + '/api/communities/' + communityId + '/participants?filter=' + filter, this.options);
+            .get(environment.apiUrl + '/api/communities/' + communityId + '/participants?filter=' + filter, this.options);
     }
 
     /**
@@ -51,7 +52,7 @@ export class CommunityService {
     public addParticipant(communityId: string, userId: string, cb) {
         const body = {};
         this.http
-            .put(this.config.apiUrl + '/api/communities/' + communityId + '/participants/rel/' + userId, body, this.options)
+            .put(environment.apiUrl + '/api/communities/' + communityId + '/participants/rel/' + userId, body, this.options)
             .map((response) => {
                 cb(null, response);
             }, (err) => {
@@ -63,7 +64,7 @@ export class CommunityService {
      * removeParticipant
      */
     public removeParticipant(communityId: string, participantId: string) {
-        return this.http.delete(this.config.apiUrl +
+        return this.http.delete(environment.apiUrl +
             '/api/communities/' + communityId + '/participants/rel/' + participantId);
     }
 
@@ -73,7 +74,7 @@ export class CommunityService {
     public getComments(communityId: string, query: any, cb) {
         const filter = JSON.stringify(query);
         this.http
-            .get(this.config.apiUrl + '/api/communities/' + communityId + '/comments' + '?filter=' + filter, this.options)
+            .get(environment.apiUrl + '/api/communities/' + communityId + '/comments' + '?filter=' + filter, this.options)
             .map((response) => {
                 cb(null, response);
             }, (err) => {
@@ -86,7 +87,7 @@ export class CommunityService {
      worrkshopID   */
     public postComments(communityId: string, commentBody: any, cb) {
         this.http
-            .post(this.config.apiUrl + '/api/communities/' + communityId + '/comments', commentBody, this.options)
+            .post(environment.apiUrl + '/api/communities/' + communityId + '/comments', commentBody, this.options)
             .map((response) => {
                 cb(null, response);
             }, (err) => {
@@ -103,7 +104,7 @@ export class CommunityService {
     public getQuestions(communityId: string, query: any, cb) {
         const filter = JSON.stringify(query);
         this.http
-            .get(this.config.apiUrl + '/api/communities/' + communityId + '/questions' + '?filter=' + filter, this.options)
+            .get(environment.apiUrl + '/api/communities/' + communityId + '/questions' + '?filter=' + filter, this.options)
             .map((response) => {
                 cb(null, response);
             }, (err) => {
@@ -120,7 +121,7 @@ export class CommunityService {
     public getLinks(communityId: string, query: any, cb) {
         const filter = JSON.stringify(query);
         this.http
-            .get(this.config.apiUrl + '/api/communities/' + communityId + '/links' + '?filter=' + filter, this.options)
+            .get(environment.apiUrl + '/api/communities/' + communityId + '/links' + '?filter=' + filter, this.options)
             .map((response) => {
                 cb(null, response);
             }, (err) => {
@@ -137,7 +138,7 @@ export class CommunityService {
     public getCollections(communityId: string, query: any, cb) {
         const filter = JSON.stringify(query);
         this.http
-            .get(this.config.apiUrl + '/api/communities/' + communityId + '/collections' + '?filter=' + filter, this.options)
+            .get(environment.apiUrl + '/api/communities/' + communityId + '/collections' + '?filter=' + filter, this.options)
             .map((response) => {
                 cb(null, response);
             }, (err) => {
@@ -154,7 +155,7 @@ export class CommunityService {
      */
     public postQuestion(communityId: string, questionBody: any) {
         return this.http
-            .post(this.config.apiUrl + '/api/communities/' + communityId + '/questions', questionBody, this.options);
+            .post(environment.apiUrl + '/api/communities/' + communityId + '/questions', questionBody, this.options);
     }
 
 
@@ -165,7 +166,7 @@ export class CommunityService {
      */
     public deleteQuestion(questionId: string) {
         return this.http
-            .delete(this.config.apiUrl + '/api/questions/' + questionId, this.options);
+            .delete(environment.apiUrl + '/api/questions/' + questionId, this.options);
     }
 
 
@@ -210,7 +211,7 @@ export class CommunityService {
     public saveBookmark(communityId, cb) {
         const body = {};
         this.http
-            .post(this.config.apiUrl + '/api/communities/' + communityId + '/bookmarks', body, this.options)
+            .post(environment.apiUrl + '/api/communities/' + communityId + '/bookmarks', body, this.options)
             .map((response) => {
                 cb(null, response);
             }, (err) => {
@@ -221,7 +222,7 @@ export class CommunityService {
     public removeBookmark(bookmarkId, cb) {
         const body = {};
         this.http
-            .delete(this.config.apiUrl + '/api/bookmarks/' + bookmarkId, this.options)
+            .delete(environment.apiUrl + '/api/bookmarks/' + bookmarkId, this.options)
             .map((response) => {
                 cb(null, response);
             }, (err) => {
@@ -235,7 +236,7 @@ export class CommunityService {
     public getBookmarks(communityId: string, query: any, cb) {
         const filter = JSON.stringify(query);
         this.http
-            .get(this.config.apiUrl + '/api/communities/' + communityId + '/bookmarks' + '?filter=' + filter, this.options)
+            .get(environment.apiUrl + '/api/communities/' + communityId + '/bookmarks' + '?filter=' + filter, this.options)
             .map((response) => {
                 cb(null, response);
             }, (err) => {
@@ -250,7 +251,7 @@ export class CommunityService {
      * @returns {Observable<any>}
      */
     public deleteCommunity(communityId: string) {
-        return this.http.delete(this.config.apiUrl +
+        return this.http.delete(environment.apiUrl +
             '/api/communities/' + communityId);
     }
 
@@ -270,7 +271,7 @@ export class CommunityService {
      */
     public addLinkToCommunity(communityId, linkBody, cb) {
         this.http
-            .post(this.config.apiUrl + '/api/communities/' + communityId + '/links', linkBody, this.options)
+            .post(environment.apiUrl + '/api/communities/' + communityId + '/links', linkBody, this.options)
             .map((response) => {
                 cb(null, response);
             }, (err) => {

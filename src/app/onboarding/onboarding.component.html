@@ -41,11 +41,11 @@
                   </div>
                   <div *ngIf="boolShowConnectedSocials" style="margin-top:5px">
                     <i *ngIf="connectedIdentities.fb" class="fa fa-facebook defaultFB socialIcons"></i>
-                    <a *ngIf="!connectedIdentities.fb" href="{{config.apiUrl + '/link/Facebook?returnTo=onboarding/1'}}">
+                    <a *ngIf="!connectedIdentities.fb" href="{{envVariable.apiUrl + '/link/Facebook?returnTo=onboarding/1'}}">
                       <i class="fa fa-facebook dcSocial socialIcons"></i>
                     </a>
                     <i *ngIf="connectedIdentities.google" class="fa fa-google defaultGoogle socialIcons"></i>
-                    <a *ngIf="!connectedIdentities.google" href="{{config.apiUrl + '/link/Google?returnTo=onboarding/1'}}">
+                    <a *ngIf="!connectedIdentities.google" href="{{envVariable.apiUrl + '/link/Google?returnTo=onboarding/1'}}">
                       <i class="fa fa-google dcSocial socialIcons"></i>
                     </a>
                   </div>

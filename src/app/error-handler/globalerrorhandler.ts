@@ -1,7 +1,7 @@
 import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { AppConfig } from '../app.config';
+import {environment} from '../../environments/environment';
 @Component({
     selector: 'app-error',
     templateUrl: './error-handler.component.html',
@@ -10,8 +10,10 @@ import { AppConfig } from '../app.config';
 
 @Injectable()
 export class GlobalErrorHandlerComponent implements ErrorHandler {
-    constructor(private injector: Injector,
-        public _appConfig: AppConfig) { }
+    public envVariable;
+    constructor(private injector: Injector) {
+        this.envVariable = environment;
+    }
     handleError(error) {
         const router = this.injector.get(Router);
         const message = error.message ? error.message : error.toString();

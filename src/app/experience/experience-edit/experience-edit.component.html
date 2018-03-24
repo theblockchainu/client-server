@@ -5,7 +5,7 @@
     </mat-sidenav>
     <!-- Page Content -->
     <mat-sidenav-content>
-      <div class="navbar-page-content" style="padding: 25px 50px; background: #fff; max-height: 100vh; min-height: 100vh; overflow-y: scroll">
+      <div class="navbar-page-content" [ngClass]="{'step5Background': showBackground}" style="padding: 25px 50px 25px 100px; max-height: 100vh; min-height: 100vh; overflow-y: scroll">
         <div class="pull-right" *ngIf="step!=1 && step !=5 && step !=12 && experience.controls['status'].value !== 'active'">
           <button mat-button (click)="saveandexit()">
             <span *ngIf="!busySave">Save &amp; Exit</span>
@@ -201,9 +201,9 @@
           <!--Disclaimer-->
           <div class="onboarding step-5" [hidden]="step!=5">
             <div class="row">
-              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" style="background: #eeeeeedd; padding: 20px;">
                 <h2 class="title">Create the page learners will see</h2>
-                <p class="subtitle">Write in a clear, straightforward and friendly way. We'll prompt you on when to show off your personality
+                <p class="subtitle" style="color: #333333;">Write in a clear, straightforward and friendly way. We'll prompt you on when to show off your personality
                   and be more descriptive.
                 </p>
                 <br/>
@@ -267,7 +267,7 @@
                       </h5>
                       <div *ngIf="urlForImages.length" class="pic delete">
                         <div *ngFor="let file of urlForImages" class="col-md-6 padding-left-0 imageContainer">
-                          <img src="{{config.apiUrl + file}}" width="150" style="border: 0.5px solid #ccc">
+                          <img src="{{envVariable.apiUrl + file}}" width="150" style="border: 0.5px solid #ccc">
                           <mat-icon (click)="deleteFromContainer(file, 'image')" class="delete-button">close</mat-icon>
                         </div>
                       </div>
@@ -400,7 +400,7 @@
                         <div *ngIf="urlForVideo.length" class="profileVideo delete">
                           <div *ngFor="let file of urlForVideo" class="col-md-6 padding-left-0 videoContainer">
                             <video controls width="150" class="uploaded_picture" style="border: 0.5px solid #ccc;" preload="metadata">
-                              <source src="{{config.apiUrl + file}}"> Your browser does not support the video tag.
+                              <source src="{{envVariable.apiUrl + file}}"> Your browser does not support the video tag.
                             </video>
                             <mat-icon (click)="deleteFromContainer(file, 'video')" class="delete-video">close</mat-icon>
                           </div>
@@ -438,18 +438,19 @@
                       <mat-checkbox [(ngModel)]="freeExperience" (ngModelChange)="onFreeChange($event)" [ngModelOptions]="{standalone: true}">Free</mat-checkbox>
                     </div>
                   </div>
+                    <br/>
                   <div class="row margin-left-0" *ngIf="!freeExperience">
                     <div class="col-md-3 padding-left-0">
-                      <mat-form-field [floatLabel]="'always'" class="margin-top-20">
+                      <mat-form-field [floatLabel]="'never'" class="margin-top-20">
                         <span matPrefix>
-                          {{0| currency: experience.controls['currency'].value : true | slice:0:1}} &nbsp;
+                          {{0 | currency: experience.controls['currency'].value : 'symbol' | slice:0:1}} &nbsp;
                         </span>
                         <input type="number" matInput #price formControlName="price" placeholder="0" min="1" required>
                       </mat-form-field>
                     </div>
-                    <div class="col-md-2 col-md-offset-2 priceAlignParent">
-                      <mat-form-field [floatLabel]="'always'">
-                        <mat-select formControlName="currency" class="priceAlign padding-top-0 margin-top-20" placeholder="USD">
+                    <div class="col-md-2 col-md-offset-2">
+                      <mat-form-field [floatLabel]="'never'">
+                        <mat-select formControlName="currency" class="padding-top-0 margin-top-20" placeholder="USD">
                           <mat-option *ngFor="let c of currencies" [value]="c">{{c}}</mat-option>
                         </mat-select>
                       </mat-form-field>
@@ -458,13 +459,13 @@
                   <h3 class="title">Cancellation Policy</h3>
                   <div class="row margin-left-0">
                     <div class="col-sm-12 padding-left-0">
-                      Students will get a full refund if they cancel within
-                      <mat-form-field [floatLabel]="'always'">
-                        <mat-select formControlName="cancellationPolicy" style="margin: 20px 10px; position: relative; top: -5px;" placeholder="3 Days">
+                      Students will get a full refund if they cancel within &nbsp;
+                      <mat-form-field [floatLabel]="'never'" style="width: 15%;">
+                        <mat-select formControlName="cancellationPolicy" placeholder="3 Days">
                           <mat-option *ngFor="let cp of cancellationPolicies" [value]="cp">{{cp}}</mat-option>
                         </mat-select>
                       </mat-form-field>
-                      of signing up.
+                        &nbsp; of signing up.
                     </div>
                   </div>
                   <div style="margin-top:100px;">

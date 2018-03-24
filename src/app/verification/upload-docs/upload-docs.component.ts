@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { AppConfig } from '../../app.config';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-
 import { MediaUploaderService } from '../../_services/mediaUploader/media-uploader.service';
 import { ProfileService } from '../../_services/profile/profile.service';
 import { MatDialog, MatDialogConfig, MatDialogRef, MatSnackBar } from '@angular/material';
 import { DialogsService } from '../../_services/dialogs/dialog.service';
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
+import {environment} from '../../../environments/environment';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -31,6 +29,7 @@ export class UploadDocsComponent implements OnInit {
   public fileName;
   public userId;
   public otpError: string;
+  public envVariable;
 
   constructor(
     public router: Router,
@@ -39,7 +38,6 @@ export class UploadDocsComponent implements OnInit {
     private _fb: FormBuilder,
     public _profileService: ProfileService,
     private http: HttpClient,
-    public config: AppConfig,
     public snackBar: MatSnackBar,
     private dialog: MatDialog,
     private dialogsService: DialogsService,
@@ -47,6 +45,7 @@ export class UploadDocsComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.step = params['step'];
     });
+      this.envVariable = environment;
     this.userId = _cookieUtilsService.getValue('userId');
   }
 

@@ -1,30 +1,26 @@
 import { Injectable } from '@angular/core';
-
-import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
-
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/map';
-
-
-import { AppConfig } from '../../app.config';
-
 import { RequestHeaderService } from '../requestHeader/request-header.service';
+import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class ContentService {
 
   public options;
+  public envVariable;
 
-  constructor(private http: HttpClient, public config: AppConfig,
+  constructor(private http: HttpClient,
     private route: ActivatedRoute,
     public router: Router,
     private requestHeaderService: RequestHeaderService) {
     this.options = requestHeaderService.getOptions();
+      this.envVariable = environment;
   }
 
   public getEvents(userId: string) {
-    return this.http.get(this.config.apiUrl + '/api/peers/' + userId + '/eventCalendar', this.options)
+    return this.http.get(environment.apiUrl + '/api/peers/' + userId + '/eventCalendar', this.options)
       .map((response: any) => response, (err) => {
         console.log('Error: ' + err);
       });
@@ -36,7 +32,7 @@ export class ContentService {
       'name': name,
       'code': name
     };
-    return this.http.post(this.config.apiUrl + '/api/languages', body, this.options)
+    return this.http.post(environment.apiUrl + '/api/languages', body, this.options)
       .map((response: any) => response, (err) => {
         console.log('Error: ' + err);
       });
@@ -49,7 +45,7 @@ export class ContentService {
           url: urlString
         }
     };
-    return this.http.get(this.config.apiUrl + '/api/media?filter=' + JSON.stringify(query), this.options)
+    return this.http.get(environment.apiUrl + '/api/media?filter=' + JSON.stringify(query), this.options)
       .map((response: any) =>
         response,
         (err) => {
@@ -66,7 +62,7 @@ export class ContentService {
       'calendarId': calendarId
     };
     return this.http
-      .post(this.config.apiUrl + '/api/contents/' + contentId + '/rsvps', body, this.options)
+      .post(environment.apiUrl + '/api/contents/' + contentId + '/rsvps', body, this.options)
       .map((response: any) => response);
   }
 }

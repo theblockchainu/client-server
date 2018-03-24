@@ -13,10 +13,10 @@
   <div class="margin-bottom-60">
     <div class="row" *ngFor="let submission of data.content.submissions; let i=index;">
       <div class="col-sm-3" *ngIf="data.userType !== 'public'" (click)="viewSubmission(submission.id)" style="cursor: pointer">
-        <img class="img-responsive" src="{{ submission.picture_url ? config.apiUrl+submission.picture_url.split(',')[0] : noImage }}" alt="image" height="117" (error)="imgErrorHandler($event)" />
+        <img class="img-responsive" src="{{ submission.picture_url ? envVariable.apiUrl+submission.picture_url.split(',')[0] : noImage }}" alt="image" height="117" (error)="imgErrorHandler($event)" />
         <div class="submission-title">{{ submission.name | ucfirst | shorten : 14 : '...' }}</div>
         <div class="submission-owner" *ngIf="submission.peer && submission.peer.length>0">
-          <img class="circle-thumb" src="{{ submission.peer[0].profiles[0].picture_url ? config.apiUrl+submission.peer[0].profiles[0].picture_url : defaultProfileUrl }}" alt="thumb" style="margin-left: 0px; width: 20px; height: 20px;" (error)="imgErrorHandler($event)" />
+          <img class="circle-thumb" src="{{ submission.peer[0].profiles[0].picture_url ? envVariable.apiUrl+submission.peer[0].profiles[0].picture_url : defaultProfileUrl }}" alt="thumb" style="margin-left: 0px; width: 20px; height: 20px;" (error)="imgErrorHandler($event)" />
           <span class="owner-name">{{ submission.peer[0].profiles[0].first_name }} {{ submission.peer[0].profiles[0].last_name }}</span>
         </div>
         <div class="submission-likes">

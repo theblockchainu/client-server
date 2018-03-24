@@ -4,7 +4,7 @@ import { ConsoleComponent } from '../console.component';
 import { CollectionService } from '../../_services/collection/collection.service';
 import { ProfileService } from '../../_services/profile/profile.service';
 import { MatSnackBar } from '@angular/material';
-import { AppConfig } from '../../app.config';
+import {environment} from '../../../environments/environment';
 
 declare var moment: any;
 
@@ -19,14 +19,15 @@ export class ConsoleAdminComponent implements OnInit {
   public unapprovedCollections: Array<any>;
   public unapprovedPeers: Array<any>;
   public peersLoaded: boolean;
+  public envVariable;
   constructor(
     activatedRoute: ActivatedRoute,
     consoleComponent: ConsoleComponent,
     public _collectionService: CollectionService,
     public _profileService: ProfileService,
     public snackBar: MatSnackBar,
-    public appConfig: AppConfig
   ) {
+      this.envVariable = environment;
     activatedRoute.pathFromRoot[3].url.subscribe((urlSegment) => {
       console.log(urlSegment[0].path);
       consoleComponent.setActiveTab(urlSegment[0].path);

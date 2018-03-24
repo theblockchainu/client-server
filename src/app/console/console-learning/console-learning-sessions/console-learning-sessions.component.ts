@@ -4,7 +4,6 @@ import { ConsoleLearningComponent } from '../console-learning.component';
 import { CollectionService } from '../../../_services/collection/collection.service';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 import { ProfileService } from '../../../_services/profile/profile.service';
-import { AppConfig } from '../../../app.config';
 import * as moment from 'moment';
 import { DialogsService } from '../../../_services/dialogs/dialog.service';
 
@@ -30,7 +29,6 @@ export class ConsoleLearningSessionsComponent implements OnInit {
     public router: Router,
     private _cookieUtilsService: CookieUtilsService,
     public _profileService: ProfileService,
-    public config: AppConfig,
     private dialogsService: DialogsService
   ) {
     activatedRoute.pathFromRoot[4].url.subscribe((urlSegment) => {

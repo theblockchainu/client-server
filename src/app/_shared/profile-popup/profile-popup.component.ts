@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ViewChild, Renderer2 } from '@angular/core';
-import { AppConfig } from '../../app.config';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { DialogsService } from '../../_services/dialogs/dialog.service';
 import { Router } from '@angular/router';
+import {environment} from '../../../environments/environment';
 @Component({
   selector: 'app-profile-popup',
   templateUrl: './profile-popup.component.html',
@@ -14,12 +14,15 @@ export class ProfilePopupComponent implements OnInit {
   @ViewChild('profilePic') profilePic;
 
   private dialogref: MatDialogRef<any>;
+  public envVariable;
 
-  constructor(public config: AppConfig,
+  constructor(
     public dialog: MatDialog,
     private _dialogsService: DialogsService,
     private _router: Router
-  ) { }
+  ) {
+      this.envVariable = environment;
+  }
 
   ngOnInit() {
   }

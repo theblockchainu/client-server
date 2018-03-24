@@ -1,16 +1,17 @@
-
-
+import {environment} from '../../../environments/environment';
 import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
-import {CookiesService} from '@ngx-utils/cookies';
 import * as moment from 'moment';
+import {CookieService} from 'angular2-cookie/core';
 
 @Injectable()
 export class CookieUtilsService {
+    public envVariable;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    public _cookieService: CookiesService
+    public _cookieService: CookieService
   ) {
+      this.envVariable = environment;
   }
 
   public getValue(key: string) {
@@ -26,11 +27,11 @@ export class CookieUtilsService {
 
   public setValue(name: string, value: string) {
     this._cookieService.remove(name, {
-      domain: 'localhost',
+      domain: environment.host,
       path: '/'
     });
     this._cookieService.put(name, value, {
-      domain: 'localhost',
+      domain: environment.host,
       path: '/',
       expires: moment().add(2, 'days').toDate()
     });
@@ -40,7 +41,10 @@ export class CookieUtilsService {
   }
 
   public deleteValue(key) {
-    this._cookieService.remove(key);
+    this._cookieService.remove(key, {
+        domain: environment.host,
+        path: '/'
+    });
   }
 
 }

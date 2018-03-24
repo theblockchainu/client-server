@@ -192,7 +192,7 @@
               (click)="onNotificationClick(notification)">
               <div class="col-md-1">
                 <img *ngIf="!notification.actor[0].profiles[0].picture_url" src="/assets/images/avatar.png" alt="A" class="circle-thumb notificationsImage">
-                <img *ngIf="notification.actor[0].profiles[0].picture_url" src="{{config.apiUrl + notification.actor[0].profiles[0].picture_url}}"
+                <img *ngIf="notification.actor[0].profiles[0].picture_url" src="{{envVariable.apiUrl + notification.actor[0].profiles[0].picture_url}}"
                   alt="A" class="circle-thumb notificationsImage">
               </div>
               <div class="col-md-10">
@@ -220,7 +220,7 @@
       <div *ngFor="let collection of collections; let i = index;">
         <div class="row margin-top-30" *ngIf="i < 3">
           <div class="col-md-6">
-            <div class="teachingContentThumb clickable" *ngIf="collection.imageUrls && collection.imageUrls.length > 0" [ngStyle]="{'background': 'url(' + config.apiUrl + collection.imageUrls[0] + '), url(../../assets/images/no-image.jpg)', 'background-size': 'cover'}"
+            <div class="teachingContentThumb clickable" *ngIf="collection.imageUrls && collection.imageUrls.length > 0" [ngStyle]="{'background': 'url(' + envVariable.apiUrl + collection.imageUrls[0] + '), url(../../assets/images/no-image.jpg)', 'background-size': 'cover'}"
               (click)="_collectionService.openCollection(collection)"></div>
             <div class="teachingContentThumb clickable" *ngIf="!collection.imageUrls || collection.imageUrls.length === 0" [ngStyle]="{'background': 'url(url(../../assets/images/no-image.jpg)', 'background-size': 'cover'}"
               (click)="_collectionService.openCollection(collection)"></div>
@@ -458,7 +458,7 @@
     <div class="userInfo margin-bottom-30" *ngIf="profileLoaded && collections.length === 0 && learningCollections.length === 0">
       <div class="row margin-bottom-10">
         <div class="col-md-12 margin-top-10 text-center">
-          <img src="{{config.apiUrl + loggedInUser.picture_url}}" width="150px" height="150px" class="profileImageLarge clickable"
+          <img src="{{envVariable.apiUrl + loggedInUser.picture_url}}" width="150px" height="150px" class="profileImageLarge clickable"
             (error)="_profileService.imgErrorHandler($event)" [routerLink]="['/console/profile/photos']">
         </div>
         <div class="col-md-12 margin-top-20 text-center">

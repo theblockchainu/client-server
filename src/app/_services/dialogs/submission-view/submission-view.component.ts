@@ -1,11 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import { AppConfig } from '../../../app.config';
 import { CollectionService } from '../../collection/collection.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommentService } from '../../comment/comment.service';
 import { ProjectSubmissionService } from '../../project-submission/project-submission.service';
 import { CookieUtilsService } from '../../cookieUtils/cookie-utils.service';
+import {environment} from '../../../../environments/environment';
 
 @Component({
     selector: 'app-submission-view',
@@ -23,8 +23,9 @@ export class SubmissionViewComponent implements OnInit {
     public replyForm: FormGroup;
     public replyingToCommentId: string;
     public comments: Array<any>;
+    public envVariable;
 
-    constructor(public config: AppConfig,
+    constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
         public _collectionService: CollectionService,
         public dialogRef: MatDialogRef<SubmissionViewComponent>,
@@ -33,6 +34,7 @@ export class SubmissionViewComponent implements OnInit {
         private _submissionService: ProjectSubmissionService,
         private _cookieUtilsService: CookieUtilsService
     ) {
+        this.envVariable = environment;
         this.userType = data.userType;
         this.workshopId = data.collectionId;
         this.userId = _cookieUtilsService.getValue('userId');

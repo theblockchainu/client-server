@@ -170,7 +170,7 @@
                         <div class="clickable" style="display: inline-block; position: relative; top: 2px; vertical-align: top;">
                           <img (click)="openProfilePage(workshop.owners[0].id)" *ngIf="!workshop.owners[0].profiles[0].picture_url" src="/assets/images/user-placeholder.jpg"
                             alt="A" class="circle-thumb" style="margin-left: 0px;">
-                          <img (click)="openProfilePage(workshop.owners[0].id)" *ngIf="workshop.owners[0].profiles[0].picture_url" src="{{config.apiUrl+workshop.owners[0].profiles[0].picture_url}}"
+                          <img (click)="openProfilePage(workshop.owners[0].id)" *ngIf="workshop.owners[0].profiles[0].picture_url" src="{{envVariable.apiUrl+workshop.owners[0].profiles[0].picture_url}}"
                             class="circle-thumb" style="margin-left: 0px;">
                         </div>
                         <div style="display: inline-block; margin-left: 10px;">
@@ -251,10 +251,10 @@
                               </div>
                               <a style="cursor:pointer;color:rgba(0,0,0,0.87)" (click)="openDialog(content, itenary.startDate, itenary.endDate)">
                                 <div class="col-md-5">
-                                  <img style="width: auto; border: 0.5px solid #eee;" *ngIf="content.type!=='video'" class="img-responsive itenary-media" src="{{config.apiUrl+content.imageUrl}}"
+                                  <img style="width: auto; border: 0.5px solid #eee;" *ngIf="content.type!=='video'" class="img-responsive itenary-media" src="{{envVariable.apiUrl+content.imageUrl}}"
                                     (error)="_collectionService.imgErrorHandler($event)">
                                   <video #videoContent width="100%" height="auto" *ngIf="content.type==='video'" class="itenary-media" preload="metadata" poster="../../../assets/images/placeholder-image.jpg">
-                                    <source src="{{config.apiUrl+content.imageUrl}}">
+                                    <source src="{{envVariable.apiUrl+content.imageUrl}}">
                                   </video>
                                 </div>
                                 <div class="col-md-7">
@@ -377,7 +377,7 @@
                         <div class="clickable" style="float: left; margin-left: 15px;">
                           <img (click)="openProfilePage(comment.peer[0].id)" *ngIf="!comment.peer[0].profiles[0].picture_url" src="/assets/images/user-placeholder.jpg"
                             alt="A" class="circle-thumb margin-top-5">
-                          <img (click)="openProfilePage(comment.peer[0].id)" *ngIf="comment.peer[0].profiles[0].picture_url" src="{{config.apiUrl+ comment.peer[0].profiles[0].picture_url}}"
+                          <img (click)="openProfilePage(comment.peer[0].id)" *ngIf="comment.peer[0].profiles[0].picture_url" src="{{envVariable.apiUrl+ comment.peer[0].profiles[0].picture_url}}"
                             class="circle-thumb margin-top-5" alt="dp">
                         </div>
                         <div style="display: inline-block; margin-left: 5px; margin-top: 3px;">
@@ -399,7 +399,7 @@
                         <form [formGroup]="replyForm" (ngSubmit)="postReply(comment)">
                           <img (click)="openProfilePage(loggedInUser.id)" *ngIf="!loggedInUser.profiles[0].picture_url" src="/assets/images/user-placeholder.jpg"
                             alt="A" class="clickable circle-thumb margin-top-5">
-                          <img (click)="openProfilePage(loggedInUser.id)" *ngIf="loggedInUser.profiles[0].picture_url" src="{{config.apiUrl+ loggedInUser.profiles[0].picture_url}}"
+                          <img (click)="openProfilePage(loggedInUser.id)" *ngIf="loggedInUser.profiles[0].picture_url" src="{{envVariable.apiUrl+ loggedInUser.profiles[0].picture_url}}"
                             class="clickable circle-thumb margin-top-5" alt="dp">
                           <mat-form-field [floatLabel]="'always'" style="margin-left: 15px; width: 92%;">
                             <input matInput type="text" formControlName="description" placeholder="Reply to above comment...">
@@ -440,7 +440,7 @@
                               <div class="clickable" style="float: left; margin-left: 15px;">
                                 <img (click)="openProfilePage(reply.peer[0].id)" *ngIf="!reply.peer[0].profiles[0].picture_url" src="/assets/images/user-placeholder.jpg"
                                   alt="A" class="clickable circle-thumb margin-top-5">
-                                <img (click)="openProfilePage(reply.peer[0].id)" *ngIf="reply.peer[0].profiles[0].picture_url" src="{{config.apiUrl+ reply.peer[0].profiles[0].picture_url}}"
+                                <img (click)="openProfilePage(reply.peer[0].id)" *ngIf="reply.peer[0].profiles[0].picture_url" src="{{envVariable.apiUrl+ reply.peer[0].profiles[0].picture_url}}"
                                   class="clickable circle-thumb margin-top-5" alt="dp">
                               </div>
                               <div style="display: inline-block; margin-left: 5px; margin-top: 3px;">
@@ -528,7 +528,7 @@
                                     <img (click)="openProfilePage(review.peer[0].id)" *ngIf="!review.peer || !review.peer[0].profiles[0].picture_url" src="/assets/images/user-placeholder.jpg"
                                       alt="A" class="clickable circle-thumb margin-top-5" (error)="_collectionService.imgErrorHandler($event)"
                                       style="margin-left: 10px;">
-                                    <img (click)="openProfilePage(review.peer[0].id)" *ngIf=" review.peer && review.peer[0].profiles[0].picture_url" src="{{config.apiUrl+ review.peer[0].profiles[0].picture_url}}"
+                                    <img (click)="openProfilePage(review.peer[0].id)" *ngIf=" review.peer && review.peer[0].profiles[0].picture_url" src="{{envVariable.apiUrl+ review.peer[0].profiles[0].picture_url}}"
                                       class="clickable circle-thumb margin-top-5" alt="dp" (error)="_collectionService.imgErrorHandler($event)"
                                       style="margin-left: 10px;">
                                   </div>
@@ -605,7 +605,7 @@
                   <div class="clickable" style="display: inline-block; position: relative; top: 2px; vertical-align: top;">
                     <img (click)="openProfilePage(workshop.owners[0].id)" *ngIf="!workshop.owners[0].profiles[0].picture_url" src="/assets/images/user-placeholder.jpg"
                       alt="A" class="circle-thumb" style="margin-left: 0px;">
-                    <img (click)="openProfilePage(workshop.owners[0].id)" *ngIf="workshop.owners[0].profiles[0].picture_url" src="{{config.apiUrl+workshop.owners[0].profiles[0].picture_url}}"
+                    <img (click)="openProfilePage(workshop.owners[0].id)" *ngIf="workshop.owners[0].profiles[0].picture_url" src="{{envVariable.apiUrl+workshop.owners[0].profiles[0].picture_url}}"
                       class="circle-thumb" style="margin-left: 0px;">
                   </div>
                   <div style="display: inline-block; margin-left: 10px;">
@@ -798,7 +798,7 @@
                           alt="First slide">
                       </slide>
                       <slide *ngFor="let imageUrl of workshop.imageUrls">
-                        <img src="{{config.apiUrl+imageUrl}}" class="img-responsive" style="width: auto; max-height: 500px; min-width: 100%;" alt="First slide">
+                        <img src="{{envVariable.apiUrl+imageUrl}}" class="img-responsive" style="width: auto; max-height: 500px; min-width: 100%;" alt="First slide">
                       </slide>
                     </carousel> -->
                   </div>
@@ -875,7 +875,7 @@
               <div class="recommendation-card" *ngFor="let workshop of recommendations.collections; let i =index">
                 <a *ngIf="i<5" [routerLink]="'/workshop/'+workshop.id">
                   <div class="">
-                    <img class="recommendation-thumb" *ngIf="workshop.imageUrls && workshop.imageUrls.length>0" src="{{config.apiUrl+workshop.imageUrls[0]}}"
+                    <img class="recommendation-thumb" *ngIf="workshop.imageUrls && workshop.imageUrls.length>0" src="{{envVariable.apiUrl+workshop.imageUrls[0]}}"
                       alt="workshpImg">
                     <img class="recommendation-thumb" *ngIf="!workshop.imageUrls || workshop.imageUrls.length<=0" src="/assets/images/no-image.jpg"
                       alt="workshpImg">

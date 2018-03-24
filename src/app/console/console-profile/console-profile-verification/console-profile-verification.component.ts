@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConsoleProfileComponent } from '../console-profile.component';
 import { ProfileService } from '../../../_services/profile/profile.service';
-import { AppConfig } from '../../../app.config';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { DialogsService } from '../../../_services/dialogs/dialog.service';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
 import { ContentService } from '../../../_services/content/content.service';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-console-profile-verification',
@@ -23,6 +23,7 @@ export class ConsoleProfileVerificationComponent implements OnInit {
   private queryForSocialIdentities = { 'include': ['identities', 'credentials'] };
   public socialIdentitiesConnected: any = [];
   public boolShowConnectedSocials = false;
+  public envVariable;
   public connectedIdentities = {
     'fb': false,
     'google': false
@@ -35,7 +36,6 @@ export class ConsoleProfileVerificationComponent implements OnInit {
     private dialog: MatDialog,
     private dialogsService: DialogsService,
     public _profileService: ProfileService,
-    public config: AppConfig,
     private _cookieUtilsService: CookieUtilsService,
     private contentService: ContentService
   ) {
@@ -43,6 +43,7 @@ export class ConsoleProfileVerificationComponent implements OnInit {
       console.log(urlSegment[0].path);
       consoleProfileComponent.setActiveTab(urlSegment[0].path);
     });
+      this.envVariable = environment;
     this.userId = _cookieUtilsService.getValue('userId');
   }
 

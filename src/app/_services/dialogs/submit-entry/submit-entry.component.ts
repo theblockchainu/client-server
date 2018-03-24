@@ -2,14 +2,14 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
-import { AppConfig } from '../../../app.config';
-import { MediaUploaderService } from '../../../_services/mediaUploader/media-uploader.service';
+import { MediaUploaderService } from '../../mediaUploader/media-uploader.service';
 import { SubmissionViewComponent } from '../submission-view/submission-view.component';
-import { ProjectSubmissionService } from '../../../_services/project-submission/project-submission.service';
-import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
+import { ProjectSubmissionService } from '../../project-submission/project-submission.service';
+import { CookieUtilsService } from '../../cookieUtils/cookie-utils.service';
 import 'rxjs/add/operator/map';
-import { ContentService } from '../../../_services/content/content.service';
+import { ContentService } from '../../content/content.service';
 import _ from 'lodash';
+import {environment} from '../../../../environments/environment';
 
 @Component({
     selector: 'app-submit-entry',
@@ -19,6 +19,7 @@ import _ from 'lodash';
 export class SubmitEntryComponent implements OnInit {
 
     public userId;
+    public envVariable;
     public submitEntryForm: any = FormGroup;
     public imageUrl: string;
     public submissionTopics = [];
@@ -37,7 +38,7 @@ export class SubmitEntryComponent implements OnInit {
     public placeholderStringTopic = 'Submission Tag';
     public maxTopicMsg = 'Choose max 3 related tags';
 
-    constructor(public config: AppConfig,
+    constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
         public dialog: MatDialog,
         private _fb: FormBuilder,
@@ -48,9 +49,10 @@ export class SubmitEntryComponent implements OnInit {
         private _contentService: ContentService,
         public dialogRef: MatDialogRef<SubmitEntryComponent>
     ) {
+        this.envVariable = environment;
         this.userId = _cookieUtilsService.getValue('userId');
-        this.searchTopicURL = config.searchUrl + '/api/search/' + this.config.uniqueDeveloperCode + '_topics/suggest?field=name&query=';
-        this.createTopicURL = config.apiUrl + '/api/' + this.config.uniqueDeveloperCode + '_topics';
+        this.searchTopicURL = environment.searchUrl + '/api/search/' + environment.uniqueDeveloperCode + '_topics/suggest?field=name&query=';
+        this.createTopicURL = environment.apiUrl + '/api/' + environment.uniqueDeveloperCode + '_topics';
 
     }
 
@@ -109,7 +111,7 @@ export class SubmitEntryComponent implements OnInit {
     public deleteFromContainer(fileUrl, fileType) {
         const fileurl = fileUrl;
         fileUrl = _.replace(fileUrl, 'download', 'files');
-        this.http.delete(this.config.apiUrl + fileUrl)
+        this.http.delete(environment.apiUrl + fileUrl)
             .map((response) => {
                 console.log(response);
                 this.urlForImages = [];

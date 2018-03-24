@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import { AppConfig } from '../../../app.config';
 import { CollectionService } from '../../../_services/collection/collection.service';
+import {environment} from '../../../../environments/environment';
 
 @Component({
     selector: 'app-rsvp-dialog',
@@ -12,14 +12,16 @@ export class ShowRSVPPopupComponent implements OnInit {
 
     public userType = 'public';
     public experienceId = '';
+    public envVariable;
     public hasChanged = false;
     public loadingRsvpDetail = false;
     constructor(public dialogRef: MatDialogRef<ShowRSVPPopupComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: any,
-                public config: AppConfig,
                 private dialog: MatDialog,
                 public _collectionService: CollectionService
-    ) { }
+    ) {
+        this.envVariable = environment;
+    }
 
     ngOnInit() {
     }

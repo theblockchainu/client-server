@@ -215,6 +215,11 @@ a:hover {
   margin-top: 12px;
 }
 
+.step5Background {
+  background: url("../../../assets/images/expEditStep5.jpg") !important;
+  background-size: cover !important;
+}
+
 .video .mat-grid-tile {
   height: 100px !important;
   width: calc(((35% - 5px) * 1) + 0px) !important;
@@ -299,5 +304,5 @@ a:hover {
 }
 
 .navbar-page-content{
-  margin-left: 50px;
+  background: #fff;
 }

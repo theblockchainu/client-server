@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AppConfig } from '../app.config';
 import { CountryPickerService } from '../_services/countrypicker/countrypicker.service';
 import { ContentService } from '../_services/content/content.service';
 import { ProfileService } from '../_services/profile/profile.service';
@@ -10,6 +9,7 @@ import { TopicService } from '../_services/topic/topic.service';
 import { CookieUtilsService } from '../_services/cookieUtils/cookie-utils.service';
 import { RequestOptions, Headers } from '@angular/http';
 import * as _ from 'lodash';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-onboarding',
@@ -20,7 +20,7 @@ export class OnboardingComponent implements OnInit {
   public step = 1;
   public userId;
   public placeholderStringTopic = 'Search for a topic ';
-
+    public envVariable;
   public suggestedTopics;
   public interests = [];
   public active = true;
@@ -50,7 +50,6 @@ export class OnboardingComponent implements OnInit {
     public router: Router,
     private activatedRoute: ActivatedRoute,
     private http: HttpClient,
-    public config: AppConfig,
     private _fb: FormBuilder,
     private countryPickerService: CountryPickerService,
     private _contentService: ContentService,
@@ -58,14 +57,15 @@ export class OnboardingComponent implements OnInit {
     private _topicService: TopicService,
     private _cookieUtilsService: CookieUtilsService
   ) {
+      this.envVariable = environment;
 
     const query = {
       'limit': 5
     };
-    this.suggestTopicURL = config.searchUrl + '/api/search/' + this.config.uniqueDeveloperCode + '_topics?filter=' + JSON.stringify(query);
+    this.suggestTopicURL = environment.searchUrl + '/api/search/' + environment.uniqueDeveloperCode + '_topics?filter=' + JSON.stringify(query);
 
-    this.searchTopicURL = config.searchUrl + '/api/search/' + this.config.uniqueDeveloperCode + '_topics/suggest?field=name&query=';
-    this.createTopicURL = config.apiUrl + '/api/' + this.config.uniqueDeveloperCode + '_topics';
+    this.searchTopicURL = environment.searchUrl + '/api/search/' + environment.uniqueDeveloperCode + '_topics/suggest?field=name&query=';
+    this.createTopicURL = environment.apiUrl + '/api/' + environment.uniqueDeveloperCode + '_topics';
     this.activatedRoute.params.subscribe(params => {
       this.step = params['step'];
     });
@@ -149,7 +149,7 @@ export class OnboardingComponent implements OnInit {
         body: body
       });
       if (topicArray.length !== 0) {
-        // this.http.delete(this.config.apiUrl + '/api/collections/' + this.userId + '/topics/rel', body)
+        // this.http.delete(environment.apiUrl + '/api/collections/' + this.userId + '/topics/rel', body)
         topicArray.forEach(topicId => {
           this._topicService.deleteRelTopic(this.userId, topicId)
             .subscribe((response) => { console.log(response); });

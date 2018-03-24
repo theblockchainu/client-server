@@ -2,15 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConsoleProfileComponent } from '../console-profile.component';
 import { ProfileService } from '../../../_services/profile/profile.service';
-import { MatAccordion } from '@angular/material';
 import { MatSnackBar } from '@angular/material';
-import { NG_VALIDATORS, FormControl, Validator, ValidationErrors } from '@angular/forms';
-
 import { DialogsService } from '../../../_services/dialogs/dialog.service';
 import { CookieUtilsService } from '../../../_services/cookieUtils/cookie-utils.service';
-
-import * as _ from 'lodash';
-import { AppConfig } from '../../../app.config';
+import {environment} from '../../../../environments/environment';
 @Component({
   selector: 'app-console-profile-topics',
   templateUrl: './console-profile-topics.component.html',
@@ -19,6 +14,7 @@ import { AppConfig } from '../../../app.config';
 export class ConsoleProfileTopicsComponent implements OnInit {
 
   public userId;
+  public envVariable;
   public loading: boolean;
   public topicsLearning: Array<any> = [];
   public topicsTeaching: Array<any> = [];
@@ -36,15 +32,15 @@ export class ConsoleProfileTopicsComponent implements OnInit {
     public _profileService: ProfileService,
     public snackBar: MatSnackBar,
     public _dialogService: DialogsService,
-    private _cookieUtilsService: CookieUtilsService,
-    public config: AppConfig
+    private _cookieUtilsService: CookieUtilsService
   ) {
+      this.envVariable = environment;
     activatedRoute.pathFromRoot[4].url.subscribe((urlSegment) => {
       console.log(urlSegment[0].path);
       consoleProfileComponent.setActiveTab(urlSegment[0].path);
     });
     this.userId = _cookieUtilsService.getValue('userId');
-    this.searchTopicURL = config.searchUrl + '/api/search/' + this.config.uniqueDeveloperCode + '_topics/suggest?field=name&query=';
+    this.searchTopicURL = environment.searchUrl + '/api/search/' + environment.uniqueDeveloperCode + '_topics/suggest?field=name&query=';
   }
 
   ngOnInit() {

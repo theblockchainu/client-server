@@ -36,7 +36,7 @@
                     </div>
                     <div class="collectionParticipantImageCarousel">
                       <div class="circle-thumb-big">
-                        <img src="{{config.apiUrl+ session.collections[0].owners[0].profiles[0].picture_url}}" alt=" " class="circle-thumb" (error)="consoleLearningComponent.imgErrorHandler($event)">
+                        <img src="{{envVariable.apiUrl+ session.collections[0].owners[0].profiles[0].picture_url}}" alt=" " class="circle-thumb" (error)="consoleLearningComponent.imgErrorHandler($event)">
                       </div>
                     </div>
                     <div class="teacherName">
@@ -84,7 +84,7 @@
                     </div>
                     <div class="collectionParticipantImageCarousel">
                       <div class="circle-thumb-big">
-                        <img src="{{config.apiUrl+session.collections[0].owners[0].profiles[0].picture_url}}" alt=" " class="circle-thumb" (error)="consoleLearningComponent.imgErrorHandler($event)">
+                        <img src="{{envVariable.apiUrl+session.collections[0].owners[0].profiles[0].picture_url}}" alt=" " class="circle-thumb" (error)="consoleLearningComponent.imgErrorHandler($event)">
                       </div>
                     </div>
                     <div class="teacherName">
@@ -143,7 +143,7 @@
                   <span *ngIf="session.collections">
                     <div class="collectionParticipantImageCarousel">
                       <div class="circle-thumb-big">
-                        <img src="{{config.apiUrl+session.collections[0].owners[0].profiles[0].picture_url}}" alt=" " class="circle-thumb" (error)="consoleLearningComponent.imgErrorHandler($event)">
+                        <img src="{{envVariable.apiUrl+session.collections[0].owners[0].profiles[0].picture_url}}" alt=" " class="circle-thumb" (error)="consoleLearningComponent.imgErrorHandler($event)">
                       </div>
                     </div>
                     <div class="teacherName">
@@ -200,7 +200,7 @@
                   </div>
                   <div class="collectionParticipantImageCarousel">
                     <div class="circle-thumb-big">
-                      <img src="{{config.apiUrl+session.collections[0].owners[0].profiles[0].picture_url}}" alt=" " class="circle-thumb" (error)="consoleLearningComponent.imgErrorHandler($event)">
+                      <img src="{{envVariable.apiUrl+session.collections[0].owners[0].profiles[0].picture_url}}" alt=" " class="circle-thumb" (error)="consoleLearningComponent.imgErrorHandler($event)">
                     </div>
                   </div>
                   <div class="teacherName">

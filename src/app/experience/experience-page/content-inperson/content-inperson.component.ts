@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { AppConfig } from '../../../app.config';
 import { CollectionService } from '../../../_services/collection/collection.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommentService } from '../../../_services/comment/comment.service';
@@ -9,6 +8,7 @@ import { DialogsService } from '../../../_services/dialogs/dialog.service';
 import { ContentService } from '../../../_services/content/content.service';
 import * as moment from 'moment';
 import {Router} from '@angular/router';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-content-inperson',
@@ -28,9 +28,9 @@ export class ContentInpersonComponent implements OnInit {
     public duration = 0;
     public lat;
     public lng;
+    public envVariable;
 
     constructor(
-        public config: AppConfig,
         public _collectionService: CollectionService,
         @Inject(MAT_DIALOG_DATA) public data: any,
         public dialogRef: MatDialogRef<ContentInpersonComponent>,
@@ -41,6 +41,7 @@ export class ContentInpersonComponent implements OnInit {
         private contentService: ContentService,
         private router: Router
     ) {
+        this.envVariable = environment;
         this.userType = data.userType;
         this.experienceId = data.collectionId;
         this.userId = _cookieUtilsService.getValue('userId');

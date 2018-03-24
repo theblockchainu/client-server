@@ -3,7 +3,6 @@ import { CollectionService } from '../../_services/collection/collection.service
 import { TopicService } from '../../_services/topic/topic.service';
 import { ProfileService } from '../../_services/profile/profile.service';
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
-import { AppConfig } from '../../app.config';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs/Observable';
 import { MatDialog } from '@angular/material';
@@ -50,7 +49,6 @@ export class ExperiencesComponent implements OnInit {
     public _profileService: ProfileService,
     private _cookieUtilsService: CookieUtilsService,
     private _topicService: TopicService,
-    public config: AppConfig,
     public dialog: MatDialog,
     public elRef: ElementRef,
     public _dialogsService: DialogsService

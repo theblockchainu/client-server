@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
-import { AppConfig } from '../../../app.config';
 import { MessageParticipantComponent } from '../message-participant/message-participant.component';
 import { CollectionService } from '../../../_services/collection/collection.service';
 import { DialogsService } from '../../../_services/dialogs/dialog.service';
 import { ProfileService } from '../../../_services/profile/profile.service';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-view-participants',
@@ -13,15 +13,18 @@ import { ProfileService } from '../../../_services/profile/profile.service';
 })
 export class ViewParticipantsComponent implements OnInit {
 
+    public envVariable;
+
   constructor(public dialogRef: MatDialogRef<ViewParticipantsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public config: AppConfig,
     private dialog: MatDialog,
     public _collectionService: CollectionService,
     public _dialogsService: DialogsService,
     public snackBar: MatSnackBar,
     public _profileService: ProfileService
-  ) { }
+  ) {
+      this.envVariable = environment;
+  }
 
   ngOnInit() {
   }

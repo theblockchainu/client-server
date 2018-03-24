@@ -32,15 +32,13 @@
                 <div class="col-md-12">
                   <h5 style="margin-bottom:10px;font-weight:bold;">{{verifiedObj.text}}</h5>
                 </div>
-                <br>
-                <div class="row">
-                  <div class="col-sm-1" style="width:7.3333% !important;">
-                    <!--<button mat-mini-fab> <mat-icon> check </mat-icon> </button>-->
-                    <i class="mat mat-check-circle-outline mat-24px primaryColor pull-right" style="margin-top: 2px"></i>
+                  <div class="col-md-1">
+                    <mat-icon [color]="'primary'" style="top: 10px;">check_circle</mat-icon>
                   </div>
-                  <p class="mat-caption" *ngIf="verifiedObj.text !== 'Government Id'" style="color:#767676;">{{verifiedObj.value}}</p>
-                  <a *ngIf="verifiedObj.text == 'Government Id' && verifiedObj.value" href="{{config.apiUrl + verifiedObj.value.url}}" target="_blank">{{verifiedObj.value.originalFilename}}</a>
-                </div>
+                    <div class="col-md-10">
+                        <p class="mat-caption" *ngIf="verifiedObj.text !== 'Government Id'" style="color:#767676;">{{verifiedObj.value}}</p>
+                        <a *ngIf="verifiedObj.text === 'Government Id' && verifiedObj.value" href="{{envVariable.apiUrl + verifiedObj.value.url}}" target="_blank">{{verifiedObj.value.originalFilename}}</a>
+                    </div>
               </div>
             </div>
           </div>
@@ -58,7 +56,7 @@
                     </div>
                     <div class="col-md-10">
                       <p *ngIf="!unverifiedObj.submitted" class="mat-caption" style="color:#767676">{{unverifiedObj.value}}</p>
-                      <a *ngIf="unverifiedObj.text == 'Government Id'  && unverifiedObj.submitted" href="{{config.apiUrl + unverifiedObj.value.url}}"
+                      <a *ngIf="unverifiedObj.text == 'Government Id'  && unverifiedObj.submitted" href="{{envVariable.apiUrl + unverifiedObj.value.url}}"
                         target="_blank">{{unverifiedObj.value.originalFilename}}</a>
                     </div>
                   </div>
@@ -89,7 +87,7 @@
               </div>
             </div>
             <div class="col-md-4 margin-top-20">
-              <a *ngIf="!connectedIdentities.fb" mat-button href="{{config.apiUrl + '/link/Facebook?returnTo=console/profile/verification'}}">Connect</a>
+              <a *ngIf="!connectedIdentities.fb" mat-button href="{{envVariable.apiUrl + '/link/Facebook?returnTo=console/profile/verification'}}">Connect</a>
               <p *ngIf="connectedIdentities.fb" href="#" color="grey">Connected</p>
             </div>
           </div>
@@ -107,7 +105,7 @@
               </div>
             </div>
             <div class="col-md-4 margin-top-40">
-              <a *ngIf="!connectedIdentities.google" mat-button href="{{config.apiUrl + '/link/Google?returnTo=console/profile/verification'}}">Connect</a>
+              <a *ngIf="!connectedIdentities.google" mat-button href="{{envVariable.apiUrl + '/link/Google?returnTo=console/profile/verification'}}">Connect</a>
               <p *ngIf="connectedIdentities.google" href="#" color="grey">Connected</p>
             </div>
           </div>

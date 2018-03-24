@@ -50,18 +50,18 @@
                                 </h5>
                                 <!-- <mat-grid-list cols="2" rowHeight="100px" gutterSize="10px" *ngIf="mediaObject && mediaObject.hasOwnProperty('type') && mediaObject.hasOwnProperty('url')">
                                     <mat-grid-tile>
-                                        <img *ngIf="mediaObject.type.includes('image')" src="{{config.apiUrl + mediaObject.url}}" width="150" (error)="imgErrorHandler($event)">
+                                        <img *ngIf="mediaObject.type.includes('image')" src="{{envVariable.apiUrl + mediaObject.url}}" width="150" (error)="imgErrorHandler($event)">
                                         <video *ngIf="mediaObject.type.includes('video')" controls width="150" style="border: 0.5px solid #ccc" preload="metadata">
-                                            <source src="{{config.apiUrl + mediaObject.url}}"> Your browser does not support the video tag.
+                                            <source src="{{envVariable.apiUrl + mediaObject.url}}"> Your browser does not support the video tag.
                                         </video>
                                         <mat-icon (click)="deleteFromContainer(mediaObject.url, '')" class="delete-button">close</mat-icon>
                                     </mat-grid-tile>
                                 </mat-grid-list> -->
                                 <div *ngIf="mediaObject && mediaObject.hasOwnProperty('type') && mediaObject.hasOwnProperty('url')" class="col-md-6 padding-left-0 pic delete imageContainerVideo">
-                                    <img *ngIf="mediaObject.type.includes('image')" src="{{config.apiUrl + mediaObject.url}}" width="150" style="border: 0.5px solid #ccc; position: relative; top: -20px;">
+                                    <img *ngIf="mediaObject.type.includes('image')" src="{{envVariable.apiUrl + mediaObject.url}}" width="150" style="border: 0.5px solid #ccc; position: relative; top: -20px;">
                                     <mat-icon *ngIf="mediaObject.type.includes('image')" (click)="deleteFromContainer(mediaObject.url, 'image')" class="delete-image">close</mat-icon>
                                     <video *ngIf="mediaObject.type.includes('video')" controls width="150" style="border: 0.5px solid #ccc" preload="metadata">
-                                        <source src="{{config.apiUrl + mediaObject.url}}"> Your browser does not support the video tag.
+                                        <source src="{{envVariable.apiUrl + mediaObject.url}}"> Your browser does not support the video tag.
                                     </video>
                                     <mat-icon *ngIf="mediaObject.type.includes('video')" (click)="deleteFromContainer(mediaObject.url, '')" class="delete-button">close</mat-icon>
                                 </div>
@@ -106,20 +106,20 @@
                                     <div style="float: left; margin-right: 15px; cursor: pointer;">
                                         <mat-icon (click)="deleteFromContainer(file, 'file')" class="">close</mat-icon>
                                     </div>
-                                    <a href="{{config.apiUrl + file}}">{{file}}</a>
+                                    <a href="{{envVariable.apiUrl + file}}">{{file}}</a>
                                 </mat-grid-tile>
                             </mat-grid-list> -->
                             <!-- </ng-template> -->
                             <div *ngIf="attachmentUrls.length" class="pic delete">
                                 <div *ngFor="let file of attachmentUrls" class="col-md-6 padding-left-0 imageContainer">
-                                    <img *ngIf="file.type.includes('image')" src="{{config.apiUrl + file.url}}" width="150" style="border: 0.5px solid #ccc; position: relative; top: -20px;">
+                                    <img *ngIf="file.type.includes('image')" src="{{envVariable.apiUrl + file.url}}" width="150" style="border: 0.5px solid #ccc; position: relative; top: -20px;">
                                     <mat-icon *ngIf="file.type.includes('image')" (click)="deleteFromContainer(file.url, 'file')" class="delete-image">close</mat-icon>
                                     <div *ngIf="file.type.includes('application')" class="uploaded_file">
-                                        <a href="{{config.apiUrl + file.url}}" target="_blank">{{file.originalFilename}}</a>
+                                        <a href="{{envVariable.apiUrl + file.url}}" target="_blank">{{file.originalFilename}}</a>
                                     </div>
                                     <mat-icon *ngIf="file.type.includes('application')" (click)="deleteFromContainer(file.url, 'file')" class="delete-file">close</mat-icon>
                                     <video *ngIf="file.type.includes('video')" controls width="150" style="border: 0.5px solid #ccc" preload="metadata">
-                                        <source src="{{config.apiUrl + file.url}}">
+                                        <source src="{{envVariable.apiUrl + file.url}}">
                                     </video>
                                     <mat-icon *ngIf="file.type.includes('video')" (click)="deleteFromContainer(file.url, '')" class="delete-button2">close</mat-icon>
 

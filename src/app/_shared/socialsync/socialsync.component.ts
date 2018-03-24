@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AppConfig } from '../../app.config';
-
 import { ProfileService } from '../../_services/profile/profile.service';
 
 @Component({
@@ -20,7 +18,6 @@ export class SocialSyncComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    public config: AppConfig,
     public _profileService: ProfileService) { }
 
   ngOnInit() {

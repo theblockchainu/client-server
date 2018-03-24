@@ -2,9 +2,9 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, FormControl, AbstractControl, Validators } from '@angular/forms';
 import { Router, Route } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
-import { AppConfig } from '../../../app.config';
-import { CollectionService } from '../../../_services/collection/collection.service';
-import { ProfileService } from '../../../_services/profile/profile.service';
+import { CollectionService } from '../../collection/collection.service';
+import { ProfileService } from '../../profile/profile.service';
+import {environment} from '../../../../environments/environment';
 @Component({
   selector: 'app-rate-participants',
   templateUrl: './rate-participant-dialog.component.html',
@@ -13,17 +13,19 @@ import { ProfileService } from '../../../_services/profile/profile.service';
 export class RateParticipantComponent implements OnInit {
 
     public notReviewedParticipantCount = 0;
+    public envVariable;
 
   constructor(public dialogRef: MatDialogRef<RateParticipantComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public config: AppConfig,
     private dialog: MatDialog,
     public _collectionService: CollectionService,
     public snackBar: MatSnackBar,
     public _profileService: ProfileService,
     public _fb: FormBuilder,
     private router: Router
-  ) { }
+  ) {
+      this.envVariable = environment;
+  }
 
   ngOnInit() {
     if (this.data) {

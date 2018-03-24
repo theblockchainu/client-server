@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConsoleComponent } from '../console.component';
-import { AppConfig } from '../../app.config';
 import { NotificationService } from '../../_services/notification/notification.service';
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
 import { UcFirstPipe, UcWordsPipe } from 'ngx-pipes';
@@ -9,6 +8,7 @@ import { CollectionService } from '../../_services/collection/collection.service
 import { MatSnackBar } from '@angular/material';
 import { DialogsService } from '../../_services/dialogs/dialog.service';
 import { ProfileService } from '../../_services/profile/profile.service';
+import {environment} from '../../../environments/environment';
 declare var moment: any;
 import * as _ from 'lodash';
 
@@ -42,7 +42,7 @@ export class ConsoleDashboardComponent implements OnInit {
     public now: Date;
     public collections: Array<any> = [];
     public userRating: number;
-
+    public envVariable;
     public ongoingLearningArray: Array<any>;
     public upcomingLearningArray: Array<any>;
     public pastLearningArray: Array<any>;
@@ -74,7 +74,6 @@ export class ConsoleDashboardComponent implements OnInit {
     constructor(
         public activatedRoute: ActivatedRoute,
         public consoleComponent: ConsoleComponent,
-        public config: AppConfig,
         public _notificationService: NotificationService,
         private ucwords: UcWordsPipe,
         private ucFirstPipe: UcFirstPipe,
@@ -85,6 +84,7 @@ export class ConsoleDashboardComponent implements OnInit {
         private _dialogService: DialogsService,
         public _profileService: ProfileService,
     ) {
+        this.envVariable = environment;
         activatedRoute.pathFromRoot[3].url.subscribe((urlSegment) => {
             console.log(urlSegment[0].path);
             consoleComponent.setActiveTab(urlSegment[0].path);

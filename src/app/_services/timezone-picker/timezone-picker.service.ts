@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
-import { AppConfig } from '../../app.config';
 import { HttpClient } from '@angular/common/http';
+import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class TimezonePickerService {
+    public envVariable;
 
-  constructor(private http: HttpClient, public config: AppConfig) {
+  constructor(private http: HttpClient) {
+      this.envVariable = environment;
   }
 
   public getTimezones(filter: string) {
-    return this.http.get(this.config.apiUrl + '/api/timezones?filter=' + filter)
+    return this.http.get(environment.apiUrl + '/api/timezones?filter=' + filter)
       .map((response: any) => {
         return response;
       });

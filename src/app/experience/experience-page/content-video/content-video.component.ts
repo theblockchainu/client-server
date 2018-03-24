@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { AppConfig } from '../../../app.config';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommentService } from '../../../_services/comment/comment.service';
 import { CollectionService } from '../../../_services/collection/collection.service';
@@ -32,7 +31,6 @@ export class ContentVideoComponent implements OnInit, OnDestroy {
     public duration = 0;
 
     constructor(
-        public config: AppConfig,
         @Inject(MAT_DIALOG_DATA) public data: any,
         public _collectionService: CollectionService,
         public dialogRef: MatDialogRef<ContentVideoComponent>,

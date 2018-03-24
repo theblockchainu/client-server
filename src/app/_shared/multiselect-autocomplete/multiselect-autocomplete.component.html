@@ -24,7 +24,7 @@
   <ul *ngFor="let item of filteredList" style="list-style:none" class="padding-left-0">
     <li class="captitalise topic" (click)="select(item)">
       <a>
-        <img src="{{_config.apiUrl+ item.imageUrl}}" class="topic-bg">
+        <img src="{{envVariable.apiUrl+ item.imageUrl}}" class="topic-bg">
         <span style="margin-left:20px">{{item.name}}</span>
         <span *ngIf="!item.inSelect">
           <i class="mati mati-check-circle-outline mati-24px primaryColor pull-right" style="margin:18px 10px"></i>

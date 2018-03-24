@@ -3,12 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { ConsoleComponent } from '../console.component';
 import { InboxService } from '../../_services/inbox/inbox.service';
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
-
-import { AppConfig } from '../../app.config';
-
 import * as moment from 'moment';
 import * as _ from 'lodash';
 import {SocketService} from '../../_services/socket/socket.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-console-inbox',
@@ -27,15 +25,16 @@ export class ConsoleInboxComponent implements OnInit {
   public displayNone = [];
   public selected = '';
   public message = '';
+  public envVariable;
 
   constructor(
-    public config: AppConfig,
     public activatedRoute: ActivatedRoute,
     public consoleComponent: ConsoleComponent,
     public _inboxService: InboxService,
     public _socketService: SocketService,
     private _cookieUtilsService: CookieUtilsService
   ) {
+      this.envVariable = environment;
     activatedRoute.pathFromRoot[3].url.subscribe((urlSegment) => {
       console.log(urlSegment[0].path);
       consoleComponent.setActiveTab(urlSegment[0].path);

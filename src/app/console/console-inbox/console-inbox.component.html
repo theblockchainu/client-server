@@ -21,7 +21,7 @@
         <div *ngFor="let rooms of tempJoinedRooms;let i = index" (click)="openChat(rooms)" style="cursor:pointer" [ngClass]="{'padding-top-10':true, 'backgroundColorGray': i===0 || displayNone[rooms.id]}">
           <div [ngClass]="{'col-md-12' : true, 'padding-left-0': true , 'backgroundColorGray': i===0 || displayNone[rooms.id]}">
             <span class="col-md-2 padding-right-0" *ngIf="rooms.collection" style="margin-left: 10px">
-              <img src="{{ config.apiUrl + rooms.collection[0].imageUrls}}" alt=" " class="circle-thumb" (error)="imgErrorHandler($event)">
+              <img src="{{ envVariable.apiUrl + rooms.collection[0].imageUrls}}" alt=" " class="circle-thumb" (error)="imgErrorHandler($event)">
             </span>
             <span class="col-md-2 padding-right-0" *ngIf="!rooms.collection"  style="margin-left: 10px">
               <!--dp-->
@@ -87,7 +87,7 @@
               </div>
               <div *ngIf="message.type==='user'" class="margin-top-10">
                 <span [ngClass]="{'col-md-1': true, 'review-thumb': true, 'pull-left': message.peer[0].id != userId, 'pull-right': message.peer[0].id == userId}">
-                  <img src="{{ config.apiUrl + message.peer[0].profiles[0].picture_url}}" alt=" " class="circle-thumb" (error)="imgErrorHandler($event)">
+                  <img src="{{ envVariable.apiUrl + message.peer[0].profiles[0].picture_url}}" alt=" " class="circle-thumb" (error)="imgErrorHandler($event)">
                 </span>
                 <span class="talk-bubble tri-right left-top round" style="margin-top:3px">
                   <div class="talktext">

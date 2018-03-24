@@ -1,14 +1,13 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { AppConfig } from '../../app.config';
 import { MediaUploaderService } from '../../_services/mediaUploader/media-uploader.service';
 import { ContentService } from '../../_services/content/content.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
 import * as _ from 'lodash';
 import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
 import { AddLocationDialogComponent } from '../add-location-dialog/add-location-dialog.component';
-
+import {environment} from '../../../environments/environment';
 @Component({
     selector: 'app-experience-content-inperson',
     templateUrl: './experience-content-inperson.component.html',
@@ -27,6 +26,7 @@ export class ExperienceContentInpersonComponent implements OnInit {
         status: 'discard',
         data: 0
     };
+    public envVariable;
     public isEdit = false;
     private uploadingImage = false;
     private uploadingAttachments = false;
@@ -38,7 +38,6 @@ export class ExperienceContentInpersonComponent implements OnInit {
     constructor(
         private _fb: FormBuilder,
         private http: HttpClient,
-        public config: AppConfig,
         private mediaUploader: MediaUploaderService,
         private contentService: ContentService,
         @Inject(MAT_DIALOG_DATA) public inputData: any,
@@ -46,6 +45,7 @@ export class ExperienceContentInpersonComponent implements OnInit {
         private requestHeaders: RequestHeaderService,
         private dialog: MatDialog,
     ) {
+        this.envVariable = environment;
         this.options = requestHeaders.getOptions();
         this.itenaryForm = inputData.itenaryForm;
         this.lastIndex = inputData.index;
@@ -205,7 +205,7 @@ export class ExperienceContentInpersonComponent implements OnInit {
     deleteFromContainer(fileUrl, fileType) {
         const fileurl = fileUrl;
         fileUrl = _.replace(fileUrl, 'download', 'files');
-        this.http.delete(this.config.apiUrl + fileUrl)
+        this.http.delete(environment.apiUrl + fileUrl)
             .map((response) => {
                 console.log(response);
                 if (fileType === 'file') {
@@ -243,7 +243,7 @@ export class ExperienceContentInpersonComponent implements OnInit {
     }
 
     deleteFromContent(contentForm, body) {
-        this.http.patch(this.config.apiUrl + '/api/contents/' + contentForm.controls['id'].value, body, this.options)
+        this.http.patch(environment.apiUrl + '/api/contents/' + contentForm.controls['id'].value, body, this.options)
             .map((response: any) => { })
             .subscribe();
     }

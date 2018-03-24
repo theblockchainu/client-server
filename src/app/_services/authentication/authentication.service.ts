@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import 'rxjs/add/operator/map';
-import { AppConfig } from '../../app.config';
+import {environment} from '../../../environments/environment';
 import { RequestHeaderService } from '../requestHeader/request-header.service';
 import { SocketService } from '../socket/socket.service';
 import * as Raven from 'raven-js';
@@ -16,17 +16,19 @@ export class AuthenticationService {
   getLoggedInUser: EventEmitter<any> = new EventEmitter();
 
   public key = 'access_token';
+  public envVariable;
   private options;
   public userId;
   isLoginSubject = new BehaviorSubject<boolean>(this.hasToken());
 
-  constructor(private http: HttpClient, public config: AppConfig,
+  constructor(private http: HttpClient,
     private _cookieUtilsService: CookieUtilsService,
     private route: ActivatedRoute,
     public router: Router,
     public _requestHeaderService: RequestHeaderService,
     private _socketService: SocketService
   ) {
+      this.envVariable = environment;
     this.options = this._requestHeaderService.getOptions();
   }
 
@@ -58,7 +60,7 @@ export class AuthenticationService {
     // this.isLoginSubject.next(true);
     const body = `{"email":"${email}","password":"${password}","rememberMe":${rememberMe}}`;
     return this.http
-      .post(this.config.apiUrl + '/auth/local', body, this.options)
+      .post(environment.apiUrl + '/auth/local', body, this.options)
       .map((response: any) => {
         console.log(response);
         // if res code is xxx and response "error"
@@ -89,7 +91,7 @@ export class AuthenticationService {
     this.getLoggedInUser.emit(0);
     if (this.getCookie(this.key)) {
       console.log(this.options);
-      this.http.get(this.config.apiUrl + '/auth/logout', this.options)
+      this.http.get(environment.apiUrl + '/auth/logout', this.options)
         .subscribe(
           (res: any) => {
             console.log(res);
@@ -116,7 +118,7 @@ export class AuthenticationService {
   sendForgotPwdMail(email): any {
     const body = `{"email":"${email}"}`;
     return this.http
-      .post(this.config.apiUrl + '/api/peers/forgotPassword?em=' + email, body, this.options)
+      .post(environment.apiUrl + '/api/peers/forgotPassword?em=' + email, body, this.options)
       .map((response: any) => response, (err) => {
         console.log('Error: ' + err);
       });
@@ -125,7 +127,7 @@ export class AuthenticationService {
   sendEmailSubscriptions(email): any {
     const body = `{"email":"${email}"}`;
     return this.http
-      .post(this.config.apiUrl + '/api/emailSubscriptions?em=' + email, body, this.options)
+      .post(environment.apiUrl + '/api/emailSubscriptions?em=' + email, body, this.options)
       .map((response: any) => response, (err) => {
         console.log('Error: ' + err);
       });
@@ -133,14 +135,14 @@ export class AuthenticationService {
 
   resetPassword(body: any): any {
     return this.http
-      .post(this.config.apiUrl + '/api/peers/resetPassword', body, this.options)
+      .post(environment.apiUrl + '/api/peers/resetPassword', body, this.options)
       .map((response: any) => response);
   }
   createGuestContacts(first_name, last_name, email, subject, message): any {
     const body = `{"first_name":"${first_name}","last_name":"${last_name}",
     "email":"${email}","subject":"${subject}","message":"${message}"}`;
     return this.http
-      .post(this.config.apiUrl + '/api/guestContacts', body, this.options)
+      .post(environment.apiUrl + '/api/guestContacts', body, this.options)
       .map((response: any) => response, (err) => {
         console.log('Error: ' + err);
       });

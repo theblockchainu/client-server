@@ -6,7 +6,7 @@ import * as moment from 'moment';
 import {CollectionService} from '../../../_services/collection/collection.service';
 import {CommunityService} from '../../../_services/community/community.service';
 import {DialogsService} from '../../../_services/dialogs/dialog.service';
-import {AppConfig} from '../../../app.config';
+import {environment} from '../../../../environments/environment';
 import {CookieUtilsService} from '../../../_services/cookieUtils/cookie-utils.service';
 
 @Component({
@@ -22,14 +22,15 @@ export class CommunityPageExperiencesComponent implements OnInit {
     public experiences;
     private today = moment();
     public loadingExperiences = true;
+    public envVariable;
 
     constructor(public activatedRoute: ActivatedRoute,
                 public communityPageComponent: CommunityPageComponent,
                 public _collectionService: CollectionService,
                 public _communityService: CommunityService,
                 public _dialogsService: DialogsService,
-                public config: AppConfig,
                 public _cookieUtilsService: CookieUtilsService) {
+        this.envVariable = environment;
         activatedRoute.pathFromRoot[3].url.subscribe((urlSegment) => {
             console.log('activated route is: ' + JSON.stringify(urlSegment));
             if (urlSegment[0] === undefined) {

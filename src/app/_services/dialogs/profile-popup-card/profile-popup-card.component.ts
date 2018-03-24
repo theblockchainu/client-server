@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CollectionService } from '../../collection/collection.service';
-import { AppConfig } from '../../../app.config';
+import {environment} from '../../../../environments/environment';
 @Component({
   selector: 'app-profile-popup-card',
   templateUrl: './profile-popup-card.component.html',
@@ -11,10 +11,12 @@ export class ProfilePopupCardComponent implements OnInit {
 
   public userRating: any;
   public ownedCollections = [];
+  public envVariable;
   constructor(public dialogRef: MatDialogRef<ProfilePopupCardComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public _collectionService: CollectionService,
-    public _config: AppConfig) { }
+    public _collectionService: CollectionService) {
+      this.envVariable = environment;
+  }
 
   ngOnInit() {
     console.log(this.data);

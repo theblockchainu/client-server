@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
 import { AlertService } from '../_services/alert/alert.service';
 import { AuthenticationService } from '../_services/authentication/authentication.service';
 import { Observable } from 'rxjs/Observable';
-
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
-import { AppConfig } from '../app.config';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-login',  // <login></login>
@@ -25,6 +23,7 @@ export class LoginComponent implements OnInit {
   public rememberMe: boolean;
   public email: string;
   public passWord: string;
+  public envVariable;
   // TypeScript public modifiers
 
   public loginForm = new FormGroup({
@@ -35,10 +34,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public router: Router,
-    public config: AppConfig,
     public authenticationService: AuthenticationService,
     private alertService: AlertService,
     private _fb: FormBuilder) {
+      this.envVariable = environment;
     this.isLoggedIn = this.authenticationService.isLoggedIn();
   }
 

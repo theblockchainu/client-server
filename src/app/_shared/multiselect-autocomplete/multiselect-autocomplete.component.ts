@@ -7,11 +7,9 @@ import {
   , NG_VALIDATORS, Validator
 } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { AppConfig } from '../../app.config';
 import { RequestHeaderService } from '../../_services/requestHeader/request-header.service';
-
 import * as _ from 'lodash';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-multiselect-autocomplete',
@@ -42,6 +40,7 @@ export class MultiselectAutocompleteComponent {
   public selectedQueries = [];
   public maxTopicMsg;
   public loadingSuggestions = false;
+  public envVariable;
 
 
   // Input parameter - jsonObject of collection
@@ -91,11 +90,11 @@ export class MultiselectAutocompleteComponent {
 
   constructor(myElement: ElementRef,
     private http: HttpClient,
-    public requestHeaderService: RequestHeaderService,
-    public _config: AppConfig) {
+    public requestHeaderService: RequestHeaderService) {
     this.elementRef = myElement;
     this.options = requestHeaderService.getOptions();
     this.placeholderString = this.title;
+      this.envVariable = environment;
   }
 
   @HostListener('document:click', ['$event'])

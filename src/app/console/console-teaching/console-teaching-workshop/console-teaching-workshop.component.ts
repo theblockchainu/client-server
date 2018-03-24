@@ -3,7 +3,6 @@ import 'rxjs/add/operator/map';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { CollectionService } from '../../../_services/collection/collection.service';
 import { ConsoleTeachingComponent } from '../console-teaching.component';
-import { AppConfig } from '../../../app.config';
 import * as _ from 'lodash';
 declare var moment: any;
 import { MatDialog } from '@angular/material';
@@ -40,7 +39,6 @@ export class ConsoleTeachingWorkshopComponent implements OnInit {
     private _cookieUtilsService: CookieUtilsService,
     private _dialogService: DialogsService,
     public router: Router,
-    public config: AppConfig,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
     private ucFirstPipe: UcFirstPipe

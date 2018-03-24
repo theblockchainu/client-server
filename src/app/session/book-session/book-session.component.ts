@@ -1,15 +1,14 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AppConfig } from '../../app.config';
 import { Router, ActivatedRoute, Params, NavigationStart } from '@angular/router';
 import { CookieUtilsService } from '../../_services/cookieUtils/cookie-utils.service';
 import { ProfileService } from '../../_services/profile/profile.service';
 import * as moment from 'moment';
 import { PaymentService } from '../../_services/payment/payment.service';
-import { HttpClient } from '@angular/common/http';
 import { CollectionService } from '../../_services/collection/collection.service';
 import * as _ from 'lodash';
 import { MatSnackBar } from '@angular/material';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import {environment} from '../../../environments/environment';
 
 declare var Stripe: any;
 
@@ -22,6 +21,7 @@ export class BookSessionComponent implements OnInit {
   public stripe: any;
   public elements: any;
   public card: any;
+  public envVariable;
   @ViewChild('cardForm', { read: ElementRef }) cardForm: ElementRef;
   public userId;
   private teacherId: string;
@@ -52,7 +52,7 @@ export class BookSessionComponent implements OnInit {
   public totalCost: BehaviorSubject<number>;
   public totalDuration: BehaviorSubject<number>;
 
-  constructor(public config: AppConfig,
+  constructor(
     private _cookieUtilsService: CookieUtilsService,
     private activatedRoute: ActivatedRoute,
     private _collectionService: CollectionService,
@@ -61,6 +61,7 @@ export class BookSessionComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar
   ) {
+      this.envVariable = environment;
     this.activatedRoute.params.subscribe(params => {
       this.teacherId = params['peerId'];
     });
@@ -68,7 +69,7 @@ export class BookSessionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.stripe = Stripe(this.config.stripePublishableKey);
+    this.stripe = Stripe(environment.stripePublishableKey);
     const elements = this.stripe.elements();
     this.card = elements.create('card', {
       iconStyle: 'solid',

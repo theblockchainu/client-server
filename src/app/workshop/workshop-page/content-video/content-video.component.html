@@ -15,7 +15,7 @@
     <div class="col-md-2" style="text-align: right">
       <img (click)="openProfilePage(data.collection.owners[0].id)" *ngIf="!data.collection.owners[0].profiles[0].picture_url" src="/assets/images/avatar.png"
            alt="A" class="clickable circle-thumb margin-top-5" style="width: 70px; height: 70px;">
-      <img (click)="openProfilePage(data.collection.owners[0].id)" *ngIf="data.collection.owners[0].profiles[0].picture_url" src="{{config.apiUrl+ data.collection.owners[0].profiles[0].picture_url}}"
+      <img (click)="openProfilePage(data.collection.owners[0].id)" *ngIf="data.collection.owners[0].profiles[0].picture_url" src="{{envVariable.apiUrl+ data.collection.owners[0].profiles[0].picture_url}}"
            class="clickable circle-thumb margin-top-5" alt="dp" style="width: 70px; height: 70px;">
     </div>
     
@@ -50,7 +50,7 @@
           </vg-controls>
 
           <video [vgMedia]="media" #media id="singleVideo" width="100%" preload="auto" style="max-height: 300px;" crossorigin>
-            <source src="{{config.apiUrl+data.content.imageUrl}}" type="video/mp4">
+            <source src="{{envVariable.apiUrl+data.content.imageUrl}}" type="video/mp4">
           </video>
         </vg-player>
       </div>
@@ -73,12 +73,12 @@
       </div>
       <br>
       <div *ngFor="let file of attachmentUrls" class="col-md-6 padding-left-0 imageContainer">
-        <img *ngIf="file.type.includes('image')" src="{{config.apiUrl + file.url}}" width="150" style="border: 0.5px solid #ccc">
+        <img *ngIf="file.type.includes('image')" src="{{envVariable.apiUrl + file.url}}" width="150" style="border: 0.5px solid #ccc">
         <div *ngIf="file.type.includes('application')" class="uploaded_file">
-          <a href="{{config.apiUrl + file.url}}" target="_blank">{{file.originalFilename}}</a>
+          <a href="{{envVariable.apiUrl + file.url}}" target="_blank">{{file.originalFilename}}</a>
         </div>
         <video *ngIf="file.type.includes('video')" controls width="150" style="border: 0.5px solid #ccc" preload="metadata">
-          <source src="{{config.apiUrl + file.url}}">
+          <source src="{{envVariable.apiUrl + file.url}}">
         </video>
       </div>
     </div>
@@ -133,7 +133,7 @@
               <div style="margin-top: 10px;" class="" *ngIf="comment.peer.length>0">
                 <div style="float: left; margin-left: 15px;">
                   <img *ngIf="!comment.peer[0].profiles[0].picture_url" src="/assets/images/avatar.png" alt="A" class="circle-thumb margin-top-5">
-                  <img *ngIf="comment.peer[0].profiles[0].picture_url" src="{{config.apiUrl+ comment.peer[0].profiles[0].picture_url}}" class="circle-thumb margin-top-5"
+                  <img *ngIf="comment.peer[0].profiles[0].picture_url" src="{{envVariable.apiUrl+ comment.peer[0].profiles[0].picture_url}}" class="circle-thumb margin-top-5"
                        alt="dp">
                 </div>
                 <div style="display: inline-block; margin-left: 5px; margin-top: 3px;">
@@ -193,7 +193,7 @@
                     <div class="" style="margin-top: 10px;" *ngIf="reply.peer && reply.peer.length>0">
                       <div style="float: left; margin-left: 15px;">
                         <img *ngIf="!reply.peer[0].profiles[0].picture_url" src="/assets/images/avatar.png" alt="A" class="circle-thumb margin-top-5">
-                        <img *ngIf="reply.peer[0].profiles[0].picture_url" src="{{config.apiUrl+ reply.peer[0].profiles[0].picture_url}}" class="circle-thumb margin-top-5"
+                        <img *ngIf="reply.peer[0].profiles[0].picture_url" src="{{envVariable.apiUrl+ reply.peer[0].profiles[0].picture_url}}" class="circle-thumb margin-top-5"
                              alt="dp">
                       </div>
                       <div style="display: inline-block; margin-left: 5px; margin-top: 3px;">

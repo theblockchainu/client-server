@@ -25,7 +25,7 @@
   </div>
   <hr>
   <div class="content-image" *ngIf="data.submission.picture_url">
-    <img class="img-responsive media-middle" style="width: 100%" src="{{config.apiUrl+data.submission.picture_url.split(',')[0]}}" alt="image" (error)="_collectionService.imgErrorHandler($event)">
+    <img class="img-responsive media-middle" style="width: 100%" src="{{envVariable.apiUrl+data.submission.picture_url.split(',')[0]}}" alt="image" (error)="_collectionService.imgErrorHandler($event)">
   </div>
   <div class="default-image" *ngIf="!data.submission.picture_url">
     <i class="fa fa-picture-o"></i>
@@ -88,7 +88,7 @@
             <div style="margin-top: 10px;" class="" *ngIf="comment.peer.length>0">
               <div style="float: left; margin-left: 15px;">
                 <img *ngIf="!comment.peer[0].profiles[0].picture_url" src="/assets/images/avatar.png" alt="A" class="circle-thumb margin-top-5">
-                <img *ngIf="comment.peer[0].profiles[0].picture_url" src="{{config.apiUrl+ comment.peer[0].profiles[0].picture_url}}" class="circle-thumb margin-top-5"
+                <img *ngIf="comment.peer[0].profiles[0].picture_url" src="{{envVariable.apiUrl+ comment.peer[0].profiles[0].picture_url}}" class="circle-thumb margin-top-5"
                   alt="dp">
               </div>
               <div style="display: inline-block; margin-left: 5px; margin-top: 3px;">
@@ -147,7 +147,7 @@
                   <div class="" style="margin-top: 10px;" *ngIf="reply.peer && reply.peer.length>0">
                     <div style="float: left; margin-left: 15px;">
                       <img *ngIf="!reply.peer[0].profiles[0].picture_url" src="/assets/images/avatar.png" alt="A" class="circle-thumb margin-top-5">
-                      <img *ngIf="reply.peer[0].profiles[0].picture_url" src="{{config.apiUrl+ reply.peer[0].profiles[0].picture_url}}" class="circle-thumb margin-top-5"
+                      <img *ngIf="reply.peer[0].profiles[0].picture_url" src="{{envVariable.apiUrl+ reply.peer[0].profiles[0].picture_url}}" class="circle-thumb margin-top-5"
                         alt="dp">
                     </div>
                     <div style="display: inline-block; margin-left: 5px; margin-top: 3px;">

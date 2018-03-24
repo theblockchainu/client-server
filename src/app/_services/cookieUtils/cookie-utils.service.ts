@@ -1,5 +1,5 @@
 import {environment} from '../../../environments/environment';
-import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import * as moment from 'moment';
 import {CookieService} from 'angular2-cookie/core';
 
@@ -8,7 +8,6 @@ export class CookieUtilsService {
     public envVariable;
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
     public _cookieService: CookieService
   ) {
       this.envVariable = environment;

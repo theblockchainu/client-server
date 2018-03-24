@@ -1,6 +1,3 @@
-import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './_core/_core.module';
 import { AppComponent } from './app.component';
 import { DefaultComponent } from './default/default.component';
@@ -27,26 +24,16 @@ import { WhitePaperComponent } from './white-paper/white-paper.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { DefaultModule } from './default/default.module';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
-import { SessionModule } from './session/session.module';
 import { AppFooterModule } from './app-footer/app-footer.module';
-import * as Raven from 'raven-js';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { CareerComponent } from './career/career.component';
 import { PressComponent } from './press/press.component';
 import { PolicyComponent } from './policy/policy.component';
 import { TrustComponent } from './trust/trust.component';
-import { DigestModule } from './digest/digest.module';
-import { CookieModule } from 'ngx-cookie';
-
-/*Raven
-  .config('https://6c6efc37493d4ff2974b8b4a506c670a@sentry.io/289434', { release: 'dev_aakash' })
-  .install();
-
-export class RavenErrorHandler implements ErrorHandler {
-  handleError(err: any): void {
-    Raven.captureException(err);
-  }
-}*/
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppRoutingModule} from './app-routing.module';
+import {BrowserCookiesModule} from '@ngx-utils/cookies/src/browser';
 
 @NgModule({
   declarations: [
@@ -72,6 +59,7 @@ export class RavenErrorHandler implements ErrorHandler {
     TrustComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'peerbuds-client' }),
+      BrowserCookiesModule.forRoot(),
     CoreModule,
     AppFooterModule,
     BrowserAnimationsModule,
@@ -98,21 +86,9 @@ export class RavenErrorHandler implements ErrorHandler {
       tertiaryColour: '#ff6d71'
     }),
     TransferHttpCacheModule,
-    MatListModule,
-    CookieModule.forRoot()
+    MatListModule
   ],
   bootstrap: [AppComponent],
-  // providers: [
-  //   {
-  //     provide: ErrorHandler,
-  //     useClass: RavenErrorHandler
-  //   },
-  //   {
-  //     provide: ErrorHandler,
-  //     useClass: GlobalErrorHandlerComponent
-  //   },
-  //   Title,
-  // ],
   entryComponents: [AppNotificationDialogComponent]
 })
 export class AppModule { }

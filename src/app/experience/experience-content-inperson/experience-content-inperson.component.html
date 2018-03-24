@@ -39,8 +39,8 @@
             </div>
             <div formGroupName="location" class="margin-top-20 margin-bottom-20">
               <button mat-button color="primary" class="mat-border-button" (click)="openAddLocationDialog()">{{getAddOrEditText()}} location</button>
-              <mat-form-field style="display: inline-block; margin-left: 20px; width: 360px;"  >
-                <input matInput #location formControlName="location_name" placeholder="No location added yet" [disabled]="'true'" [readOnly]="true">
+              <mat-form-field style="display: inline-block; margin-left: 20px; width: 360px;" [floatLabel]="'never'">
+                <input matInput #location formControlName="location_name" placeholder="No location added yet" [disabled]="'true'" [readOnly]="'true'" readonly>
               </mat-form-field>
             </div>
             <div class="form-group margin-top-20">

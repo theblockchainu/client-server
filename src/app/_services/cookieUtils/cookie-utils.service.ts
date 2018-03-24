@@ -1,14 +1,15 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { CookieService } from 'ngx-cookie';
-import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
+
+import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
+import {CookiesService} from '@ngx-utils/cookies';
 import * as moment from 'moment';
 
 @Injectable()
 export class CookieUtilsService {
 
-  constructor(private _cookieService: CookieService,
-    @Inject(PLATFORM_ID) private platformId: Object
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    public _cookieService: CookiesService
   ) {
   }
 
@@ -33,6 +34,7 @@ export class CookieUtilsService {
       path: '/',
       expires: moment().add(2, 'days').toDate()
     });
+
 
     // moment().add(2, 'days').toDate(), '/', 'localhost'
   }

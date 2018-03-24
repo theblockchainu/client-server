@@ -33,7 +33,7 @@ import { TrustComponent } from './trust/trust.component';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
-import {BrowserCookiesModule} from '@ngx-utils/cookies/src/browser';
+import {BrowserCookiesModule} from '@ngx-utils/cookies/browser';
 
 @NgModule({
   declarations: [

@@ -14,10 +14,10 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { WhitePaperComponent } from './white-paper/white-paper.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
-import {CareerComponent} from './career/career.component';
-import {PolicyComponent} from './policy/policy.component';
-import {TrustComponent} from './trust/trust.component';
-import {PressComponent} from './press/press.component';
+import { CareerComponent } from './career/career.component';
+import { PolicyComponent } from './policy/policy.component';
+import { TrustComponent } from './trust/trust.component';
+import { PressComponent } from './press/press.component';
 
 const routes: Routes = [
   {
@@ -29,26 +29,26 @@ const routes: Routes = [
     path: 'about-us',
     component: AboutUsComponent
   },
-    {
-        path: 'career',
-        component: CareerComponent
-    },
-    {
-        path: 'press',
-        component: PressComponent
-    },
-    {
-        path: 'policy',
-        component: PolicyComponent
-    },
-    {
-        path: 'trust',
-        component: TrustComponent
-    },
-    {
-        path: 'digest',
-        loadChildren: 'app/digest/digest.module#DigestModule'
-    },
+  {
+    path: 'career',
+    component: CareerComponent
+  },
+  {
+    path: 'press',
+    component: PressComponent
+  },
+  {
+    path: 'policy',
+    component: PolicyComponent
+  },
+  {
+    path: 'trust',
+    component: TrustComponent
+  },
+  {
+    path: 'digest',
+    loadChildren: 'app/digest/digest.module#DigestModule'
+  },
   {
     path: 'white-paper',
     component: WhitePaperComponent
@@ -148,7 +148,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    onSameUrlNavigation: 'reload'
+  })],
   exports: [RouterModule],
   providers: [LoginComponentDialog]
 })

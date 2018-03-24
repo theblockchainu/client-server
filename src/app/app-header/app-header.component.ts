@@ -49,7 +49,7 @@ export class AppHeaderComponent implements OnInit {
     public _searchService: SearchService,
     private dialogsService: DialogsService) {
     this.profile = {};
-    this.isLoggedIn = authService.isLoggedIn();
+    this.isLoggedIn = authService.isLoginSubject.asObservable();
     authService.isLoggedIn().subscribe((res) => {
       this.loggedIn = res;
     });
@@ -61,6 +61,7 @@ export class AppHeaderComponent implements OnInit {
         this.getNotifications();
       } else {
         this.loggedIn = false;
+        this.profile = {};
       }
     });
     this.userId = this.userIdObservable || this._cookieService.getValue('userId');
@@ -107,6 +108,7 @@ export class AppHeaderComponent implements OnInit {
 
 
   public openLogin() {
+    console.log('openLogin');
     this.dialogsService.openLogin().subscribe();
   }
 

@@ -539,7 +539,7 @@
                       <div class="row margin-top-20 reviewItem" [hidden]="i>=noOfReviews">
                         <div class="col-md-12">
                           <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12" *ngIf="!editReviewForm || (editReviewForm && editReviewForm.value['id']!==review.id)">
                               <div class="row">
                                 <div style="margin-top: 10px; margin-bottom: 10px;" class="">
                                   <button *ngIf="userType !== 'public'" mat-icon-button [matMenuTriggerFor]="menuReply" style="float: right; margin-right: 15px; margin-top: 15px;">
@@ -553,6 +553,10 @@
                                     <button *ngIf="userType==='teacher' || isMyReview(review)" mat-menu-item (click)="deleteReview(review)">
                                       <mat-icon>delete</mat-icon>
                                       <span>Delete</span>
+                                    </button>
+                                    <button *ngIf="isMyReview(review)" mat-menu-item (click)="editReview(review)">
+                                      <mat-icon>edit</mat-icon>
+                                      <span>Edit</span>
                                     </button>
                                   </mat-menu>
                                   <div class="clickable" style="float: left;">
@@ -581,6 +585,21 @@
                                 </div>
                               </div>
                               <br>
+                            </div>
+                          </div>
+                          <div class="row" *ngIf="editReviewForm && editReviewForm.value['id']===review.id">
+                            <div class="col-md-12">
+                              New Rating
+                              <p-rating style="display: inline-flex;" [(ngModel)]="newUserRating" (onRate)="updateRating($event)" [cancel]="false"></p-rating>
+                              <form [formGroup]="editReviewForm" (ngSubmit)="updateReview()">
+                                <mat-form-field class="full-width">
+                                  <input matInput formControlName="description" placeholder="Review this experience">
+                                </mat-form-field>
+                                <button [disabled]="!editReviewForm.valid" mat-raised-button color="primary">
+                                  <span *ngIf="!busyReview">Submit</span>
+                                  <ngx-loading [show]="busyReview"></ngx-loading>
+                                </button>
+                              </form>
                             </div>
                           </div>
                         </div>
@@ -864,9 +883,12 @@
                 <a (click)="openInviteFriendsDialog()">Invite friends</a>
               </div>
               <div class="col-md-4 clickable" (click)="saveBookmark()" style="cursor: pointer;">
-                <mat-icon [ngClass]="{'hasBookmarked': hasBookmarked}" style="font-size: 1rem; top: 2px;">bookmark</mat-icon>
-                <span *ngIf="!hasBookmarked">Bookmark</span>
-                <span *ngIf="hasBookmarked">Saved</span>
+                <ngx-loading [show]="bookmarking"></ngx-loading>
+                <span [hidden]="bookmarking">
+                  <mat-icon [ngClass]="{'hasBookmarked': hasBookmarked}" style="font-size: 1rem; top: 2px;">bookmark</mat-icon>
+                  <span *ngIf="!hasBookmarked">Bookmark</span>
+                  <span *ngIf="hasBookmarked">Saved</span>
+                </span>
               </div>
               <div class="col-md-4" style="cursor: pointer;">
                 Share&nbsp;

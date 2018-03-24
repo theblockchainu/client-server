@@ -25,7 +25,6 @@ import { AppConfig } from '../../../app.config';
 export class LoginComponentDialog implements OnInit {
   // Set our default values
   // public loading = false;
-  public returnUrl: string;
   isLoggedIn: Observable<boolean>;
   private email: string;
   public passWord: string;
@@ -53,10 +52,7 @@ export class LoginComponentDialog implements OnInit {
 
   public ngOnInit() {
     // reset login status
-    this.authenticationService.logout();
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home/homefeed';
-
     this.loginForm = this._fb.group({
       email: ['', Validators.email], /* putting reg ex as well */
       password: ['', Validators.required],
@@ -78,9 +74,7 @@ export class LoginComponentDialog implements OnInit {
     this.authenticationService.login(this.email, this.passWord, this.rememberMe)
       .subscribe(
         (data) => {
-          console.log(this.returnUrl);
           this.dialogRef.close();
-          this.router.navigate([this.returnUrl]);
         },
         (error) => {
           if (error.status === 401 || error._body === '"authentication error"') {
@@ -93,10 +87,6 @@ export class LoginComponentDialog implements OnInit {
     const dialogRef = this.dialog.open(RequestPasswordDialogComponent);
     return dialogRef.afterClosed();
   }
-  private redirect() {
-    this.router.navigate([this.returnUrl]); // use the stored url here
-  }
-
   onNoClick(): void {
     this.dialogRef.close();
   }

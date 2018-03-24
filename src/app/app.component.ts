@@ -14,6 +14,7 @@ import { SocketService } from './_services/socket/socket.service';
 import { AuthenticationService } from './_services/authentication/authentication.service';
 import { Title } from '@angular/platform-browser';
 
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,7 @@ export class AppComponent implements OnInit {
   showFooter = true;
 
   // Sets initial value to true to show loading spinner on first load
-  loading;
+  public loading: Observable<boolean>;
 
   constructor(private router: Router,
     private _spinnerService: SpinnerService,
@@ -46,7 +47,6 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe(event => this.modifyHeader(event));
     this.router.events.subscribe(event => this.modifyFooter(event));
     this.setTitle('Peerbuds');
-
   }
 
   modifyFooter(location) {
@@ -74,21 +74,21 @@ export class AppComponent implements OnInit {
   navigationInterceptor(event: RouterEvent): void {
     if (event instanceof NavigationStart) {
       this._spinnerService.setSpinnerState(true);
-      this.loading = this._spinnerService.getSpinnerState();
+      // this.loading = this._spinnerService.getSpinnerState();
     }
     if (event instanceof NavigationEnd) {
       this._spinnerService.setSpinnerState(false);
-      this.loading = this._spinnerService.getSpinnerState();
+      // this.loading = this._spinnerService.getSpinnerState();
     }
 
     // Set loading state to false in both of the below events to hide the spinner in case a request fails
     if (event instanceof NavigationCancel) {
       this._spinnerService.setSpinnerState(false);
-      this.loading = this._spinnerService.getSpinnerState();
+      // this.loading = this._spinnerService.getSpinnerState();
     }
     if (event instanceof NavigationError) {
       this._spinnerService.setSpinnerState(false);
-      this.loading = this._spinnerService.getSpinnerState();
+      // this.loading = this._spinnerService.getSpinnerState();
     }
   }
 }

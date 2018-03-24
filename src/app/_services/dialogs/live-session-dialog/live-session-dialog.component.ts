@@ -6,7 +6,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CookieUtilsService } from '../../cookieUtils/cookie-utils.service';
 import { SocketService } from '../../socket/socket.service';
 import { Router } from '@angular/router';
-import { DeviceDetectorService } from 'ngx-device-detector';
+// import { DeviceDetectorService } from 'ngx-device-detector';
 import { Observable } from 'rxjs/Observable';
 import { AppConfig } from '../../../app.config';
 import { TitleCasePipe } from '@angular/common';
@@ -41,7 +41,7 @@ export class LiveSessionDialogComponent implements OnInit, OnDestroy {
     private cookieUtilsService: CookieUtilsService,
     private _socketService: SocketService,
     private router: Router,
-    private deviceService: DeviceDetectorService,
+    // private deviceService: DeviceDetectorService,
     private _config: AppConfig,
     private _titleCase: TitleCasePipe
   ) {
@@ -168,7 +168,7 @@ export class LiveSessionDialogComponent implements OnInit, OnDestroy {
       type: 'user',
       url: this.router.url,
       ip_address: '',
-      browser: this.deviceService.getDeviceInfo().browser,
+      browser: '', // this.deviceService.getDeviceInfo().browser,
       viewedModelName: 'content',
       startTime: new Date(),
       content: this.dialogData.content,

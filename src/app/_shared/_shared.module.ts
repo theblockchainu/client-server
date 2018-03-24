@@ -60,7 +60,7 @@ import { NotificationService } from '../_services/notification/notification.serv
 import { ANIMATION_TYPES, LoadingModule } from 'ngx-loading';
 import { ExtractTimePipe } from './extract-time/extract-time.pipe';
 import { SocketService } from '../_services/socket/socket.service';
-import { DeviceDetectorModule } from 'ngx-device-detector';
+// import { DeviceDetectorModule } from 'ngx-device-detector';
 import { StickyModule } from 'ng2-sticky-kit';
 import { ConvertCurrencyPipe } from './convert-currency/convert-currency.pipe';
 import { TrimPipe } from './trim/trim.pipe';
@@ -93,7 +93,7 @@ import { TopicRowComponent } from './topic-row/topic-row.component';
             secondaryColour: '#ff5b5f',
             tertiaryColour: '#ff6d71'
         }),
-        DeviceDetectorModule.forRoot(),
+        // DeviceDetectorModule.forRoot(),
         StickyModule,
         NguCarouselModule,
         AgmCoreModule.forRoot({
